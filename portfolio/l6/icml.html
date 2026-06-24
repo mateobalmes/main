@@ -4,274 +4,288 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Layer 6 · ICML 2026</title>
+<meta name="robots" content="noindex, nofollow, noarchive">
 <style>
-* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
-:root {
-  --bg:#F2F2F7; --surface:#FFFFFF; --surface2:#F2F2F7;
-  --label:#000000; --secondary:#8E8E93; --separator:rgba(60,60,67,0.12);
-  --accent:#1A7A0E; --accent-light:#E8F5E4; --accent-bg:#F0F8EE;
-  --warn-bg:#FFF8EC; --danger-bg:#FFF1F0; --danger:#D32F2F;
-  --gold:#B8860B; --silver:#607D8B; --bronze:#8D5524;
-  --radius:12px; --radius-sm:8px;
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+:root{
+  --bg:#F2F2F7;--surface:#FFFFFF;--label:#000000;--secondary:#8E8E93;
+  --separator:rgba(60,60,67,0.12);--accent:#1A7A0E;--accent-light:#E8F5E4;
+  --accent-bg:#F0F8EE;--warn-bg:#FFF8EC;--danger-bg:#FFF1F0;--danger:#D32F2F;
+  --gold:#B8860B;--silver:#607D8B;--bronze:#8D5524;--radius:12px;--radius-sm:8px;
 }
-body { font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue',sans-serif; background:var(--bg); color:var(--label); min-height:100vh; overflow-x:hidden; }
+body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue',sans-serif;background:var(--bg);color:var(--label);min-height:100vh;overflow-x:hidden;}
 
 /* PASSWORD */
-#pw-screen { position:fixed; inset:0; background:var(--bg); display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:9999; padding:40px 32px; }
-.pw-logo-wrap { margin-bottom:24px; }
-.pw-logo-wrap img { height:48px; object-fit:contain; }
-.pw-title { font-size:22px; font-weight:700; color:var(--label); margin-bottom:6px; text-align:center; }
-.pw-sub { font-size:14px; color:var(--secondary); text-align:center; margin-bottom:36px; line-height:1.5; }
-.pw-field { width:100%; max-width:280px; display:block; padding:14px 16px; background:var(--surface); border:none; border-radius:var(--radius); color:var(--label); font-size:20px; letter-spacing:6px; text-align:center; outline:none; font-family:inherit; margin-bottom:12px; box-shadow:0 1px 3px rgba(0,0,0,0.1); }
-.pw-field:focus { box-shadow:0 0 0 3px rgba(26,122,14,0.2),0 1px 3px rgba(0,0,0,0.1); }
-.pw-btn { width:100%; max-width:280px; display:block; padding:14px; background:var(--accent); color:#fff; border:none; border-radius:var(--radius); font-size:16px; font-weight:600; cursor:pointer; font-family:inherit; }
-.pw-btn:active { opacity:0.85; }
-.pw-err { font-size:13px; color:var(--danger); text-align:center; margin-top:10px; min-height:18px; }
+#pw-screen{position:fixed;inset:0;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;padding:40px 32px;}
+.pw-logo-wrap{margin-bottom:24px;}
+.pw-logo-wrap img{height:48px;object-fit:contain;}
+.pw-title{font-size:22px;font-weight:700;color:var(--label);margin-bottom:6px;text-align:center;}
+.pw-sub{font-size:14px;color:var(--secondary);text-align:center;margin-bottom:36px;line-height:1.5;}
+.pw-field{width:100%;max-width:280px;display:block;padding:14px 16px;background:var(--surface);border:none;border-radius:var(--radius);color:var(--label);font-size:20px;letter-spacing:6px;text-align:center;outline:none;font-family:inherit;margin-bottom:12px;box-shadow:0 1px 3px rgba(0,0,0,0.1);}
+.pw-field:focus{box-shadow:0 0 0 3px rgba(26,122,14,0.2),0 1px 3px rgba(0,0,0,0.1);}
+.pw-btn{width:100%;max-width:280px;display:block;padding:14px;background:var(--accent);color:#fff;border:none;border-radius:var(--radius);font-size:16px;font-weight:600;cursor:pointer;font-family:inherit;}
+.pw-btn:active{opacity:0.85;}
+.pw-err{font-size:13px;color:var(--danger);text-align:center;margin-top:10px;min-height:18px;}
 
 /* APP */
-#app { display:none; max-width:430px; margin:0 auto; min-height:100vh; }
+#app{display:none;max-width:430px;margin:0 auto;min-height:100vh;}
 
-/* NAV BAR */
-.nav-bar { position:sticky; top:0; z-index:100; background:rgba(242,242,247,0.88); -webkit-backdrop-filter:blur(20px); backdrop-filter:blur(20px); border-bottom:0.5px solid var(--separator); padding:10px 16px; display:flex; align-items:center; gap:10px; min-height:56px; }
-.nav-back { background:none; border:none; color:var(--accent); font-size:16px; font-family:inherit; cursor:pointer; padding:0; display:none; align-items:center; gap:4px; font-weight:400; white-space:nowrap; flex-shrink:0; }
-.nav-back svg { width:10px; height:16px; }
-.nav-title { font-size:17px; font-weight:600; color:var(--label); position:absolute; left:50%; transform:translateX(-50%); white-space:nowrap; pointer-events:none; max-width:60%; overflow:hidden; text-overflow:ellipsis; }
+/* NAV */
+.nav-bar{position:sticky;top:0;z-index:100;background:rgba(242,242,247,0.88);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);border-bottom:0.5px solid var(--separator);padding:10px 16px;display:flex;align-items:center;gap:10px;min-height:56px;}
+.nav-back{background:none;border:none;color:var(--accent);font-size:16px;font-family:inherit;cursor:pointer;padding:0;display:none;align-items:center;gap:4px;font-weight:400;white-space:nowrap;flex-shrink:0;}
+.nav-back svg{width:10px;height:16px;}
+.nav-title{font-size:17px;font-weight:600;color:var(--label);position:absolute;left:50%;transform:translateX(-50%);white-space:nowrap;pointer-events:none;max-width:60%;overflow:hidden;text-overflow:ellipsis;}
 
 /* HOME HEADER */
-.home-header { background:var(--surface); border-bottom:0.5px solid var(--separator); padding:12px 16px; display:flex; align-items:center; gap:10px; }
-.home-header .l6-logo { height:32px; object-fit:contain; }
-.home-header-meta { display:flex; flex-direction:column; flex:1; }
-.home-header-meta .booth { font-size:12px; font-weight:600; color:var(--label); }
-.home-header-meta .location { font-size:11px; color:var(--secondary); }
-.icml-logo-wrap { background:#fff; border-radius:6px; padding:3px 6px; border:0.5px solid var(--separator); flex-shrink:0; }
-.icml-logo-wrap img { height:24px; object-fit:contain; }
+.home-header{background:rgba(255,255,255,0.92);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);border-bottom:0.5px solid var(--separator);padding:12px 16px;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:100;}
+.home-header .l6-logo{height:32px;object-fit:contain;}
+.home-header-meta{display:flex;flex-direction:column;flex:1;}
+.home-header-meta .booth{font-size:12px;font-weight:600;color:var(--label);}
+.home-header-meta .location{font-size:11px;color:var(--secondary);}
+.icml-logo-wrap{background:#fff;border-radius:6px;padding:3px 6px;border:0.5px solid var(--separator);flex-shrink:0;}
+.icml-logo-wrap img{height:24px;object-fit:contain;}
 
 /* PAGES */
-.page { display:none; padding-bottom:60px; }
-.page.active { display:block; }
+.page{display:none;padding-bottom:60px;}
+.page.active{display:block;}
 
 /* HOME */
-.home-hero { padding:20px 20px 16px; text-align:center; }
-.home-hero .eyebrow { font-size:11px; font-weight:600; letter-spacing:1px; text-transform:uppercase; color:var(--accent); margin-bottom:6px; }
-.home-hero h1 { font-size:26px; font-weight:700; color:var(--label); line-height:1.15; letter-spacing:-0.5px; margin-bottom:4px; }
-.home-hero .meta { font-size:13px; color:var(--secondary); }
+.home-hero{padding:20px 20px 16px;text-align:center;}
+.home-hero .eyebrow{font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--accent);margin-bottom:6px;}
+.home-hero h1{font-size:26px;font-weight:700;color:var(--label);line-height:1.15;letter-spacing:-0.5px;margin-bottom:4px;}
+.home-hero .meta{font-size:13px;color:var(--secondary);}
 
-/* GROUPED LIST */
-.group { margin:0 16px 8px; }
-.group-label { font-size:12px; font-weight:400; color:var(--secondary); text-transform:uppercase; letter-spacing:0.4px; padding:8px 4px 6px; }
-.list { background:var(--surface); border-radius:var(--radius); overflow:hidden; }
-.row { display:flex; align-items:center; padding:12px 16px; gap:14px; cursor:pointer; position:relative; min-height:50px; }
-.row:active { background:rgba(0,0,0,0.04); }
-.row+.row { border-top:0.5px solid var(--separator); }
-.row-icon { width:32px; height:32px; border-radius:8px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:16px; }
-.row-text { flex:1; min-width:0; }
-.row-label { font-size:16px; color:var(--label); }
-.row-sub { font-size:12px; color:var(--secondary); margin-top:1px; }
-.row-right { display:flex; align-items:center; gap:6px; flex-shrink:0; }
-.row-badge { background:var(--accent); color:#fff; font-size:11px; font-weight:600; padding:2px 7px; border-radius:20px; }
-.row-chevron { color:var(--secondary); font-size:14px; opacity:0.5; }
-.ic-green{background:#34C759;} .ic-blue{background:#007AFF;} .ic-purple{background:#AF52DE;}
-.ic-orange{background:#FF9500;} .ic-pink{background:#FF2D55;} .ic-teal{background:#32ADE6;}
-.ic-indigo{background:#5856D6;} .ic-yellow{background:#FFCC00;} .ic-red{background:#FF3B30;}
-.ic-gray{background:#8E8E93;} .ic-l6{background:var(--accent);}
+/* GROUPS */
+.group{margin:0 16px 8px;}
+.group-label{font-size:12px;font-weight:400;color:var(--secondary);text-transform:uppercase;letter-spacing:0.4px;padding:8px 4px 6px;}
+.list{background:var(--surface);border-radius:var(--radius);overflow:hidden;}
+.row{display:flex;align-items:center;padding:12px 16px;gap:14px;cursor:pointer;position:relative;min-height:50px;}
+.row:active{background:rgba(0,0,0,0.04);}
+.row+.row{border-top:0.5px solid var(--separator);}
+.row-icon{width:32px;height:32px;border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:16px;}
+.row-text{flex:1;min-width:0;}
+.row-label{font-size:16px;color:var(--label);}
+.row-sub{font-size:12px;color:var(--secondary);margin-top:1px;}
+.row-right{display:flex;align-items:center;gap:6px;flex-shrink:0;}
+.row-badge{background:var(--accent);color:#fff;font-size:11px;font-weight:600;padding:2px 7px;border-radius:20px;}
+.row-chevron{color:var(--secondary);font-size:14px;opacity:0.5;}
+.ic-green{background:#34C759;}.ic-blue{background:#007AFF;}.ic-purple{background:#AF52DE;}
+.ic-orange{background:#FF9500;}.ic-pink{background:#FF2D55;}.ic-teal{background:#32ADE6;}
+.ic-indigo{background:#5856D6;}.ic-yellow{background:#FFCC00;}.ic-red{background:#FF3B30;}
+.ic-gray{background:#8E8E93;}.ic-l6{background:var(--accent);}
 
 /* DETAIL */
-.content { padding:0 0 40px; }
-.s-label { font-size:12px; font-weight:400; color:var(--secondary); text-transform:uppercase; letter-spacing:0.4px; padding:20px 20px 6px; }
-.s-label:first-child { padding-top:16px; }
-.inset-group { margin:0 16px; background:var(--surface); border-radius:var(--radius); overflow:hidden; }
-.inset-row { padding:12px 16px; display:flex; gap:12px; align-items:flex-start; border-bottom:0.5px solid var(--separator); }
-.inset-row:last-child { border-bottom:none; }
-.inset-row.center { align-items:center; }
-.dot { width:5px; height:5px; border-radius:50%; background:var(--accent); flex-shrink:0; margin-top:7px; }
-.ir-text { font-size:15px; color:var(--label); line-height:1.55; flex:1; }
-.ir-text .dim { color:var(--secondary); font-size:14px; }
+.content{padding:0 0 40px;}
+.s-label{font-size:12px;font-weight:400;color:var(--secondary);text-transform:uppercase;letter-spacing:0.4px;padding:20px 20px 6px;}
+.s-label:first-child{padding-top:16px;}
+.inset-group{margin:0 16px;background:var(--surface);border-radius:var(--radius);overflow:hidden;}
+.inset-row{padding:12px 16px;display:flex;gap:12px;align-items:flex-start;border-bottom:0.5px solid var(--separator);}
+.inset-row:last-child{border-bottom:none;}
+.inset-row.center{align-items:center;}
+.dot{width:5px;height:5px;border-radius:50%;background:var(--accent);flex-shrink:0;margin-top:7px;}
+.ir-text{font-size:15px;color:var(--label);line-height:1.55;flex:1;}
+.ir-text .dim{color:var(--secondary);font-size:14px;}
 
-.hero-card { margin:0 16px 4px; background:var(--accent); border-radius:var(--radius); padding:20px; color:#fff; }
-.hero-card .hc-label { font-size:11px; font-weight:600; letter-spacing:1px; text-transform:uppercase; opacity:0.75; margin-bottom:6px; }
-.hero-card .hc-title { font-size:20px; font-weight:700; letter-spacing:-0.3px; margin-bottom:4px; line-height:1.2; }
-.hero-card .hc-sub { font-size:14px; opacity:0.85; line-height:1.5; }
+.hero-card{margin:0 16px 4px;background:var(--accent);border-radius:var(--radius);padding:20px;color:#fff;}
+.hero-card .hc-label{font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;opacity:0.75;margin-bottom:6px;}
+.hero-card .hc-title{font-size:20px;font-weight:700;letter-spacing:-0.3px;margin-bottom:4px;line-height:1.2;}
+.hero-card .hc-sub{font-size:14px;opacity:0.85;line-height:1.5;}
 
-.kv-group { margin:0 16px; background:var(--surface); border-radius:var(--radius); overflow:hidden; }
-.kv { display:flex; justify-content:space-between; align-items:flex-start; padding:12px 16px; border-bottom:0.5px solid var(--separator); gap:16px; }
-.kv:last-child { border-bottom:none; }
-.kv-key { font-size:15px; color:var(--label); flex-shrink:0; }
-.kv-val { font-size:15px; color:var(--secondary); text-align:right; flex:1; }
-.kv-val a { color:var(--accent); text-decoration:none; }
+.kv-group{margin:0 16px;background:var(--surface);border-radius:var(--radius);overflow:hidden;}
+.kv{display:flex;justify-content:space-between;align-items:flex-start;padding:12px 16px;border-bottom:0.5px solid var(--separator);gap:16px;}
+.kv:last-child{border-bottom:none;}
+.kv-key{font-size:15px;color:var(--label);flex-shrink:0;}
+.kv-val{font-size:15px;color:var(--secondary);text-align:right;flex:1;}
+.kv-val a{color:var(--accent);text-decoration:none;}
 
-.alert { margin:0 16px 4px; border-radius:var(--radius); padding:13px 15px; font-size:14px; line-height:1.55; }
-.alert.warn { background:var(--warn-bg); border:1px solid rgba(240,165,0,0.3); color:#7A5000; }
-.alert.warn strong { color:#7A5000; }
-.alert.danger { background:var(--danger-bg); border:1px solid rgba(211,47,47,0.2); color:var(--danger); }
-.alert.danger strong { color:var(--danger); }
-.alert.success { background:var(--accent-bg); border:1px solid rgba(26,122,14,0.2); color:#1A5C0A; }
-.alert.success strong { color:#1A5C0A; }
+.alert{margin:0 16px 4px;border-radius:var(--radius);padding:13px 15px;font-size:14px;line-height:1.55;}
+.alert.warn{background:var(--warn-bg);border:1px solid rgba(240,165,0,0.3);color:#7A5000;}
+.alert.warn strong{color:#7A5000;}
+.alert.danger{background:var(--danger-bg);border:1px solid rgba(211,47,47,0.2);color:var(--danger);}
+.alert.danger strong{color:var(--danger);}
+.alert.success{background:var(--accent-bg);border:1px solid rgba(26,122,14,0.2);color:#1A5C0A;}
+.alert.success strong{color:#1A5C0A;}
 
 /* SCHEDULE */
-.day-header { font-size:13px; font-weight:600; color:var(--accent); padding:16px 20px 8px; }
-.shift-card { margin:0 16px 8px; background:var(--surface); border-radius:var(--radius); overflow:hidden; }
-.shift-time { padding:10px 14px 8px; border-bottom:0.5px solid var(--separator); display:flex; align-items:center; justify-content:space-between; }
-.shift-time-text { font-size:14px; font-weight:600; color:var(--label); }
-.shift-note { font-size:12px; color:var(--accent); font-weight:500; }
-.shift-names { padding:10px 14px; display:flex; flex-wrap:wrap; gap:6px; }
-.name-chip { font-size:12px; padding:4px 10px; border-radius:20px; background:var(--bg); color:var(--label); }
-.name-chip.ops { color:var(--secondary); }
+.day-header{font-size:13px;font-weight:600;color:var(--accent);padding:16px 20px 8px;}
+.shift-card{margin:0 16px 8px;background:var(--surface);border-radius:var(--radius);overflow:hidden;}
+.shift-time{padding:10px 14px 8px;border-bottom:0.5px solid var(--separator);display:flex;align-items:center;justify-content:space-between;}
+.shift-time-text{font-size:14px;font-weight:600;color:var(--label);}
+.shift-note{font-size:12px;color:var(--accent);font-weight:500;}
+.shift-names{padding:10px 14px;display:flex;flex-wrap:wrap;gap:6px;}
+.name-chip{font-size:12px;padding:4px 10px;border-radius:20px;background:var(--bg);color:var(--label);}
+.name-chip.ops{color:var(--secondary);}
 
-/* PAPERS — key component */
-.paper-card { margin:0 16px 12px; background:var(--surface); border-radius:var(--radius); overflow:hidden; border:0.5px solid var(--separator); }
-.paper-card-header { padding:14px 16px 10px; }
-.paper-venue-row { display:flex; align-items:center; gap:8px; margin-bottom:8px; flex-wrap:wrap; }
-.paper-title { font-size:15px; font-weight:600; color:var(--label); line-height:1.4; margin-bottom:6px; }
-.paper-session { font-size:12px; color:var(--secondary); margin-bottom:4px; }
-.paper-authors { font-size:12px; color:var(--accent); }
-.chip { font-size:11px; padding:3px 9px; border-radius:20px; font-weight:500; background:var(--bg); color:var(--secondary); }
-.chip.green { background:var(--accent-light); color:var(--accent); }
-.chip.amber { background:#FFF3CD; color:#8A6000; }
-.chip.blue { background:#E5F0FF; color:#1650A0; }
-.chip.purple { background:#F0E8FF; color:#6B35B0; }
+/* EXPO TALK CARD */
+.expo-card{margin:0 16px 8px;background:var(--surface);border-radius:var(--radius);overflow:hidden;border-left:3px solid var(--accent);}
+.expo-inner{padding:13px 14px 13px 16px;}
+.expo-type{font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--accent);margin-bottom:4px;}
+.expo-title{font-size:15px;font-weight:600;color:var(--label);margin-bottom:4px;line-height:1.4;}
+.expo-meta{font-size:13px;color:var(--secondary);}
 
-/* PAPER QR SECTION */
-.paper-qr-divider { border-top:0.5px solid var(--separator); }
-.paper-qr-row { display:flex; align-items:center; gap:14px; padding:14px 16px; }
-.paper-qr-row.coming-soon { opacity:0.5; }
-.paper-qr-wrap img { width:72px; height:72px; border-radius:6px; flex-shrink:0; border:0.5px solid var(--separator); }
-.paper-qr-placeholder { width:72px; height:72px; border-radius:6px; flex-shrink:0; background:var(--bg); border:1px dashed var(--separator); display:flex; align-items:center; justify-content:center; font-size:24px; }
-.paper-qr-meta { flex:1; min-width:0; }
-.paper-qr-label { font-size:13px; font-weight:600; color:var(--label); margin-bottom:2px; }
-.paper-qr-url { font-size:11px; color:var(--secondary); margin-bottom:6px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-.paper-qr-btn { display:inline-block; font-size:12px; font-weight:600; color:#fff; background:var(--accent); padding:5px 12px; border-radius:20px; text-decoration:none; }
+/* TEAM / DELEGATION */
+.team-section-label{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);padding:12px 16px 6px;}
+.team-member-row{display:flex;align-items:center;padding:10px 16px;border-bottom:0.5px solid var(--separator);}
+.team-member-row:last-child{border-bottom:none;}
+.team-avatar{width:34px;height:34px;border-radius:50%;background:var(--accent-light);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:var(--accent);flex-shrink:0;margin-right:12px;}
+.team-name{font-size:15px;font-weight:500;color:var(--label);flex:1;}
+.team-role{font-size:12px;color:var(--secondary);}
 
-/* WORKSHOP CARD */
-.workshop-card { margin:0 16px 12px; background:var(--surface); border-radius:var(--radius); overflow:hidden; border:0.5px solid var(--separator); }
-.workshop-header { padding:14px 16px 10px; background:var(--accent-bg); border-bottom:0.5px solid var(--separator); }
-.workshop-name { font-size:16px; font-weight:700; color:var(--label); margin-bottom:4px; }
-.workshop-meta { font-size:13px; color:var(--secondary); }
-.workshop-body { padding:14px 16px; }
-.workshop-qr-row { display:flex; align-items:center; gap:14px; }
-.workshop-qr-row img { width:72px; height:72px; border-radius:6px; border:0.5px solid var(--separator); flex-shrink:0; }
-.workshop-qr-text { flex:1; }
-.workshop-qr-label { font-size:13px; font-weight:600; color:var(--label); margin-bottom:2px; }
-.workshop-qr-url { font-size:11px; color:var(--secondary); margin-bottom:6px; }
-.workshop-qr-btn { display:inline-block; font-size:12px; font-weight:600; color:#fff; background:var(--accent); padding:5px 12px; border-radius:20px; text-decoration:none; }
+/* PAPERS */
+.paper-card{margin:0 16px 12px;background:var(--surface);border-radius:var(--radius);overflow:hidden;border:0.5px solid var(--separator);}
+.paper-card-header{padding:14px 16px 10px;}
+.paper-venue-row{display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap;}
+.paper-title{font-size:15px;font-weight:600;color:var(--label);line-height:1.4;margin-bottom:6px;}
+.paper-session{font-size:12px;color:var(--secondary);margin-bottom:4px;}
+.paper-authors{font-size:12px;color:var(--accent);}
+.chip{font-size:11px;padding:3px 9px;border-radius:20px;font-weight:500;background:var(--bg);color:var(--secondary);}
+.chip.green{background:var(--accent-light);color:var(--accent);}
+.chip.amber{background:#FFF3CD;color:#8A6000;}
+.chip.blue{background:#E5F0FF;color:#1650A0;}
+.chip.purple{background:#F0E8FF;color:#6B35B0;}
+.paper-qr-divider{border-top:0.5px solid var(--separator);}
+.paper-qr-row{display:flex;align-items:center;gap:14px;padding:14px 16px;}
+.paper-qr-row.coming-soon{opacity:0.5;}
+.paper-qr-wrap img{width:72px;height:72px;border-radius:6px;flex-shrink:0;border:0.5px solid var(--separator);}
+.paper-qr-placeholder{width:72px;height:72px;border-radius:6px;flex-shrink:0;background:var(--bg);border:1px dashed var(--separator);display:flex;align-items:center;justify-content:center;font-size:24px;}
+.paper-qr-meta{flex:1;min-width:0;}
+.paper-qr-label{font-size:13px;font-weight:600;color:var(--label);margin-bottom:2px;}
+.paper-qr-url{font-size:11px;color:var(--secondary);margin-bottom:6px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.paper-qr-btn{display:inline-block;font-size:12px;font-weight:600;color:#fff;background:var(--accent);padding:5px 12px;border-radius:20px;text-decoration:none;}
+
+/* WORKSHOP */
+.workshop-card{margin:0 16px 12px;background:var(--surface);border-radius:var(--radius);overflow:hidden;border:0.5px solid var(--separator);}
+.workshop-header{padding:14px 16px 10px;background:var(--accent-bg);border-bottom:0.5px solid var(--separator);}
+.workshop-name{font-size:16px;font-weight:700;color:var(--label);margin-bottom:4px;}
+.workshop-meta{font-size:13px;color:var(--secondary);}
+.workshop-body{padding:14px 16px;}
+.workshop-qr-row{display:flex;align-items:center;gap:14px;}
+.workshop-qr-row img{width:72px;height:72px;border-radius:6px;border:0.5px solid var(--separator);flex-shrink:0;}
+.workshop-qr-text{flex:1;}
+.workshop-qr-label{font-size:13px;font-weight:600;color:var(--label);margin-bottom:2px;}
+.workshop-qr-url{font-size:11px;color:var(--secondary);margin-bottom:6px;}
+.workshop-qr-btn{display:inline-block;font-size:12px;font-weight:600;color:#fff;background:var(--accent);padding:5px 12px;border-radius:20px;text-decoration:none;}
 
 /* TIERS */
-.tier-item { margin:0 16px 8px; border-radius:var(--radius); padding:14px 16px; border:1px solid; }
-.tier-item.t1 { background:#FDF8F4; border-color:rgba(141,85,36,0.2); }
-.tier-item.t2 { background:#F5F7F8; border-color:rgba(96,125,139,0.25); }
-.tier-item.t3 { background:#FFFBF0; border-color:rgba(184,134,11,0.3); }
-.tier-name { font-size:15px; font-weight:600; margin-bottom:3px; }
-.t1 .tier-name{color:var(--bronze);} .t2 .tier-name{color:var(--silver);} .t3 .tier-name{color:var(--gold);}
-.tier-qty { font-size:13px; color:var(--secondary); margin-bottom:5px; }
-.tier-desc { font-size:14px; color:var(--label); line-height:1.5; }
+.tier-item{margin:0 16px 8px;border-radius:var(--radius);padding:14px 16px;border:1px solid;}
+.tier-item.t1{background:#FDF8F4;border-color:rgba(141,85,36,0.2);}
+.tier-item.t2{background:#F5F7F8;border-color:rgba(96,125,139,0.25);}
+.tier-item.t3{background:#FFFBF0;border-color:rgba(184,134,11,0.3);}
+.tier-name{font-size:15px;font-weight:600;margin-bottom:3px;}
+.t1 .tier-name{color:var(--bronze);}.t2 .tier-name{color:var(--silver);}.t3 .tier-name{color:var(--gold);}
+.tier-qty{font-size:13px;color:var(--secondary);margin-bottom:5px;}
+.tier-desc{font-size:14px;color:var(--label);line-height:1.5;}
 
 /* ACTIVATION */
-.act-item { margin:0 16px 8px; background:var(--surface); border-radius:var(--radius); overflow:hidden; }
-.act-header { padding:13px 16px 10px; border-bottom:0.5px solid var(--separator); }
-.act-header-text { font-size:16px; font-weight:600; color:var(--label); }
-.act-row { display:flex; justify-content:space-between; align-items:center; padding:10px 16px; border-bottom:0.5px solid var(--separator); }
-.act-row:last-child { border-bottom:none; }
-.act-condition { font-size:14px; color:var(--label); }
-.act-prize { font-size:13px; font-weight:600; }
-.act-prize.t1{color:var(--bronze);} .act-prize.t2{color:var(--silver);} .act-prize.t3{color:var(--gold);}
+.act-item{margin:0 16px 8px;background:var(--surface);border-radius:var(--radius);overflow:hidden;}
+.act-header{padding:13px 16px 10px;border-bottom:0.5px solid var(--separator);}
+.act-header-text{font-size:16px;font-weight:600;color:var(--label);}
+.act-row{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-bottom:0.5px solid var(--separator);}
+.act-row:last-child{border-bottom:none;}
+.act-condition{font-size:14px;color:var(--label);}
+.act-prize{font-size:13px;font-weight:600;}
+.act-prize.t1{color:var(--bronze);}.act-prize.t2{color:var(--silver);}.act-prize.t3{color:var(--gold);}
 
 /* ROLES */
-.role-item { margin:0 16px 8px; background:var(--surface); border-radius:var(--radius); overflow:hidden; }
-.role-header { padding:13px 16px 6px; border-bottom:0.5px solid var(--separator); }
-.role-name { font-size:16px; font-weight:600; color:var(--label); margin-bottom:3px; }
-.role-sub { font-size:13px; color:var(--secondary); line-height:1.45; }
-.role-level { display:flex; justify-content:space-between; padding:10px 16px; border-bottom:0.5px solid var(--separator); gap:12px; align-items:center; }
-.role-level:last-child { border-bottom:none; }
-.role-level-name { font-size:14px; color:var(--label); }
-.role-level-req { font-size:13px; color:var(--secondary); text-align:right; }
+.role-item{margin:0 16px 8px;background:var(--surface);border-radius:var(--radius);overflow:hidden;}
+.role-header{padding:13px 16px 6px;border-bottom:0.5px solid var(--separator);}
+.role-name{font-size:16px;font-weight:600;color:var(--label);margin-bottom:3px;}
+.role-sub{font-size:13px;color:var(--secondary);line-height:1.45;}
+.role-level{display:flex;justify-content:space-between;padding:10px 16px;border-bottom:0.5px solid var(--separator);gap:12px;align-items:center;}
+.role-level:last-child{border-bottom:none;}
+.role-level-name{font-size:14px;color:var(--label);}
+.role-level-req{font-size:13px;color:var(--secondary);text-align:right;}
 
-/* STAT GRID */
-.stat-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:0 16px 4px; }
-.stat-box { background:var(--surface); border-radius:var(--radius); padding:16px 12px; text-align:center; }
-.stat-num { font-size:30px; font-weight:700; color:var(--accent); letter-spacing:-1px; line-height:1; margin-bottom:4px; }
-.stat-lbl { font-size:12px; color:var(--secondary); }
-.pillar-item { margin:0 16px 8px; background:var(--surface); border-radius:var(--radius); padding:14px 16px; }
-.pillar-name { font-size:15px; font-weight:600; color:var(--label); margin-bottom:4px; }
-.pillar-desc { font-size:14px; color:var(--secondary); line-height:1.5; }
+/* STATS */
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 16px 4px;}
+.stat-box{background:var(--surface);border-radius:var(--radius);padding:16px 12px;text-align:center;}
+.stat-num{font-size:30px;font-weight:700;color:var(--accent);letter-spacing:-1px;line-height:1;margin-bottom:4px;}
+.stat-lbl{font-size:12px;color:var(--secondary);}
+.pillar-item{margin:0 16px 8px;background:var(--surface);border-radius:var(--radius);padding:14px 16px;}
+.pillar-name{font-size:15px;font-weight:600;color:var(--label);margin-bottom:4px;}
+.pillar-desc{font-size:14px;color:var(--secondary);line-height:1.5;}
 
-/* QR */
-.qr-block { margin:0 16px 4px; background:var(--surface); border-radius:var(--radius); padding:24px; text-align:center; }
-.qr-block img { width:150px; height:150px; border-radius:8px; }
-.qr-lbl { font-size:14px; color:var(--label); font-weight:500; margin-top:12px; }
-.qr-url { font-size:13px; color:var(--accent); margin-top:4px; }
+/* QR BLOCK */
+.qr-block{margin:0 16px 4px;background:var(--surface);border-radius:var(--radius);padding:24px;text-align:center;}
+.qr-block img{width:150px;height:150px;border-radius:8px;}
+.qr-lbl{font-size:14px;color:var(--label);font-weight:500;margin-top:12px;}
+.qr-url{font-size:13px;color:var(--accent);margin-top:4px;}
 
 /* CONTACT */
-.contact-item { display:flex; align-items:center; gap:14px; padding:13px 16px; cursor:pointer; border-bottom:0.5px solid var(--separator); text-decoration:none; color:var(--label); }
-.contact-item:last-child { border-bottom:none; }
-.contact-item:active { background:var(--bg); }
-.contact-icon2 { font-size:22px; flex-shrink:0; }
-.contact-label { font-size:16px; color:var(--label); }
-.contact-sub2 { font-size:13px; color:var(--secondary); margin-top:1px; }
-.contact-chev { color:var(--accent); font-size:14px; margin-left:auto; opacity:0.6; }
+.contact-item{display:flex;align-items:center;gap:14px;padding:13px 16px;cursor:pointer;border-bottom:0.5px solid var(--separator);text-decoration:none;color:var(--label);}
+.contact-item:last-child{border-bottom:none;}
+.contact-item:active{background:var(--bg);}
+.contact-icon2{font-size:22px;flex-shrink:0;}
+.contact-label{font-size:16px;color:var(--label);}
+.contact-sub2{font-size:13px;color:var(--secondary);margin-top:1px;}
+.contact-chev{color:var(--accent);font-size:14px;margin-left:auto;opacity:0.6;}
 
 /* TIPS */
-.tip-item { padding:12px 16px; display:flex; gap:14px; align-items:flex-start; border-bottom:0.5px solid var(--separator); }
-.tip-item:last-child { border-bottom:none; }
-.tip-emoji { font-size:20px; flex-shrink:0; width:28px; text-align:center; margin-top:1px; }
-.tip-title { font-size:15px; font-weight:500; color:var(--label); margin-bottom:3px; }
-.tip-body { font-size:14px; color:var(--secondary); line-height:1.55; }
-.tip-body a { color:var(--accent); }
-.tip-body strong { color:var(--label); font-weight:500; }
+.tip-item{padding:12px 16px;display:flex;gap:14px;align-items:flex-start;border-bottom:0.5px solid var(--separator);}
+.tip-item:last-child{border-bottom:none;}
+.tip-emoji{font-size:20px;flex-shrink:0;width:28px;text-align:center;margin-top:1px;}
+.tip-title{font-size:15px;font-weight:500;color:var(--label);margin-bottom:3px;}
+.tip-body{font-size:14px;color:var(--secondary);line-height:1.55;}
+.tip-body a{color:var(--accent);}
+.tip-body strong{color:var(--label);font-weight:500;}
 
 /* APP DOWNLOAD */
-.app-dl-btn { display:flex; align-items:center; gap:12px; padding:13px 16px; border-bottom:0.5px solid var(--separator); text-decoration:none; color:var(--label); cursor:pointer; }
-.app-dl-btn:last-child { border-bottom:none; }
-.app-dl-btn:active { background:var(--bg); }
-.app-dl-icon { font-size:22px; flex-shrink:0; }
-.app-dl-name { font-size:15px; font-weight:500; color:var(--label); }
-.app-dl-sub { font-size:12px; color:var(--secondary); margin-top:1px; }
-.app-dl-badge { background:var(--accent); color:#fff; font-size:11px; font-weight:600; padding:3px 10px; border-radius:20px; flex-shrink:0; }
+.app-dl-btn{display:flex;align-items:center;gap:12px;padding:13px 16px;border-bottom:0.5px solid var(--separator);text-decoration:none;color:var(--label);cursor:pointer;}
+.app-dl-btn:last-child{border-bottom:none;}
+.app-dl-btn:active{background:var(--bg);}
+.app-dl-icon{font-size:22px;flex-shrink:0;}
+.app-dl-name{font-size:15px;font-weight:500;color:var(--label);}
+.app-dl-sub{font-size:12px;color:var(--secondary);margin-top:1px;}
+.app-dl-badge{background:var(--accent);color:#fff;font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;flex-shrink:0;}
 
 /* FILTER */
-.filter-scroll { display:flex; gap:8px; padding:8px 16px 12px; overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; }
-.filter-scroll::-webkit-scrollbar { display:none; }
-.filt-pill { padding:6px 14px; border-radius:20px; border:1px solid var(--separator); background:var(--surface); color:var(--label); font-size:14px; white-space:nowrap; cursor:pointer; font-family:inherit; flex-shrink:0; }
-.filt-pill.on { background:var(--accent); border-color:var(--accent); color:#fff; font-weight:500; }
+.filter-scroll{display:flex;gap:8px;padding:8px 16px 12px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+.filter-scroll::-webkit-scrollbar{display:none;}
+.filt-pill{padding:6px 14px;border-radius:20px;border:1px solid var(--separator);background:var(--surface);color:var(--label);font-size:14px;white-space:nowrap;cursor:pointer;font-family:inherit;flex-shrink:0;}
+.filt-pill.on{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:500;}
 
-.spots-wrap { margin:0 16px; background:var(--surface); border-radius:var(--radius); overflow:hidden; }
-.spot-row { border-bottom:0.5px solid var(--separator); display:none; }
-.spot-row.show { display:block; }
-.spot-row:last-child { border-bottom:none; }
-.spot-inner { padding:11px 16px; }
-.spot-cat { font-size:10px; font-weight:600; letter-spacing:0.5px; text-transform:uppercase; color:var(--accent); margin-bottom:3px; }
-.spot-name { font-size:15px; font-weight:500; color:var(--label); margin-bottom:2px; }
-.spot-note { font-size:13px; color:var(--secondary); line-height:1.45; }
-.spot-note a { color:var(--accent); }
+.spots-wrap{margin:0 16px;background:var(--surface);border-radius:var(--radius);overflow:hidden;}
+.spot-row{border-bottom:0.5px solid var(--separator);display:none;}
+.spot-row.show{display:block;}
+.spot-row:last-child{border-bottom:none;}
+.spot-inner{padding:11px 16px;}
+.spot-cat{font-size:10px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;color:var(--accent);margin-bottom:3px;}
+.spot-name{font-size:15px;font-weight:500;color:var(--label);margin-bottom:2px;}
+.spot-note{font-size:13px;color:var(--secondary);line-height:1.45;}
+.spot-note a{color:var(--accent);}
 
-.itin-wrap { margin:0 16px 8px; background:var(--surface); border-radius:var(--radius); overflow:hidden; display:none; }
-.itin-wrap.show { display:block; }
-.itin-head { padding:14px 16px; background:var(--accent-bg); border-bottom:0.5px solid var(--separator); display:flex; gap:12px; align-items:center; }
-.itin-emoji2 { font-size:24px; }
-.itin-title2 { font-size:16px; font-weight:600; color:var(--label); }
-.itin-when2 { font-size:13px; color:var(--secondary); margin-top:2px; }
-.itin-stop2 { display:flex; gap:12px; padding:12px 16px; border-bottom:0.5px solid var(--separator); }
-.itin-stop2:last-child { border-bottom:none; }
-.stop-num { width:22px; height:22px; border-radius:50%; background:var(--accent); color:#fff; font-size:11px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px; }
-.stop-name2 { font-size:15px; font-weight:500; color:var(--label); margin-bottom:3px; }
-.stop-desc2 { font-size:13px; color:var(--secondary); line-height:1.5; }
+.itin-wrap{margin:0 16px 8px;background:var(--surface);border-radius:var(--radius);overflow:hidden;display:none;}
+.itin-wrap.show{display:block;}
+.itin-head{padding:14px 16px;background:var(--accent-bg);border-bottom:0.5px solid var(--separator);display:flex;gap:12px;align-items:center;}
+.itin-emoji2{font-size:24px;}
+.itin-title2{font-size:16px;font-weight:600;color:var(--label);}
+.itin-when2{font-size:13px;color:var(--secondary);margin-top:2px;}
+.itin-stop2{display:flex;gap:12px;padding:12px 16px;border-bottom:0.5px solid var(--separator);}
+.itin-stop2:last-child{border-bottom:none;}
+.stop-num{width:22px;height:22px;border-radius:50%;background:var(--accent);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.stop-name2{font-size:15px;font-weight:500;color:var(--label);margin-bottom:3px;}
+.stop-desc2{font-size:13px;color:var(--secondary);line-height:1.5;}
 
-.full-img { width:calc(100% - 32px); margin:0 16px 4px; border-radius:var(--radius); display:block; object-fit:cover; max-height:200px; }
-.link-row { display:flex; justify-content:space-between; align-items:center; padding:13px 16px; border-bottom:0.5px solid var(--separator); cursor:pointer; }
-.link-row:last-child { border-bottom:none; }
-.link-row:active { background:var(--bg); }
-.link-row a { font-size:15px; color:var(--accent); text-decoration:none; flex:1; }
-.link-row-chev { color:var(--secondary); font-size:14px; opacity:0.5; }
-.pills-wrap { padding:12px 16px; display:flex; flex-wrap:wrap; gap:7px; }
+.full-img{width:calc(100% - 32px);margin:0 16px 4px;border-radius:var(--radius);display:block;object-fit:cover;max-height:200px;}
+.link-row{display:flex;justify-content:space-between;align-items:center;padding:13px 16px;border-bottom:0.5px solid var(--separator);cursor:pointer;}
+.link-row:last-child{border-bottom:none;}
+.link-row:active{background:var(--bg);}
+.link-row a{font-size:15px;color:var(--accent);text-decoration:none;flex:1;}
+.link-row-chev{color:var(--secondary);font-size:14px;opacity:0.5;}
+.pills-wrap{padding:12px 16px;display:flex;flex-wrap:wrap;gap:7px;}
 
-.contact-mateo-btn { display:flex; align-items:center; justify-content:center; gap:10px; margin:24px 16px 8px; background:var(--accent); border-radius:var(--radius); padding:16px; text-decoration:none; cursor:pointer; border:none; width:calc(100% - 32px); font-family:inherit; }
-.contact-mateo-btn:active { opacity:0.85; }
-.contact-mateo-btn .cm-icon { font-size:20px; }
-.contact-mateo-btn .cm-name { font-size:15px; font-weight:700; color:#fff; }
-.contact-mateo-btn .cm-sub { font-size:12px; color:rgba(255,255,255,0.75); margin-top:1px; }
+/* CONTACT FOOTER BUTTONS */
+.contact-footer{padding:24px 16px 8px;display:flex;gap:10px;}
+.contact-btn-half{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;background:var(--accent);border-radius:var(--radius);padding:14px 10px;text-decoration:none;cursor:pointer;border:none;font-family:inherit;}
+.contact-btn-half:active{opacity:0.85;}
+.contact-btn-half .cb-icon{font-size:18px;}
+.contact-btn-half .cb-name{font-size:13px;font-weight:700;color:#fff;}
+.contact-btn-half .cb-sub{font-size:10px;color:rgba(255,255,255,0.75);margin-top:1px;}
 
-.page.slide-in { animation:slideIn 0.28s cubic-bezier(0.25,0.46,0.45,0.94) both; }
-@keyframes slideIn { from{transform:translateX(100%);opacity:0.6;} to{transform:translateX(0);opacity:1;} }
-.page.slide-back-in { animation:slideBackIn 0.28s cubic-bezier(0.25,0.46,0.45,0.94) both; }
-@keyframes slideBackIn { from{transform:translateX(-30%);opacity:0.4;} to{transform:translateX(0);opacity:1;} }
+.page.slide-in{animation:slideIn 0.28s cubic-bezier(0.25,0.46,0.45,0.94) both;}
+@keyframes slideIn{from{transform:translateX(100%);opacity:0.6;}to{transform:translateX(0);opacity:1;}}
+.page.slide-back-in{animation:slideBackIn 0.28s cubic-bezier(0.25,0.46,0.45,0.94) both;}
+@keyframes slideBackIn{from{transform:translateX(-30%);opacity:0.4;}to{transform:translateX(0);opacity:1;}}
 </style>
 </head>
 <body>
@@ -310,6 +324,7 @@ body { font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neu
       <h1>Layer 6 Goes to<br>ICML 2026</h1>
       <div class="meta">COEX Convention Centre, Seoul · Jul 6–11</div>
     </div>
+
     <div class="group">
       <div class="group-label">Booth</div>
       <div class="list">
@@ -320,6 +335,7 @@ body { font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neu
         <div class="row" onclick="nav('ourstory','Our Story')"><div class="row-icon ic-indigo">🧠</div><div class="row-text"><div class="row-label">Our Story</div><div class="row-sub">Research pillars, stats, messaging</div></div><div class="row-right"><span class="row-chevron">›</span></div></div>
       </div>
     </div>
+
     <div class="group">
       <div class="group-label">Events</div>
       <div class="list">
@@ -328,13 +344,15 @@ body { font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neu
         <div class="row" onclick="nav('papers','Papers & Talks')"><div class="row-icon ic-l6">📄</div><div class="row-text"><div class="row-label">Papers & Talks</div><div class="row-sub">11 accepted papers + workshop sites</div></div><div class="row-right"><span class="row-badge">11</span><span class="row-chevron">›</span></div></div>
       </div>
     </div>
+
     <div class="group">
       <div class="group-label">Seoul</div>
       <div class="list">
-        <div class="row" onclick="nav('seoul','Seoul Guide')"><div class="row-icon ic-green">🗺️</div><div class="row-text"><div class="row-label">Seoul Guide</div><div class="row-sub">Top spots & 5 itineraries</div></div><div class="row-right"><span class="row-chevron">›</span></div></div>
+        <div class="row" onclick="nav('seoul','Seoul Guide')"><div class="row-icon ic-green">🗺️</div><div class="row-text"><div class="row-label">Seoul Guide</div><div class="row-sub">Airport, top spots & 5 itineraries</div></div><div class="row-right"><span class="row-chevron">›</span></div></div>
         <div class="row" onclick="nav('tips','Practical Tips')"><div class="row-icon ic-yellow">💡</div><div class="row-text"><div class="row-label">Practical Tips</div><div class="row-sub">Naver Maps, eSIM, transit, phrases</div></div><div class="row-right"><span class="row-chevron">›</span></div></div>
       </div>
     </div>
+
     <div class="group">
       <div class="group-label">Conference</div>
       <div class="list">
@@ -343,17 +361,27 @@ body { font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neu
         <div class="row" onclick="nav('apps','Recommended Apps')"><div class="row-icon ic-indigo">📲</div><div class="row-text"><div class="row-label">Recommended Apps</div><div class="row-sub">Download before you land</div></div><div class="row-right"><span class="row-chevron">›</span></div></div>
       </div>
     </div>
+
     <div class="group">
       <div class="group-label">Team</div>
       <div class="list">
-        <div class="row" onclick="nav('contact','Contact & Comms')"><div class="row-icon ic-green">💬</div><div class="row-text"><div class="row-label">Contact & Comms</div><div class="row-sub">Mateo · Slack · Google Photos</div></div><div class="row-right"><span class="row-chevron">›</span></div></div>
+        <div class="row" onclick="nav('delegation','Our Delegation')"><div class="row-icon ic-purple">🏅</div><div class="row-text"><div class="row-label">Our Delegation</div><div class="row-sub">Who's going to Seoul</div></div><div class="row-right"><span class="row-chevron">›</span></div></div>
+        <div class="row" onclick="nav('contact','Contact & Comms')"><div class="row-icon ic-green">💬</div><div class="row-text"><div class="row-label">Contact & Comms</div><div class="row-sub">Abi · Mateo · Slack · Photos</div></div><div class="row-right"><span class="row-chevron">›</span></div></div>
         <div class="row" onclick="nav('reminders','Reminders')"><div class="row-icon ic-red">⚠️</div><div class="row-text"><div class="row-label">Important Reminders</div><div class="row-sub">Conduct, dress code, reimbursement</div></div><div class="row-right"><span class="row-chevron">›</span></div></div>
       </div>
     </div>
-    <a href="https://wa.me/16475736173" class="contact-mateo-btn">
-      <span class="cm-icon">💬</span>
-      <div><div class="cm-name">Contact Mateo</div><div class="cm-sub">Questions? Tap to WhatsApp</div></div>
-    </a>
+
+    <!-- Dual contact footer -->
+    <div class="contact-footer">
+      <a href="https://wa.me/14164647804" class="contact-btn-half">
+        <span class="cb-icon">💬</span>
+        <div><div class="cb-name">Abi</div><div class="cb-sub">WhatsApp</div></div>
+      </a>
+      <a href="https://wa.me/16475736173" class="contact-btn-half">
+        <span class="cb-icon">💬</span>
+        <div><div class="cb-name">Mateo</div><div class="cb-sub">WhatsApp</div></div>
+      </a>
+    </div>
     <div style="height:24px;"></div>
   </div>
 
@@ -361,39 +389,51 @@ body { font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neu
   <div class="page" id="page-schedule">
     <div class="content">
       <div style="padding:4px 0 0;"></div>
-      <div class="alert warn"><strong>Shifts & reimbursement are linked.</strong> Contact Mateo in advance if something comes up.</div>
-      <div class="s-label">Pre-Conference · Mon Jul 6</div>
-      <div class="inset-group">
-        <div class="inset-row"><div class="ir-text"><strong>Booth move-in</strong> — exhibit hall not yet open to attendees</div></div>
-        <div class="inset-row"><div class="ir-text"><strong>Jesse's Expo Talk</strong> — time TBC <span class="dim">· Outside ICML program</span></div></div>
-        <div class="inset-row"><div class="ir-text"><strong>Patent Session</strong> — time TBC <span class="dim">· Outside ICML program</span></div></div>
-      </div>
+      <div class="alert warn"><strong>Shifts & reimbursement are linked.</strong> Contact Abi or Mateo in advance if something comes up.</div>
+
       <div class="s-label">Conference Calendar</div>
       <div class="kv-group">
         <div class="kv"><span class="kv-key">Mon Jul 6</span><span class="kv-val">Move-in · Expo talk · Patent session</span></div>
-        <div class="kv"><span class="kv-key" style="color:var(--accent);font-weight:600;">Tue–Thu Jul 7–9</span><span class="kv-val" style="color:var(--accent);font-weight:600;">Exhibit Hall Open ← Your shifts</span></div>
+        <div class="kv" style="background:var(--accent-bg);"><span class="kv-key" style="color:var(--accent);font-weight:600;">Tue–Thu Jul 7–9</span><span class="kv-val" style="color:var(--accent);font-weight:600;">Exhibit Hall Open ← Your shifts</span></div>
         <div class="kv"><span class="kv-key">Fri Jul 10</span><span class="kv-val">Workshop days</span></div>
-        <div class="kv"><span class="kv-key">Sat Jul 11</span><span class="kv-val">FMSD Workshop + AgentUQ Workshop</span></div>
-        <div class="kv"><span class="kv-key">Sat Jul 11</span><span class="kv-val">FMSD After-Party · 7–11 PM</span></div>
+        <div class="kv"><span class="kv-key">Sat Jul 11</span><span class="kv-val">FMSD Workshop + AgentUQ + After-Party</span></div>
       </div>
+
+      <div class="day-header">Monday · Jul 6 — Pre-Conference</div>
+      <div class="expo-card">
+        <div class="expo-inner">
+          <div class="expo-type">Expo Talk Panel</div>
+          <div class="expo-title">Operationalizing Trustworthy AI in Industry</div>
+          <div class="expo-meta">Jesse Cresswell · Hall D1 · 12:30–1:30 PM KST</div>
+        </div>
+      </div>
+      <div class="shift-card">
+        <div class="shift-time"><span class="shift-time-text">Patent Session</span></div>
+        <div class="shift-names"><span class="name-chip ops">Time TBC · Outside ICML program</span></div>
+        <div style="padding:6px 14px 10px;font-size:12px;color:#8E8E93;font-style:italic;">Check with Jesse if you need to be part of this session.</div>
+      </div>
+
       <div class="day-header">Tuesday · Jul 7</div>
       <div class="shift-card"><div class="shift-time"><span class="shift-time-text">11:00 AM — Prep</span></div><div class="shift-names"><span class="name-chip ops">Mateo</span><span class="name-chip ops">Abi</span></div></div>
       <div class="shift-card"><div class="shift-time"><span class="shift-time-text">11:00 AM – 1:00 PM</span></div><div class="shift-names"><span class="name-chip ops">Mateo</span><span class="name-chip">Zoey</span><span class="name-chip">Ilan</span><span class="name-chip">Sebastian</span><span class="name-chip">Zhaoyan</span><span class="name-chip">Dae Yon</span></div></div>
       <div class="shift-card"><div class="shift-time"><span class="shift-time-text">1:00 PM – 3:00 PM</span></div><div class="shift-names"><span class="name-chip ops">Mateo</span><span class="name-chip">Nafiseh</span><span class="name-chip">Mingzhe</span><span class="name-chip">Naiqing</span><span class="name-chip">Kevin</span><span class="name-chip">Mouloud</span></div></div>
       <div class="shift-card"><div class="shift-time"><span class="shift-time-text">3:00 PM – 5:30 PM</span></div><div class="shift-names"><span class="name-chip ops">Abi</span><span class="name-chip">Yuyan</span><span class="name-chip">Rasa</span><span class="name-chip">Keyu</span><span class="name-chip">Mehran</span><span class="name-chip">Gabriel</span></div></div>
       <div class="shift-card"><div class="shift-time"><span class="shift-time-text">5:30 PM – 7:00 PM</span><span class="shift-note">★ Welcome Reception</span></div><div class="shift-names"><span class="name-chip ops">Abi</span><span class="name-chip">Amy</span><span class="name-chip">Raunaq</span><span class="name-chip">Jesse</span><span class="name-chip">Wei</span><span class="name-chip">Sebastian</span><span class="name-chip">Zhaoyan</span></div></div>
+
       <div class="day-header">Wednesday · Jul 8</div>
       <div class="shift-card"><div class="shift-time"><span class="shift-time-text">9:00 AM – 11:00 AM</span><span class="shift-note">Morning crew</span></div><div class="shift-names"><span class="name-chip ops">Abi</span><span class="name-chip">Amy</span><span class="name-chip">Raunaq</span><span class="name-chip">Naiqing</span><span class="name-chip">Brendan</span><span class="name-chip">Dae Yon</span></div></div>
       <div class="shift-card"><div class="shift-time"><span class="shift-time-text">11:00 AM – 1:00 PM</span></div><div class="shift-names"><span class="name-chip ops">Abi</span><span class="name-chip">Mingzhe</span><span class="name-chip">Jesse</span><span class="name-chip">Rasa</span><span class="name-chip">Mouloud</span><span class="name-chip">Mehran</span></div></div>
       <div class="shift-card"><div class="shift-time"><span class="shift-time-text">1:00 PM – 3:00 PM</span></div><div class="shift-names"><span class="name-chip ops">Mateo</span><span class="name-chip">Zoey</span><span class="name-chip">Ilan</span><span class="name-chip">Naiqing</span><span class="name-chip">Gabriel</span><span class="name-chip">Kevin</span></div></div>
       <div class="shift-card"><div class="shift-time"><span class="shift-time-text">3:00 PM – 5:00 PM</span></div><div class="shift-names"><span class="name-chip ops">Mateo</span><span class="name-chip">Nafiseh</span><span class="name-chip">Sebastian</span><span class="name-chip">Wei</span><span class="name-chip">Dae Yon</span><span class="name-chip">Keyu</span></div></div>
       <div class="shift-card"><div class="shift-time"><span class="shift-time-text">5:00 PM – 6:00 PM</span><span class="shift-note">Wrap-up</span></div><div class="shift-names"><span class="name-chip ops">Mateo</span><span class="name-chip">Yuyan</span><span class="name-chip">Mingzhe</span><span class="name-chip">Brendan</span><span class="name-chip">Rasa</span><span class="name-chip">Mouloud</span></div></div>
+
       <div class="day-header">Thursday · Jul 9</div>
       <div class="shift-card"><div class="shift-time"><span class="shift-time-text">9:00 AM – 11:00 AM</span><span class="shift-note">Morning crew</span></div><div class="shift-names"><span class="name-chip ops">Mateo</span><span class="name-chip">Yuyan</span><span class="name-chip">Ilan</span><span class="name-chip">Alex</span><span class="name-chip">Zhaoyan</span><span class="name-chip">Gabriel</span></div></div>
       <div class="shift-card"><div class="shift-time"><span class="shift-time-text">11:00 AM – 1:00 PM</span></div><div class="shift-names"><span class="name-chip ops">Mateo</span><span class="name-chip">Amy</span><span class="name-chip">Naiqing</span><span class="name-chip">Wei</span><span class="name-chip">Kevin</span><span class="name-chip">Raunaq</span></div></div>
       <div class="shift-card"><div class="shift-time"><span class="shift-time-text">1:00 PM – 3:00 PM</span></div><div class="shift-names"><span class="name-chip ops">Abi</span><span class="name-chip">Sebastian</span><span class="name-chip">Alex</span><span class="name-chip">Dae Yon</span><span class="name-chip">Brendan</span><span class="name-chip">Rasa</span></div></div>
       <div class="shift-card"><div class="shift-time"><span class="shift-time-text">3:00 PM – 5:00 PM</span></div><div class="shift-names"><span class="name-chip ops">Abi</span><span class="name-chip">Zoey</span><span class="name-chip">Keyu</span><span class="name-chip">Mehran</span><span class="name-chip">Zhaoyan</span><span class="name-chip">Gabriel</span></div></div>
       <div class="shift-card"><div class="shift-time"><span class="shift-time-text">5:00 PM – 6:00 PM</span><span class="shift-note">Close-out</span></div><div class="shift-names"><span class="name-chip ops">Abi</span><span class="name-chip">Nafiseh</span><span class="name-chip">Ilan</span><span class="name-chip">Alex</span><span class="name-chip">Jesse</span><span class="name-chip">Mouloud</span></div></div>
+
       <div style="padding:8px 0 0;"></div>
       <div class="alert warn">Jesse, Dae Yon, Raunaq, Brendan, Gabriel, Kevin, Wei, and Mouloud have scheduled talks. Shifts are arranged to avoid conflicts — see Papers & Talks for session times.</div>
     </div>
@@ -402,7 +442,7 @@ body { font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neu
   <!-- RESPONSIBILITIES -->
   <div class="page" id="page-responsibilities">
     <div class="content">
-      <div class="s-label">Strat & Ops — Mateo & Abi</div>
+      <div class="s-label">Strat & Ops — Abi & Mateo</div>
       <div class="inset-group">
         <div class="inset-row"><div class="dot"></div><div class="ir-text">Monitor and replenish snacks and catering throughout the day</div></div>
         <div class="inset-row"><div class="dot"></div><div class="ir-text">Manage swag — correct labeled tier box, track daily quantities, no replenishment until next day</div></div>
@@ -410,7 +450,7 @@ body { font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neu
         <div class="inset-row"><div class="dot"></div><div class="ir-text">Ensure all 4 screens are running and content is looping</div></div>
         <div class="inset-row"><div class="dot"></div><div class="ir-text">Run or oversee the activation game; distribute prizes from the correct tier box</div></div>
         <div class="inset-row"><div class="dot"></div><div class="ir-text">Greet and direct walk-ins not yet engaged with a researcher</div></div>
-        <div class="inset-row"><div class="dot"></div><div class="ir-text">First contact for any logistics issue — reach Mateo on WhatsApp</div></div>
+        <div class="inset-row"><div class="dot"></div><div class="ir-text">First contact for any logistics issue — reach <strong>Abi or Mateo</strong> on WhatsApp</div></div>
         <div class="inset-row"><div class="dot"></div><div class="ir-text">Setup each morning, teardown each evening</div></div>
         <div class="inset-row"><div class="dot"></div><div class="ir-text">Manage meeting room and storage room access</div></div>
       </div>
@@ -418,7 +458,7 @@ body { font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neu
       <div class="inset-group">
         <div class="inset-row"><div class="dot"></div><div class="ir-text">Engage attendees — talk about your work, Layer 6's research, and our ICML papers</div></div>
         <div class="inset-row"><div class="dot"></div><div class="ir-text">After a genuine conversation, hand the attendee a <strong>green coin</strong> — their entry to the activation game</div></div>
-        <div class="inset-row"><div class="dot"></div><div class="ir-text">If someone asks about jobs, point to the Layer 6 listing on the ICML portal. Show the pamphlet or TV screens for more info</div></div>
+        <div class="inset-row"><div class="dot"></div><div class="ir-text">If someone asks about jobs, point to the Layer 6 listing on the ICML portal. Show the pamphlet or TV screens</div></div>
         <div class="inset-row"><div class="dot"></div><div class="ir-text">Invite attendees to the after-party — Sat Jul 11, 7–11 PM</div></div>
         <div class="inset-row"><div class="dot"></div><div class="ir-text">If overwhelmed, redirect overflow to another available researcher</div></div>
         <div class="inset-row"><div class="dot"></div><div class="ir-text">Wear the <strong>Layer 6 quarter-zip and lanyard</strong> at all times on shift</div></div>
@@ -443,9 +483,9 @@ body { font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neu
     <div class="content">
       <div class="s-label">The Gate</div>
       <div class="inset-group"><div class="inset-row"><div class="ir-text">Attendees must <strong>speak with a researcher first</strong>. After a real conversation, the researcher hands them a <strong>green coin</strong>. No coin, no play.</div></div></div>
-      <div class="s-label">Choose Your Game</div>
-      <div class="act-item"><div class="act-header"><div class="act-header-text">🎲 Option A — Dice Roll</div></div><div class="act-row"><span class="act-condition">Roll two 6s</span><span class="act-prize t3">🥇 Premium</span></div><div class="act-row"><span class="act-condition">Roll one 6</span><span class="act-prize t2">🥈 Mid-Tier</span></div><div class="act-row"><span class="act-condition">No 6s</span><span class="act-prize t1">🥉 Common</span></div></div>
-      <div class="act-item"><div class="act-header"><div class="act-header-text">🌽 Option B — Cornhole</div></div><div class="act-row"><span class="act-condition">Both bags in</span><span class="act-prize t3">🥇 Premium</span></div><div class="act-row"><span class="act-condition">One bag in</span><span class="act-prize t2">🥈 Mid-Tier</span></div><div class="act-row"><span class="act-condition">No bags in</span><span class="act-prize t1">🥉 Common</span></div></div>
+      <div class="s-label">The Game — Dice Roll</div>
+      <div class="act-item"><div class="act-header"><div class="act-header-text">🎲 Dice Roll</div></div><div class="act-row"><span class="act-condition">Roll two 6s</span><span class="act-prize t3">🥇 Premium</span></div><div class="act-row"><span class="act-condition">Roll one 6</span><span class="act-prize t2">🥈 Mid-Tier</span></div><div class="act-row"><span class="act-condition">No 6s</span><span class="act-prize t1">🥉 Common</span></div></div>
+
       <div class="s-label">Daily Prize Quantities</div>
       <div class="tier-item t1"><div class="tier-name">🥉 Tier 1 — Common</div><div class="tier-qty">~150 per day · everyone who plays</div><div class="tier-desc">Box labeled TIER 1.</div></div>
       <div class="tier-item t2"><div class="tier-name">🥈 Tier 2 — Mid-Tier</div><div class="tier-qty">~75 per day · give sparingly</div><div class="tier-desc">Box labeled TIER 2.</div></div>
@@ -464,7 +504,7 @@ body { font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neu
         <div class="inset-row"><div class="dot"></div><div class="ir-text">Point to the <strong>Layer 6 listing on the ICML job portal</strong> — website or ICML app</div></div>
         <div class="inset-row"><div class="dot"></div><div class="ir-text">Show the <strong>pamphlet</strong> for role details, or direct to the <strong>TV screens</strong></div></div>
         <div class="inset-row"><div class="dot"></div><div class="ir-text">CV submissions go through the ICML portal job listing</div></div>
-        <div class="inset-row"><div class="dot"></div><div class="ir-text">For escalation, contact <strong>Mateo on WhatsApp</strong></div></div>
+        <div class="inset-row"><div class="dot"></div><div class="ir-text">For escalation, contact <strong>Abi or Mateo on WhatsApp</strong></div></div>
       </div>
       <div class="s-label">What Not to Say</div>
       <div class="inset-group">
@@ -509,28 +549,19 @@ body { font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neu
   </div>
 
   
-  <!-- PAPERS & TALKS -->
   <div class="page" id="page-papers">
     <div class="content">
       <div class="s-label">Highlights</div>
-      <div class="alert success"><strong>11 accepted papers</strong> — 3 ICML Main Conference papers, 3 FMSD Workshop Spotlight Orals, 5 additional workshop papers.</div>
-
+      <div class="alert success"><strong>11 accepted papers</strong> — 3 ICML Main Conference, 3 FMSD Spotlight Orals, 5 additional workshop papers.</div>
       <div class="s-label">ICML Main Conference</div>
-
-<div class="paper-card">
+      <div class="paper-card">
   <div class="paper-card-header">
-    <div class="paper-venue-row">
-      <span class="chip green">Main Conference</span>
-    </div>
+    <div class="paper-venue-row"><span class="chip green">Main Conference</span></div>
     <div class="paper-title">Agentic Monte Carlo</div>
-    <div class="paper-session">📅 Tue Jul 7 · 2:00–3:45 PM KST</div>
-    <div class="paper-authors">Brendan, Dae Yon, Jesse, Raunaq</div>
+    <div class="paper-session">📅 Tue Jul 7 · 2:00–3:45 PM KST · Hall TBC</div><div class="paper-authors">Brendan, Dae Yon, Jesse, Raunaq</div>
   </div>
-  <div class="paper-qr-divider">
-<div class="paper-qr-row">
-  <div class="paper-qr-wrap">
-    <img src="data:image/png;base64,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" alt="QR">
-  </div>
+  <div class="paper-qr-divider"><div class="paper-qr-row">
+  <div class="paper-qr-wrap"><img src="data:image/png;base64,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" alt="QR"></div>
   <div class="paper-qr-meta">
     <div class="paper-qr-label">Read the paper</div>
     <div class="paper-qr-url">https://arxiv.org/abs/2606.05296</div>
@@ -538,20 +569,14 @@ body { font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neu
   </div>
 </div></div>
 </div>
-<div class="paper-card">
+      <div class="paper-card">
   <div class="paper-card-header">
-    <div class="paper-venue-row">
-      <span class="chip green">Main Conference</span>
-    </div>
+    <div class="paper-venue-row"><span class="chip green">Main Conference</span></div>
     <div class="paper-title">Conf-Gen: Conformal Uncertainty Quantification for Generative Models</div>
-    <div class="paper-session">📅 Wed Jul 8 · 10:30 AM–12:15 PM KST</div>
-    <div class="paper-authors">Gabriel, Kevin, Wei</div>
+    <div class="paper-session">📅 Wed Jul 8 · 10:30 AM–12:15 PM KST</div><div class="paper-authors">Gabriel, Kevin, Wei</div>
   </div>
-  <div class="paper-qr-divider">
-<div class="paper-qr-row">
-  <div class="paper-qr-wrap">
-    <img src="data:image/png;base64,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" alt="QR">
-  </div>
+  <div class="paper-qr-divider"><div class="paper-qr-row">
+  <div class="paper-qr-wrap"><img src="data:image/png;base64,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" alt="QR"></div>
   <div class="paper-qr-meta">
     <div class="paper-qr-label">Read the paper</div>
     <div class="paper-qr-url">https://arxiv.org/abs/2605.28920</div>
@@ -559,20 +584,14 @@ body { font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neu
   </div>
 </div></div>
 </div>
-<div class="paper-card">
+      <div class="paper-card">
   <div class="paper-card-header">
-    <div class="paper-venue-row">
-      <span class="chip green">Main Conference</span>
-    </div>
+    <div class="paper-venue-row"><span class="chip green">Main Conference</span></div>
     <div class="paper-title">Beyond Procedure: Substantive Fairness in Conformal Prediction</div>
-    <div class="paper-session">📅 Thu Jul 9 · 2:30–4:15 PM KST</div>
-    <div class="paper-authors">Jesse, Mouloud</div>
+    <div class="paper-session">📅 Thu Jul 9 · 2:30–4:15 PM KST</div><div class="paper-authors">Jesse, Mouloud</div>
   </div>
-  <div class="paper-qr-divider">
-<div class="paper-qr-row">
-  <div class="paper-qr-wrap">
-    <img src="data:image/png;base64,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" alt="QR">
-  </div>
+  <div class="paper-qr-divider"><div class="paper-qr-row">
+  <div class="paper-qr-wrap"><img src="data:image/png;base64,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" alt="QR"></div>
   <div class="paper-qr-meta">
     <div class="paper-qr-label">Read the paper</div>
     <div class="paper-qr-url">https://arxiv.org/abs/2602.16794</div>
@@ -581,62 +600,43 @@ body { font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neu
 </div></div>
 </div>
       <div class="s-label">FMSD Workshop — Spotlight Orals</div>
-      <div class="alert success" style="margin-bottom:8px;">All FMSD papers are presented at <strong>Grand Ballroom 103, COEX · Sat Jul 11</strong>. For the full program, scan the workshop QR below.</div>
-
-<div class="paper-card">
+      <div class="alert success" style="margin-bottom:8px;">All FMSD papers at <strong>Grand Ballroom 103 · Sat Jul 11</strong>. Scan the workshop QR at the bottom for the full program.</div>
+      <div class="paper-card">
   <div class="paper-card-header">
-    <div class="paper-venue-row">
-      <span class="chip amber">Spotlight Oral</span>
-    </div>
+    <div class="paper-venue-row"><span class="chip amber">Spotlight Oral</span></div>
     <div class="paper-title">Foundations without Fundamentals: Zero-Shot Blind Spots in Time Series FMs</div>
     <div class="paper-session">📅 Sat Jul 11 · FMSD Workshop</div>
-    
   </div>
-  <div class="paper-qr-divider">
-<div class="paper-qr-row coming-soon">
-  <div class="paper-qr-placeholder">
-    <span>🔗</span>
-  </div>
+  <div class="paper-qr-divider"><div class="paper-qr-row coming-soon">
+  <div class="paper-qr-placeholder"><span>🔗</span></div>
   <div class="paper-qr-meta">
     <div class="paper-qr-label">QR Coming Soon</div>
     <div class="paper-qr-url">Public link not yet available</div>
   </div>
 </div></div>
 </div>
-<div class="paper-card">
+      <div class="paper-card">
   <div class="paper-card-header">
-    <div class="paper-venue-row">
-      <span class="chip amber">Spotlight Oral</span>
-    </div>
+    <div class="paper-venue-row"><span class="chip amber">Spotlight Oral</span></div>
     <div class="paper-title">Training Fair Tabular Foundation Models</div>
     <div class="paper-session">📅 Sat Jul 11 · FMSD Workshop</div>
-    
   </div>
-  <div class="paper-qr-divider">
-<div class="paper-qr-row coming-soon">
-  <div class="paper-qr-placeholder">
-    <span>🔗</span>
-  </div>
+  <div class="paper-qr-divider"><div class="paper-qr-row coming-soon">
+  <div class="paper-qr-placeholder"><span>🔗</span></div>
   <div class="paper-qr-meta">
     <div class="paper-qr-label">QR Coming Soon</div>
     <div class="paper-qr-url">Public link not yet available</div>
   </div>
 </div></div>
 </div>
-<div class="paper-card">
+      <div class="paper-card">
   <div class="paper-card-header">
-    <div class="paper-venue-row">
-      <span class="chip amber">Spotlight Oral</span>
-    </div>
+    <div class="paper-venue-row"><span class="chip amber">Spotlight Oral</span></div>
     <div class="paper-title">Dataset Inference for Data Provenance and Privacy Auditing in Tabular Foundation Models</div>
     <div class="paper-session">📅 Sat Jul 11 · FMSD Workshop</div>
-    
   </div>
-  <div class="paper-qr-divider">
-<div class="paper-qr-row coming-soon">
-  <div class="paper-qr-placeholder">
-    <span>🔗</span>
-  </div>
+  <div class="paper-qr-divider"><div class="paper-qr-row coming-soon">
+  <div class="paper-qr-placeholder"><span>🔗</span></div>
   <div class="paper-qr-meta">
     <div class="paper-qr-label">QR Coming Soon</div>
     <div class="paper-qr-url">Public link not yet available</div>
@@ -644,21 +644,14 @@ body { font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neu
 </div></div>
 </div>
       <div class="s-label">FMSD Workshop — Additional Papers</div>
-
-<div class="paper-card">
+      <div class="paper-card">
   <div class="paper-card-header">
-    <div class="paper-venue-row">
-      <span class="chip blue">FMSD Workshop</span>
-    </div>
+    <div class="paper-venue-row"><span class="chip blue">FMSD Workshop</span></div>
     <div class="paper-title">Causal Foundation Models with Continuous Treatments</div>
     <div class="paper-session">📅 Sat Jul 11 · FMSD Workshop</div>
-    
   </div>
-  <div class="paper-qr-divider">
-<div class="paper-qr-row">
-  <div class="paper-qr-wrap">
-    <img src="data:image/png;base64,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" alt="QR">
-  </div>
+  <div class="paper-qr-divider"><div class="paper-qr-row">
+  <div class="paper-qr-wrap"><img src="data:image/png;base64,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" alt="QR"></div>
   <div class="paper-qr-meta">
     <div class="paper-qr-label">Read the paper</div>
     <div class="paper-qr-url">https://arxiv.org/abs/2605.15133</div>
@@ -666,60 +659,42 @@ body { font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neu
   </div>
 </div></div>
 </div>
-<div class="paper-card">
+      <div class="paper-card">
   <div class="paper-card-header">
-    <div class="paper-venue-row">
-      <span class="chip blue">FMSD Workshop</span>
-    </div>
+    <div class="paper-venue-row"><span class="chip blue">FMSD Workshop</span></div>
     <div class="paper-title">TabDPT-Turbo: Efficient In-Context Learning for Tabular Prediction</div>
     <div class="paper-session">📅 Sat Jul 11 · FMSD Workshop</div>
-    
   </div>
-  <div class="paper-qr-divider">
-<div class="paper-qr-row coming-soon">
-  <div class="paper-qr-placeholder">
-    <span>🔗</span>
-  </div>
+  <div class="paper-qr-divider"><div class="paper-qr-row coming-soon">
+  <div class="paper-qr-placeholder"><span>🔗</span></div>
   <div class="paper-qr-meta">
     <div class="paper-qr-label">QR Coming Soon</div>
     <div class="paper-qr-url">Public link not yet available</div>
   </div>
 </div></div>
 </div>
-<div class="paper-card">
+      <div class="paper-card">
   <div class="paper-card-header">
-    <div class="paper-venue-row">
-      <span class="chip blue">FMSD Workshop</span>
-    </div>
+    <div class="paper-venue-row"><span class="chip blue">FMSD Workshop</span></div>
     <div class="paper-title">TabPATE: Differentially Private Tabular In-Context Learning Without Public Data</div>
     <div class="paper-session">📅 Sat Jul 11 · FMSD Workshop</div>
-    
   </div>
-  <div class="paper-qr-divider">
-<div class="paper-qr-row coming-soon">
-  <div class="paper-qr-placeholder">
-    <span>🔗</span>
-  </div>
+  <div class="paper-qr-divider"><div class="paper-qr-row coming-soon">
+  <div class="paper-qr-placeholder"><span>🔗</span></div>
   <div class="paper-qr-meta">
     <div class="paper-qr-label">QR Coming Soon</div>
     <div class="paper-qr-url">Public link not yet available</div>
   </div>
 </div></div>
 </div>
-<div class="paper-card">
+      <div class="paper-card">
   <div class="paper-card-header">
-    <div class="paper-venue-row">
-      <span class="chip blue">FMSD Workshop</span>
-    </div>
+    <div class="paper-venue-row"><span class="chip blue">FMSD Workshop</span></div>
     <div class="paper-title">Text-Attention Guided Forecasting (TAG-ICF)</div>
     <div class="paper-session">📅 Sat Jul 11 · FMSD Workshop</div>
-    
   </div>
-  <div class="paper-qr-divider">
-<div class="paper-qr-row coming-soon">
-  <div class="paper-qr-placeholder">
-    <span>🔗</span>
-  </div>
+  <div class="paper-qr-divider"><div class="paper-qr-row coming-soon">
+  <div class="paper-qr-placeholder"><span>🔗</span></div>
   <div class="paper-qr-meta">
     <div class="paper-qr-label">QR Coming Soon</div>
     <div class="paper-qr-url">Public link not yet available</div>
@@ -727,22 +702,15 @@ body { font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neu
 </div></div>
 </div>
       <div class="s-label">AgentUQ Workshop</div>
-      <div class="alert success" style="margin-bottom:8px;">Presented at <strong>Conference Room E1-E4, COEX · Sat Jul 11</strong>. For the full program, scan the workshop QR below.</div>
-
-<div class="paper-card">
+      <div class="alert success" style="margin-bottom:8px;">Presented at <strong>Conference Room E1–E4 · Sat Jul 11</strong>. Scan the workshop QR at the bottom for the full program.</div>
+      <div class="paper-card">
   <div class="paper-card-header">
-    <div class="paper-venue-row">
-      <span class="chip purple">AgentUQ Workshop</span>
-    </div>
+    <div class="paper-venue-row"><span class="chip purple">AgentUQ Workshop</span></div>
     <div class="paper-title">Conformal Agent Error Attribution</div>
     <div class="paper-session">📅 Sat Jul 11 · AgentUQ Workshop</div>
-    
   </div>
-  <div class="paper-qr-divider">
-<div class="paper-qr-row">
-  <div class="paper-qr-wrap">
-    <img src="data:image/png;base64,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" alt="QR">
-  </div>
+  <div class="paper-qr-divider"><div class="paper-qr-row">
+  <div class="paper-qr-wrap"><img src="data:image/png;base64,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" alt="QR"></div>
   <div class="paper-qr-meta">
     <div class="paper-qr-label">Read the paper</div>
     <div class="paper-qr-url">https://arxiv.org/abs/2605.06788</div>
@@ -752,40 +720,58 @@ body { font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neu
 </div>
       <div class="s-label">Workshop Sites</div>
       <div class="workshop-card">
-        <div class="workshop-header">
-          <div class="workshop-name">FMSD Workshop</div>
-          <div class="workshop-meta">Grand Ballroom 103 · Sat Jul 11 · COEX</div>
-        </div>
-        <div class="workshop-body">
-          <div class="workshop-qr-row">
-            <img src="data:image/png;base64,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"  alt="FMSD QR">
-            <div class="workshop-qr-text">
-              <div class="workshop-qr-label">Full program & schedule</div>
-              <div class="workshop-qr-url">icml-structured-fm-workshop.github.io</div>
-              <a href="https://icml-structured-fm-workshop.github.io" class="workshop-qr-btn">Visit site →</a>
-            </div>
-          </div>
-        </div>
+        <div class="workshop-header"><div class="workshop-name">FMSD Workshop</div><div class="workshop-meta">Grand Ballroom 103 · Sat Jul 11 · COEX</div></div>
+        <div class="workshop-body"><div class="workshop-qr-row">
+          <img src="data:image/png;base64,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" alt="FMSD QR">
+          <div class="workshop-qr-text"><div class="workshop-qr-label">Full program & schedule</div><div class="workshop-qr-url">icml-structured-fm-workshop.github.io</div><a href="https://icml-structured-fm-workshop.github.io" class="workshop-qr-btn">Visit site →</a></div>
+        </div></div>
       </div>
       <div class="workshop-card">
-        <div class="workshop-header">
-          <div class="workshop-name">AgentUQ Workshop</div>
-          <div class="workshop-meta">Conference Room E1–E4 · Sat Jul 11 · COEX</div>
-        </div>
-        <div class="workshop-body">
-          <div class="workshop-qr-row">
-            <img src="data:image/png;base64,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" alt="AgentUQ QR">
-            <div class="workshop-qr-text">
-              <div class="workshop-qr-label">Full program & schedule</div>
-              <div class="workshop-qr-url">agentic-uncertainty-icml2026.github.io</div>
-              <a href="https://agentic-uncertainty-icml2026.github.io" class="workshop-qr-btn">Visit site →</a>
-            </div>
-          </div>
-        </div>
+        <div class="workshop-header"><div class="workshop-name">AgentUQ Workshop</div><div class="workshop-meta">Conference Room E1–E4 · Sat Jul 11 · COEX</div></div>
+        <div class="workshop-body"><div class="workshop-qr-row">
+          <img src="data:image/png;base64,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" alt="AgentUQ QR">
+          <div class="workshop-qr-text"><div class="workshop-qr-label">Full program & schedule</div><div class="workshop-qr-url">agentic-uncertainty-icml2026.github.io</div><a href="https://agentic-uncertainty-icml2026.github.io" class="workshop-qr-btn">Visit site →</a></div>
+        </div></div>
       </div>
     </div>
   </div>
 
+
+  <!-- DELEGATION -->
+  <div class="page" id="page-delegation">
+    <div class="content">
+      <div class="s-label">Strategy & Operations</div>
+      <div class="inset-group">
+        <div class="team-member-row"><div class="team-avatar">M</div><div><div class="team-name">Maulik</div><div class="team-role">Strategy & Operations</div></div></div>
+        <div class="team-member-row"><div class="team-avatar">A</div><div><div class="team-name">Abi</div><div class="team-role">Strategy & Operations</div></div></div>
+        <div class="team-member-row"><div class="team-avatar">M</div><div><div class="team-name">Mateo</div><div class="team-role">Strategy & Operations</div></div></div>
+      </div>
+      <div class="s-label">Researchers</div>
+      <div class="inset-group">
+        <div class="team-member-row"><div class="team-avatar">J</div><div><div class="team-name">Jesse</div><div class="team-role">Head Scientist</div></div></div>
+        <div class="team-member-row"><div class="team-avatar">Z</div><div><div class="team-name">Zoey</div><div class="team-role">Researcher</div></div></div>
+        <div class="team-member-row"><div class="team-avatar">I</div><div><div class="team-name">Ilan</div><div class="team-role">Researcher</div></div></div>
+        <div class="team-member-row"><div class="team-avatar">S</div><div><div class="team-name">Sebastian</div><div class="team-role">Researcher</div></div></div>
+        <div class="team-member-row"><div class="team-avatar">Z</div><div><div class="team-name">Zhaoyan</div><div class="team-role">Researcher</div></div></div>
+        <div class="team-member-row"><div class="team-avatar">D</div><div><div class="team-name">Dae Yon</div><div class="team-role">Researcher</div></div></div>
+        <div class="team-member-row"><div class="team-avatar">N</div><div><div class="team-name">Nafiseh</div><div class="team-role">Researcher</div></div></div>
+        <div class="team-member-row"><div class="team-avatar">M</div><div><div class="team-name">Mingzhe</div><div class="team-role">Researcher</div></div></div>
+        <div class="team-member-row"><div class="team-avatar">N</div><div><div class="team-name">Naiqing</div><div class="team-role">Researcher</div></div></div>
+        <div class="team-member-row"><div class="team-avatar">K</div><div><div class="team-name">Kevin</div><div class="team-role">Researcher</div></div></div>
+        <div class="team-member-row"><div class="team-avatar">M</div><div><div class="team-name">Mouloud</div><div class="team-role">Researcher</div></div></div>
+        <div class="team-member-row"><div class="team-avatar">Y</div><div><div class="team-name">Yuyan</div><div class="team-role">Researcher</div></div></div>
+        <div class="team-member-row"><div class="team-avatar">R</div><div><div class="team-name">Rasa</div><div class="team-role">Researcher</div></div></div>
+        <div class="team-member-row"><div class="team-avatar">K</div><div><div class="team-name">Keyu</div><div class="team-role">Researcher</div></div></div>
+        <div class="team-member-row"><div class="team-avatar">M</div><div><div class="team-name">Mehran</div><div class="team-role">Researcher</div></div></div>
+        <div class="team-member-row"><div class="team-avatar">G</div><div><div class="team-name">Gabriel</div><div class="team-role">Researcher</div></div></div>
+        <div class="team-member-row"><div class="team-avatar">A</div><div><div class="team-name">Amy</div><div class="team-role">Researcher</div></div></div>
+        <div class="team-member-row"><div class="team-avatar">R</div><div><div class="team-name">Raunaq</div><div class="team-role">Researcher</div></div></div>
+        <div class="team-member-row"><div class="team-avatar">W</div><div><div class="team-name">Wei</div><div class="team-role">Researcher</div></div></div>
+        <div class="team-member-row"><div class="team-avatar">B</div><div><div class="team-name">Brendan</div><div class="team-role">Researcher</div></div></div>
+        <div class="team-member-row"><div class="team-avatar">A</div><div><div class="team-name">Alex</div><div class="team-role">Researcher</div></div></div>
+      </div>
+    </div>
+  </div>
 
   <!-- AFTER PARTY -->
   <div class="page" id="page-afterparty">
@@ -838,6 +824,17 @@ body { font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neu
   <!-- SEOUL GUIDE -->
   <div class="page" id="page-seoul">
     <div class="content">
+      <div class="s-label">Getting from the Airport</div>
+      <div class="inset-group">
+        <div class="inset-row"><div class="ir-text"><strong>Incheon International Airport (ICN)</strong> is the main arrival airport. COEX is in Gangnam, about 60–90 min away depending on your route.</div></div>
+      </div>
+      <div class="kv-group" style="margin-top:8px;">
+        <div class="kv"><span class="kv-key" style="font-weight:600;">AREX + Subway</span><span class="kv-val">Best value. AREX direct to Seoul Station (~43 min), then subway Line 2 to Samseong Station → 5 min walk to COEX. Total ~70 min.</span></div>
+        <div class="kv"><span class="kv-key" style="font-weight:600;">Limousine Bus</span><span class="kv-val">Route 6001/6002 to Gangnam. Cheaper than taxi, ~60–80 min. Drops near major hotels.</span></div>
+        <div class="kv"><span class="kv-key" style="font-weight:600;">Taxi / Kakao</span><span class="kv-val">Most convenient with luggage. ~60–90 min, 70,000–90,000 KRW depending on traffic.</span></div>
+        <div class="kv"><span class="kv-key" style="font-weight:600;">From COEX</span><span class="kv-val">Samseong Station (Subway Line 2) is connected directly to COEX underground.</span></div>
+      </div>
+
       <div class="s-label">Top Spots</div>
       <div class="filter-scroll">
         <button class="filt-pill on" onclick="toggleSpot('Near COEX',this)">Near COEX</button>
@@ -857,7 +854,7 @@ body { font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neu
         <div class="spot-row show" data-cat="Culture"><div class="spot-inner"><div class="spot-cat">Culture</div><div class="spot-name">Gyeongbokgung Palace</div><div class="spot-note">Main Joseon palace. Guard ceremony at 10 AM & 2 PM.</div></div></div>
         <div class="spot-row show" data-cat="Culture"><div class="spot-inner"><div class="spot-cat">Culture</div><div class="spot-name">Bukchon Hanok Village</div><div class="spot-note">Traditional houses on a hillside. Photo gold.</div></div></div>
         <div class="spot-row show" data-cat="Culture"><div class="spot-inner"><div class="spot-cat">Culture</div><div class="spot-name">DDP — Zaha Hadid</div><div class="spot-note">Iconic building. Exhibitions + night market.</div></div></div>
-        <div class="spot-row show" data-cat="Views"><div class="spot-inner"><div class="spot-cat">Views</div><div class="spot-name">N Seoul Tower</div><div class="spot-note">Cable car up, 360° city views. Best at sunset.</div></div></div>
+        <div class="spot-row show" data-cat="Views"><div class="spot-inner"><div class="spot-cat">Views</div><div class="spot-name">N Seoul Tower</div><div class="spot-note">Cable car up, 360° views. Best at sunset.</div></div></div>
         <div class="spot-row show" data-cat="Views"><div class="spot-inner"><div class="spot-cat">Views</div><div class="spot-name">Namsan Park</div><div class="spot-note">Walk or cable car. Forested hillside. Free.</div></div></div>
         <div class="spot-row show" data-cat="Activities"><div class="spot-inner"><div class="spot-cat">Activities</div><div class="spot-name">GetYourGuide</div><div class="spot-note"><a href="https://www.getyourguide.com/seoul-l197/">getyourguide.com →</a> DMZ tours, cooking classes, food walks.</div></div></div>
         <div class="spot-row show" data-cat="Activities"><div class="spot-inner"><div class="spot-cat">Activities</div><div class="spot-name">Klook</div><div class="spot-note"><a href="https://www.klook.com/en-CA/city/5-seoul-things-to-do/">klook.com →</a> Asia-popular booking.</div></div></div>
@@ -865,6 +862,7 @@ body { font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neu
         <div class="spot-row show" data-cat="Nightlife"><div class="spot-inner"><div class="spot-cat">Nightlife</div><div class="spot-name">Itaewon</div><div class="spot-note">International bar scene, rooftops, late-night food.</div></div></div>
         <div class="spot-row show" data-cat="Nightlife"><div class="spot-inner"><div class="spot-cat">Nightlife</div><div class="spot-name">Cheongdam / Apgujeong</div><div class="spot-note">Upscale near COEX. Cocktail bars, specialty cafes.</div></div></div>
       </div>
+
       <div class="s-label" style="padding-top:20px;">4-Hour Itineraries</div>
       <div class="filter-scroll">
         <button class="filt-pill on" onclick="toggleItin('culture',this)">History & Culture</button>
@@ -873,11 +871,11 @@ body { font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neu
         <button class="filt-pill on" onclick="toggleItin('design',this)">Design & Night</button>
         <button class="filt-pill on" onclick="toggleItin('views',this)">Views & Vibes</button>
       </div>
-      <div class="itin-wrap show" id="itin-culture"><div class="itin-head"><div class="itin-emoji2">🏯</div><div><div class="itin-title2">History & Culture</div><div class="itin-when2">Best in the morning · ~4 hrs from COEX</div></div></div><div class="itin-stop2"><div class="stop-num">1</div><div><div class="stop-name2">Gyeongbokgung Palace</div><div class="stop-desc2">Arrive 9 AM. Guard ceremony at 10 AM and 2 PM. ~1 hr.</div></div></div><div class="itin-stop2"><div class="stop-num">2</div><div><div class="stop-name2">Bukchon Hanok Village</div><div class="stop-desc2">10-min walk. Traditional hanok lanes. ~45 min.</div></div></div><div class="itin-stop2"><div class="stop-num">3</div><div><div class="stop-name2">Insadong</div><div class="stop-desc2">5-min walk. Tea houses, crafts, good lunch. ~1 hr.</div></div></div><div class="itin-stop2"><div class="stop-num">4</div><div><div class="stop-name2">Back to COEX</div><div class="stop-desc2">Subway Line 3 → Anguk → Line 9 → Bongeunsa. ~40 min.</div></div></div></div>
+      <div class="itin-wrap show" id="itin-culture"><div class="itin-head"><div class="itin-emoji2">🏯</div><div><div class="itin-title2">History & Culture</div><div class="itin-when2">Best in the morning · ~4 hrs from COEX</div></div></div><div class="itin-stop2"><div class="stop-num">1</div><div><div class="stop-name2">Gyeongbokgung Palace</div><div class="stop-desc2">Arrive 9 AM. Guard ceremony at 10 AM and 2 PM. ~1 hr.</div></div></div><div class="itin-stop2"><div class="stop-num">2</div><div><div class="stop-name2">Bukchon Hanok Village</div><div class="stop-desc2">10-min walk. Traditional hanok lanes. ~45 min.</div></div></div><div class="itin-stop2"><div class="stop-num">3</div><div><div class="stop-name2">Insadong</div><div class="stop-desc2">5-min walk. Tea houses, crafts, good lunch. ~1 hr.</div></div></div><div class="itin-stop2"><div class="stop-num">4</div><div><div class="stop-name2">Back to COEX</div><div class="stop-desc2">Subway Line 3 → Anguk → Line 9 → Samseong. ~40 min.</div></div></div></div>
       <div class="itin-wrap show" id="itin-gangnam"><div class="itin-head"><div class="itin-emoji2">🏙️</div><div><div class="itin-title2">Gangnam Local</div><div class="itin-when2">Walkable from COEX · Any time of day</div></div></div><div class="itin-stop2"><div class="stop-num">1</div><div><div class="stop-name2">Starfield Library</div><div class="stop-desc2">Inside COEX Mall. Massive book wall, free. ~30 min.</div></div></div><div class="itin-stop2"><div class="stop-num">2</div><div><div class="stop-name2">Bongeunsa Temple</div><div class="stop-desc2">5-min walk. 1,200 years old, right in Gangnam. ~45 min.</div></div></div><div class="itin-stop2"><div class="stop-num">3</div><div><div class="stop-name2">Gangnam Style Statue</div><div class="stop-desc2">Right outside COEX. Coffee nearby. ~30 min.</div></div></div><div class="itin-stop2"><div class="stop-num">4</div><div><div class="stop-name2">Cheongdam & Apgujeong</div><div class="stop-desc2">10-min walk. Upscale cafes, cocktail bars. ~1 hr.</div></div></div></div>
-      <div class="itin-wrap show" id="itin-food"><div class="itin-head"><div class="itin-emoji2">🍜</div><div><div class="itin-title2">Food & Markets</div><div class="itin-when2">Best late morning or evening · ~4 hrs</div></div></div><div class="itin-stop2"><div class="stop-num">1</div><div><div class="stop-name2">Gwangjang Market</div><div class="stop-desc2">Best street food in Seoul. Go hungry. ~1 hr.</div></div></div><div class="itin-stop2"><div class="stop-num">2</div><div><div class="stop-name2">Cheonggyecheon Stream</div><div class="stop-desc2">Short walk. Restored urban stream. ~30 min.</div></div></div><div class="itin-stop2"><div class="stop-num">3</div><div><div class="stop-name2">Myeongdong</div><div class="stop-desc2">Street food vendors the whole road. ~1 hr.</div></div></div><div class="itin-stop2"><div class="stop-num">4</div><div><div class="stop-name2">Namdaemun Market</div><div class="stop-desc2">Korea's largest market. ~45 min.</div></div></div></div>
-      <div class="itin-wrap show" id="itin-design"><div class="itin-head"><div class="itin-emoji2">🌆</div><div><div class="itin-title2">Design & Nightlife</div><div class="itin-when2">Best starting late afternoon · ~4 hrs</div></div></div><div class="itin-stop2"><div class="stop-num">1</div><div><div class="stop-name2">DDP — Dongdaemun Design Plaza</div><div class="stop-desc2">Zaha Hadid building. Exhibitions at night. ~1 hr.</div></div></div><div class="itin-stop2"><div class="stop-num">2</div><div><div class="stop-name2">Dongdaemun Night Market</div><div class="stop-desc2">Right next to DDP. Street food, fashion. ~45 min.</div></div></div><div class="itin-stop2"><div class="stop-num">3</div><div><div class="stop-name2">Cheonggyecheon Stream (night)</div><div class="stop-desc2">Lit up at night. ~30 min.</div></div></div><div class="itin-stop2"><div class="stop-num">4</div><div><div class="stop-name2">Itaewon rooftop bar</div><div class="stop-desc2">30 min by subway. International crowd. ~1 hr+.</div></div></div></div>
-      <div class="itin-wrap show" id="itin-views"><div class="itin-head"><div class="itin-emoji2">🗼</div><div><div class="itin-title2">Views & Vibes</div><div class="itin-when2">Best at sunset · ~4 hrs from COEX</div></div></div><div class="itin-stop2"><div class="stop-num">1</div><div><div class="stop-name2">Namsan Park</div><div class="stop-desc2">Cable car or walk. Free. ~45 min.</div></div></div><div class="itin-stop2"><div class="stop-num">2</div><div><div class="stop-name2">N Seoul Tower</div><div class="stop-desc2">360° views. Stunning at dusk. ~45 min.</div></div></div><div class="itin-stop2"><div class="stop-num">3</div><div><div class="stop-name2">Itaewon</div><div class="stop-desc2">10-min walk. International restaurants, rooftop bars. ~1 hr.</div></div></div><div class="itin-stop2"><div class="stop-num">4</div><div><div class="stop-name2">Han River — Banpo Bridge</div><div class="stop-desc2">Short taxi. Rainbow fountain at night. ~45 min.</div></div></div></div>
+      <div class="itin-wrap show" id="itin-food"><div class="itin-head"><div class="itin-emoji2">🍜</div><div><div class="itin-title2">Food & Markets</div><div class="itin-when2">Best late morning or evening · ~4 hrs</div></div></div><div class="itin-stop2"><div class="stop-num">1</div><div><div class="stop-name2">Gwangjang Market</div><div class="stop-desc2">Best street food in Seoul. Go hungry. ~1 hr.</div></div></div><div class="itin-stop2"><div class="stop-num">2</div><div><div class="stop-name2">Cheonggyecheon Stream</div><div class="stop-desc2">Short walk. Restored urban stream. ~30 min.</div></div></div><div class="itin-stop2"><div class="stop-num">3</div><div><div class="stop-name2">Myeongdong</div><div class="stop-desc2">Street food vendors the whole road. ~1 hr.</div></div></div><div class="itin-stop2"><div class="stop-num">4</div><div><div class="stop-name2">Namdaemun Market</div><div class="stop-desc2">Korea's largest market, buzzing at night. ~45 min.</div></div></div></div>
+      <div class="itin-wrap show" id="itin-design"><div class="itin-head"><div class="itin-emoji2">🌆</div><div><div class="itin-title2">Design & Nightlife</div><div class="itin-when2">Best starting late afternoon · ~4 hrs</div></div></div><div class="itin-stop2"><div class="stop-num">1</div><div><div class="stop-name2">DDP — Dongdaemun Design Plaza</div><div class="stop-desc2">Zaha Hadid building. Exhibitions at night. ~1 hr.</div></div></div><div class="itin-stop2"><div class="stop-num">2</div><div><div class="stop-name2">Dongdaemun Night Market</div><div class="stop-desc2">Right next to DDP. Street food, fashion. ~45 min.</div></div></div><div class="itin-stop2"><div class="stop-num">3</div><div><div class="stop-name2">Cheonggyecheon Stream (night)</div><div class="stop-desc2">Lit up at night. Different feel from daytime. ~30 min.</div></div></div><div class="itin-stop2"><div class="stop-num">4</div><div><div class="stop-name2">Itaewon rooftop bar</div><div class="stop-desc2">30 min by subway. International crowd. ~1 hr+.</div></div></div></div>
+      <div class="itin-wrap show" id="itin-views"><div class="itin-head"><div class="itin-emoji2">🗼</div><div><div class="itin-title2">Views & Vibes</div><div class="itin-when2">Best at sunset · ~4 hrs from COEX</div></div></div><div class="itin-stop2"><div class="stop-num">1</div><div><div class="stop-name2">Namsan Park</div><div class="stop-desc2">Cable car or walk. Free. ~45 min.</div></div></div><div class="itin-stop2"><div class="stop-num">2</div><div><div class="stop-name2">N Seoul Tower</div><div class="stop-desc2">360° views. Stunning at dusk. ~45 min.</div></div></div><div class="itin-stop2"><div class="stop-num">3</div><div><div class="stop-name2">Itaewon</div><div class="stop-desc2">10-min walk down. International restaurants, rooftop bars. ~1 hr.</div></div></div><div class="itin-stop2"><div class="stop-num">4</div><div><div class="stop-name2">Han River — Banpo Bridge</div><div class="stop-desc2">Short taxi. Rainbow fountain at night. ~45 min.</div></div></div></div>
     </div>
   </div>
 
@@ -901,7 +899,14 @@ body { font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neu
       <div class="inset-group">
         <div class="tip-item"><div class="tip-emoji">🙏</div><div><div class="tip-title">No Tipping</div><div class="tip-body">Not customary in Korea — restaurants, taxis, or cafes.</div></div></div>
         <div class="tip-item"><div class="tip-emoji">🏪</div><div><div class="tip-title">Convenience Stores</div><div class="tip-body">GS25, CU, 7-Eleven everywhere — great for meals, snacks, drinks.</div></div></div>
-        <div class="tip-item"><div class="tip-emoji">💬</div><div><div class="tip-title">Korean Phrases</div><div class="tip-body">Thank you: <strong>감사합니다</strong><br>Excuse me: <strong>실례합니다</strong><br>Bathroom?: <strong>화장실이 어디예요?</strong><br>How much?: <strong>얼마예요?</strong></div></div></div>
+        <div class="tip-item"><div class="tip-emoji">💬</div><div><div class="tip-title">Korean Phrases</div><div class="tip-body">
+  Thank you: <strong>감사합니다</strong> <em>gam-sa-ham-ni-da</em><br>
+  Excuse me: <strong>실례합니다</strong> <em>sil-lye-ham-ni-da</em><br>
+  Bathroom?: <strong>화장실이 어디예요?</strong> <em>hwa-jang-sil-i eo-di-ye-yo?</em><br>
+  How much?: <strong>얼마예요?</strong> <em>eol-ma-ye-yo?</em><br>
+  Hello: <strong>안녕하세요</strong> <em>an-nyeong-ha-se-yo</em><br>
+  Delicious!: <strong>맛있어요!</strong> <em>ma-si-sseo-yo!</em>
+</div></div></div>
       </div>
     </div>
   </div>
@@ -944,7 +949,7 @@ body { font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neu
       <div class="s-label">When in Doubt</div>
       <div class="kv-group">
         <div class="kv"><span class="kv-key">First ask</span><span class="kv-val">Jesse — expense questions</span></div>
-        <div class="kv"><span class="kv-key">Program costs</span><span class="kv-val">Mateo</span></div>
+        <div class="kv"><span class="kv-key">Program costs</span><span class="kv-val">Maulik, Abi, Mateo</span></div>
       </div>
       <div style="padding:8px 0 0;"></div>
       <div class="alert danger"><strong>Shift attendance is required for reimbursement eligibility.</strong></div>
@@ -975,8 +980,20 @@ body { font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neu
     <div class="content">
       <div class="s-label">Reach the Team</div>
       <div class="inset-group">
+        <a href="https://wa.me/14164647804" class="contact-item"><div class="contact-icon2">💬</div><div><div class="contact-label">Abi — WhatsApp</div><div class="contact-sub2">Tap to open chat · +1 416 464 7804</div></div><span class="contact-chev">›</span></a>
         <a href="https://wa.me/16475736173" class="contact-item"><div class="contact-icon2">💬</div><div><div class="contact-label">Mateo — WhatsApp</div><div class="contact-sub2">Tap to open chat · +1 647 573 6173</div></div><span class="contact-chev">›</span></a>
         <a href="https://layer6.slack.com/archives/C0AUA8AEW58" class="contact-item"><div class="contact-icon2">💼</div><div><div class="contact-label">ICML Slack Channel</div><div class="contact-sub2">Tap to open in Slack</div></div><span class="contact-chev">›</span></a>
+      </div>
+      <div class="s-label">WhatsApp QR Codes</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 16px 4px;">
+        <div style="background:var(--surface);border-radius:var(--radius);padding:16px;text-align:center;">
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASIAAAEiCAIAAADS3EjhAAAE+0lEQVR4nO3dO64cNxBAUT3BqQND+1+i4MALaKcKBEIyfVFsvnPymen5XDCYQvXH8zxfgNLX6QuA+8kMcjKDnMwgJzPIyQxyMoOczCAnM8jJDHIyg5zMICczyMkMcjKDnMwgJzPIyQxyMoPcHzsP/vPbX//XdRzin+9//+fHrj+N9TN3n+R972jKzifpNIOczCAnM8jJDHIyg5zMICczyMkMcjKD3NYUyNrOv+adnemEqamInWfeuebOfb+NNacZ5GQGOZlBTmaQkxnkZAY5mUFOZpCTGeTCKZC1M7dfdKZmRNbOnBG577fhNIOczCAnM8jJDHIyg5zMICczyMkMcjKD3NgUyH26iYr7piI+G6cZ5GQGOZlBTmaQkxnkZAY5mUFOZpCTGeRMgfyGN05ydK/Lr3OaQU5mkJMZ5GQGOZlBTmaQkxnkZAY5mUFubArks22hMKvx6+77bTjNICczyMkMcjKDnMwgJzPIyQxyMoOczCAXToHcN9mwc8+X7rGdN97j5kxOM8jJDHIyg5zMICczyMkMcjKDnMwgJzPIbU2B3LezYceZkw1T35Hfxo+cZpCTGeRkBjmZQU5mkJMZ5GQGOZlBTmaQ25oC6XZFdKauuXvmqS0jO489c49I9x05zSAnM8jJDHIyg5zMICczyMkMcjKDnMwg9/E8z/Q1/MQb50ve6L5Jjh2mQODFZAY5mUFOZpCTGeRkBjmZQU5mkJMZ5MZ2gXRzHmdONkztApkydVU7v7ruG3SaQU5mkJMZ5GQGOZlBTmaQkxnkZAY5mUHulbtAdpw5X/LG3SdT39HU/JApEDiazCAnM8jJDHIyg5zMICczyMkMcjKDXLgLZK2bbJiaIZja9rHzftemvqPusVOcZpCTGeRkBjmZQU5mkJMZ5GQGOZlBTmaQ25oCmdLNeUw99o2TDWdu3TjzdZ1mkJMZ5GQGOZlBTmaQkxnkZAY5mUFOZpDbuiPMmf/lT+l2cpz5umv3fRruCANHkxnkZAY5mUFOZpCTGeRkBjmZQU5mkLML5Dd0MwRT8zRrZ77u+rOaunvOmtMMcjKDnMwgJzPIyQxyMoOczCAnM8jJDHJju0CmtjKcOW8xtRtj7b6dK1Pfr9MMcjKDnMwgJzPIyQxyMoOczCAnM8jJDHJbUyCfzZn3MTnzsTvOnOTY4TSDnMwgJzPIyQxyMoOczCAnM8jJDHIyg9zWHWHO3BWxYz1hMDVvsePM7SZnTnJ01+w0g5zMICczyMkMcjKDnMwgJzPIyQxyMoPc1hTI2hv/6Z963fv2avj2f+Q0g5zMICczyMkMcjKDnMwgJzPIyQxyMoNcOAWydt/2i6ltH1M7SM7cBHPmDhKnGeRkBjmZQU5mkJMZ5GQGOZlBTmaQkxnkxqZA7nPfREVnagfJzufsjjBwNJlBTmaQkxnkZAY5mUFOZpCTGeRkBjlTIEfYmV3YmU44874ta90kRzeL4zSDnMwgJzPIyQxyMoOczCAnM8jJDHIyg9zYFMgb5w/W7ntHZ85bvPFzdppBTmaQkxnkZAY5mUFOZpCTGeRkBjmZQS6cArnvLidT72hn7mFqj0j3ut0zd5xmkJMZ5GQGOZlBTmaQkxnkZAY5mUFOZpD7eJ5n+hrgck4zyMkMcjKDnMwgJzPIyQxyMoOczCAnM8jJDHIyg5zMICczyMkMcjKDnMwgJzPIyQxyMoPcv6TNeqcbFRrEAAAAAElFTkSuQmCC" alt="Abi QR" style="width:110px;height:110px;border-radius:6px;">
+          <div style="font-size:13px;font-weight:600;color:var(--label);margin-top:8px;">Abi</div>
+        </div>
+        <div style="background:var(--surface);border-radius:var(--radius);padding:16px;text-align:center;">
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASIAAAEiCAIAAADS3EjhAAAFEElEQVR4nO3dMW4UQRBAUYycEiDuf0REwAGGlKhluferesbv5csOu/vVgUvVb9d1fQNK36cfAJ5PZpCTGeRkBjmZQU5mkJMZ5GQGOZlBTmaQkxnkZAY5mUFOZpCTGeRkBjmZQU5mkJMZ5N53Xvzj189XPcch/v7+8+nX7nwaO++7tn6qqfe9o53PymkGOZlBTmaQkxnkZAY5mUFOZpCTGeRkBrmtKZC1bsJgxx2nE7pnnpoR+Wq/DacZ5GQGOZlBTmaQkxnkZAY5mUFOZpCTGeTCKZC17i/uX22/xfr/u/PMz9sjMjV94jSDnMwgJzPIyQxyMoOczCAnM8jJDHIyg9zYFMjz7Exj7MxbdK/lVZxmkJMZ5GQGOZlBTmaQkxnkZAY5mUFOZpAzBfIyOxMVOzsquhkRXsVpBjmZQU5mkJMZ5GQGOZlBTmaQkxnkZAa5sSkQ8wcf101ynDkj8rzfhtMMcjKDnMwgJzPIyQxyMoOczCAnM8jJDHLhFMhXu23kjnevTO0ROfPT6DjNICczyMkMcjKDnMwgJzPIyQxyMoOczCC3NQXyvJ0NO3YmG543FeG38T+nGeRkBjmZQU5mkJMZ5GQGOZlBTmaQkxnk3q7r+vSLd3ZFnDn3cObsws5n1X0Lvt+Pc5pBTmaQkxnkZAY5mUFOZpCTGeRkBjmZQe6Wu0DOnNVY625XmbrVZe3Mp5p6X6cZ5GQGOZlBTmaQkxnkZAY5mUFOZpCTGeS2doFM6XaQ3HH+YGrrxpm7QKZ2n6w5zSAnM8jJDHIyg5zMICczyMkMcjKDnMwgF94IszY19/C8eYu1O975MrXrpZvUcZpBTmaQkxnkZAY5mUFOZpCTGeRkBjmZQS7cBXLm1o0dZ04nrE3txpj6Fs789p1mkJMZ5GQGOZlBTmaQkxnkZAY5mUFOZpALd4GceTfHjjMnDNamZnHWpu70mfo0nGaQkxnkZAY5mUFOZpCTGeRkBjmZQU5mkHufeuOdv9ZPTZ+snXnXjE/jVe9rFwgcTWaQkxnkZAY5mUFOZpCTGeRkBjmZQW5sCmTqLpIzt1+sdRMVd/wkd953aibGaQY5mUFOZpCTGeRkBjmZQU5mkJMZ5GQGubEpkM7z7hM58/acqY0dazvfkRth4MZkBjmZQU5mkJMZ5GQGOZlBTmaQkxnk3q7rmn6G23jePo8dZ86XTG0oWXOaQU5mkJMZ5GQGOZlBTmaQkxnkZAY5mUFuawrkzG0QO7pZjTu+79TelOdNvTjNICczyMkMcjKDnMwgJzPIyQxyMoOczCAX3ghz5laGnSmBbjrhjhMka1ObQqZmRNacZpCTGeRkBjmZQU5mkJMZ5GQGOZlBTmaQC6dA1u44f7B25iTHmfe27Oj2iHScZpCTGeRkBjmZQU5mkJMZ5GQGOZlBTmaQG5sC4X9n3uqyNvXM3TaXNTfCwNFkBjmZQU5mkJMZ5GQGOZlBTmaQkxnkTIG8zJk7Kp73L09Nn+xwmkFOZpCTGeRkBjmZQU5mkJMZ5GQGOZlBbmwKZOpujh07z3zHjR07puYtzvxdOc0gJzPIyQxyMoOczCAnM8jJDHIyg5zMIPd2XdenXzw1YdCZ2kKxY2rLyPO+/TU3wsDRZAY5mUFOZpCTGeRkBjmZQU5mkJMZ5LamQICPcJpBTmaQkxnkZAY5mUFOZpCTGeRkBjmZQU5mkJMZ5GQGOZlBTmaQkxnkZAY5mUFOZpCTGeT+Aa0AkyhFdJ8ZAAAAAElFTkSuQmCC" alt="Mateo QR" style="width:110px;height:110px;border-radius:6px;">
+          <div style="font-size:13px;font-weight:600;color:var(--label);margin-top:8px;">Mateo</div>
+        </div>
       </div>
       <div class="s-label">Slack QR</div>
       <div class="qr-block"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeAQAAAAB6HIMaAAAB0klEQVR4nO2YMW5cMQxEn1YfcEnfiHszw0fKDbhHyQEC6PdcTArK6xSxkyYICwuqPpsB/3BmxCE+PPfLxzX4Kv6piBbAXC4F+FSAA+DZDu0FXBL2CkzFfbxoMSWtnr118Clhm8JTmou5evYWgPM6v1+1SIv7uDYA9HnxBoCDZw9AvzsHIDggz9uwb08/xhSHibMh2ndN+PUCLTUB1VlImgqgVEJSR7TLH7KQFlpIUd87olWUuqYpYS7SQgqsaW/nAtNUYJrLE5eiKRMUaZE49fdNgKTsOGUXzhfg4IYFMBdTcZT8tkO7eVstLU1IPK0rE1ZFBWrQ5vKEubzllF2wGM872xznwF6fFpRrtEOLlpcvTGkq8s3XWvYWLRLSNKXc0TE2mRuiVWh5ZdrcscGxyJ691cNtXYuNs25HtPVS2PEGPE1YNM0JC0xltVvEFJiaTpn2cywtKjDQV2/f8q1iR6/yMmjK2/Iyi7Ld4jAVbBqi3W8H32gViastExbUrmZ55dtKvF2ZUM6rSrnSBtxSwS7AGFfOAT4X92fgNp675tv9hIzHoCUObXn7vgdLUzGWpprw2NXcdF5vjGlxGPp/gP5OE8gtX1SrW+4Yx9cm/58VfwLlOLBgVkiBhAAAAABJRU5ErkJggg==" alt="Slack QR"><div class="qr-lbl">Scan to open the ICML Slack channel</div></div>
@@ -993,13 +1010,13 @@ body { font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neu
   <div class="page" id="page-reminders">
     <div class="content">
       <div style="padding:4px 0 0;"></div>
-      <div class="alert danger"><strong>Shift attendance = reimbursement eligibility.</strong> Missing shifts without prior approval affects your expenses. Contact Mateo in advance.</div>
+      <div class="alert danger"><strong>Shift attendance = reimbursement eligibility.</strong> Missing shifts without prior approval affects your expenses. Contact Abi or Mateo in advance.</div>
       <div class="s-label">Professional Conduct</div>
       <div class="inset-group">
         <div class="inset-row"><div class="dot"></div><div class="ir-text">This is a work trip — professional conduct expected at all times: booth, dinner, and after-party</div></div>
         <div class="inset-row"><div class="dot"></div><div class="ir-text">Booth shifts take priority over personal conference scheduling unless pre-approved</div></div>
         <div class="inset-row"><div class="dot"></div><div class="ir-text">Swag and catering are for attendees, not personal use</div></div>
-        <div class="inset-row"><div class="dot"></div><div class="ir-text">All communications representing Layer 6 or TD should stay on-message — redirect sensitive questions to Mateo</div></div>
+        <div class="inset-row"><div class="dot"></div><div class="ir-text">All communications representing Layer 6 or TD should stay on-message — redirect sensitive questions to Abi or Mateo</div></div>
         <div class="inset-row"><div class="dot"></div><div class="ir-text">Social media posts from the booth should be tasteful and professional</div></div>
       </div>
       <div class="s-label">Dress Code</div>
