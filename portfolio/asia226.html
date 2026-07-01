@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Asia Trip 2026 — Jay Mark Balmes</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a0a0f;--surface:#13131a;--surface2:#1c1c26;
+  --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.12);
+  --text:#f0f0f5;--text2:#9090a8;--text3:#5a5a72;
+  --mn:#c8a96e;--kr:#4e9cf5;--jp:#e8655a;--us:#7fc47a;--imm:#b47ff5;--shop:#f5a623;
+  --font:'Inter',sans-serif;
+}
+body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:100vh;padding-bottom:90px}
+
+/* HEADER */
+.header{padding:24px 18px 0;position:sticky;top:0;z-index:100;background:var(--bg)}
+.trip-label{font-size:10px;font-weight:600;letter-spacing:.12em;color:var(--text3);text-transform:uppercase}
+.trip-title{font-size:22px;font-weight:700;color:var(--text);line-height:1.2;margin-top:2px}
+.trip-dates{font-size:12px;color:var(--text2);margin-top:2px;margin-bottom:16px}
+.nav-tabs{display:flex;gap:3px;background:var(--surface);border-radius:12px;padding:4px;overflow-x:auto;scrollbar-width:none;border:1px solid var(--border);margin-bottom:2px}
+.nav-tabs::-webkit-scrollbar{display:none}
+.tab-btn{flex-shrink:0;padding:7px 13px;border-radius:8px;border:none;background:transparent;color:var(--text2);font-family:var(--font);font-size:12px;font-weight:500;cursor:pointer;transition:all .2s;white-space:nowrap}
+.tab-btn.active{background:var(--surface2);color:var(--text);border:1px solid var(--border2)}
+.tab-btn[data-tab="mn"].active{color:var(--mn)}
+.tab-btn[data-tab="kr"].active{color:var(--kr)}
+.tab-btn[data-tab="jp"].active{color:var(--jp)}
+.tab-btn[data-tab="us"].active{color:var(--us)}
+.tab-btn[data-tab="imm"].active{color:var(--imm)}
+.tab-btn[data-tab="shop"].active{color:var(--shop)}
+
+/* CONTENT */
+.content{padding:18px;display:none}
+.content.active{display:block}
+
+/* HERO */
+.hero-card{border-radius:16px;padding:18px;margin-bottom:14px;position:relative;overflow:hidden}
+.hero-card.mn{background:linear-gradient(135deg,#1a1408,#2a1f0e);border:1px solid rgba(200,169,110,.2)}
+.hero-card.kr{background:linear-gradient(135deg,#08101e,#0e1e35);border:1px solid rgba(78,156,245,.2)}
+.hero-card.jp{background:linear-gradient(135deg,#1a0b0a,#2a1210);border:1px solid rgba(232,101,90,.2)}
+.hero-card.us{background:linear-gradient(135deg,#0a140a,#0f1f0f);border:1px solid rgba(127,196,122,.2)}
+.hero-emoji{font-size:32px;margin-bottom:8px}
+.hero-city{font-size:19px;font-weight:700}
+.hero-city.mn{color:var(--mn)}.hero-city.kr{color:var(--kr)}.hero-city.jp{color:var(--jp)}.hero-city.us{color:var(--us)}
+.hero-sub{font-size:12px;color:var(--text2);margin-top:3px}
+.hero-pills{display:flex;gap:5px;flex-wrap:wrap;margin-top:12px}
+.pill{padding:3px 9px;border-radius:20px;font-size:10px;font-weight:500;background:rgba(255,255,255,.06);border:1px solid var(--border2);color:var(--text2)}
+
+/* SECTION TITLE */
+.section-title{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin:20px 0 10px}
+
+/* DAY CARD */
+.day-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;margin-bottom:10px;overflow:hidden}
+.day-header{display:flex;align-items:center;gap:12px;padding:13px 15px;cursor:pointer;transition:background .15s}
+.day-header:hover{background:var(--surface2)}
+.day-num{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;text-align:center;line-height:1.2}
+.mn .day-num{background:rgba(200,169,110,.12);color:var(--mn)}
+.kr .day-num{background:rgba(78,156,245,.12);color:var(--kr)}
+.jp .day-num{background:rgba(232,101,90,.12);color:var(--jp)}
+.us .day-num{background:rgba(127,196,122,.12);color:var(--us)}
+.day-info{flex:1}
+.day-date{font-size:13px;font-weight:600;color:var(--text)}
+.day-desc{font-size:11px;color:var(--text2);margin-top:1px}
+.day-chevron{font-size:11px;color:var(--text3);transition:transform .2s}
+.day-card.open .day-chevron{transform:rotate(180deg)}
+.day-body{display:none;padding:0 15px 15px}
+.day-card.open .day-body{display:block}
+
+/* TIMELINE */
+.timeline{position:relative;padding-left:18px}
+.timeline::before{content:'';position:absolute;left:4px;top:6px;bottom:4px;width:1px;background:var(--border2)}
+.tl-item{position:relative;margin-bottom:14px}
+.tl-item:last-child{margin-bottom:0}
+.tl-dot{position:absolute;left:-16px;top:5px;width:7px;height:7px;border-radius:50%;border:1px solid var(--border2)}
+.mn .tl-dot{background:var(--mn)}.kr .tl-dot{background:var(--kr)}.jp .tl-dot{background:var(--jp)}.us .tl-dot{background:var(--us)}
+.tl-time{font-size:10px;color:var(--text3);font-weight:500;margin-bottom:1px;letter-spacing:.04em}
+.tl-title{font-size:13px;font-weight:600;color:var(--text)}
+.tl-note{font-size:11px;color:var(--text2);margin-top:2px;line-height:1.55}
+.tl-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}
+.tl-tag{display:inline-block;padding:2px 7px;border-radius:4px;font-size:10px;font-weight:600}
+.tag-alert{background:rgba(232,101,90,.15);color:#e8655a}
+.tag-food{background:rgba(200,169,110,.15);color:var(--mn)}
+.tag-activity{background:rgba(78,156,245,.15);color:var(--kr)}
+.tag-transport{background:rgba(127,196,122,.15);color:var(--us)}
+.tag-book{background:rgba(180,127,245,.15);color:var(--imm)}
+.tag-reimburse{background:rgba(245,166,35,.15);color:var(--shop)}
+
+/* FLIGHT CARD */
+.flight-card{background:var(--surface2);border:1px solid var(--border2);border-radius:12px;padding:13px 14px;margin-bottom:9px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.flight-route{display:flex;align-items:center;gap:7px}
+.flight-iata{font-size:16px;font-weight:700}
+.flight-arrow{color:var(--text3);font-size:12px}
+.flight-meta{text-align:right;flex-shrink:0}
+.flight-airline{font-size:11px;color:var(--text2)}
+.flight-time{font-size:11px;color:var(--text3);margin-top:1px}
+
+/* HOTEL CARD */
+.hotel-card{background:var(--surface2);border:1px solid var(--border2);border-radius:12px;padding:13px;margin-bottom:10px}
+.hotel-name{font-size:13px;font-weight:600;color:var(--text)}
+.hotel-meta{font-size:11px;color:var(--text2);margin-top:4px;line-height:1.6}
+.hotel-conf{font-size:10px;color:var(--text3);margin-top:6px;font-family:monospace;letter-spacing:.02em}
+
+/* BANNERS */
+.alert-banner{background:rgba(232,101,90,.1);border:1px solid rgba(232,101,90,.25);border-radius:10px;padding:9px 13px;font-size:11px;color:#e8655a;margin-bottom:10px;line-height:1.55}
+.success-banner{background:rgba(127,196,122,.1);border:1px solid rgba(127,196,122,.25);border-radius:10px;padding:9px 13px;font-size:11px;color:var(--us);margin-bottom:10px;line-height:1.55}
+.info-card{background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:13px;margin-bottom:10px}
+.info-card-title{font-size:10px;font-weight:600;color:var(--text2);margin-bottom:8px;text-transform:uppercase;letter-spacing:.08em}
+
+/* OVERVIEW STRIP */
+.overview-strip{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding-bottom:4px;margin-bottom:14px}
+.overview-strip::-webkit-scrollbar{display:none}
+.ov-card{flex-shrink:0;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:11px 14px;min-width:100px}
+.ov-card-flag{font-size:18px;margin-bottom:3px}
+.ov-card-country{font-size:10px;font-weight:600;color:var(--text2)}
+.ov-card-nights{font-size:20px;font-weight:700;color:var(--text)}
+.ov-card-label{font-size:10px;color:var(--text3)}
+
+/* SHOPPING */
+.shop-section{margin-bottom:22px}
+.shop-country{font-size:13px;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.shop-item{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--border);font-size:13px}
+.shop-item:last-child{border-bottom:none}
+.shop-item input[type="checkbox"]{width:16px;height:16px;flex-shrink:0;accent-color:var(--jp);cursor:pointer}
+.shop-item.checked span{color:var(--text3);text-decoration:line-through}
+
+/* IMMIGRATION */
+.imm-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:15px;margin-bottom:12px}
+.imm-country{font-size:13px;font-weight:700;color:var(--text);display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.imm-row{display:flex;justify-content:space-between;align-items:flex-start;padding:7px 0;border-bottom:1px solid var(--border);font-size:11px}
+.imm-row:last-child{border-bottom:none}
+.imm-label{color:var(--text3);flex-shrink:0;margin-right:12px}
+.imm-value{color:var(--text);font-weight:500;text-align:right}
+
+/* BOTTOM NAV */
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(10,10,15,.97);backdrop-filter:blur(20px);border-top:1px solid var(--border);display:flex;padding:8px 0 14px;z-index:200}
+.nav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;padding:4px 0;border:none;background:transparent;color:var(--text3);font-family:var(--font);font-size:10px;font-weight:500;transition:color .15s}
+.nav-item .nav-icon{font-size:17px}
+.nav-item.active{color:var(--text)}
+.nav-item[data-nav="mn"].active{color:var(--mn)}
+.nav-item[data-nav="kr"].active{color:var(--kr)}
+.nav-item[data-nav="jp"].active{color:var(--jp)}
+.nav-item[data-nav="us"].active{color:var(--us)}
+.nav-item[data-nav="shop"].active{color:var(--shop)}
+.nav-item[data-nav="imm"].active{color:var(--imm)}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="trip-label">Asia Trip 2026</div>
+  <div class="trip-title">Jay Mark Balmes</div>
+  <div class="trip-dates">Jul 1 – Jul 12 · Mongolia · Seoul · Tokyo</div>
+  <div class="nav-tabs">
+    <button class="tab-btn active" data-tab="overview" onclick="showTab('overview')">Overview</button>
+    <button class="tab-btn" data-tab="mn" onclick="showTab('mn')">🇲🇳 Mongolia</button>
+    <button class="tab-btn" data-tab="kr" onclick="showTab('kr')">🇰🇷 Seoul</button>
+    <button class="tab-btn" data-tab="jp" onclick="showTab('jp')">🇯🇵 Tokyo</button>
+    <button class="tab-btn" data-tab="us" onclick="showTab('us')">🇺🇸 Chicago</button>
+    <button class="tab-btn" data-tab="shop" onclick="showTab('shop')">🛍 Shopping</button>
+    <button class="tab-btn" data-tab="imm" onclick="showTab('imm')">🛂 Immigration</button>
+  </div>
+</div>
+
+<!-- OVERVIEW -->
+<div class="content active" id="tab-overview">
+  <div class="section-title">Trip at a glance</div>
+  <div class="overview-strip">
+    <div class="ov-card"><div class="ov-card-flag">🇲🇳</div><div class="ov-card-country">Mongolia</div><div class="ov-card-nights">3</div><div class="ov-card-label">nights · UBN</div></div>
+    <div class="ov-card"><div class="ov-card-flag">🇰🇷</div><div class="ov-card-country">Seoul</div><div class="ov-card-nights">5</div><div class="ov-card-label">nights · ICN</div></div>
+    <div class="ov-card"><div class="ov-card-flag">🇯🇵</div><div class="ov-card-country">Tokyo</div><div class="ov-card-nights">2</div><div class="ov-card-label">nights · NRT/HND</div></div>
+    <div class="ov-card"><div class="ov-card-flag">🇺🇸</div><div class="ov-card-country">Chicago</div><div class="ov-card-nights">6h</div><div class="ov-card-label">layover · ORD</div></div>
+  </div>
+
+  <div class="alert-banner">⚠️ Submit Korea e-Arrival card from Jul 2 at e-arrivalcard.go.kr — need flight TW422 + Lotte Hotel address.</div>
+  <div class="alert-banner">⚠️ Pokémon Cafe reservation — book now, Jul 11 slots go fast.</div>
+  <div class="success-banner">✓ Reimbursable expenses start ICN arrival Jul 5. Keep all receipts.</div>
+
+  <div class="section-title">All flights</div>
+  <div class="flight-card">
+    <div class="flight-route">
+      <div><div class="flight-iata">YYZ</div><div style="font-size:9px;color:var(--text3)">Toronto</div></div>
+      <div class="flight-arrow">›</div>
+      <div><div class="flight-iata">IAH</div><div style="font-size:9px;color:var(--text3)">Houston</div></div>
+      <div class="flight-arrow">›</div>
+      <div><div class="flight-iata">NRT</div><div style="font-size:9px;color:var(--text3)">Tokyo</div></div>
+      <div class="flight-arrow">›</div>
+      <div><div class="flight-iata" style="color:var(--mn)">UBN</div><div style="font-size:9px;color:var(--text3)">UBN</div></div>
+    </div>
+    <div class="flight-meta"><div class="flight-airline">United · Jul 1</div><div class="flight-time">6:10 AM YYZ</div></div>
+  </div>
+  <div class="flight-card">
+    <div class="flight-route">
+      <div><div class="flight-iata" style="color:var(--mn)">UBN</div></div>
+      <div class="flight-arrow">›</div>
+      <div><div class="flight-iata" style="color:var(--kr)">ICN</div></div>
+    </div>
+    <div class="flight-meta"><div class="flight-airline">T'way TW422 · Jul 5</div><div class="flight-time">14:50 → 18:55</div></div>
+  </div>
+  <div class="flight-card">
+    <div class="flight-route">
+      <div><div class="flight-iata" style="color:var(--kr)">ICN</div></div>
+      <div class="flight-arrow">›</div>
+      <div><div class="flight-iata" style="color:var(--jp)">NRT</div></div>
+    </div>
+    <div class="flight-meta"><div class="flight-airline">Air Premia YP731 · Jul 10</div><div class="flight-time">8:50 → 11:20</div></div>
+  </div>
+  <div class="flight-card">
+    <div class="flight-route">
+      <div><div class="flight-iata" style="color:var(--jp)">HND</div></div>
+      <div class="flight-arrow">›</div>
+      <div><div class="flight-iata" style="color:var(--us)">ORD</div></div>
+      <div class="flight-arrow">›</div>
+      <div><div class="flight-iata">YYZ</div></div>
+    </div>
+    <div class="flight-meta"><div class="flight-airline">United · Jul 12</div><div class="flight-time">5:15 PM → 11:59 PM</div></div>
+  </div>
+
+  <div class="section-title">Hotels</div>
+  <div class="hotel-card">
+    <div class="hotel-name" style="color:var(--mn)">🇲🇳 Khongor Guest House & Tours</div>
+    <div class="hotel-meta">Jul 2–5 · 3 nights · Breakfast included · Non-refundable</div>
+    <div class="hotel-conf">Conf: 5397.243.744 · PIN: 4968</div>
+  </div>
+  <div class="hotel-card">
+    <div class="hotel-name" style="color:var(--kr)">🇰🇷 Lotte Hotel Seoul — Main Tower</div>
+    <div class="hotel-meta">Jul 5–10 · 5 nights · Superior Double · On-site payment · 2,210,670 KRW</div>
+    <div class="hotel-conf">Reservation: 26109B3434433 · Free cancel until Jul 2, 18:00 KST</div>
+  </div>
+  <div class="hotel-card">
+    <div class="hotel-name" style="color:var(--jp)">🇯🇵 APA Hotel Nishishinjuku Gochome Tower</div>
+    <div class="hotel-meta">Jul 10–12 · 2 nights · Single Non-Smoking · WiFi + Express check-in</div>
+    <div class="hotel-conf">Booking ID: 1018592966 (Agoda) · Free cancel until Jul 9</div>
+  </div>
+</div>
+
+<!-- MONGOLIA -->
+<div class="content mn" id="tab-mn">
+  <div class="hero-card mn">
+    <div class="hero-emoji">🏔️</div>
+    <div class="hero-city mn">Ulaanbaatar, Mongolia</div>
+    <div class="hero-sub">Jul 1–5 · 3 nights · Khongor Guesthouse · CAD 93</div>
+    <div class="hero-pills">
+      <span class="pill">Non-refundable</span><span class="pill">Breakfast included</span><span class="pill">Arrive ~10 PM Jul 1</span>
+    </div>
+  </div>
+
+  <div class="hotel-card">
+    <div class="hotel-name">Khongor Guest House & Tours</div>
+    <div class="hotel-meta">Check-in: Jul 2, 12:00 · Check-out: Jul 5, before 12:00<br>Budget Single · Twin bed · Shared bathroom</div>
+    <div class="hotel-conf">5397.243.744 · PIN: 4968 · +976 9914 2882 · GPS: N47°54.980 E106°54.233</div>
+  </div>
+
+  <div class="section-title">Day by day</div>
+
+  <div class="day-card mn">
+    <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-num">Jul 1</div>
+      <div class="day-info"><div class="day-date">Travel Day</div><div class="day-desc">YYZ → IAH → NRT → UBN</div></div>
+      <div class="day-chevron">▼</div>
+    </div>
+    <div class="day-body"><div class="timeline mn">
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">6:10 AM</div><div class="tl-title">Depart YYZ → IAH</div><div class="tl-note">United. Arrive Houston 8:52 AM.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">10:40 AM</div><div class="tl-title">IAH → NRT</div><div class="tl-note">Arrives Tokyo 2:00 PM Jul 2 local time.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">4:30 PM</div><div class="tl-title">NRT → UBN</div><div class="tl-note">Arrives 8:55 PM Ulaanbaatar.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">~10 PM</div><div class="tl-title">Check in Khongor Guesthouse</div><div class="tl-note">Arrival noted as 22:00–23:00. Get some sleep.</div><div class="tl-tags"><span class="tl-tag tag-alert">Long travel day</span></div></div>
+    </div></div>
+  </div>
+
+  <div class="day-card mn">
+    <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-num">Jul 2</div>
+      <div class="day-info"><div class="day-date">Recovery + City Walk</div><div class="day-desc">Slow start · Monastery · Zaisan Hill</div></div>
+      <div class="day-chevron">▼</div>
+    </div>
+    <div class="day-body"><div class="timeline mn">
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">Morning</div><div class="tl-title">Breakfast at guesthouse</div><div class="tl-note">Included. Slow start — you deserve it.</div><div class="tl-tags"><span class="tl-tag tag-food">Included</span></div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">Late Morning</div><div class="tl-title">Sukhbaatar Square</div><div class="tl-note">Central plaza. Walk it to get oriented.</div><div class="tl-tags"><span class="tl-tag tag-activity">Sightseeing</span></div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">Midday</div><div class="tl-title">Naran Tuul Black Market</div><div class="tl-note">Mongolia's biggest open-air market. Cashmere, leather, traditional goods. Taxi ~10 min. Go before noon.</div><div class="tl-tags"><span class="tl-tag tag-activity">Shopping</span></div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">Lunch</div><div class="tl-title">Modern Nomads or BD's Mongolian BBQ</div><div class="tl-note">Reliable first-day Mongolian food.</div><div class="tl-tags"><span class="tl-tag tag-food">Food</span></div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">Afternoon</div><div class="tl-title">Gandantegchinlen Monastery</div><div class="tl-note">Most important Buddhist monastery in Mongolia. Free entry. Very photogenic.</div><div class="tl-tags"><span class="tl-tag tag-activity">Culture</span></div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">Late Afternoon</div><div class="tl-title">Zaisan Hill</div><div class="tl-note">Easy 20-min hike. Panoramic city views + Soviet war memorial at top.</div><div class="tl-tags"><span class="tl-tag tag-activity">Hike</span></div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">Dinner</div><div class="tl-title">Khaan Buuz</div><div class="tl-note">Authentic Mongolian dumplings. Early night — 8:30 AM start tomorrow.</div><div class="tl-tags"><span class="tl-tag tag-food">Food</span><span class="tl-tag tag-alert">Early start tomorrow</span></div></div>
+    </div></div>
+  </div>
+
+  <div class="day-card mn">
+    <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-num">Jul 3</div>
+      <div class="day-info"><div class="day-date">Self-Guided UBN</div><div class="day-desc">City center · Shopping · Explore</div></div>
+      <div class="day-chevron">▼</div>
+    </div>
+    <div class="day-body"><div class="timeline mn">
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">Morning</div><div class="tl-title">Breakfast + Sukhbaatar Square</div><div class="tl-note">Included breakfast. Explore city center at your own pace.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">Afternoon</div><div class="tl-title">State Department Store area</div><div class="tl-note">Last cashmere, souvenirs, or anything you missed yesterday.</div><div class="tl-tags"><span class="tl-tag tag-activity">Shopping</span></div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">Evening</div><div class="tl-title">Dinner + Pack</div><div class="tl-note">8:30 AM pickup tomorrow. Lay out your kit tonight.</div><div class="tl-tags"><span class="tl-tag tag-alert">Early start Jul 4</span></div></div>
+    </div></div>
+  </div>
+
+  <div class="day-card mn open">
+    <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-num">Jul 4</div>
+      <div class="day-info"><div class="day-date">Genghis Khan + Terelj Adventure</div><div class="day-desc">GetYourGuide · 8:30 AM pickup</div></div>
+      <div class="day-chevron">▼</div>
+    </div>
+    <div class="day-body"><div class="timeline mn">
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">8:30 AM</div><div class="tl-title">Pickup + 10 min transfer</div><div class="tl-note">GetYourGuide tour begins.</div><div class="tl-tags"><span class="tl-tag tag-transport">Booked</span></div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">Morning (~3 hrs)</div><div class="tl-title">Genghis Khan Statue Complex</div><div class="tl-note">Photo stop, guided tour, camel ride (optional, extra fee), horse riding, regional food, shopping.</div><div class="tl-tags"><span class="tl-tag tag-activity">Main event</span></div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">Midday (~1.5 hrs)</div><div class="tl-title">Lunch in Töv</div><div class="tl-note">Regional Mongolian food stop.</div><div class="tl-tags"><span class="tl-tag tag-food">Food</span></div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">Afternoon (~1 hr)</div><div class="tl-title">Turtle Rock</div><div class="tl-note">Unique granite formation in Terelj. Symbolizes longevity.</div><div class="tl-tags"><span class="tl-tag tag-activity">Sightseeing</span></div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">Late Afternoon (~2 hrs)</div><div class="tl-title">Gorkhi-Terelj National Park — Hiking</div><div class="tl-note">Granite valleys, stunning steppe landscape.</div><div class="tl-tags"><span class="tl-tag tag-activity">Hiking</span></div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">Evening</div><div class="tl-title">Drop-off: Ulaanbaatar</div><div class="tl-note">Pack tonight. Check-out tomorrow before 12:00. Flight at 14:50.</div><div class="tl-tags"><span class="tl-tag tag-alert">Pack tonight</span></div></div>
+    </div></div>
+  </div>
+
+  <div class="day-card mn">
+    <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-num">Jul 5</div>
+      <div class="day-info"><div class="day-date">Depart UBN → Seoul</div><div class="day-desc">Check out · T'way TW422 · 14:50</div></div>
+      <div class="day-chevron">▼</div>
+    </div>
+    <div class="day-body"><div class="timeline mn">
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">Before 12:00</div><div class="tl-title">Check out Khongor Guesthouse</div><div class="tl-note">Last included breakfast. Settle up.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">~12:30 PM</div><div class="tl-title">Taxi to UBN Airport</div><div class="tl-note">~1 hour to Chinggis Khaan International Airport.</div><div class="tl-tags"><span class="tl-tag tag-transport">Transport</span></div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">14:50</div><div class="tl-title">Depart UBN → ICN</div><div class="tl-note">T'way Airlines TW422 · Airbus A330-300 · 3h 5m</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">18:55</div><div class="tl-title">Arrive ICN Terminal 1 — Seoul</div><div class="tl-note">Buy T-money transit card at airport (reimbursable). Uber/KAKAO to Lotte Hotel. Expenses reimbursable from here.</div><div class="tl-tags"><span class="tl-tag tag-reimburse">Reimbursable from here</span></div></div>
+    </div></div>
+  </div>
+</div>
+
+<!-- SEOUL -->
+<div class="content kr" id="tab-kr">
+  <div class="hero-card kr">
+    <div class="hero-emoji">🏙️</div>
+    <div class="hero-city kr">Seoul, South Korea</div>
+    <div class="hero-sub">Jul 5–10 · 5 nights · Lotte Hotel Seoul · ICML 2026</div>
+    <div class="hero-pills">
+      <span class="pill">2,210,670 KRW on-site</span><span class="pill">All reimbursable</span><span class="pill">Free cancel Jul 2 18:00 KST</span>
+    </div>
+  </div>
+
+  <div class="hotel-card">
+    <div class="hotel-name">Lotte Hotel Seoul — Main Tower, Superior Double</div>
+    <div class="hotel-meta">Check-in: Jul 5, 15:00 · Check-out: Jul 10, 11:00<br>30 Eulji-ro, Jung-gu, Seoul · +82-2-771-1000</div>
+    <div class="hotel-conf">Reservation: 26109B3434433</div>
+  </div>
+
+  <div class="alert-banner">⚠️ Air Premia YP731 departs 8:50 AM Jul 10. Leave hotel by 6:00–6:30 AM.</div>
+  <div class="success-banner">✓ Keep all receipts — transport, meals, and activities are reimbursable.</div>
+
+  <div class="section-title">Day by day</div>
+
+  <div class="day-card kr">
+    <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-num">Jul 5</div>
+      <div class="day-info"><div class="day-date">Arrive Seoul</div><div class="day-desc">ICN 18:55 · Check in · Rest</div></div>
+      <div class="day-chevron">▼</div>
+    </div>
+    <div class="day-body"><div class="timeline kr">
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">18:55</div><div class="tl-title">Arrive ICN Terminal 1</div><div class="tl-note">Immigration, baggage. Long day from UBN.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">Airport</div><div class="tl-title">Buy T-money transit card</div><div class="tl-note">At any convenience store inside ICN. Load KRW. Covers all metro, buses, some taxis.</div><div class="tl-tags"><span class="tl-tag tag-reimburse">Reimbursable</span></div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">~20:00</div><div class="tl-title">Uber/KAKAO Taxi to Lotte Hotel</div><div class="tl-note">30 Eulji-ro, Jung-gu. ~1 hr from ICN. ~₩70,000.</div><div class="tl-tags"><span class="tl-tag tag-reimburse">Reimbursable</span></div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">Evening</div><div class="tl-title">Light dinner — Myeongdong</div><div class="tl-note">Walking distance from Lotte Hotel. Street food, tteokbokki, Korean BBQ.</div><div class="tl-tags"><span class="tl-tag tag-food">Food</span></div></div>
+    </div></div>
+  </div>
+
+  <div class="day-card kr">
+    <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-num">Jul 6–8</div>
+      <div class="day-info"><div class="day-date">ICML 2026 — Conference Days</div><div class="day-desc">Layer 6 booth + evening explore</div></div>
+      <div class="day-chevron">▼</div>
+    </div>
+    <div class="day-body"><div class="timeline kr">
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">All Day</div><div class="tl-title">ICML 2026 Conference</div><div class="tl-note">Layer 6 booth management. All meals and transport reimbursable — keep every receipt.</div><div class="tl-tags"><span class="tl-tag tag-reimburse">Reimbursable</span></div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">Jul 6 Evening</div><div class="tl-title">Myeongdong + Insadong</div><div class="tl-note">Myeongdong for street food and shopping. Insadong for traditional crafts. Both walkable from Lotte.</div><div class="tl-tags"><span class="tl-tag tag-activity">Explore</span></div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">Jul 7 Evening</div><div class="tl-title">Hongdae — Stüssy Seoul</div><div class="tl-note">Hongdae for nightlife and shopping. Stüssy Seoul Chapter is in this area. Nat Geo Store also nearby.</div><div class="tl-tags"><span class="tl-tag tag-activity">Shopping</span></div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">Jul 8 Evening</div><div class="tl-title">Han River or Itaewon</div><div class="tl-note">Han River park for a sunset walk. Convenience store picnic is a Seoul staple. Itaewon for international food.</div><div class="tl-tags"><span class="tl-tag tag-activity">Explore</span></div></div>
+    </div></div>
+  </div>
+
+  <div class="day-card kr open">
+    <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-num">Jul 9</div>
+      <div class="day-info"><div class="day-date">Free Day in Seoul</div><div class="day-desc">Palaces · Shopping · Korean BBQ</div></div>
+      <div class="day-chevron">▼</div>
+    </div>
+    <div class="day-body"><div class="timeline kr">
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">Morning</div><div class="tl-title">Gyeongbokgung Palace</div><div class="tl-note">Korea's most iconic palace. Changing of the guard at 10 AM and 2 PM. Hanbok rental nearby.</div><div class="tl-tags"><span class="tl-tag tag-activity">Culture</span></div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">Midday</div><div class="tl-title">Bukchon Hanok Village</div><div class="tl-note">Traditional village walkable from Gyeongbokgung. Great photography.</div><div class="tl-tags"><span class="tl-tag tag-activity">Sightseeing</span></div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">Afternoon</div><div class="tl-title">Shopping — Stüssy, Nat Geo, Kirin salt spoon</div><div class="tl-note">Final shopping run. Check if Kirin salt spoon is available at department stores.</div><div class="tl-tags"><span class="tl-tag tag-activity">Shopping</span></div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">Dinner</div><div class="tl-title">Korean BBQ — proper samgyeopsal</div><div class="tl-note">Jongno or Mapo area. Make it a good one — last night in Seoul.</div><div class="tl-tags"><span class="tl-tag tag-food">Food</span></div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">Night</div><div class="tl-title">Pack + Early bed</div><div class="tl-note">Flight at 8:50 AM. Leave hotel 6:00–6:30 AM. Set two alarms.</div><div class="tl-tags"><span class="tl-tag tag-alert">6 AM wake-up</span></div></div>
+    </div></div>
+  </div>
+
+  <div class="day-card kr">
+    <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-num">Jul 10</div>
+      <div class="day-info"><div class="day-date">Depart Seoul → Tokyo</div><div class="day-desc">Check out · YP731 · 8:50 AM</div></div>
+      <div class="day-chevron">▼</div>
+    </div>
+    <div class="day-body"><div class="timeline kr">
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">6:00 AM</div><div class="tl-title">Check out Lotte Hotel Seoul</div><div class="tl-note">Settle incidentals. Visa card on file.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">6:15 AM</div><div class="tl-title">Uber/KAKAO to ICN T1</div><div class="tl-note">~1 hour. Book night before.</div><div class="tl-tags"><span class="tl-tag tag-transport">Transport</span></div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">8:50 AM</div><div class="tl-title">Depart ICN → NRT</div><div class="tl-note">Air Premia YP731 · Confirmation: HYRSYN · 2h 30m</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">11:20 AM</div><div class="tl-title">Arrive NRT — Tokyo</div><div class="tl-note">Show Japan eVisa (V260004380). Passport P5191512C.</div><div class="tl-tags"><span class="tl-tag tag-alert">Show eVisa</span></div></div>
+    </div></div>
+  </div>
+</div>
+
+<!-- TOKYO -->
+<div class="content jp" id="tab-jp">
+  <div class="hero-card jp">
+    <div class="hero-emoji">🗼</div>
+    <div class="hero-city jp">Tokyo, Japan</div>
+    <div class="hero-sub">Jul 10–12 · 2 nights · APA Hotel Nishishinjuku · eVisa required</div>
+    <div class="hero-pills">
+      <span class="pill">Free cancel until Jul 9</span><span class="pill">WiFi + Express check-in</span><span class="pill">Shinjuku area</span>
+    </div>
+  </div>
+
+  <div class="hotel-card">
+    <div class="hotel-name">APA Hotel & Resort Nishishinjuku Gochome Ekimae Tower</div>
+    <div class="hotel-meta">Single Non-Smoking · Check-in: Jul 10 · Check-out: Jul 12<br>3-14-1 Honmachi, Shibuya, Shinjuku · +81-3-5304-7011</div>
+    <div class="hotel-conf">Booking ID: 1018592966 (Agoda) · Super Saver rate</div>
+  </div>
+
+  <div class="section-title">Day by day</div>
+
+  <div class="day-card jp">
+    <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-num">Jul 10</div>
+      <div class="day-info"><div class="day-date">Arrive Tokyo</div><div class="day-desc">NRT 11:20 · Check in · Shinjuku evening</div></div>
+      <div class="day-chevron">▼</div>
+    </div>
+    <div class="day-body"><div class="timeline jp">
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">11:20 AM</div><div class="tl-title">Arrive NRT</div><div class="tl-note">Show Japan eVisa V260004380. Immigration, baggage.</div><div class="tl-tags"><span class="tl-tag tag-alert">eVisa: V260004380</span></div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">Airport</div><div class="tl-title">Get Suica IC card</div><div class="tl-note">At NRT Station inside airport. Top up JPY. Works on all trains, metro, and convenience stores.</div><div class="tl-tags"><span class="tl-tag tag-transport">Do this first</span></div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">~1:30 PM</div><div class="tl-title">Narita Express (N'EX) → Shinjuku</div><div class="tl-note">~90 min direct. Walking distance to APA Hotel.</div><div class="tl-tags"><span class="tl-tag tag-transport">Transport</span></div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">Afternoon</div><div class="tl-title">Check in + rest</div><div class="tl-note">Drop bags, freshen up. Confirm Jul 11 bookings.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">Evening</div><div class="tl-title">Shinjuku — Kabukicho + Golden Gai</div><div class="tl-note">Omoide Yokocho (Memory Lane) for yakitori. Golden Gai for tiny bars. Your hotel is steps away.</div><div class="tl-tags"><span class="tl-tag tag-food">Food + Explore</span></div></div>
+    </div></div>
+  </div>
+
+  <div class="day-card jp open">
+    <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-num">Jul 11</div>
+      <div class="day-info"><div class="day-date">Full Day — Make It Count</div><div class="day-desc">Your one free day in Tokyo</div></div>
+      <div class="day-chevron">▼</div>
+    </div>
+    <div class="day-body">
+      <div class="info-card">
+        <div class="info-card-title">Recommended combo for Jul 11</div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.7">
+          Best option: <strong style="color:var(--text)">Toyosu tuna auction (5 AM) → DSM Ginza + Pokémon Cafe (morning) → teamLab Planets evening slot → Geisha dinner.</strong><br>
+          Alt: Go-karting + Geisha dinner. Mt. Fuji is a full day — can't combine.
+        </div>
+      </div>
+      <div class="timeline jp">
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">5:00 AM (optional)</div><div class="tl-title">Toyosu Tuna Auction + Tsukiji</div><div class="tl-note">~$114–125 USD · 3.5 hrs · Hotel pickup 4:20 AM. Ends 8:30 AM. Jul 11 is Saturday — auctions run ✓</div><div class="tl-tags"><span class="tl-tag tag-book">Book on GYG</span></div></div>
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">Morning</div><div class="tl-title">DSM Ginza (Dover Street Market)</div><div class="tl-note">6-6-9 Ginza, Chuo. Opens 11 AM. Best fashion stop in Tokyo.</div><div class="tl-tags"><span class="tl-tag tag-activity">Shopping</span></div></div>
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">Morning</div><div class="tl-title">Pokémon Cafe — Nihonbashi</div><div class="tl-note">Pre-book required at pokemoncenter-online.com. July slots fill fast — book immediately.</div><div class="tl-tags"><span class="tl-tag tag-book">Pre-book now</span><span class="tl-tag tag-food">Experience</span></div></div>
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">Midday</div><div class="tl-title">Stüssy Tokyo + Brother Joyfactory</div><div class="tl-note">Stüssy Tokyo in Harajuku. Brother Joyfactory also Harajuku area. Combine into one walk.</div><div class="tl-tags"><span class="tl-tag tag-activity">Shopping</span></div></div>
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">Midday</div><div class="tl-title">Vintage camera — Map Camera, Shinjuku</div><div class="tl-note">Best vintage camera shop in Tokyo. Huge selection, English-friendly.</div><div class="tl-tags"><span class="tl-tag tag-activity">Shopping</span></div></div>
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">Midday</div><div class="tl-title">Nintendo merch — Shibuya PARCO B1</div><div class="tl-note">Nintendo Tokyo in Shibuya PARCO. Easier than Universal Studios Osaka for merch only.</div><div class="tl-tags"><span class="tl-tag tag-activity">Shopping</span></div></div>
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">Afternoon</div><div class="tl-title">Matcha + Zyn</div><div class="tl-note">Ippodo Tea (Shinjuku) or Marukyu-Koyamaen for quality matcha. Zyn available at tobacco shops and some convenience stores.</div><div class="tl-tags"><span class="tl-tag tag-food">Buy</span></div></div>
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">Afternoon/Evening</div><div class="tl-title">teamLab Planets — Toyosu</div><div class="tl-note">~$22–25 USD · 90–120 min barefoot · Book evening slot ~18:00 for Sat. Sells out. Screenshot QR before going — bad signal at venue.</div><div class="tl-tags"><span class="tl-tag tag-book">Book Klook or GYG</span></div></div>
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">Alt: Afternoon</div><div class="tl-title">Shibuya/Shinjuku Go-Karting</div><div class="tl-note">~$56–93 USD · 1 hr · Need IDP booklet (1949 Geneva Convention). Canada qualifies. Drive through Shibuya Scramble.</div><div class="tl-tags"><span class="tl-tag tag-alert">Need IDP booklet</span></div></div>
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">Evening</div><div class="tl-title">Geisha Experience — Benitsuya</div><div class="tl-note">~$131 USD · 1.5 hrs · Kaiseki dinner, live dance, ozashiki games, photos. Shimbashi Station, 1 min walk. Free cancel 24hr.</div><div class="tl-tags"><span class="tl-tag tag-book">Book on GYG</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="day-card jp">
+    <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-num">Jul 12</div>
+      <div class="day-info"><div class="day-date">Depart Tokyo → Chicago</div><div class="day-desc">Check out · HND · 5:15 PM</div></div>
+      <div class="day-chevron">▼</div>
+    </div>
+    <div class="day-body"><div class="timeline jp">
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">Morning</div><div class="tl-title">Last morning in Tokyo</div><div class="tl-note">7-Eleven onigiri for breakfast — it's a Tokyo ritual. Final anything you missed.</div><div class="tl-tags"><span class="tl-tag tag-food">Food</span></div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">~2:00 PM</div><div class="tl-title">Head to HND (Haneda)</div><div class="tl-note">Keikyu Line from Shinjuku or Uber. ~40 min. Haneda is closer than Narita — you depart from here.</div><div class="tl-tags"><span class="tl-tag tag-transport">Transport</span></div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">5:15 PM</div><div class="tl-title">Depart HND → ORD</div><div class="tl-note">United · Arrives Chicago 3:25 PM (time zone gain).</div></div>
+    </div></div>
+  </div>
+</div>
+
+<!-- CHICAGO -->
+<div class="content us" id="tab-us">
+  <div class="hero-card us">
+    <div class="hero-emoji">🌭</div>
+    <div class="hero-city us">Chicago Layover</div>
+    <div class="hero-sub">Jul 12 · 3:25 PM – 9:20 PM · ~6 hours at ORD</div>
+    <div class="hero-pills">
+      <span class="pill">Go outside — recommended</span><span class="pill">Back by 7:30 PM</span>
+    </div>
+  </div>
+
+  <div class="alert-banner">⚠️ Back at ORD by 7:30 PM. Allow 90 min for check-in + security + gate.</div>
+
+  <div class="section-title">Transport</div>
+  <div class="info-card">
+    <div class="info-card-title">Getting around</div>
+    <div class="timeline us">
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-title">Uber/Lyft — recommended</div><div class="tl-note">ORD to city ~15–20 min · ~$25–35 USD each way. Book return before you leave airport.</div><div class="tl-tags"><span class="tl-tag tag-transport">Best option</span></div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-title">Blue Line CTA</div><div class="tl-note">$2.50 · ~45 min downtown. Too slow for 6 hours.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-title">Stay in airport</div><div class="tl-note">Not recommended after 12 days in Asia. But if exhausted: Tortas Frontera (Rick Bayless — best airport food in the US), Garrett Popcorn, Lou Malnati's by the slice, Goose Island 312 beer.</div></div>
+    </div>
+  </div>
+
+  <div class="section-title">The plan</div>
+  <div class="day-card us open">
+    <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-num">Jul 12</div>
+      <div class="day-info"><div class="day-date">Chicago Layover</div><div class="day-desc">3:25 PM arrive · 9:20 PM depart</div></div>
+      <div class="day-chevron">▼</div>
+    </div>
+    <div class="day-body"><div class="timeline us">
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">3:25 PM</div><div class="tl-title">Land ORD</div><div class="tl-note">Domestic arrival. No immigration needed.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">~4:15 PM</div><div class="tl-title">Uber to Portillo's</div><div class="tl-note">Chicago hot dogs and Italian beef sandwich. ~15 min from ORD. Absolute must.</div><div class="tl-tags"><span class="tl-tag tag-food">Must-eat</span></div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">~5:00 PM</div><div class="tl-title">Trader Joe's run</div><div class="tl-note">Elmwood Park or Jefferson Park location, ~15 min from ORD. Stock up for Toronto.</div><div class="tl-tags"><span class="tl-tag tag-activity">Shopping</span></div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">~5:45 PM</div><div class="tl-title">Garrett Popcorn</div><div class="tl-note">Chicago Mix (cheese + caramel). Take a bag on the flight home.</div><div class="tl-tags"><span class="tl-tag tag-food">Snack</span></div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">7:15 PM</div><div class="tl-title">Uber back to ORD — hard deadline</div><div class="tl-note">Back at airport by 7:30 PM. 90 min buffer for check-in and security.</div><div class="tl-tags"><span class="tl-tag tag-alert">Don't miss this</span></div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">9:20 PM</div><div class="tl-title">Depart ORD → YYZ</div><div class="tl-note">United. Arrives Toronto 11:59 PM. Welcome home.</div></div>
+    </div></div>
+  </div>
+
+  <div class="info-card">
+    <div class="info-card-title">Note</div>
+    <div style="font-size:12px;color:var(--text2)">No In-N-Out in Chicago — closest is Texas. Portillo's is the right call here.</div>
+  </div>
+</div>
+
+<!-- SHOPPING -->
+<div class="content" id="tab-shop">
+  <div class="section-title">Shopping checklist</div>
+
+  <div class="shop-section">
+    <div class="shop-country"><span>🇰🇷</span><span style="color:var(--kr)">Seoul</span></div>
+    <div class="shop-item"><input type="checkbox" onchange="toggleShop(this)"><span>Stüssy Seoul Chapter</span></div>
+    <div class="shop-item"><input type="checkbox" onchange="toggleShop(this)"><span>National Geographic Store</span></div>
+    <div class="shop-item"><input type="checkbox" onchange="toggleShop(this)"><span>Kirin salt spoon</span></div>
+  </div>
+
+  <div class="shop-section">
+    <div class="shop-country"><span>🇯🇵</span><span style="color:var(--jp)">Tokyo</span></div>
+    <div class="shop-item"><input type="checkbox" onchange="toggleShop(this)"><span>DSM Ginza (Dover Street Market)</span></div>
+    <div class="shop-item"><input type="checkbox" onchange="toggleShop(this)"><span>Stüssy Tokyo</span></div>
+    <div class="shop-item"><input type="checkbox" onchange="toggleShop(this)"><span>Vintage camera — Map Camera, Shinjuku</span></div>
+    <div class="shop-item"><input type="checkbox" onchange="toggleShop(this)"><span>Nintendo merch — Shibuya PARCO B1</span></div>
+    <div class="shop-item"><input type="checkbox" onchange="toggleShop(this)"><span>Pokémon Cafe breakfast — PRE-BOOK NOW</span></div>
+    <div class="shop-item"><input type="checkbox" onchange="toggleShop(this)"><span>Matcha — Ippodo or Marukyu-Koyamaen</span></div>
+    <div class="shop-item"><input type="checkbox" onchange="toggleShop(this)"><span>Brother Joyfactory Tokyo</span></div>
+    <div class="shop-item"><input type="checkbox" onchange="toggleShop(this)"><span>Zyn</span></div>
+    <div class="shop-item"><input type="checkbox" onchange="toggleShop(this)"><span>Corporate / nice gym bag</span></div>
+  </div>
+
+  <div class="shop-section">
+    <div class="shop-country"><span>🇺🇸</span><span style="color:var(--us)">Chicago</span></div>
+    <div class="shop-item"><input type="checkbox" onchange="toggleShop(this)"><span>Trader Joe's haul</span></div>
+    <div class="shop-item"><input type="checkbox" onchange="toggleShop(this)"><span>Garrett Popcorn — Chicago Mix</span></div>
+  </div>
+</div>
+
+<!-- IMMIGRATION -->
+<div class="content" id="tab-imm">
+  <div class="section-title">Travel documents</div>
+
+  <div class="imm-card">
+    <div class="imm-country">👤 Passport</div>
+    <div class="imm-row"><span class="imm-label">Name</span><span class="imm-value">BALMES JAY MARK</span></div>
+    <div class="imm-row"><span class="imm-label">Passport No.</span><span class="imm-value">P5191512C</span></div>
+    <div class="imm-row"><span class="imm-label">Nationality</span><span class="imm-value">Philippines</span></div>
+    <div class="imm-row"><span class="imm-label">DOB</span><span class="imm-value">1992.11.17 · Male</span></div>
+    <div class="imm-row"><span class="imm-label">Expires</span><span class="imm-value">2033.09.06</span></div>
+    <div class="imm-row"><span class="imm-label">Residency</span><span class="imm-value">Canadian Permanent Resident</span></div>
+  </div>
+
+  <div class="imm-card">
+    <div class="imm-country">🇲🇳 Mongolia</div>
+    <div class="imm-row"><span class="imm-label">Entry</span><span class="imm-value">Visa-free · Philippine passport</span></div>
+    <div class="imm-row"><span class="imm-label">Hotel proof</span><span class="imm-value">Khongor Guesthouse · 5397.243.744</span></div>
+    <div class="imm-row"><span class="imm-label">Duration</span><span class="imm-value">Jul 2–5 · 3 nights</span></div>
+  </div>
+
+  <div class="imm-card">
+    <div class="imm-country">🇰🇷 South Korea</div>
+    <div class="imm-row"><span class="imm-label">Visa type</span><span class="imm-value">C-3-1 Temporary Visitor</span></div>
+    <div class="imm-row"><span class="imm-label">Visa number</span><span class="imm-value">TR2600001385</span></div>
+    <div class="imm-row"><span class="imm-label">Period of stay</span><span class="imm-value">30 days · Single entry</span></div>
+    <div class="imm-row"><span class="imm-label">Valid until</span><span class="imm-value">2026.09.23</span></div>
+    <div class="imm-row"><span class="imm-label">Issued</span><span class="imm-value">2026.06.23 · Toronto Consulate</span></div>
+    <div class="imm-row"><span class="imm-label">Purpose</span><span class="imm-value">ICML 2026</span></div>
+    <div class="imm-row"><span class="imm-label">Hotel proof</span><span class="imm-value">Lotte Hotel Seoul · 26109B3434433</span></div>
+    <div class="imm-row"><span class="imm-label">e-Arrival card</span><span class="imm-value">Submit from Jul 2 · e-arrivalcard.go.kr</span></div>
+    <div class="imm-row"><span class="imm-label">Flight in</span><span class="imm-value">T'way TW422 · Jul 5 · 18:55 ICN</span></div>
+    <div class="imm-row"><span class="imm-label">Flight out</span><span class="imm-value">Air Premia YP731 · Jul 10 · 8:50 ICN</span></div>
+  </div>
+
+  <div class="imm-card">
+    <div class="imm-country">🇯🇵 Japan</div>
+    <div class="imm-row"><span class="imm-label">Visa type</span><span class="imm-value">eVisa · Temporary Visitor (V)</span></div>
+    <div class="imm-row"><span class="imm-label">Issue number</span><span class="imm-value">V260004380</span></div>
+    <div class="imm-row"><span class="imm-label">Period of stay</span><span class="imm-value">15 days · Single entry</span></div>
+    <div class="imm-row"><span class="imm-label">Valid until</span><span class="imm-value">2026.09.17</span></div>
+    <div class="imm-row"><span class="imm-label">Issued</span><span class="imm-value">2026.06.17 · Toronto</span></div>
+    <div class="imm-row"><span class="imm-label">Hotel proof</span><span class="imm-value">APA Hotel · Booking 1018592966</span></div>
+    <div class="imm-row"><span class="imm-label">Flight in</span><span class="imm-value">Air Premia YP731 · Jul 10 · 11:20 NRT</span></div>
+    <div class="imm-row"><span class="imm-label">Flight out</span><span class="imm-value">United · Jul 12 · 5:15 PM HND</span></div>
+    <div class="imm-row"><span class="imm-label">⚠️ Note</span><span class="imm-value">Screenshot QR before leaving hotel — bad signal at NRT</span></div>
+  </div>
+</div>
+
+<!-- BOTTOM NAV -->
+<div class="bottom-nav">
+  <button class="nav-item active" data-nav="overview" onclick="showTab('overview')"><span class="nav-icon">🗺</span>Overview</button>
+  <button class="nav-item" data-nav="mn" onclick="showTab('mn')"><span class="nav-icon">🇲🇳</span>Mongolia</button>
+  <button class="nav-item" data-nav="kr" onclick="showTab('kr')"><span class="nav-icon">🇰🇷</span>Seoul</button>
+  <button class="nav-item" data-nav="jp" onclick="showTab('jp')"><span class="nav-icon">🇯🇵</span>Tokyo</button>
+  <button class="nav-item" data-nav="shop" onclick="showTab('shop')"><span class="nav-icon">🛍</span>Shop</button>
+  <button class="nav-item" data-nav="imm" onclick="showTab('imm')"><span class="nav-icon">🛂</span>Docs</button>
+</div>
+
+<script>
+function showTab(tab) {
+  document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+  const content = document.getElementById('tab-' + tab);
+  if (content) content.classList.add('active');
+  document.querySelectorAll('[data-tab="' + tab + '"]').forEach(b => b.classList.add('active'));
+  document.querySelectorAll('[data-nav="' + tab + '"]').forEach(b => b.classList.add('active'));
+  window.scrollTo(0,0);
+}
+function toggleDay(header) {
+  header.parentElement.classList.toggle('open');
+}
+function toggleShop(cb) {
+  cb.parentElement.classList.toggle('checked', cb.checked);
+}
+</script>
+</body>
+</html>
