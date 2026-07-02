@@ -318,6 +318,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',sans-serif;backg
     </div></div>
     <div class="group"><div class="group-lbl">Conference</div><div class="list">
       <div class="row" onclick="nav('attendee','Attendee Guide')"><div class="ri ic-bl">🎫</div><div class="rt"><div class="rl">Attendee Guide</div><div class="rs">Badge, ICML app, WiFi</div></div><div class="rr"><span class="rchev">›</span></div></div>
+      <div class="row" onclick="nav('wifi','Booth WiFi')"><div class="ri ic-gr">📶</div><div class="rt"><div class="rl">Booth WiFi</div><div class="rs">GL-MT3000-8a6 · Tap to auto-connect</div></div><div class="rr"><span class="rchev">›</span></div></div>
       <div class="row" onclick="nav('expenses','Expenses')"><div class="ri ic-gy">💳</div><div class="rt"><div class="rl">Expenses</div><div class="rs">Coupa, what's covered</div></div><div class="rr"><span class="rchev">›</span></div></div>
       <div class="row" onclick="nav('apps','Recommended Apps')"><div class="ri ic-in">📲</div><div class="rt"><div class="rl">Recommended Apps</div><div class="rs">Download before you land</div></div><div class="rr"><span class="rchev">›</span></div></div>
     </div></div>
@@ -759,6 +760,27 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',sans-serif;backg
         <div class="app-btn" onclick="window.open('https://apps.apple.com/us/app/kakaotalk/id362057947','_blank')"><span class="app-ic">💬</span><div><div class="app-n">KakaoTalk</div><div class="app-s">Dominant messaging app in Korea</div></div><span class="app-badge">Download</span></div>
         <div class="app-btn" onclick="window.open('https://www.getyourguide.com/seoul-l197/','_blank')"><span class="app-ic">🎒</span><div><div class="app-n">GetYourGuide</div><div class="app-s">Tours, experiences, activities in Seoul</div></div><span class="app-badge">Open</span></div>
       </div>
+    </div>
+  </div>
+
+
+  <!-- BOOTH WIFI -->
+  <div class="page" id="page-wifi">
+    <div class="content">
+      <div class="sl">Auto-Connect</div>
+      <div style="margin:0 16px 12px;background:var(--surface);border-radius:var(--r);padding:28px 20px;text-align:center;border:0.5px solid var(--sep);">
+        <img src="data:image/png;base64,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" alt="WiFi QR" style="width:180px;height:180px;border-radius:10px;border:0.5px solid var(--sep);">
+        <div style="font-size:15px;font-weight:600;color:var(--label);margin-top:14px;">Scan to connect automatically</div>
+        <div style="font-size:13px;color:var(--secondary);margin-top:4px;">Works on iOS and Android</div>
+      </div>
+      <div class="sl">Manual Connection</div>
+      <div class="kv-g">
+        <div class="kv"><span class="kv-k">Network</span><span class="kv-v" style="font-family:monospace;font-size:14px;letter-spacing:0.5px;">GL-MT3000-8a6</span></div>
+        <div class="kv"><span class="kv-k">Password</span><span class="kv-v" style="font-family:monospace;font-size:14px;letter-spacing:0.5px;">Layersix6</span></div>
+        <div class="kv"><span class="kv-k">Security</span><span class="kv-v">WPA2</span></div>
+      </div>
+      <div style="padding:8px 0 0;"></div>
+      <div class="alert success">This is the <strong>booth router</strong> — use it for demos and anything requiring stable connectivity. Conference WiFi in the hall will be unreliable.</div>
     </div>
   </div>
 
