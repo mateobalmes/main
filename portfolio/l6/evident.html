@@ -1,7 +1,482 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta http-equiv="refresh" content="0; url=https://bit.ly/EvidentIndexTD">
-    <script>window.location.replace("https://bit.ly/EvidentIndexTD");</script>
-  </head>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Evident AI Index — LinkedIn Update Message Generator</title>
+<style>
+  :root {
+    --forest: #1B4D35;
+    --paper: #FCFBF8;
+    --ink: #191919;
+    --line: #E3E0D8;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--paper); color: var(--ink); font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
+  ::selection { background: var(--forest); color: white; }
+  input:focus, textarea:focus { outline: 2px solid var(--forest); outline-offset: 1px; }
+  button:focus-visible { outline: 2px solid var(--forest); outline-offset: 2px; }
+  button { cursor: pointer; font-family: inherit; }
+
+  header { border-bottom: 1px solid var(--line); padding: 28px 32px 22px; }
+  .header-inner { max-width: 1180px; margin: 0 auto; }
+  .eyebrow { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--forest); font-weight: 700; margin-bottom: 6px; }
+  h1 { font-size: 26px; font-weight: 700; margin: 0; letter-spacing: -0.01em; }
+  .subtitle { font-size: 14px; color: #5b5b5b; margin: 6px 0 0; max-width: 640px; }
+
+  main { max-width: 1180px; margin: 0 auto; padding: 28px 32px 80px; display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 28px; }
+  @media (max-width: 900px) { main { grid-template-columns: 1fr; } }
+
+  .section-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; flex-wrap: wrap; gap: 8px; }
+  h2 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; color: #444; margin: 0; }
+
+  .ghost-btn { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; color: var(--forest); background: transparent; border: none; padding: 4px 2px; font-weight: 600; }
+  .icon-btn { display: inline-flex; align-items: center; justify-content: center; background: transparent; border: none; color: #999; padding: 4px; margin-left: 2px; }
+  .primary-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 700; color: white; background: var(--forest); border: none; border-radius: 4px; padding: 7px 14px; }
+
+  .fam-card { border: 1px solid var(--line); border-radius: 4px; background: white; margin-bottom: 8px; transition: border-color 120ms, background 120ms; }
+  .fam-card.selected { border-color: var(--forest); background: #F1F6F3; }
+  .fam-row { display: flex; align-items: center; padding: 12px; cursor: pointer; }
+  .fam-row input[type="checkbox"] { accent-color: var(--forest); width: 16px; height: 16px; margin-right: 10px; }
+  .fam-name { font-weight: 700; font-size: 14px; flex: 1; }
+  .fam-count { font-size: 11.5px; color: #999; margin-right: 8px; }
+  .fam-edit-panel { border-top: 1px solid var(--line); padding: 8px 12px 12px; }
+  .role-row { display: grid; grid-template-columns: 1fr 1fr 22px; gap: 8px; align-items: center; padding: 5px 0; border-bottom: 1px solid var(--line); }
+
+  .std-input { border: 1px solid var(--line); border-radius: 3px; padding: 4px 7px; font-size: 13px; font-family: inherit; background: var(--paper); width: 100%; }
+
+  .msg-controls { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  .msg-controls label { font-size: 12px; color: #666; display: flex; gap: 6px; align-items: center; }
+  .msg-controls input { width: 90px; }
+
+  .empty-state { border: 1px dashed var(--line); border-radius: 4px; padding: 32px; text-align: center; color: #999; font-size: 13px; background: white; }
+  pre#messageOutput { white-space: pre-wrap; font-family: 'Segoe UI', system-ui, sans-serif; font-size: 13.5px; line-height: 1.65; background: white; border: 1px solid var(--line); border-radius: 4px; padding: 22px 24px; margin: 0; display: none; }
+
+  h3 { font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; color: #444; margin-bottom: 10px; }
+  .example-card { border: 1px solid var(--line); border-radius: 4px; background: white; padding: 10px 14px; margin-bottom: 8px; }
+  .example-label { font-size: 11px; font-weight: 700; color: var(--forest); margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.04em; }
+  .example-before { font-size: 12.5px; color: #888; text-decoration: line-through; margin-bottom: 3px; }
+  .example-after { font-size: 12.5px; color: var(--ink); font-weight: 600; }
+
+  .save-state { font-size: 11px; color: #9a9a9a; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="eyebrow">Evident AI Index — Talent Bucket</div>
+    <h1>LinkedIn Update Message Generator</h1>
+    <p class="subtitle">Pick the job family or families. Every title under it gets listed automatically.</p>
+  </div>
+</header>
+
+<main>
+  <section>
+    <div class="section-head">
+      <h2>1. Job family</h2>
+      <div style="display:flex; gap:14px; align-items:center;">
+        <span class="save-state" id="saveState"></span>
+        <button class="ghost-btn" id="resetBtn">↺ Reset</button>
+      </div>
+    </div>
+    <div id="familyList"></div>
+    <button class="ghost-btn" id="addFamilyBtn" style="margin-top:12px;">+ Add job family</button>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>2. Message</h2>
+      <div class="msg-controls">
+        <label>Talking to <input class="std-input" id="recipientInput" placeholder="team" /></label>
+        <label>Sign as <input class="std-input" id="senderInput" value="Mateo" /></label>
+        <button class="primary-btn" id="copyBtn">Copy</button>
+      </div>
+    </div>
+
+    <div class="empty-state" id="emptyState">Select a job family on the left to generate the message.</div>
+    <pre id="messageOutput"></pre>
+
+    <div style="margin-top:22px;">
+      <h3>Example</h3>
+      <div class="example-card">
+        <div class="example-label">Title</div>
+        <div class="example-before">Senior Manager, Analytics</div>
+        <div class="example-after">Senior Manager, Data Scientist</div>
+      </div>
+      <div class="example-card">
+        <div class="example-label">Headline (optional)</div>
+        <div class="example-before">Senior Manager at TD</div>
+        <div class="example-after">Senior Manager, Data Science at TD</div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+(function () {
+  "use strict";
+
+  var STORAGE_KEY = "evident-job-families";
+  var AI_KEYWORD_RE = /\b(AI|ML|NLP)\b/i;
+
+  var DEFAULT_FAMILIES = [
+    { id: "fam-dev", name: "AI Development", roles: [
+      { id: "r1", tdTitle: "Advanced Analytics, Data Science", linkedinTitle: "Data Scientist" },
+      { id: "r2", tdTitle: "Decision Scientist, Decision Science", linkedinTitle: "Decision Scientist" },
+      { id: "r3", tdTitle: "Model Developer, Modeler", linkedinTitle: "Model Developer" },
+      { id: "r4", tdTitle: "Quantitative Analyst, Algo Trader, Strat", linkedinTitle: "Quant" }
+    ]},
+    { id: "fam-spec", name: "AI Specialist", roles: [
+      { id: "r5", tdTitle: "AI Architect, ML Architect", linkedinTitle: "AI Architect" },
+      { id: "r5b", tdTitle: "AI Engineer, AI Developer", linkedinTitle: "AI Engineer" },
+      { id: "r5c", tdTitle: "AI Scientist, ML Scientist", linkedinTitle: "AI Scientist" },
+      { id: "r5d", tdTitle: "Chatbot Engineer, Conversational AI", linkedinTitle: "Conversational AI" },
+      { id: "r5e", tdTitle: "Gen AI, LLM Engineer, LLM Developer", linkedinTitle: "Generative AI" },
+      { id: "r5f", tdTitle: "Machine Learning Engineer, ML Developer", linkedinTitle: "ML Engineer" },
+      { id: "r5g", tdTitle: "NLP Data Scientist, NLP Developer", linkedinTitle: "NLP Data Scientist" },
+      { id: "r5h", tdTitle: "NLP Engineer", linkedinTitle: "NLP Engineer" }
+    ]},
+    { id: "fam-risk", name: "Model Risk", roles: [
+      { id: "r6", tdTitle: "Model Governance Analyst", linkedinTitle: "Model Governance" },
+      { id: "r6b", tdTitle: "Model Risk, Model Validation", linkedinTitle: "Model Risk" },
+      { id: "r6c", tdTitle: "Model Risk Audit, Model Auditor", linkedinTitle: "Model Risk Audit" }
+    ]},
+    { id: "fam-eng", name: "Data Engineering", roles: [
+      { id: "r7", tdTitle: "Data Architect, Data Manager", linkedinTitle: "Data Architect" },
+      { id: "r7b", tdTitle: "Data Engineer, Data Warehouse", linkedinTitle: "Data Engineer" },
+      { id: "r7c", tdTitle: "Data Governance, Data Risk", linkedinTitle: "Data Governance" },
+      { id: "r7d", tdTitle: "Database Admin, DBA", linkedinTitle: "Database Administrator" }
+    ]},
+    { id: "fam-pm", name: "Product Management", roles: [
+      { id: "r8", tdTitle: "Product Owner, Product Manager", linkedinTitle: "Product Manager" },
+      { id: "r8b", tdTitle: "Project Owner, Project Manager", linkedinTitle: "Project Manager" }
+    ]},
+    { id: "fam-impl", name: "Implementation", roles: [
+      { id: "r9", tdTitle: "Software Developer, Software Engineer", linkedinTitle: "Software Engineer" },
+      { id: "r9b", tdTitle: "MLOps, ML Ops, AI Ops, AIOps", linkedinTitle: "MLOps Engineer" },
+      { id: "r9c", tdTitle: "Backend, Back End Developer", linkedinTitle: "Backend Developer" },
+      { id: "r9d", tdTitle: "Frontend, Web Developer", linkedinTitle: "Frontend Developer" },
+      { id: "r9e", tdTitle: "Full Stack, Fullstack Developer", linkedinTitle: "Full Stack Developer" },
+      { id: "r9f", tdTitle: "Cloud Developer, Cloud Architect", linkedinTitle: "Cloud Developer" },
+      { id: "r9g", tdTitle: "DevOps, Dev Ops, Developer Ops", linkedinTitle: "DevOps" },
+      { id: "r9h", tdTitle: "Software / Solutions Architect", linkedinTitle: "Software Architect" },
+      { id: "r9i", tdTitle: "Technical Lead, Principal Engineer", linkedinTitle: "Technical Lead" }
+    ]},
+    { id: "fam-rec", name: "Recruitment", roles: [
+      { id: "r10", tdTitle: "Recruiter, Talent Acquisition", linkedinTitle: "Recruitment" }
+    ]}
+  ];
+
+  var state = {
+    families: [],
+    selected: {},
+    editing: {}
+  };
+
+  function uid() {
+    return Math.random().toString(36).slice(2, 9);
+  }
+
+  function deepCopy(obj) {
+    return JSON.parse(JSON.stringify(obj));
+  }
+
+  function loadFamilies() {
+    try {
+      var raw = window.localStorage.getItem(STORAGE_KEY);
+      if (raw) {
+        var parsed = JSON.parse(raw);
+        if (Array.isArray(parsed) && parsed.length) return parsed;
+      }
+    } catch (e) { /* ignore, fall back to defaults */ }
+    return deepCopy(DEFAULT_FAMILIES);
+  }
+
+  var saveTimer = null;
+  function persist() {
+    var el = document.getElementById("saveState");
+    el.textContent = "Saving…";
+    if (saveTimer) clearTimeout(saveTimer);
+    saveTimer = setTimeout(function () {
+      try {
+        window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state.families));
+        el.textContent = "Saved";
+      } catch (e) {
+        el.textContent = "";
+      }
+    }, 400);
+  }
+
+  function render() {
+    renderFamilyList();
+    renderMessage();
+  }
+
+  function renderFamilyList() {
+    var container = document.getElementById("familyList");
+    container.innerHTML = "";
+
+    state.families.forEach(function (fam) {
+      var isSel = !!state.selected[fam.id];
+      var isEditing = !!state.editing[fam.id];
+
+      var card = document.createElement("div");
+      card.className = "fam-card" + (isSel ? " selected" : "");
+
+      var row = document.createElement("div");
+      row.className = "fam-row";
+      row.addEventListener("click", function () {
+        state.selected[fam.id] = !state.selected[fam.id];
+        render();
+      });
+
+      var checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.checked = isSel;
+      checkbox.addEventListener("click", function (e) { e.stopPropagation(); });
+      checkbox.addEventListener("change", function () {
+        state.selected[fam.id] = !state.selected[fam.id];
+        render();
+      });
+      row.appendChild(checkbox);
+
+      if (isEditing) {
+        var nameInput = document.createElement("input");
+        nameInput.className = "std-input";
+        nameInput.style.fontWeight = "700";
+        nameInput.style.fontSize = "14px";
+        nameInput.style.flex = "1";
+        nameInput.value = fam.name;
+        nameInput.addEventListener("click", function (e) { e.stopPropagation(); });
+        nameInput.addEventListener("input", function (e) {
+          fam.name = e.target.value;
+          persist();
+          renderMessage();
+        });
+        row.appendChild(nameInput);
+      } else {
+        var nameSpan = document.createElement("span");
+        nameSpan.className = "fam-name";
+        nameSpan.textContent = fam.name;
+        row.appendChild(nameSpan);
+      }
+
+      var countSpan = document.createElement("span");
+      countSpan.className = "fam-count";
+      countSpan.textContent = fam.roles.length + " titles";
+      row.appendChild(countSpan);
+
+      var editBtn = document.createElement("button");
+      editBtn.className = "icon-btn";
+      editBtn.setAttribute("aria-label", "Edit family");
+      editBtn.textContent = isEditing ? "✓" : "✎";
+      editBtn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        state.editing[fam.id] = !state.editing[fam.id];
+        render();
+      });
+      row.appendChild(editBtn);
+
+      var delBtn = document.createElement("button");
+      delBtn.className = "icon-btn";
+      delBtn.setAttribute("aria-label", "Delete family");
+      delBtn.textContent = "🗑";
+      delBtn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        state.families = state.families.filter(function (f) { return f.id !== fam.id; });
+        delete state.selected[fam.id];
+        persist();
+        render();
+      });
+      row.appendChild(delBtn);
+
+      card.appendChild(row);
+
+      if (isEditing) {
+        var panel = document.createElement("div");
+        panel.className = "fam-edit-panel";
+
+        fam.roles.forEach(function (r) {
+          var rRow = document.createElement("div");
+          rRow.className = "role-row";
+
+          var tdInput = document.createElement("input");
+          tdInput.className = "std-input";
+          tdInput.placeholder = "Current TD title";
+          tdInput.value = r.tdTitle;
+          tdInput.addEventListener("input", function (e) {
+            r.tdTitle = e.target.value;
+            persist();
+            renderMessage();
+          });
+
+          var liInput = document.createElement("input");
+          liInput.className = "std-input";
+          liInput.placeholder = "Prescribed LinkedIn title";
+          liInput.value = r.linkedinTitle;
+          liInput.addEventListener("input", function (e) {
+            r.linkedinTitle = e.target.value;
+            persist();
+            renderMessage();
+          });
+
+          var rmBtn = document.createElement("button");
+          rmBtn.className = "icon-btn";
+          rmBtn.setAttribute("aria-label", "Remove role");
+          rmBtn.textContent = "✕";
+          rmBtn.addEventListener("click", function () {
+            fam.roles = fam.roles.filter(function (x) { return x.id !== r.id; });
+            persist();
+            render();
+          });
+
+          rRow.appendChild(tdInput);
+          rRow.appendChild(liInput);
+          rRow.appendChild(rmBtn);
+          panel.appendChild(rRow);
+        });
+
+        var addRoleBtn = document.createElement("button");
+        addRoleBtn.className = "ghost-btn";
+        addRoleBtn.style.marginTop = "8px";
+        addRoleBtn.textContent = "+ Add title";
+        addRoleBtn.addEventListener("click", function () {
+          fam.roles.push({ id: uid(), tdTitle: "New TD title", linkedinTitle: "New prescribed title" });
+          persist();
+          render();
+        });
+        panel.appendChild(addRoleBtn);
+
+        card.appendChild(panel);
+      }
+
+      container.appendChild(card);
+    });
+  }
+
+  function buildMessage() {
+    var chosen = state.families.filter(function (f) { return state.selected[f.id]; });
+    if (chosen.length === 0) return "";
+
+    var recipient = document.getElementById("recipientInput").value;
+    var sender = document.getElementById("senderInput").value || "Mateo";
+    var greeting = (recipient && recipient.trim()) ? ("Hi " + recipient.trim() + ",") : "Hi team,";
+
+    var allRoles = [];
+    chosen.forEach(function (f) { allRoles = allRoles.concat(f.roles); });
+    var needsBioLine = allRoles.some(function (r) { return !AI_KEYWORD_RE.test(r.linkedinTitle); });
+
+    var roleLines = [];
+    chosen.forEach(function (f) {
+      f.roles.forEach(function (r) {
+        roleLines.push("If your TD title looks like: " + r.tdTitle);
+        roleLines.push("You should use: " + r.linkedinTitle);
+        roleLines.push("");
+      });
+    });
+
+    var lines = [];
+    lines.push("Subject: Quick LinkedIn update — Evident AI Index");
+    lines.push("");
+    lines.push(greeting);
+    lines.push("");
+    lines.push("Following Sumee's email on the Evident AI Index: it scores banks on how well their AI talent shows up on LinkedIn. Titled correctly, our people count toward that score.");
+    lines.push("");
+    lines.push("Your team may have the following roles:");
+    lines.push("");
+    lines.push(roleLines.join("\n").replace(/\n+$/, ""));
+    lines.push("");
+    lines.push("Update your LinkedIn title to match.");
+    lines.push("");
+    lines.push("Also encouraged, not required: update your headline, About section, and experience bullets to describe your AI/ML work.");
+    if (needsBioLine) {
+      lines.push("If your new title doesn't include AI, ML, or NLP, this matters more. Work the word AI into your About section or a recent experience bullet.");
+    }
+    lines.push("");
+    lines.push("Examples below.");
+    lines.push("");
+    lines.push("Details, poster, and live Q&A: https://bit.ly/EvidentIndexTD");
+    lines.push("");
+    lines.push("Questions? Reach out to me directly.");
+    lines.push("");
+    lines.push("Appreciate you taking the two minutes on this. It genuinely adds up.");
+    lines.push("");
+    lines.push("Thanks,");
+    lines.push(sender);
+
+    return lines.join("\n");
+  }
+
+  function renderMessage() {
+    var msg = buildMessage();
+    var empty = document.getElementById("emptyState");
+    var out = document.getElementById("messageOutput");
+    if (!msg) {
+      empty.style.display = "block";
+      out.style.display = "none";
+    } else {
+      empty.style.display = "none";
+      out.style.display = "block";
+      out.textContent = msg;
+    }
+  }
+
+  function copyMessage() {
+    var msg = buildMessage();
+    if (!msg) return;
+    var btn = document.getElementById("copyBtn");
+
+    function done() {
+      btn.textContent = "Copied";
+      setTimeout(function () { btn.textContent = "Copy"; }, 1800);
+    }
+
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(msg).then(done).catch(function () { fallbackCopy(msg, done); });
+    } else {
+      fallbackCopy(msg, done);
+    }
+  }
+
+  function fallbackCopy(text, cb) {
+    var ta = document.createElement("textarea");
+    ta.value = text;
+    ta.style.position = "fixed";
+    ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    try { document.execCommand("copy"); } catch (e) { /* ignore */ }
+    document.body.removeChild(ta);
+    if (cb) cb();
+  }
+
+  document.getElementById("resetBtn").addEventListener("click", function () {
+    state.families = deepCopy(DEFAULT_FAMILIES);
+    state.selected = {};
+    state.editing = {};
+    persist();
+    render();
+  });
+
+  document.getElementById("addFamilyBtn").addEventListener("click", function () {
+    var famId = uid();
+    var roleId = uid();
+    state.families.push({ id: famId, name: "New job family", roles: [{ id: roleId, tdTitle: "TD title", linkedinTitle: "Prescribed title" }] });
+    state.editing[famId] = true;
+    persist();
+    render();
+  });
+
+  document.getElementById("recipientInput").addEventListener("input", renderMessage);
+  document.getElementById("senderInput").addEventListener("input", renderMessage);
+  document.getElementById("copyBtn").addEventListener("click", copyMessage);
+
+  state.families = loadFamilies();
+  render();
+})();
+</script>
+
+</body>
 </html>
