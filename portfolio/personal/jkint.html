@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Travel Partnerships Advisor — Interview Prep</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Roboto:wght@400;500;600&family=Roboto+Mono:wght@500&display=swap');
+
+  :root{
+    --red: #D22630;
+    --red-dark: #A81D26;
+    --black: #101010;
+    --ink: #1D1D1D;
+    --grey: #6B6E73;
+    --grey-line: #E4E4E6;
+    --paper: #FFFFFF;
+    --shell: #F5F5F6;
+    --green: #0E8A3E;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background: var(--shell);
+    color: var(--ink);
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+  }
+  a{ color: inherit; }
+
+  .redbar{ background: var(--red); height: 6px; width: 100%; }
+  header{
+    padding: 44px 24px 32px;
+    background: var(--black);
+    color: #fff;
+  }
+  .board-wrap{ max-width: 920px; margin: 0 auto; }
+  .brandrow{ display: flex; align-items: center; gap: 10px; margin-bottom: 28px; }
+  .leafmark{
+    width: 26px; height: 26px; background: var(--red);
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  }
+  .brandrow span{ font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 15px; letter-spacing: 0.02em; }
+  .eyebrow{
+    font-family: 'Roboto Mono', monospace; letter-spacing: 0.12em; text-transform: uppercase;
+    font-size: 12px; color: var(--red); margin-bottom: 12px; font-weight: 500;
+  }
+  h1{ font-family: 'Poppins', sans-serif; font-weight: 800; font-size: clamp(28px, 5vw, 40px); margin: 0 0 12px; letter-spacing: -0.01em; }
+  .role-line{ font-size: 14px; color: #C9CACD; display: flex; flex-wrap: wrap; gap: 6px 22px; margin-top: 14px; }
+  .role-line span b{ color: #fff; font-weight: 600; }
+
+  nav{
+    max-width: 920px; margin: 26px auto 0; padding: 10px 14px 10px 14px;
+    display: flex; flex-wrap: wrap; gap: 8px;
+    background: var(--paper); border-radius: 40px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  }
+  nav a{
+    font-family: 'Roboto', sans-serif; font-size: 12.5px; font-weight: 500; text-decoration: none;
+    color: var(--ink); padding: 7px 14px; border-radius: 30px; transition: background .15s, color .15s;
+  }
+  nav a:hover{ background: var(--red); color: #fff; }
+
+  main{ max-width: 920px; margin: 0 auto; padding: 30px 24px 100px; }
+
+  section{
+    background: var(--paper); border-radius: 14px; padding: 38px 34px; margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05); border: 1px solid var(--grey-line);
+  }
+
+  .gate{ font-family: 'Roboto Mono', monospace; font-size: 12px; color: var(--red); letter-spacing: 0.1em; margin-bottom: 8px; font-weight: 500; }
+  h2{ font-family: 'Poppins', sans-serif; font-size: 23px; font-weight: 700; margin: 0 0 6px; color: var(--black); }
+  .sub{ color: var(--grey); font-size: 14px; margin: 0 0 22px; max-width: 68ch; }
+
+  p{ color: #333; font-size: 15px; }
+  strong{ color: var(--black); }
+
+  ul{ padding-left: 20px; margin: 12px 0; }
+  li{ margin-bottom: 8px; color: #333; font-size: 14.5px; }
+  li::marker{ color: var(--red); font-weight: 700; }
+
+  /* glossary */
+  .glossary{ display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 10px; margin-top: 18px; }
+  .term{ background: var(--shell); border: 1px solid var(--grey-line); border-left: 3px solid var(--red); border-radius: 6px; padding: 14px 16px; }
+  .term .word{ font-family: 'Poppins', sans-serif; color: var(--black); font-weight: 600; font-size: 13px; display: block; margin-bottom: 5px; }
+  .term p{ margin: 0; font-size: 13px; color: var(--grey); }
+
+  /* mapping table */
+  .map-row{
+    display: grid; grid-template-columns: 1fr 1fr; gap: 18px;
+    padding: 16px 0; border-bottom: 1px solid var(--grey-line);
+  }
+  .map-row:last-child{ border-bottom: none; }
+  .map-row .jd{ font-size: 13px; }
+  .map-row .jd .tag{
+    font-family: 'Roboto Mono', monospace; font-size: 10.5px; color: var(--red);
+    text-transform: uppercase; letter-spacing: 0.06em; display: block; margin-bottom: 6px; font-weight: 600;
+  }
+  .map-row .evidence{
+    background: var(--shell); border-radius: 8px; padding: 12px 14px; font-size: 13.5px; color: #2A2A2A;
+    border-left: 3px solid var(--green);
+  }
+  .map-head{
+    display: grid; grid-template-columns: 1fr 1fr; gap: 18px;
+    font-family: 'Roboto Mono', monospace; font-size: 11px; color: var(--grey);
+    text-transform: uppercase; letter-spacing: 0.06em; padding-bottom: 10px; border-bottom: 2px solid var(--black);
+  }
+
+  /* boarding pass */
+  .pass{
+    border: 1px solid var(--grey-line); border-radius: 10px; padding: 20px 22px; margin: 16px 0 0;
+    background: var(--shell); position: relative;
+  }
+  .pass:before{ content: ""; position: absolute; left: 0; right: 0; top: 44px; border-top: 1px dashed #C7C8CA; }
+  .pass .from-to{
+    font-family: 'Roboto Mono', monospace; font-size: 12px; color: var(--grey); letter-spacing: 0.06em;
+    padding-bottom: 12px; display: flex; align-items: center; gap: 10px;
+  }
+  .pass .from-to b{ color: var(--red); font-size: 15px; }
+  .pass .body{ padding-top: 16px; }
+
+  /* Q&A */
+  .qa{ border-left: 3px solid var(--grey-line); padding: 4px 0 4px 18px; margin-bottom: 22px; }
+  .qa .q{ font-weight: 600; color: var(--black); font-size: 15.5px; margin-bottom: 8px; font-family: 'Poppins', sans-serif; }
+  .qa .q:before{ content: "Q — "; color: var(--red); font-family: 'Roboto Mono', monospace; font-size: 12.5px; }
+  .qa .ammo{ font-size: 13.5px; color: #333; background: var(--shell); border-radius: 8px; padding: 10px 14px; margin-top: 6px; border-left: 3px solid var(--green); }
+  .qa .ammo b{ color: var(--green); font-weight: 600; }
+  .qa .hint{ font-size: 13.5px; color: var(--grey); margin-top: 6px; }
+
+  .flag{
+    background: #FFF4E9; border: 1px solid #F0D3AC; border-left: 3px solid #C97A2B;
+    border-radius: 8px; padding: 12px 16px; font-size: 13.5px; color: #5C3B14; margin-top: 10px;
+  }
+  .flag b{ color: #A85B15; }
+
+  .ask-list li{ font-size: 15px; }
+
+  footer{ text-align: center; padding: 36px 24px 50px; color: var(--grey); font-family: 'Roboto Mono', monospace; font-size: 12px; }
+
+  @media (max-width: 700px){
+    .map-row, .map-head{ grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px){
+    header{ padding: 36px 18px 26px; }
+    section{ padding: 26px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="redbar"></div>
+<header>
+  <div class="board-wrap">
+    <div class="brandrow"><div class="leafmark"></div><span>AIR CANADA</span></div>
+    <div class="eyebrow">Interview Prep · Internal Transfer</div>
+    <h1>Travel Partnerships Advisor</h1>
+    <div class="role-line">
+      <span><b>Jerich Matthew King</b></span>
+      <span>Air Canada · Toronto / Montréal</span>
+      <span>Reports to: <b>Director, Travel Partnerships &amp; Platforms</b></span>
+      <span>From: <b>Demand Analyst, Revenue Management</b></span>
+    </div>
+  </div>
+</header>
+<nav>
+  <a href="#context">01 · Role Context</a>
+  <a href="#lingo">02 · Lingo</a>
+  <a href="#mapping">03 · Your Resume, Mapped</a>
+  <a href="#angle">04 · Your Angle</a>
+  <a href="#behavioral">05 · Behavioural Qs</a>
+  <a href="#gaps">06 · Gaps to Own</a>
+  <a href="#ask">07 · Ask Them</a>
+</nav>
+
+<main>
+
+  <section id="context">
+    <div class="gate">Gate 01</div>
+    <h2>What this role actually is</h2>
+    <p class="sub">The shape of the job, not the posting text.</p>
+    <p>This sits inside <strong>Travel and Loyalty Platforms</strong>, supporting Aeroplan's travel partnerships — day-one focus is the <strong>car rental vertical</strong>, with room to grow. Three layers working at once:</p>
+    <ul>
+      <li><strong>Commercial:</strong> business case analysis, forward and historic modeling, partnership profitability, program codes and promo T&Cs.</li>
+      <li><strong>Analytical:</strong> data models across customer, operational and revenue data to find optimization opportunities, plus market and competitor benchmarking in travel and loyalty.</li>
+      <li><strong>Relational:</strong> connective tissue between Digital Product/IT, Partner Marketing and CRM, Aeroplan Finance, customer care, and the partner itself. Closer to an account manager who can also build the model than a pure analyst.</li>
+    </ul>
+    <p>Three years of relevant experience is the real bar, not airline/loyalty tenure specifically — the posting wants someone <strong>curious about aviation and loyalty</strong>, not already expert in it. As an internal mover already inside the airline's commercial engine, that bar is comfortably cleared.</p>
+  </section>
+
+  <section id="lingo">
+    <div class="gate">Gate 02</div>
+    <h2>Lingo to have ready</h2>
+    <p class="sub">You already speak most of this fluently from Revenue Management — this is the partnerships-side vocabulary layered on top.</p>
+    <div class="glossary">
+      <div class="term"><span class="word">Accrual vs. Redemption</span><p>Earning Aeroplan points vs. spending them. Partnerships sit on one or both sides.</p></div>
+      <div class="term"><span class="word">Breakage</span><p>Points issued but never redeemed — loyalty's version of the revenue recognition question.</p></div>
+      <div class="term"><span class="word">Activation</span><p>A member actually using a partner benefit after seeing it marketed, not just awareness.</p></div>
+      <div class="term"><span class="word">Value proposition</span><p>What Aeroplan is worth to a member vs. competitors — the framing this role is told to amplify.</p></div>
+      <div class="term"><span class="word">Partner P&amp;L</span><p>The commercial split between Air Canada/Aeroplan and the partner.</p></div>
+      <div class="term"><span class="word">Program codes</span><p>Operational tagging used to track a specific partnership offer or campaign — directly adjacent to the OTA promo work you've already done.</p></div>
+      <div class="term"><span class="word">Co-brand card</span><p>TD and CIBC's Aeroplan cards — the largest loyalty partnership by revenue.</p></div>
+      <div class="term"><span class="word">Affinity analysis</span><p>Correlating usage patterns to find partnership fit — you've built this exact analysis at Globe.</p></div>
+      <div class="term"><span class="word">BLF / Yield</span><p>Booking load factor and yield — already your daily vocabulary from RM.</p></div>
+      <div class="term"><span class="word">Digital Product team</span><p>The internal team building the tech surface partnerships live on — your business-side counterpart.</p></div>
+    </div>
+  </section>
+
+  <section id="mapping">
+    <div class="gate">Gate 03</div>
+    <h2>Your resume, mapped to this job</h2>
+    <p class="sub">Every line on the left is a real job responsibility. Every line on the right is already on your CV. Say these connections out loud in the interview — don't make them infer it.</p>
+
+    <div class="map-head"><span>Job needs</span><span>You've already done it</span></div>
+
+    <div class="map-row">
+      <div class="jd"><span class="tag">Business case &amp; commercial modeling</span>Ensure partnerships drive profitability and sustained growth</div>
+      <div class="evidence">Managed a <b>$1.06B CA-US portfolio</b>; commercial strategies contributed to a <b>21% YoY revenue increase</b>. Optimized seat inventory via booking curves, demand forecast and competitor pricing — improved BLF, RASM and yield.</div>
+    </div>
+
+    <div class="map-row">
+      <div class="jd"><span class="tag">Historic + forward projecting models</span>Predict commercial impact of proposed loyalty initiatives</div>
+      <div class="evidence">Demand forecasting is your day job. Booking curve and competitor pricing analysis is the same discipline pointed at a partnership instead of a route.</div>
+    </div>
+
+    <div class="map-row">
+      <div class="jd"><span class="tag">Data models for optimization</span>Use customer, operational and revenue data to find program optimization areas</div>
+      <div class="evidence"><b>Pioneered a customer booking data model</b> to evaluate OTA promotion effectiveness; insights led to reintroducing promotions and a <b>30% increase in daily YoY bookings</b>.</div>
+    </div>
+
+    <div class="map-row">
+      <div class="jd"><span class="tag">Partnership content &amp; validation</span>Define new potential partnerships, keep the portfolio relevant and engaging</div>
+      <div class="evidence">At Globe: <b>initiated a partnership analysis report</b> running an <b>affinity analysis on 10M users</b>, correlating app usage to define new content partnerships — recommendations directly resulted in improved offers. This is the closest one-to-one match on your entire CV.</div>
+    </div>
+
+    <div class="map-row">
+      <div class="jd"><span class="tag">Partner Marketing / CRM collaboration</span>Drive activation and long-term member engagement</div>
+      <div class="evidence">Worked cross-functionally with lifecycle marketing and loyalty campaign teams at Globe to shape add-on retention strategy on 20M prepaid users, isolating the top 10% of add-ons driving 80% of revenue.</div>
+    </div>
+
+    <div class="map-row">
+      <div class="jd"><span class="tag">Program codes &amp; promo T&amp;Cs</span>Manage marketing partnership operations</div>
+      <div class="evidence">Direct precedent: OTA promotion reintroduction work at Air Canada — same operational muscle, different partner category.</div>
+    </div>
+
+    <div class="map-row">
+      <div class="jd"><span class="tag">Post-campaign / post-launch analysis</span>Support analysis after a partnership initiative goes live</div>
+      <div class="evidence">Built an <b>add-on migration and decay report</b> at Globe; surfaced 10 new business cases and a <b>5% increase in add-on revenue</b>.</div>
+    </div>
+
+    <div class="map-row">
+      <div class="jd"><span class="tag">Digital Product / IT coordination</span>Resolve technical issues tied to partnership management</div>
+      <div class="evidence">Built a time-critical customer usage dashboard at Globe pulling from multiple data sources — cross-functional build with technical teams under time pressure.</div>
+    </div>
+
+    <div class="map-row">
+      <div class="jd"><span class="tag">Ad-hoc research &amp; benchmarking</span>Own research projects, gather industry insights, compare programs</div>
+      <div class="evidence">Flight schedule pattern analysis that identified missing network flow and generated <b>+$200K incremental revenue</b> — self-initiated, not assigned.</div>
+    </div>
+
+    <div class="map-row">
+      <div class="jd"><span class="tag">Excellent analytical skills, complex data</span>Advanced analytics tooling</div>
+      <div class="evidence">R, Python, PySpark, Dataiku, Snowflake, SQL, PowerBI, Tableau — exceeds what most candidates in this pool will bring.</div>
+    </div>
+
+    <div class="map-row">
+      <div class="jd"><span class="tag">Partner sourcing &amp; pricing strategy</span>General partnerships commercial instinct</div>
+      <div class="evidence">Hidden Spices: co-founded and ran partner sourcing, pricing strategy and inventory planning end to end, <b>$350K in sales over four years</b> — this is real, hands-on partnership ownership outside the resume's employment section, worth mentioning if the conversation allows it.</div>
+    </div>
+
+  </section>
+
+  <section id="angle">
+    <div class="gate">Gate 04</div>
+    <h2>Your angle: Revenue Management → Partnerships</h2>
+    <p class="sub">The internal-transfer story only works if it's specific, not "I want a change."</p>
+    <div class="pass">
+      <div class="from-to"><span>YUL</span> Revenue Management <span>→</span> Travel Partnerships <span>YYZ/YUL</span></div>
+      <div class="body">
+        <p>Revenue Management already trained the two hardest parts of this job: <strong>forecasting under uncertainty</strong> and <strong>defending a commercial recommendation to people who weren't in the room when the model was built</strong>. And before Air Canada, Globe Telecom's product management work already put you on the partnerships side of that equation — the affinity analysis project is effectively a rehearsal for this exact job, just in telecom instead of travel. The honest pivot isn't "I want to leave RM," it's "I've done both halves of this role separately — the commercial rigor at Air Canada, the partnership analytics at Globe — and this is where they combine." Say that plainly.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="behavioral">
+    <div class="gate">Gate 05</div>
+    <h2>Behavioural questions, with your ammo</h2>
+    <p class="sub">Structure each as STAR — situation, task, action, result. The result line is already written for you below; build the situation and action around it.</p>
+
+    <div class="qa">
+      <div class="q">Why are you moving from Revenue Management into Travel Partnerships?</div>
+      <div class="hint">Will be asked directly since you're internal.</div>
+      <div class="ammo"><b>Use:</b> the RM + Globe partnerships combination above. Two different companies, same underlying skill, now converging in one role.</div>
+    </div>
+
+    <div class="qa">
+      <div class="q">Tell me about a time you used data to identify an opportunity others had missed.</div>
+      <div class="ammo"><b>Use:</b> flight schedule pattern analysis → missing network flow → +$200K incremental revenue, self-initiated and pitched to the scheduling team.</div>
+    </div>
+
+    <div class="qa">
+      <div class="q">Describe a time you found a new partnership or growth opportunity through data.</div>
+      <div class="ammo"><b>Use:</b> the Globe affinity analysis — correlating app usage across 10M users to define new content partnerships. This is your strongest, most directly relevant story in the whole interview. Lead with it if this question or anything close to it comes up.</div>
+    </div>
+
+    <div class="qa">
+      <div class="q">Tell me about a time you had to influence people outside your reporting line.</div>
+      <div class="ammo"><b>Use:</b> OTA promotion insights shared with senior leadership resulted in reintroducing promotions — you influenced a reversal of an existing decision with data, not authority.</div>
+    </div>
+
+    <div class="qa">
+      <div class="q">Tell me about managing multiple competing priorities under pressure.</div>
+      <div class="ammo"><b>Use:</b> the Globe COVID-onset dashboard — built as an early-detection tool under time pressure, pulling from multiple data sources when the business needed answers fast.</div>
+    </div>
+
+    <div class="qa">
+      <div class="q">Give an example of learning something new quickly to do your job well.</div>
+      <div class="ammo"><b>Use:</b> Data Science Leadership Development Program — top 10% of 200+ candidates, ranked 90th percentile on a churn study within your first year at Globe. Shows fast ramp, not just current competence.</div>
+    </div>
+
+    <div class="qa">
+      <div class="q">Describe a project you owned end-to-end with real ambiguity.</div>
+      <div class="ammo"><b>Use:</b> Hidden Spices — sourcing, pricing, inventory, and customer acquisition built from nothing to $350K in sales over four years. Full-stack ownership outside a corporate structure.</div>
+    </div>
+
+    <div class="qa">
+      <div class="q">Tell me about presenting a complex analysis to senior or executive stakeholders.</div>
+      <div class="ammo"><b>Use:</b> the churn study presented to an executive audience at Globe, or the OTA promotion insights shared with Air Canada senior leadership.</div>
+    </div>
+  </section>
+
+  <section id="gaps">
+    <div class="gate">Gate 06</div>
+    <h2>Gaps to own, not hide</h2>
+    <p class="sub">A confident, direct answer on these beats pretending they aren't gaps.</p>
+    <div class="flag"><b>French:</b> listed as preferred, not required. If it's not strong, say so directly and pivot to willingness to build it — don't let it turn into a dodge.</div>
+    <div class="flag"><b>Direct partner-facing / external account management experience:</b> your partnership work (Globe, Hidden Spices) has been analytical or founder-led, not managing an external corporate partner relationship day-to-day. If asked, acknowledge it and point to the OTA and cross-functional stakeholder work as the closest adjacent muscle.</div>
+    <div class="flag"><b>Car rental / travel partnerships specifically:</b> no direct experience in this vertical. Fine to say plainly — the posting wants curiosity here more than expertise. Knowing who Air Canada's current car rental partners are (Hertz, Avis, National are the common names in this space) before the interview closes that gap fast.</div>
+  </section>
+
+  <section id="ask">
+    <div class="gate">Gate 07</div>
+    <h2>A good question to ask back</h2>
+    <p class="sub">One sharp question beats three safe ones — this one forces a real answer, not a script.</p>
+    <ul class="ask-list">
+      <li><strong>Best single option:</strong> "Car rental is the primary focus today — what does the roadmap look like for expanding into other partnership categories, and how does this role's scope evolve as that happens?"</li>
+      <li>Strong alternative, given your affinity-analysis background: "How does the team currently decide which new partnership categories to pursue — is it opportunity-driven from data, or more relationship-driven from inbound partner interest?"</li>
+      <li>Backup: "Where does the friction usually show up between Partner Marketing, Digital Product and this role, and how does the team resolve it?"</li>
+    </ul>
+  </section>
+
+</main>
+
+<footer>PREPARED FOR INTERVIEW · JERICH MATTHEW KING · TRAVEL PARTNERSHIPS ADVISOR · AIR CANADA</footer>
+
+</body>
+</html>
