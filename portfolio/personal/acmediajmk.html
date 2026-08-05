@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Specialist, AC Media Analytics — Interview Prep</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Roboto:wght@400;500;600&family=Roboto+Mono:wght@500&display=swap');
+
+  :root{
+    --red: #D22630;
+    --black: #101010;
+    --ink: #1D1D1D;
+    --grey: #6B6E73;
+    --grey-line: #E4E4E6;
+    --paper: #FFFFFF;
+    --shell: #F5F5F6;
+    --green: #0E8A3E;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{ margin:0; background: var(--shell); color: var(--ink); font-family: 'Roboto', sans-serif; line-height: 1.6; }
+  a{ color: inherit; }
+
+  .redbar{ background: var(--red); height: 6px; width: 100%; }
+  header{ padding: 44px 24px 32px; background: var(--black); color: #fff; }
+  .board-wrap{ max-width: 920px; margin: 0 auto; }
+  .brandrow{ display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
+  .leafmark{ width: 26px; height: 26px; background: var(--red);
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); }
+  .brandrow span{ font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 15px; letter-spacing: 0.02em; }
+  .status{
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: 'Roboto Mono', monospace; font-size: 11px; color: #F0B25A;
+    border: 1px solid #6B5030; background: rgba(240,178,90,0.08);
+    padding: 5px 10px; border-radius: 20px; margin-bottom: 18px; letter-spacing: 0.04em;
+  }
+  .eyebrow{ font-family: 'Roboto Mono', monospace; letter-spacing: 0.12em; text-transform: uppercase;
+    font-size: 12px; color: var(--red); margin-bottom: 12px; font-weight: 500; }
+  h1{ font-family: 'Poppins', sans-serif; font-weight: 800; font-size: clamp(26px, 5vw, 38px); margin: 0 0 12px; letter-spacing: -0.01em; }
+  .role-line{ font-size: 14px; color: #C9CACD; display: flex; flex-wrap: wrap; gap: 6px 22px; margin-top: 14px; }
+  .role-line span b{ color: #fff; font-weight: 600; }
+
+  nav{ max-width: 920px; margin: 26px auto 0; padding: 10px 14px; display: flex; flex-wrap: wrap; gap: 8px;
+    background: var(--paper); border-radius: 40px; box-shadow: 0 6px 18px rgba(0,0,0,0.08); }
+  nav a{ font-family: 'Roboto', sans-serif; font-size: 12.5px; font-weight: 500; text-decoration: none;
+    color: var(--ink); padding: 7px 14px; border-radius: 30px; transition: background .15s, color .15s; }
+  nav a:hover{ background: var(--red); color: #fff; }
+
+  main{ max-width: 920px; margin: 0 auto; padding: 30px 24px 100px; }
+
+  section{ background: var(--paper); border-radius: 14px; padding: 38px 34px; margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05); border: 1px solid var(--grey-line); }
+
+  .gate{ font-family: 'Roboto Mono', monospace; font-size: 12px; color: var(--red); letter-spacing: 0.1em; margin-bottom: 8px; font-weight: 500; }
+  h2{ font-family: 'Poppins', sans-serif; font-size: 23px; font-weight: 700; margin: 0 0 6px; color: var(--black); }
+  .sub{ color: var(--grey); font-size: 14px; margin: 0 0 22px; max-width: 68ch; }
+
+  p{ color: #333; font-size: 15px; }
+  strong{ color: var(--black); }
+
+  ul{ padding-left: 20px; margin: 12px 0; }
+  li{ margin-bottom: 8px; color: #333; font-size: 14.5px; }
+  li::marker{ color: var(--red); font-weight: 700; }
+
+  .glossary{ display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 10px; margin-top: 18px; }
+  .term{ background: var(--shell); border: 1px solid var(--grey-line); border-left: 3px solid var(--red); border-radius: 6px; padding: 14px 16px; }
+  .term .word{ font-family: 'Poppins', sans-serif; color: var(--black); font-weight: 600; font-size: 13px; display: block; margin-bottom: 5px; }
+  .term p{ margin: 0; font-size: 13px; color: var(--grey); }
+
+  .map-row{ display: grid; grid-template-columns: 1fr 1fr; gap: 18px; padding: 16px 0; border-bottom: 1px solid var(--grey-line); }
+  .map-row:last-child{ border-bottom: none; }
+  .map-row .jd{ font-size: 13px; }
+  .map-row .jd .tag{ font-family: 'Roboto Mono', monospace; font-size: 10.5px; color: var(--red);
+    text-transform: uppercase; letter-spacing: 0.06em; display: block; margin-bottom: 6px; font-weight: 600; }
+  .map-row .evidence{ background: var(--shell); border-radius: 8px; padding: 12px 14px; font-size: 13.5px; color: #2A2A2A;
+    border-left: 3px solid var(--green); }
+  .map-head{ display: grid; grid-template-columns: 1fr 1fr; gap: 18px; font-family: 'Roboto Mono', monospace; font-size: 11px;
+    color: var(--grey); text-transform: uppercase; letter-spacing: 0.06em; padding-bottom: 10px; border-bottom: 2px solid var(--black); }
+
+  .pass{ border: 1px solid var(--grey-line); border-radius: 10px; padding: 20px 22px; margin: 16px 0 0; background: var(--shell); position: relative; }
+  .pass:before{ content: ""; position: absolute; left: 0; right: 0; top: 44px; border-top: 1px dashed #C7C8CA; }
+  .pass .from-to{ font-family: 'Roboto Mono', monospace; font-size: 12px; color: var(--grey); letter-spacing: 0.06em;
+    padding-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+  .pass .from-to b{ color: var(--red); font-size: 15px; }
+  .pass .body{ padding-top: 16px; }
+
+  .qa{ border-left: 3px solid var(--grey-line); padding: 4px 0 4px 18px; margin-bottom: 22px; }
+  .qa .q{ font-weight: 600; color: var(--black); font-size: 15.5px; margin-bottom: 8px; font-family: 'Poppins', sans-serif; }
+  .qa .q:before{ content: "Q — "; color: var(--red); font-family: 'Roboto Mono', monospace; font-size: 12.5px; }
+  .qa .ammo{ font-size: 13.5px; color: #333; background: var(--shell); border-radius: 8px; padding: 10px 14px; margin-top: 6px; border-left: 3px solid var(--green); }
+  .qa .ammo b{ color: var(--green); font-weight: 600; }
+  .qa .hint{ font-size: 13.5px; color: var(--grey); margin-top: 6px; }
+
+  .flag{ background: #FFF4E9; border: 1px solid #F0D3AC; border-left: 3px solid #C97A2B;
+    border-radius: 8px; padding: 12px 16px; font-size: 13.5px; color: #5C3B14; margin-top: 10px; }
+  .flag b{ color: #A85B15; }
+
+  .ask-list li{ font-size: 15px; }
+
+  footer{ text-align: center; padding: 36px 24px 50px; color: var(--grey); font-family: 'Roboto Mono', monospace; font-size: 12px; }
+
+  @media (max-width: 700px){ .map-row, .map-head{ grid-template-columns: 1fr; } }
+  @media (max-width: 600px){ header{ padding: 36px 18px 26px; } section{ padding: 26px 20px; } }
+</style>
+</head>
+<body>
+
+<div class="redbar"></div>
+<header>
+  <div class="board-wrap">
+    <div class="brandrow"><div class="leafmark"></div><span>AIR CANADA · AC MEDIA</span></div>
+    <div class="status">⚠ Listing shown as filled — confirm status or repost before relying on timeline</div>
+    <div class="eyebrow">Interview Prep · Senior Level</div>
+    <h1>Specialist, AC Media Analytics</h1>
+    <div class="role-line">
+      <span><b>Jerich Matthew King</b></span>
+      <span>Air Canada · Toronto, ON</span>
+      <span>Team: <b>AC Media</b> (retail media / advertising business)</span>
+      <span>From: <b>Demand Analyst, Revenue Management</b></span>
+    </div>
+  </div>
+</header>
+<nav>
+  <a href="#context">01 · Role Context</a>
+  <a href="#lingo">02 · Lingo</a>
+  <a href="#mapping">03 · Your Resume, Mapped</a>
+  <a href="#angle">04 · Your Angle</a>
+  <a href="#behavioral">05 · Behavioural Qs</a>
+  <a href="#gaps">06 · Gaps to Own</a>
+  <a href="#ask">07 · Ask Them</a>
+</nav>
+
+<main>
+
+  <section id="context">
+    <div class="gate">Gate 01</div>
+    <h2>What this role actually is</h2>
+    <p class="sub">Different beast from the Partnerships Advisor role — this one is a data and measurement job, not a relationship job.</p>
+    <p><strong>AC Media</strong> is Air Canada's advertising business — it sells marketing inventory (including the in-flight entertainment channel) to third-party brands, the same category as a retail media network like Walmart Connect or Air Canada's peers running loyalty-based ad businesses. This role sits on the analytics side of that business, reporting into a structure that works alongside a Data Scientist, AC Media. Three things this job is really testing for:</p>
+    <ul>
+      <li><strong>Measurement rigor:</strong> building the reporting, test/control structure, and KPI frameworks that prove a campaign worked — this is the entire point of the role.</li>
+      <li><strong>Vendor-facing translation:</strong> turning raw data into something a sales team and an external advertiser can act on and trust.</li>
+      <li><strong>Data infrastructure fluency:</strong> tagging, data availability, and working with a Data Scientist to make sure the underlying data is even trustworthy before it's reported.</li>
+    </ul>
+    <p>It's <strong>Senior Level</strong>, wants 5+ years or a degree in a quantitative field, and is explicitly heavier on digital marketing / ad-tech vocabulary than the Partnerships Advisor posting was. This is the more technical of the two roles — lean into that.</p>
+  </section>
+
+  <section id="lingo">
+    <div class="gate">Gate 02</div>
+    <h2>Lingo to have ready</h2>
+    <p class="sub">This posting is dense with digital marketing terms that don't show up in Revenue Management. Know these cold.</p>
+    <div class="glossary">
+      <div class="term"><span class="word">Retail Media Network (RMN)</span><p>An advertising business built on top of a company's own audience/data — AC Media is Air Canada's version, same category as Amazon Ads or Walmart Connect.</p></div>
+      <div class="term"><span class="word">Test/control strategy</span><p>Holding out a control group so you can prove a campaign caused the lift, not just correlated with it — the posting names this directly.</p></div>
+      <div class="term"><span class="word">Tagging</span><p>Placing tracking pixels/tags so campaign data is actually captured — "ensure necessary tagging and data availability" is a listed responsibility.</p></div>
+      <div class="term"><span class="word">Audience profiling</span><p>Describing who a segment of customers actually is, used to sell advertisers on why AC's audience is worth targeting.</p></div>
+      <div class="term"><span class="word">Post-campaign measurement</span><p>Proving what a campaign delivered after it ran — the core deliverable of this entire role.</p></div>
+      <div class="term"><span class="word">Ad servers</span><p>The systems that deliver and track ads (e.g. Google Ad Manager) — listed as a nice-to-have environment.</p></div>
+      <div class="term"><span class="word">Funnel optimization</span><p>Improving conversion at each stage from awareness to purchase — a CRM/digital marketing fundamental named in the posting.</p></div>
+      <div class="term"><span class="word">CPC / CAC</span><p>Cost per click / customer acquisition cost — the KPI language advertisers speak in, explicitly listed as required knowledge.</p></div>
+      <div class="term"><span class="word">Data Scientist, AC Media</span><p>The role you'd work alongside — they likely own modeling depth, you own translation, reporting and stakeholder delivery.</p></div>
+      <div class="term"><span class="word">IFE channel</span><p>In-flight entertainment — one of AC Media's unique ad inventory surfaces, worth name-checking as understanding the product.</p></div>
+    </div>
+  </section>
+
+  <section id="mapping">
+    <div class="gate">Gate 03</div>
+    <h2>Your resume, mapped to this job</h2>
+    <p class="sub">This posting rewards your Globe Telecom experience even more than the Partnerships role did — it's genuinely closer to a media/CRM analytics job than an airline job. Say these connections out loud.</p>
+
+    <div class="map-head"><span>Job needs</span><span>You've already done it</span></div>
+
+    <div class="map-row">
+      <div class="jd"><span class="tag">Post-campaign measurement</span>Deliver campaign reports and tests that demonstrate channel/audience value</div>
+      <div class="evidence">Built a <b>customer booking data model</b> to evaluate OTA promotion effectiveness at Air Canada — insights directly led to reintroducing the promotion and a <b>30% lift in daily YoY bookings</b>. That's a campaign measurement story, just not badged as one.</div>
+    </div>
+
+    <div class="map-row">
+      <div class="jd"><span class="tag">Audience profiling</span>Reporting and insights including audience profiling for RMN customers</div>
+      <div class="evidence">Globe: <b>descriptive segmentation analysis of 10M home-internet users</b>, 360-degree view of behavior, risk and opportunity. Direct precedent for profiling an audience to sell to a partner or advertiser.</div>
+    </div>
+
+    <div class="map-row">
+      <div class="jd"><span class="tag">Test/control strategy</span>Ensure best practices around test/control are adhered to</div>
+      <div class="evidence">The OTA promotion reintroduction functioned as a natural test/control comparison (with vs. without the promo). Frame it explicitly in test/control language in the interview — same evidence, more precise vocabulary.</div>
+    </div>
+
+    <div class="map-row">
+      <div class="jd"><span class="tag">Statistical &amp; ML technique application</span>Exploration and application of data analysis/statistical techniques on large datasets</div>
+      <div class="evidence">Data Science Leadership Development Program: applied <b>advanced modeling, machine learning and statistical analysis</b> to large customer feedback datasets; churn study ranked <b>90th percentile</b> and became individual KPI basis.</div>
+    </div>
+
+    <div class="map-row">
+      <div class="jd"><span class="tag">CRM / digital marketing principles</span>Funnel optimization, retention, lifecycle relevance</div>
+      <div class="evidence">Led the <b>add-on migration and decay report</b> at Globe, isolating the top 10% of add-ons driving 80% of revenue, working directly with the lifecycle marketing and loyalty campaign team — this is CRM/lifecycle work under a different name.</div>
+    </div>
+
+    <div class="map-row">
+      <div class="jd"><span class="tag">Thought leadership / go-to expert on data assets</span>Lead proposals, drive process improvement through data</div>
+      <div class="evidence">Prescriptive analytics report on 20M mobile prepaid users; insights helped identify <b>10 new business cases</b> for the Prepaid team, led to a <b>5% increase in add-on revenue</b>. Self-driven, not assigned.</div>
+    </div>
+
+    <div class="map-row">
+      <div class="jd"><span class="tag">Project management across stakeholders</span>Own timelines, manage expectations, cross-functional updates</div>
+      <div class="evidence">Managed a <b>$1.06B CA-US revenue portfolio</b> at Air Canada, partnering with pricing to execute tactical strategies — real accountability for outcomes across teams, at a larger scale than most candidates for this req will show.</div>
+    </div>
+
+    <div class="map-row">
+      <div class="jd"><span class="tag">SQL, R/Python, PowerBI, cloud environments</span>Required tooling</div>
+      <div class="evidence">R, Python, PySpark, Dataiku, Snowflake, SQL, PowerBI, Tableau — this checks essentially every tooling line in the qualifications, including the "cloud environments" nice-to-have (Snowflake/Dataiku).</div>
+    </div>
+
+    <div class="map-row">
+      <div class="jd"><span class="tag">Digital marketing KPIs, small-scale campaign execution</span>CPC/CAC awareness, hands-on marketing experience</div>
+      <div class="evidence">Hidden Spices: built and ran <b>data-driven marketing campaigns</b> that improved customer order size by 30% and grew revenue — real, if small-scale, hands-on digital marketing ownership including the acquisition side.</div>
+    </div>
+
+  </section>
+
+  <section id="angle">
+    <div class="gate">Gate 04</div>
+    <h2>Your angle: Revenue Management → Media Analytics</h2>
+    <p class="sub">This story is more natural than the Partnerships one — lean on the Globe Telecom half harder here.</p>
+    <div class="pass">
+      <div class="from-to"><span>YUL</span> Revenue Management <span>→</span> AC Media Analytics <span>YYZ</span></div>
+      <div class="body">
+        <p>Frame it as: <strong>"I've spent my career on both sides of this exact job — proving commercial impact with rigorous measurement."</strong> At Air Canada, that's been forecasting and promotion effectiveness on a $1B+ portfolio. Before that, at Globe Telecom, it was audience segmentation, lifecycle/CRM analytics and campaign measurement for 20M+ users — literally the media/CRM analytics discipline this role wants, just in telecom. The pivot isn't a leap into an unfamiliar domain, it's returning to the type of work you did before Air Canada, now inside the airline where you already understand the business and the data culture.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="behavioral">
+    <div class="gate">Gate 05</div>
+    <h2>Behavioural questions, with your ammo</h2>
+    <p class="sub">STAR format — situation, task, action, result. Lead with the number.</p>
+
+    <div class="qa">
+      <div class="q">Tell me about a time you designed a test/control comparison to prove a campaign's impact.</div>
+      <div class="ammo"><b>Use:</b> OTA promotion data model — reintroducing the promo based on your analysis, 30% lift in daily YoY bookings. Explicitly name it as a test/control result even though it wasn't originally framed that way.</div>
+    </div>
+
+    <div class="qa">
+      <div class="q">Describe a time you built an audience segmentation or profiling analysis.</div>
+      <div class="ammo"><b>Use:</b> Globe's 10M-user descriptive segmentation and the 20M-user prescriptive analytics report. Two strong options — pick whichever has the cleanest narrative arc.</div>
+    </div>
+
+    <div class="qa">
+      <div class="q">Tell me about a time you had to translate a technical analysis for a non-technical audience.</div>
+      <div class="ammo"><b>Use:</b> churn study presented to an executive audience at Globe; OTA insights shared with Air Canada senior leadership.</div>
+    </div>
+
+    <div class="qa">
+      <div class="q">Tell me about managing a project with multiple stakeholders and a deadline.</div>
+      <div class="ammo"><b>Use:</b> the COVID-onset time-critical dashboard — multiple data sources, urgent business need, cross-functional build.</div>
+    </div>
+
+    <div class="qa">
+      <div class="q">Give an example of using data to identify a new opportunity for the business.</div>
+      <div class="ammo"><b>Use:</b> flight schedule analysis → missing network flow → +$200K incremental revenue, self-initiated and pitched upward.</div>
+    </div>
+
+    <div class="qa">
+      <div class="q">Tell me about a time you had to get comfortable with a new tool or dataset quickly.</div>
+      <div class="ammo"><b>Use:</b> Data Science Leadership Development Program — top 10% of 200+ candidates, 90th-percentile churn study within the first year.</div>
+    </div>
+
+    <div class="qa">
+      <div class="q">Describe a time your recommendation wasn't well received at first — what did you do?</div>
+      <div class="hint">No perfect resume line for this one — prep a real answer in advance rather than reaching for one. Any moment where an insight had to be re-pitched or reframed works; the OTA reintroduction (an idea that had presumably been paused before) is a plausible angle if the backstory fits.</div>
+    </div>
+  </section>
+
+  <section id="gaps">
+    <div class="gate">Gate 06</div>
+    <h2>Gaps to own, not hide</h2>
+    <p class="sub">Say these plainly rather than dodging — this interviewer will likely go deeper on ad-tech specifics than the Partnerships one did.</p>
+    <div class="flag"><b>Ad servers / programmatic ad-tech:</b> nothing on the resume shows direct experience with ad servers, DSPs, or programmatic buying. Acknowledge it directly, pivot to the underlying skill (working with tagging, data pipelines, and measurement) transferring cleanly.</div>
+    <div class="flag"><b>Formal CPC/CAC and funnel/SEO vocabulary:</b> the work is there (Hidden Spices marketing, Globe lifecycle campaigns) but hasn't been described in these exact digital marketing terms before. Practice saying "CAC," "funnel," and "conversion" out loud in context so it doesn't feel like translation happening live in the room.</div>
+    <div class="flag"><b>Filled listing:</b> confirm with a contact or recruiter whether this is reopening, was reposted, or if there's a related req before investing heavily in interview-specific prep on a dead posting.</div>
+  </section>
+
+  <section id="ask">
+    <div class="gate">Gate 07</div>
+    <h2>A good question to ask back</h2>
+    <p class="sub">This role is new-ish territory (retail media networks at airlines are a growing category) — a question about maturity and roadmap plays well.</p>
+    <ul class="ask-list">
+      <li><strong>Best single option:</strong> "How mature is the tagging and data infrastructure today for AC Media's channels, including IFE — is this role more about building that foundation or optimizing an existing one?"</li>
+      <li>Strong alternative: "How is success on this team currently measured — is it primarily proving value to advertisers, or also building AC Media's own internal case for investment?"</li>
+      <li>Backup: "What does the split in ownership look like day to day between this role and the Data Scientist, AC Media?"</li>
+    </ul>
+  </section>
+
+</main>
+
+<footer>PREPARED FOR INTERVIEW · JERICH MATTHEW KING · SPECIALIST, AC MEDIA ANALYTICS · AIR CANADA</footer>
+
+</body>
+</html>
