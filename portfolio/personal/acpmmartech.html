@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Recruiter call practice — Product Manager, Martech · Air Canada</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#EDEFF1; --paper-2:#F7F8F8; --card:#FFFFFF;
+  --ink:#16232B; --ink-soft:#4A5B65; --rule:#C3CCD1;
+  --airspace:#B4266E; --water:#2F6B8F; --terrain:#6F7D5C;
+  --measure:64ch;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:"Source Sans 3","Segoe UI",Helvetica,Arial,sans-serif;font-size:17px;line-height:1.55}
+h1,h2,h3{font-family:"Archivo Narrow","Arial Narrow",Helvetica,sans-serif;font-weight:700;letter-spacing:.01em}
+:focus-visible{outline:2px solid var(--airspace);outline-offset:3px}
+p{max-width:var(--measure)}
+
+.wrap{display:grid;grid-template-columns:200px minmax(0,1fr);max-width:1120px;margin:0 auto}
+nav{position:sticky;top:0;align-self:start;height:100vh;padding:28px 16px 28px 22px;border-right:1px solid var(--rule)}
+nav .tag{font-size:13px;color:var(--ink-soft);line-height:1.35;margin:0 0 18px}
+nav ol{list-style:none;margin:0;padding:0;counter-reset:s}
+nav li{counter-increment:s}
+nav a{display:block;padding:5px 8px 5px 26px;position:relative;text-decoration:none;color:var(--ink);font-size:14.5px}
+nav a::before{content:counter(s);position:absolute;left:6px;top:7px;color:var(--rule);font-size:12.5px}
+nav a:hover{background:var(--paper-2)}
+nav a.on{background:#fff;box-shadow:inset 2px 0 0 var(--airspace)}
+nav a.on::before{color:var(--airspace)}
+main{padding:34px 34px 120px;min-width:0}
+section{padding:30px 0;border-top:1px solid var(--rule)}
+h2{font-size:26px;margin:0 0 4px}
+.sub{color:var(--ink-soft);font-size:15px;margin:0 0 20px;max-width:var(--measure)}
+
+header.mast{padding:32px 0 24px}
+.kicker{font-size:14px;color:var(--airspace);margin:0 0 6px}
+h1{font-size:37px;line-height:1.05;margin:0 0 10px;max-width:17ch}
+.meta{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:14.5px;color:var(--ink-soft);margin:0 0 20px}
+.thesis{background:var(--card);border-left:3px solid var(--airspace);padding:15px 20px;max-width:var(--measure);font-size:17px}
+
+.drillbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 16px}
+button{font:inherit;font-size:15px;color:var(--ink);background:var(--card);
+  border:1px solid var(--rule);border-radius:2px;padding:7px 14px;cursor:pointer}
+button:hover{border-color:var(--ink-soft)}
+button.primary{background:var(--airspace);border-color:var(--airspace);color:#fff}
+button.primary:hover{background:#9C1F5F}
+.count{font-size:14px;color:var(--ink-soft)}
+
+.card{background:var(--card);padding:22px 24px;border-top:3px solid var(--airspace)}
+.card .qnum{font-size:13.5px;color:var(--ink-soft);margin:0 0 6px}
+.card h3{font-size:22px;margin:0 0 14px;max-width:34ch;line-height:1.2}
+.reveal{border-top:1px solid var(--rule);margin-top:16px;padding-top:16px}
+.blk{margin:0 0 16px;max-width:var(--measure)}
+.blk:last-child{margin-bottom:0}
+.blk .lab{font-size:13.5px;margin:0 0 3px;color:var(--water)}
+.blk.trap .lab{color:var(--airspace)}
+.blk.mat .lab{color:var(--terrain)}
+.blk p{margin:0;font-size:16px}
+.script{font-size:16.5px;border-left:2px solid var(--rule);padding-left:14px;font-style:italic}
+.rate{display:flex;gap:8px;margin-top:18px;flex-wrap:wrap;align-items:center}
+.rate .lab{font-size:14px;color:var(--ink-soft);margin-right:2px}
+.pill{border:1px solid var(--rule);background:var(--paper-2);padding:5px 12px;font-size:14.5px;cursor:pointer;border-radius:2px}
+.pill.sel-good{background:var(--terrain);border-color:var(--terrain);color:#fff}
+.pill.sel-again{background:var(--airspace);border-color:var(--airspace);color:#fff}
+
+.rows{border-top:1px solid var(--rule)}
+.row{display:grid;grid-template-columns:104px minmax(0,1fr);gap:0 18px;padding:13px 0;border-bottom:1px solid var(--rule);align-items:start}
+.mark{display:flex;align-items:center;gap:8px;font-size:13.5px;padding-top:2px}
+.dot{width:11px;height:11px;flex:none;border:1.5px solid currentColor}
+.s-strong .mark{color:var(--terrain)} .s-strong .dot{background:var(--terrain)}
+.s-part .mark{color:var(--water)} .s-part .dot{background:linear-gradient(90deg,var(--water) 50%,transparent 50%)}
+.s-gap .mark{color:var(--airspace)}
+.req{font-weight:600;margin:0 0 3px}
+.say{margin:0;color:var(--ink-soft);font-size:15.5px;max-width:var(--measure)}
+
+ul.plain{padding-left:19px;margin:0;max-width:var(--measure)}
+ul.plain li{margin-bottom:10px;font-size:16px}
+ul.plain li em{font-style:normal;color:var(--ink-soft);display:block;font-size:14.5px}
+.story{padding:15px 0;border-bottom:1px solid var(--rule);max-width:var(--measure)}
+.story h3{font-size:18px;margin:0 0 2px}
+.story .from{font-size:13.5px;color:var(--water);margin:0 0 6px}
+.story p{margin:0;font-size:15.5px;color:var(--ink-soft)}
+.callout{background:var(--card);padding:14px 18px;border-left:3px solid var(--water);max-width:var(--measure);font-size:15.5px;margin:18px 0 0}
+.check{display:flex;gap:11px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--rule);max-width:var(--measure)}
+.check input{margin-top:5px;width:16px;height:16px;accent-color:var(--airspace);flex:none}
+.check input:checked + span{color:var(--ink-soft);text-decoration:line-through}
+.saved{font-size:13.5px;color:var(--terrain);opacity:0;transition:opacity .3s}
+.saved.show{opacity:1}
+
+@media (max-width:860px){
+  .wrap{grid-template-columns:minmax(0,1fr)}
+  nav{position:static;height:auto;border-right:0;border-bottom:1px solid var(--rule);padding:14px 18px}
+  nav ol{display:flex;gap:4px;overflow-x:auto;padding-bottom:4px}
+  nav li{flex:none}
+  main{padding:22px 18px 90px}
+  h1{font-size:29px}
+  .row{grid-template-columns:minmax(0,1fr);gap:5px}
+  .card{padding:18px 16px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav aria-label="Sections">
+  <p class="tag">Recruiter screen<br>Air Canada · Martech</p>
+  <ol>
+    <li><a href="#drill" class="on">Practice</a></li>
+    <li><a href="#say">What to say</a></li>
+    <li><a href="#map">Requirement map</a></li>
+    <li><a href="#stories">Story bank</a></li>
+    <li><a href="#ask">What to ask</a></li>
+    <li><a href="#do">What to do</a></li>
+  </ol>
+</nav>
+
+<main>
+<header class="mast">
+  <p class="kicker">Recruiter call practice</p>
+  <h1>Product Manager, Martech &mdash; Marketing Activation</h1>
+  <div class="meta"><span>Air Canada</span><span>Toronto, on-site</span><span>Campaign Classic + Journey Optimizer</span></div>
+  <div class="thesis">The posting wants one person who holds the roadmap and builds in the platform. Most candidates have one half. You have both, so every answer should show both.</div>
+</header>
+
+<section id="drill" style="border-top:0;padding-top:26px">
+  <h2>Practice</h2>
+  <p class="sub">Read the question, answer out loud, then reveal. Mark the ones that came out badly and replay only those.</p>
+
+  <div class="drillbar">
+    <button class="primary" id="reveal">Show answer</button>
+    <button id="prev">Back</button>
+    <button id="next">Next</button>
+    <button id="replay">Replay weak only</button>
+    <button id="reset">Reset marks</button>
+    <span class="count" id="count"></span>
+    <span class="saved" id="saved">Saved</span>
+  </div>
+
+  <div class="card" id="card"></div>
+</section>
+
+<section id="say">
+  <h2>What to say</h2>
+  <p class="sub">Three lines to have word-perfect before you dial.</p>
+
+  <div class="blk"><p class="lab">Opening, 40 seconds</p>
+  <p class="script">I'm a product manager at TD's AI centre of excellence, where I run enterprise AI intake and partnership strategy across research, engineering, product and risk. Before that I was Senior Analyst, Marketing Technology at Restaurant Brands, working in Adobe Experience Platform and Customer Journey Analytics on audience creation and activation, alongside hands-on build work in Campaign Classic and Journey Optimizer. What draws me to this role is that it puts the roadmap and the platform in the same pair of hands, which is where I do my best work.</p></div>
+
+  <div class="blk"><p class="lab">Why you are leaving TD</p>
+  <p class="script">Layer 6 has been a good run on the strategy side of AI delivery, and I've enjoyed the enterprise view. What I want back is direct ownership of a platform, end to end. This role is one of the few I've seen that asks for the product direction and the hands-on build together rather than splitting them.</p></div>
+
+  <div class="blk"><p class="lab">The hands-on line</p>
+  <p class="script">I'm the person who opens the workflow to find the fault rather than the person who assigns it.</p></div>
+</section>
+
+<section id="map">
+  <h2>Requirement map</h2>
+  <p class="sub">Their required list against what you actually have.</p>
+  <div class="rows">
+
+    <div class="row s-strong"><div class="mark"><span class="dot"></span>Strong</div><div>
+      <p class="req">5+ years martech, product management or technical product ownership</p>
+      <p class="say">Restaurant Brands martech, five TD rotations, product ownership at S&amp;P Global. Say the total, then name the two closest.</p></div></div>
+
+    <div class="row s-part"><div class="mark"><span class="dot"></span>Prove depth</div><div>
+      <p class="req">4+ years hands-on Campaign Classic in production</p>
+      <p class="say">Workflows, deliveries, templates, targeting, troubleshooting. They test here hardest. Lead with a send volume and one thing that broke.</p></div></div>
+
+    <div class="row s-part"><div class="mark"><span class="dot"></span>Prove depth</div><div>
+      <p class="req">2+ years Journey Optimizer or comparable orchestration</p>
+      <p class="say">Braze, Salesforce Marketing Cloud Journeys and Responsys count as equivalents. Name a journey and what triggered it.</p></div></div>
+
+    <div class="row s-strong"><div class="mark"><span class="dot"></span>Strong</div><div>
+      <p class="req">Align Experience Platform schemas with Campaign relational models</p>
+      <p class="say">Your Restaurant Brands AEP and CJA work sits exactly here. This is your differentiator, so give it a full answer, not a clause.</p></div></div>
+
+    <div class="row s-part"><div class="mark"><span class="dot"></span>Prove depth</div><div>
+      <p class="req">Strong SQL, debugging audience counts and CDP sync</p>
+      <p class="say">The real question is whether you open the query or file a ticket. One debugging story settles it.</p></div></div>
+
+    <div class="row s-part"><div class="mark"><span class="dot"></span>Prove depth</div><div>
+      <p class="req">Scripting in Campaign workflows, JavaScript or equivalent</p>
+      <p class="say">Your Python from Empleo covers the instinct. Tie it to something you scripted inside a workflow.</p></div></div>
+
+    <div class="row s-part"><div class="mark"><span class="dot"></span>Prove depth</div><div>
+      <p class="req">Deliverability fundamentals and CASL-aware operations</p>
+      <p class="say">Both TD and Restaurant Brands run under CASL. Treat consent, suppression, bounce handling and warm-up as one system rather than four definitions.</p></div></div>
+
+    <div class="row s-gap"><div class="mark"><span class="dot"></span>Sharpest ask</div><div>
+      <p class="req">Led a major migration or upgrade, v7 to v8 preferred</p>
+      <p class="say">This reads like the reason the role exists. If yours was not v7 to v8, say so plainly and substitute a migration you did lead, using their phases: assessment, plan, build, test, cutover, hypercare.</p></div></div>
+
+    <div class="row s-strong"><div class="mark"><span class="dot"></span>Strong</div><div>
+      <p class="req">Documentation and reduced key-person risk</p>
+      <p class="say">The knowledge transfer document you wrote when leaving Restaurant Brands answers this directly and is unusual enough to stick.</p></div></div>
+
+    <div class="row s-strong"><div class="mark"><span class="dot"></span>Strong</div><div>
+      <p class="req">Influential communicator in matrixed organizations</p>
+      <p class="say">Layer 6 spans research, engineering, product and risk. Their forum is Marketing, Data, IT, Privacy and executives.</p></div></div>
+
+    <div class="row s-gap"><div class="mark"><span class="dot"></span>Straight answer</div><div>
+      <p class="req">Bilingual English and French, preferred at equal qualifications</p>
+      <p class="say">A preference, not a bar. Air Canada is federally regulated so it will come up. A clear yes or no costs less than a hedge.</p></div></div>
+
+    <div class="row s-part"><div class="mark"><span class="dot"></span>Angle</div><div>
+      <p class="req">Travel, hospitality or loyalty background preferred</p>
+      <p class="say">Restaurant Brands is hospitality with a large consumer loyalty program attached. Air Canada's activation problem is Aeroplan-shaped, so draw the line for them.</p></div></div>
+  </div>
+
+  <div class="callout">Nice-to-haves worth naming if there is room: Experience Platform audiences activated into Campaign and Journey Optimizer, Message Center, offer decisioning, and tag management where it fires journey triggers. Adobe certifications are listed, and asking whether they sponsor them signals intent.</div>
+</section>
+
+<section id="stories">
+  <h2>Story bank</h2>
+  <p class="sub">Five you already own. Pick, do not recite.</p>
+  <div class="story"><h3>Journey orchestration that fixed data quality</h3><p class="from">DXC Technology</p>
+    <p>Customer journey orchestration and cloud operations took a consumer goods client's data integrity across four product lines to 95%, up 17 points. Use for activation dataflows and bad data reaching a send.</p></div>
+  <div class="story"><h3>Adoption measured, not assumed</h3><p class="from">S&amp;P Global</p>
+    <p>CapitalIQ add-in launch lifted usage 23%, and you cut a release cycle from 120 hours to 80. The posting names adoption KPIs and time-to-launch, so this maps almost one to one.</p></div>
+  <div class="story"><h3>A business case that reached executives</h3><p class="from">TD, first rotation</p>
+    <p>The direct deposit form change removed roughly 100,000 calls a year and cut manual handling 32%.</p></div>
+  <div class="story"><h3>Regulated data, done properly</h3><p class="from">TD, third rotation</p>
+    <p>Data localization work saved $400K and won a 2025 Celent Model Bank award. Your answer to privacy, consent and residency, which an airline runs too.</p></div>
+  <div class="story"><h3>Handover as a discipline</h3><p class="from">Restaurant Brands</p>
+    <p>Small story, lands hard against their key-person risk bullet.</p></div>
+</section>
+
+<section id="ask">
+  <h2>What to ask</h2>
+  <p class="sub">Pick three, then close on the last one.</p>
+  <ul class="plain">
+    <li>The posting draws a firm line between Marketing Technology owning the platforms and Marketing Operations running campaigns. How settled is that split today?
+      <em>The unusual clarity suggests it was recently contested. Their answer tells you what you would walk into.</em></li>
+    <li>What is driving the timing on the Campaign v7 to v8 move, and where is it in the plan?
+      <em>Tests whether this is a migration hire with a deadline attached.</em></li>
+    <li>Who does this role report to, and how big is the Marketing Technology team?</li>
+    <li>What does the first six months look like if it goes well?</li>
+    <li>What are the next steps and the timeline?
+      <em>Always close on this.</em></li>
+  </ul>
+</section>
+
+<section id="do">
+  <h2>What to do</h2>
+  <p class="sub">Before you dial. Ticks save.</p>
+  <div id="checks">
+    <label class="check"><input type="checkbox" data-k="c1"><span>Opening line read aloud twice, timed under 45 seconds</span></label>
+    <label class="check"><input type="checkbox" data-k="c2"><span>One Campaign Classic number ready: send volume, audience size or workflow count</span></label>
+    <label class="check"><input type="checkbox" data-k="c3"><span>One Journey Optimizer journey ready, with its trigger named</span></label>
+    <label class="check"><input type="checkbox" data-k="c4"><span>Migration answer decided, including what to say if it was not v7 to v8</span></label>
+    <label class="check"><input type="checkbox" data-k="c5"><span>French answer settled in one sentence</span></label>
+    <label class="check"><input type="checkbox" data-k="c6"><span>Comp band and floor written down, with their range asked for first</span></label>
+    <label class="check"><input type="checkbox" data-k="c7"><span>Commute checked. Air Canada's Toronto base is at the airport, not downtown</span></label>
+    <label class="check"><input type="checkbox" data-k="c8"><span>Three questions picked, closing question ready</span></label>
+    <label class="check"><input type="checkbox" data-k="c9"><span>Every drill card marked solid at least once</span></label>
+    <label class="check"><input type="checkbox" data-k="c10"><span>Quiet room, charged phone, water, notepad</span></label>
+  </div>
+</section>
+</main>
+</div>
+
+<script>
+const Q=[
+{q:"Tell me about yourself.",
+ test:"Whether you sound like a platform owner or a generalist.",
+ say:"Three beats in 40 seconds: what you own at TD now, the martech depth from Restaurant Brands including hands-on Campaign and Journey Optimizer, and why this role. Then stop.",
+ mat:"Layer 6 intake and partnership strategy. AEP and CJA audience work. Campaign Classic and AJO build work.",
+ trap:"Do not open with the MBA or the awards. Credentials land as evidence later, not as identity first."},
+
+{q:"Why Air Canada, and why this role?",
+ test:"Whether you read the posting or applied to fifty.",
+ say:"Name the specific thing: the role asks for product direction and hands-on platform work in one person, which is unusual, and it sits on top of an Experience Platform to Campaign and AJO chain you have already worked in.",
+ mat:"Hospitality and loyalty from Restaurant Brands. Regulated, high-volume consumer marketing from both TD and RBI.",
+ trap:"Avoid airline romance. They hear it all day."},
+
+{q:"Why are you leaving TD?",
+ test:"Whether there is a problem you are running from.",
+ say:"Answer forward. You want direct platform ownership back, and this role puts roadmap and build together.",
+ mat:"Five rotations completed, so a move reads as a natural next step rather than an escape.",
+ trap:"No mention of team friction, managers or reorgs. A recruiter who hears friction writes it down."},
+
+{q:"Walk me through your hands-on Campaign Classic experience.",
+ test:"Depth. This is the question the role turns on.",
+ say:"Structure it: what you owned, the workflow patterns you built, targeting and typology, then one troubleshooting story. Give a volume figure early so the scale is clear.",
+ mat:"Workflows, deliveries, templates, targeting. Pick the build you remember well enough to draw on a whiteboard.",
+ trap:"Vague verbs. 'I worked on campaigns' reads as adjacent experience. Name objects: workflow, delivery, typology rule, targeting dimension."},
+
+{q:"How much of your time is actually in the platform versus strategy?",
+ test:"Whether you will delegate the build. The posting says twice that they do not want that.",
+ say:"Give a rough split, then a proof: the last thing you personally built or debugged, and when.",
+ mat:"The hands-on line, that you open the workflow to find the fault rather than assigning it.",
+ trap:"Overclaiming. If you are mostly strategy at TD right now, say so and point at the build work honestly."},
+
+{q:"Tell me about a journey you built in Journey Optimizer.",
+ test:"Whether the AJO experience is real or a course you took.",
+ say:"One journey, end to end: the business trigger, the event and schema behind it, the branching, and what it changed.",
+ mat:"Name the trigger type. Real-time triggers and lifecycle journeys are what the posting calls out.",
+ trap:"Describing the marketing goal without the configuration. They want the build."},
+
+{q:"The audience count in the CDP does not match what landed in Campaign. What do you do?",
+ test:"SQL and debugging instinct.",
+ say:"Work backwards through the chain: segment definition at source, dataflow and latency, consent and suppression applied at send, then delivery exclusions. Say which layer you check first and why.",
+ mat:"The DXC data integrity work and the RBI audience creation work both fit here.",
+ trap:"Answering as a manager who escalates. Answer as the person who runs the count."},
+
+{q:"Have you led a platform migration?",
+ test:"Whether you can carry the v7 to v8 move, which looks like the real reason the role exists.",
+ say:"If yes to v7 to v8, lead with it. If not, say so directly and substitute your closest migration using their phases: assessment, plan, build, test, cutover, hypercare. Spend most of the answer on cutover risk and hypercare, because that is where migrations fail.",
+ mat:"Any platform or data migration you led, including the TD data localization work.",
+ trap:"Implying v7 to v8 experience you do not have. It surfaces in round two."},
+
+{q:"How do you think about email deliverability?",
+ test:"Whether you have run high-volume sending or only planned it.",
+ say:"Treat it as one system: consent capture, suppression and bounce handling, IP and domain warm-up, engagement-based sending, and the operational SLAs with Marketing Operations. Say what you monitor weekly.",
+ mat:"CASL applies at both TD and Restaurant Brands, so consent has been a live constraint in your work.",
+ trap:"Reciting hard versus soft bounce definitions. Talk about what you did when reputation dropped."},
+
+{q:"What does CASL mean for how you operate day to day?",
+ test:"Canadian regulatory fluency, which matters at a federally regulated airline.",
+ say:"Express consent and its record-keeping, unsubscribe handling inside the required window, and suppression enforced before send rather than after. Then tie it to platform design: consent lives in the data layer, not in the campaign.",
+ mat:"Regulated data experience at TD, including the localization work that won the Celent award.",
+ trap:"Treating it as legal's problem. The posting puts consent enforcement on this role."},
+
+{q:"How would you work with Marketing Operations?",
+ test:"Whether you respect the split the posting spells out.",
+ say:"You own the platform, standards and reusable patterns. They run campaigns on it. Your success measure is their self-serve maturity, so training, runbooks and template quality are the job, not overhead.",
+ mat:"The knowledge transfer document from Restaurant Brands. Enablement is already how you work.",
+ trap:"Sounding like you would take campaign execution back when things get tense."},
+
+{q:"Tell me about influencing without authority.",
+ test:"The matrixed-organization bullet.",
+ say:"One situation where you moved a decision across functions that did not report to you, with the mechanism you used.",
+ mat:"Layer 6 coordination across research, engineering, product and risk. The TD direct deposit business case that removed roughly 100,000 calls a year.",
+ trap:"Abstract talk about relationships. Name the forum and the decision."},
+
+{q:"How do you prioritize when every team wants their campaign first?",
+ test:"Roadmap discipline.",
+ say:"A stated framework, not diplomacy: reach and revenue against build cost and reusability, with a standing lane for platform health so debt does not compound. Then how you deliver the no.",
+ mat:"Enterprise AI intake at Layer 6 is this same problem at larger scale.",
+ trap:"Saying you take it case by case."},
+
+{q:"What KPIs would you own here?",
+ test:"Whether you read past the responsibilities.",
+ say:"Their own list said back with intent: time to launch, workflow reuse, deliverability health, journey throughput, Marketing Operations self-serve maturity. Add which one you would fix first and why.",
+ mat:"S&amp;P Global, where you moved a release cycle from 120 hours to 80 and lifted add-in usage 23%.",
+ trap:"Inventing generic metrics like open rate. Those belong to Marketing Operations."},
+
+{q:"The role is on-site in Toronto. Does that work?",
+ test:"A screening filter.",
+ say:"A clear yes if it is one, plus a clarifying question about how many days on-site means in practice.",
+ mat:"Check the commute first. Air Canada's Toronto base is at the airport, not downtown.",
+ trap:"An unqualified yes you regret at offer stage."},
+
+{q:"Do you speak French?",
+ test:"A stated preference at equal qualifications, and a real one at a federally regulated airline.",
+ say:"A straight yes or no with your actual level, and nothing more.",
+ mat:"You already speak more than one language, worth a sentence if French is a no.",
+ trap:"Hedging. It reads worse than a no."},
+
+{q:"What are your compensation expectations?",
+ test:"Whether you anchor first.",
+ say:"Turn it around once: ask what range the role is budgeted at. If pushed, give a band rather than a number, and anchor on total package including travel benefits.",
+ mat:"This is a specialist platform role, which usually pays above a generalist product manager band.",
+ trap:"Naming a number before they do, and naming one below your floor."},
+
+{q:"What is your notice period and availability?",
+ test:"Logistics, and how serious you are.",
+ say:"Your actual notice, said without apology, plus your availability for interviews.",
+ mat:"Have your calendar constraints in front of you.",
+ trap:"Overpromising a start date you cannot hold."},
+
+{q:"Do you hold any Adobe certifications?",
+ test:"Listed under nice to have.",
+ say:"Honest answer, then turn it into a question about whether they sponsor certification for the team.",
+ mat:"Your track record of finishing programs, including the Ivey MBA on an entrepreneurship fellowship.",
+ trap:"Apologizing for a nice-to-have you do not have."},
+
+{q:"What questions do you have for us?",
+ test:"Whether you understood what the posting was telling you.",
+ say:"Three, then the closing one. Lead with the Marketing Technology versus Marketing Operations split, because the posting defines it unusually firmly and that usually means it was recently contested.",
+ mat:"Migration timing, reporting line, team size, first six months.",
+ trap:"Having none, or asking something the posting already answered."}
+];
+
+const KEY='ac-martech-drill:v2';
+let state={marks:{},checks:{}};
+let order=[...Q.keys()], pos=0, showing=false, timer=null;
+const $=id=>document.getElementById(id);
+const savedEl=$('saved');
+
+function flash(){savedEl.classList.add('show');setTimeout(()=>savedEl.classList.remove('show'),1100);}
+async function save(){try{const r=await window.storage.set(KEY,JSON.stringify(state));if(r)flash();}catch(e){console.error('Could not save',e);}}
+function queueSave(){clearTimeout(timer);timer=setTimeout(save,500);}
+
+function esc(s){return s.replace(/</g,'&lt;');}
+
+function render(){
+  const i=order[pos], q=Q[i], mark=state.marks[i];
+  $('card').innerHTML=
+    '<p class="qnum">Question '+(pos+1)+' of '+order.length+'</p>'+
+    '<h3>'+esc(q.q)+'</h3>'+
+    (showing?
+      '<div class="reveal">'+
+      '<div class="blk"><p class="lab">What they are testing</p><p>'+q.test+'</p></div>'+
+      '<div class="blk"><p class="lab">Say this</p><p>'+q.say+'</p></div>'+
+      '<div class="blk mat"><p class="lab">Your material</p><p>'+q.mat+'</p></div>'+
+      '<div class="blk trap"><p class="lab">Trap</p><p>'+q.trap+'</p></div>'+
+      '<div class="rate"><span class="lab">How did that go?</span>'+
+      '<button class="pill '+(mark==='good'?'sel-good':'')+'" data-m="good">Solid</button>'+
+      '<button class="pill '+(mark==='again'?'sel-again':'')+'" data-m="again">Needs work</button>'+
+      '</div></div>'
+    :'');
+  $('reveal').textContent=showing?'Hide answer':'Show answer';
+  const weak=Object.values(state.marks).filter(v=>v==='again').length;
+  $('count').textContent=weak?weak+' marked needs work':'';
+  $('card').querySelectorAll('.pill').forEach(function(b){
+    b.addEventListener('click',function(){
+      state.marks[i]=state.marks[i]===b.dataset.m?null:b.dataset.m;
+      queueSave();render();
+    });
+  });
+}
+function go(d){pos=(pos+d+order.length)%order.length;showing=false;render();}
+
+$('reveal').addEventListener('click',function(){showing=!showing;render();});
+$('next').addEventListener('click',function(){go(1);});
+$('prev').addEventListener('click',function(){go(-1);});
+$('replay').addEventListener('click',function(){
+  const weak=[...Q.keys()].filter(function(i){return state.marks[i]==='again';});
+  order=weak.length?weak:[...Q.keys()];
+  pos=0;showing=false;render();
+});
+$('reset').addEventListener('click',function(){
+  state.marks={};order=[...Q.keys()];pos=0;showing=false;queueSave();render();
+});
+document.querySelectorAll('#checks input').forEach(function(cb){
+  cb.addEventListener('change',function(){state.checks[cb.dataset.k]=cb.checked;queueSave();});
+});
+
+const links=[...document.querySelectorAll('nav a')];
+const obs=new IntersectionObserver(function(es){
+  es.forEach(function(e){
+    if(e.isIntersecting){
+      links.forEach(function(l){l.classList.toggle('on',l.getAttribute('href')==='#'+e.target.id);});
+    }
+  });
+},{rootMargin:'-15% 0px -70% 0px'});
+document.querySelectorAll('main section').forEach(function(s){obs.observe(s);});
+
+(async function(){
+  try{const r=await window.storage.get(KEY);if(r&&r.value)state=JSON.parse(r.value);}catch(e){}
+  document.querySelectorAll('#checks input').forEach(function(cb){cb.checked=!!state.checks[cb.dataset.k];});
+  render();
+})();
+</script>
+</body>
+</html>
