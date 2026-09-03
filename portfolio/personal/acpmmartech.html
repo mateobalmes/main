@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Recruiter call practice — Product Manager, Martech · Air Canada</title>
+<title>Recruiter call prep — Product Manager, Martech · Air Canada</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
@@ -21,8 +21,8 @@ h1,h2,h3{font-family:"Archivo Narrow","Arial Narrow",Helvetica,sans-serif;font-w
 :focus-visible{outline:2px solid var(--airspace);outline-offset:3px}
 p{max-width:var(--measure)}
 
-.wrap{display:grid;grid-template-columns:200px minmax(0,1fr);max-width:1120px;margin:0 auto}
-nav{position:sticky;top:0;align-self:start;height:100vh;padding:28px 16px 28px 22px;border-right:1px solid var(--rule)}
+.wrap{display:grid;grid-template-columns:198px minmax(0,1fr);max-width:1120px;margin:0 auto}
+nav{position:sticky;top:0;align-self:start;height:100vh;padding:28px 14px 28px 22px;border-right:1px solid var(--rule)}
 nav .tag{font-size:13px;color:var(--ink-soft);line-height:1.35;margin:0 0 18px}
 nav ol{list-style:none;margin:0;padding:0;counter-reset:s}
 nav li{counter-increment:s}
@@ -40,7 +40,8 @@ header.mast{padding:32px 0 24px}
 .kicker{font-size:14px;color:var(--airspace);margin:0 0 6px}
 h1{font-size:37px;line-height:1.05;margin:0 0 10px;max-width:17ch}
 .meta{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:14.5px;color:var(--ink-soft);margin:0 0 20px}
-.thesis{background:var(--card);border-left:3px solid var(--airspace);padding:15px 20px;max-width:var(--measure);font-size:17px}
+.thesis{background:var(--card);border-left:3px solid var(--airspace);padding:16px 20px;max-width:var(--measure);font-size:17px}
+.thesis strong{font-weight:600}
 
 .drillbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 16px}
 button{font:inherit;font-size:15px;color:var(--ink);background:var(--card);
@@ -49,10 +50,13 @@ button:hover{border-color:var(--ink-soft)}
 button.primary{background:var(--airspace);border-color:var(--airspace);color:#fff}
 button.primary:hover{background:#9C1F5F}
 .count{font-size:14px;color:var(--ink-soft)}
+.saved{font-size:13.5px;color:var(--terrain);opacity:0;transition:opacity .3s}
+.saved.show{opacity:1}
 
 .card{background:var(--card);padding:22px 24px;border-top:3px solid var(--airspace)}
 .card .qnum{font-size:13.5px;color:var(--ink-soft);margin:0 0 6px}
-.card h3{font-size:22px;margin:0 0 14px;max-width:34ch;line-height:1.2}
+.card .qnum b{color:var(--airspace);font-weight:600}
+.card h3{font-size:22px;margin:0 0 14px;max-width:36ch;line-height:1.2}
 .reveal{border-top:1px solid var(--rule);margin-top:16px;padding-top:16px}
 .blk{margin:0 0 16px;max-width:var(--measure)}
 .blk:last-child{margin-bottom:0}
@@ -60,12 +64,14 @@ button.primary:hover{background:#9C1F5F}
 .blk.trap .lab{color:var(--airspace)}
 .blk.mat .lab{color:var(--terrain)}
 .blk p{margin:0;font-size:16px}
-.script{font-size:16.5px;border-left:2px solid var(--rule);padding-left:14px;font-style:italic}
 .rate{display:flex;gap:8px;margin-top:18px;flex-wrap:wrap;align-items:center}
 .rate .lab{font-size:14px;color:var(--ink-soft);margin-right:2px}
 .pill{border:1px solid var(--rule);background:var(--paper-2);padding:5px 12px;font-size:14.5px;cursor:pointer;border-radius:2px}
 .pill.sel-good{background:var(--terrain);border-color:var(--terrain);color:#fff}
 .pill.sel-again{background:var(--airspace);border-color:var(--airspace);color:#fff}
+
+.script{font-size:16.5px;border-left:2px solid var(--rule);padding-left:14px;font-style:italic;max-width:var(--measure);margin:0}
+.lab{font-size:13.5px;color:var(--water);margin:0 0 4px}
 
 .rows{border-top:1px solid var(--rule)}
 .row{display:grid;grid-template-columns:104px minmax(0,1fr);gap:0 18px;padding:13px 0;border-bottom:1px solid var(--rule);align-items:start}
@@ -84,12 +90,14 @@ ul.plain li em{font-style:normal;color:var(--ink-soft);display:block;font-size:1
 .story h3{font-size:18px;margin:0 0 2px}
 .story .from{font-size:13.5px;color:var(--water);margin:0 0 6px}
 .story p{margin:0;font-size:15.5px;color:var(--ink-soft)}
-.callout{background:var(--card);padding:14px 18px;border-left:3px solid var(--water);max-width:var(--measure);font-size:15.5px;margin:18px 0 0}
+.callout{background:var(--card);padding:15px 18px;border-left:3px solid var(--water);max-width:var(--measure);font-size:15.5px;margin:18px 0 0}
 .check{display:flex;gap:11px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--rule);max-width:var(--measure)}
 .check input{margin-top:5px;width:16px;height:16px;accent-color:var(--airspace);flex:none}
 .check input:checked + span{color:var(--ink-soft);text-decoration:line-through}
-.saved{font-size:13.5px;color:var(--terrain);opacity:0;transition:opacity .3s}
-.saved.show{opacity:1}
+.nums{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:6px}
+.num{background:var(--card);padding:12px 14px}
+.num b{display:block;font-family:"Archivo Narrow",sans-serif;font-size:25px;line-height:1.1}
+.num span{font-size:13.5px;color:var(--ink-soft)}
 
 @media (max-width:860px){
   .wrap{grid-template-columns:minmax(0,1fr)}
@@ -109,26 +117,43 @@ ul.plain li em{font-style:normal;color:var(--ink-soft);display:block;font-size:1
 <nav aria-label="Sections">
   <p class="tag">Recruiter screen<br>Air Canada · Martech</p>
   <ol>
-    <li><a href="#drill" class="on">Practice</a></li>
-    <li><a href="#say">What to say</a></li>
+    <li><a href="#angle" class="on">The angle</a></li>
+    <li><a href="#drill">Practice</a></li>
+    <li><a href="#say">Word for word</a></li>
     <li><a href="#map">Requirement map</a></li>
-    <li><a href="#stories">Story bank</a></li>
+    <li><a href="#numbers">Your numbers</a></li>
+    <li><a href="#jd">The posting</a></li>
+    <li><a href="#work">The actual work</a></li>
+    <li><a href="#success">What success is</a></li>
     <li><a href="#ask">What to ask</a></li>
-    <li><a href="#do">What to do</a></li>
+    <li><a href="#do">Checklist</a></li>
   </ol>
 </nav>
 
 <main>
 <header class="mast">
-  <p class="kicker">Recruiter call practice</p>
+  <p class="kicker">Recruiter call preparation</p>
   <h1>Product Manager, Martech &mdash; Marketing Activation</h1>
   <div class="meta"><span>Air Canada</span><span>Toronto, on-site</span><span>Campaign Classic + Journey Optimizer</span></div>
-  <div class="thesis">The posting wants one person who holds the roadmap and builds in the platform. Most candidates have one half. You have both, so every answer should show both.</div>
+  <div class="thesis">They are asking for four years of Campaign Classic, which is their present. You have three years of Journey Optimizer and Experience Platform at Tim Hortons scale, which is their <strong>destination</strong>. Do not defend the gap. Reframe the role around where the stack is going, and be the only candidate on the list who has already built there.</div>
 </header>
 
-<section id="drill" style="border-top:0;padding-top:26px">
+<section id="angle" style="border-top:0;padding-top:26px">
+  <h2>The angle</h2>
+  <p class="sub">Read this first. Everything else follows from it.</p>
+
+  <p>The posting has a tell in it. They want a v7 to v8 upgrade led, and separately they want Journey Optimizer owned, Experience Platform audiences activated into both tools, and offer decisioning stood up. That is a shop with a legacy email platform and an ambition to run real-time orchestration on top of a CDP. The Campaign Classic requirement describes the work in front of them. The AJO and AEP requirements describe where they are trying to get.</p>
+
+  <p>Most candidates who clear the four-year Campaign Classic bar will be deep in the legacy half and thin on the new half. You are the reverse, and the reverse is rarer. At Tim Hortons you ran the destination stack in production across 4,000 locations for three years, including the exact integration surface they name in the posting: Experience Platform schemas aligned to activation, dataflows from the CDP, and consent enforced before send.</p>
+
+  <p>So the line you hold all call is this. The Campaign Classic operating knowledge is learnable in a quarter, and you have a plan for it. The Experience Platform and Journey Optimizer judgment they need is the part that takes years, and you already have it.</p>
+
+  <div class="callout">One thing to decide before you dial: the CV you sent leads with a summary that says Campaign Classic is ecosystem exposure only. That was the right call and it buys you enormous credibility, because it means everything else you say is trusted. Do not walk it back on the phone. Own it in one sentence and move to the bridge.</div>
+</section>
+
+<section id="drill">
   <h2>Practice</h2>
-  <p class="sub">Read the question, answer out loud, then reveal. Mark the ones that came out badly and replay only those.</p>
+  <p class="sub">Answer out loud, then reveal. Mark what came out badly and replay only those. Questions 4 and 5 decide the call.</p>
 
   <div class="drillbar">
     <button class="primary" id="reveal">Show answer</button>
@@ -139,272 +164,431 @@ ul.plain li em{font-style:normal;color:var(--ink-soft);display:block;font-size:1
     <span class="count" id="count"></span>
     <span class="saved" id="saved">Saved</span>
   </div>
-
   <div class="card" id="card"></div>
 </section>
 
 <section id="say">
-  <h2>What to say</h2>
-  <p class="sub">Three lines to have word-perfect before you dial.</p>
+  <h2>Word for word</h2>
+  <p class="sub">Four passages worth memorizing. The rest you can improvise.</p>
 
-  <div class="blk"><p class="lab">Opening, 40 seconds</p>
-  <p class="script">I'm a product manager at TD's AI centre of excellence, where I run enterprise AI intake and partnership strategy across research, engineering, product and risk. Before that I was Senior Analyst, Marketing Technology at Restaurant Brands, working in Adobe Experience Platform and Customer Journey Analytics on audience creation and activation, alongside hands-on build work in Campaign Classic and Journey Optimizer. What draws me to this role is that it puts the roadmap and the platform in the same pair of hands, which is where I do my best work.</p></div>
-
-  <div class="blk"><p class="lab">Why you are leaving TD</p>
-  <p class="script">Layer 6 has been a good run on the strategy side of AI delivery, and I've enjoyed the enterprise view. What I want back is direct ownership of a platform, end to end. This role is one of the few I've seen that asks for the product direction and the hands-on build together rather than splitting them.</p></div>
-
-  <div class="blk"><p class="lab">The hands-on line</p>
-  <p class="script">I'm the person who opens the workflow to find the fault rather than the person who assigns it.</p></div>
+  <p class="lab">Opening, about 40 seconds</p>
+  <p class="script">I'm a marketing technology specialist, six years across the Adobe stack, most recently three years at Restaurant Brands where I owned the Journey Optimizer and Experience Platform implementation for Tim Hortons across four thousand locations. That covered journey design and event configuration on the AJO side, and Real-Time CDP segmentation, XDM schema work and activation dataflows on the AEP side, including consent and suppression enforcement before send. I also managed the Adobe vendor relationship across both Campaign and AJO. What pulled me to this role is that it asks for product direction and hands-on platform work in the same person, which is exactly how I've operated.</p>
+  <br>
+  <p class="lab">The Campaign Classic answer</p>
+  <p class="script">Let me be straight with you, because it's on my CV and I'd rather you hear it from me. My hands-on production depth is Journey Optimizer and Experience Platform, not Campaign Classic. I've worked around Campaign through the Adobe relationship and the shared data layer, but I haven't built v7 workflows day to day. Here's why I still think I'm the right person. Most of what breaks in Campaign isn't the workflow canvas, it's upstream: schema alignment, audience counts that don't reconcile, dataflow latency, suppression applied in the wrong place. That layer is what I've done end to end for three years at four thousand locations. The Campaign build mechanics I can be productive in within a quarter, and I'd take a certification on my own time. The AEP and AJO judgment you need for the second half of this roadmap took me three years to build and I already have it.</p>
+  <br>
+  <p class="lab">Why this role</p>
+  <p class="script">Two reasons. First, the shape of it. Most postings split the roadmap from the build, and this one deliberately doesn't, which is how I've always worked best. Second, the direction. You're running Campaign and standing up Journey Optimizer with Experience Platform audiences feeding both, and that transition is the exact work I've just spent three years doing on the other side of it.</p>
+  <br>
+  <p class="lab">The hands-on line</p>
+  <p class="script">I'm the person who opens the workflow to find the fault, not the person who assigns it.</p>
 </section>
 
 <section id="map">
   <h2>Requirement map</h2>
-  <p class="sub">Their required list against what you actually have.</p>
+  <p class="sub">Their required list against the CV you sent.</p>
   <div class="rows">
 
     <div class="row s-strong"><div class="mark"><span class="dot"></span>Strong</div><div>
       <p class="req">5+ years martech, product management or technical product ownership</p>
-      <p class="say">Restaurant Brands martech, five TD rotations, product ownership at S&amp;P Global. Say the total, then name the two closest.</p></div></div>
+      <p class="say">Six-plus across the Adobe stack, and product roadmap ownership at S&amp;P Global for Capital IQ with a four million user base.</p></div></div>
 
-    <div class="row s-part"><div class="mark"><span class="dot"></span>Prove depth</div><div>
+    <div class="row s-gap"><div class="mark"><span class="dot"></span>The gap</div><div>
       <p class="req">4+ years hands-on Campaign Classic in production</p>
-      <p class="say">Workflows, deliveries, templates, targeting, troubleshooting. They test here hardest. Lead with a send volume and one thing that broke.</p></div></div>
+      <p class="say">Declared on your CV, so answer it in the first two minutes rather than waiting to be caught. Bridge with the shared data layer, the Adobe relationship across both products, and a stated ramp plan.</p></div></div>
 
-    <div class="row s-part"><div class="mark"><span class="dot"></span>Prove depth</div><div>
+    <div class="row s-strong"><div class="mark"><span class="dot"></span>Exceeds</div><div>
       <p class="req">2+ years Journey Optimizer or comparable orchestration</p>
-      <p class="say">Braze, Salesforce Marketing Cloud Journeys and Responsys count as equivalents. Name a journey and what triggered it.</p></div></div>
+      <p class="say">Three years of AJO in production, plus Lytics and Braze at DXC. The posting names Braze as an accepted equivalent, so you clear this twice over.</p></div></div>
 
     <div class="row s-strong"><div class="mark"><span class="dot"></span>Strong</div><div>
-      <p class="req">Align Experience Platform schemas with Campaign relational models</p>
-      <p class="say">Your Restaurant Brands AEP and CJA work sits exactly here. This is your differentiator, so give it a full answer, not a clause.</p></div></div>
+      <p class="req">Align Experience Platform schemas with activation for profile merging</p>
+      <p class="say">XDM schema alignment, Real-Time CDP segmentation, data ingestion and activation dataflows, all end to end. The Campaign relational half is what you'd learn, and say so.</p></div></div>
 
-    <div class="row s-part"><div class="mark"><span class="dot"></span>Prove depth</div><div>
+    <div class="row s-strong"><div class="mark"><span class="dot"></span>Strong</div><div>
       <p class="req">Strong SQL, debugging audience counts and CDP sync</p>
-      <p class="say">The real question is whether you open the query or file a ticket. One debugging story settles it.</p></div></div>
-
-    <div class="row s-part"><div class="mark"><span class="dot"></span>Prove depth</div><div>
-      <p class="req">Scripting in Campaign workflows, JavaScript or equivalent</p>
-      <p class="say">Your Python from Empleo covers the instinct. Tie it to something you scripted inside a workflow.</p></div></div>
-
-    <div class="row s-part"><div class="mark"><span class="dot"></span>Prove depth</div><div>
-      <p class="req">Deliverability fundamentals and CASL-aware operations</p>
-      <p class="say">Both TD and Restaurant Brands run under CASL. Treat consent, suppression, bounce handling and warm-up as one system rather than four definitions.</p></div></div>
-
-    <div class="row s-gap"><div class="mark"><span class="dot"></span>Sharpest ask</div><div>
-      <p class="req">Led a major migration or upgrade, v7 to v8 preferred</p>
-      <p class="say">This reads like the reason the role exists. If yours was not v7 to v8, say so plainly and substitute a migration you did lead, using their phases: assessment, plan, build, test, cutover, hypercare.</p></div></div>
+      <p class="say">Python and SQL pipelines at DXC that took reporting from three days to four hours, plus RT-CDP audience work at RBI. Have one reconciliation story ready.</p></div></div>
 
     <div class="row s-strong"><div class="mark"><span class="dot"></span>Strong</div><div>
-      <p class="req">Documentation and reduced key-person risk</p>
-      <p class="say">The knowledge transfer document you wrote when leaving Restaurant Brands answers this directly and is unusual enough to stick.</p></div></div>
+      <p class="req">Consent and suppression enforced before sending</p>
+      <p class="say">Named explicitly on your CV, and GDPR compliance across the P&amp;G platform builds at DXC. Tim Hortons is Canadian, so CASL was your operating constraint.</p></div></div>
+
+    <div class="row s-part"><div class="mark"><span class="dot"></span>Partial</div><div>
+      <p class="req">Scripting in Campaign workflows, JavaScript or equivalent</p>
+      <p class="say">JavaScript, Python, SQL and R on your CV, plus REST API work. The equivalent clause is doing real work here, so answer it as transferable rather than direct.</p></div></div>
+
+    <div class="row s-gap"><div class="mark"><span class="dot"></span>Reframe</div><div>
+      <p class="req">Led a major migration or upgrade, v7 to v8 preferred</p>
+      <p class="say">You have not led a v7 to v8 upgrade. You have led greenfield implementation of AEP, AJO and AEM end to end, and a vendor consolidation that cut $84K. Use their own phases and be honest about which one you have not done.</p></div></div>
+
+    <div class="row s-strong"><div class="mark"><span class="dot"></span>Strong</div><div>
+      <p class="req">Manage the Adobe relationship for Campaign and Journey Optimizer</p>
+      <p class="say">This is a responsibility line in their posting and a bullet on your CV, word for word. Full vendor lifecycle from sourcing through negotiation to offboarding. Do not let this one pass unmentioned.</p></div></div>
+
+    <div class="row s-strong"><div class="mark"><span class="dot"></span>Strong</div><div>
+      <p class="req">Documentation, runbooks, reduced key-person risk</p>
+      <p class="say">Runbooks, operating procedures and training materials that moved Marketing Operations to self-serve. Their posting names this twice.</p></div></div>
 
     <div class="row s-strong"><div class="mark"><span class="dot"></span>Strong</div><div>
       <p class="req">Influential communicator in matrixed organizations</p>
-      <p class="say">Layer 6 spans research, engineering, product and risk. Their forum is Marketing, Data, IT, Privacy and executives.</p></div></div>
+      <p class="say">Fifty-plus stakeholders on the measurement side, reporting up to VP, and vendor work coordinated across legal, IT and communications.</p></div></div>
 
     <div class="row s-gap"><div class="mark"><span class="dot"></span>Straight answer</div><div>
       <p class="req">Bilingual English and French, preferred at equal qualifications</p>
-      <p class="say">A preference, not a bar. Air Canada is federally regulated so it will come up. A clear yes or no costs less than a hedge.</p></div></div>
+      <p class="say">A preference, not a bar. Air Canada is federally regulated so it will come up. Give your real level in one sentence and stop.</p></div></div>
 
-    <div class="row s-part"><div class="mark"><span class="dot"></span>Angle</div><div>
-      <p class="req">Travel, hospitality or loyalty background preferred</p>
-      <p class="say">Restaurant Brands is hospitality with a large consumer loyalty program attached. Air Canada's activation problem is Aeroplan-shaped, so draw the line for them.</p></div></div>
+    <div class="row s-strong"><div class="mark"><span class="dot"></span>Strong</div><div>
+      <p class="req">Travel, hospitality or loyalty preferred</p>
+      <p class="say">Tim Hortons is hospitality at four thousand locations with a large consumer loyalty and payments footprint. Air Canada's activation problem is Aeroplan-shaped, so draw the parallel for them yourself.</p></div></div>
   </div>
 
-  <div class="callout">Nice-to-haves worth naming if there is room: Experience Platform audiences activated into Campaign and Journey Optimizer, Message Center, offer decisioning, and tag management where it fires journey triggers. Adobe certifications are listed, and asking whether they sponsor them signals intent.</div>
+  <div class="callout">Nice-to-haves you can claim: Experience Platform audience activation into downstream channels, real-time use cases and triggers, and tag and analytics work through CJA, Adobe Analytics and GA4. Adobe certification is listed, and asking whether they sponsor it turns a gap into a signal of intent.</div>
 </section>
 
-<section id="stories">
-  <h2>Story bank</h2>
-  <p class="sub">Five you already own. Pick, do not recite.</p>
-  <div class="story"><h3>Journey orchestration that fixed data quality</h3><p class="from">DXC Technology</p>
-    <p>Customer journey orchestration and cloud operations took a consumer goods client's data integrity across four product lines to 95%, up 17 points. Use for activation dataflows and bad data reaching a send.</p></div>
-  <div class="story"><h3>Adoption measured, not assumed</h3><p class="from">S&amp;P Global</p>
-    <p>CapitalIQ add-in launch lifted usage 23%, and you cut a release cycle from 120 hours to 80. The posting names adoption KPIs and time-to-launch, so this maps almost one to one.</p></div>
-  <div class="story"><h3>A business case that reached executives</h3><p class="from">TD, first rotation</p>
-    <p>The direct deposit form change removed roughly 100,000 calls a year and cut manual handling 32%.</p></div>
-  <div class="story"><h3>Regulated data, done properly</h3><p class="from">TD, third rotation</p>
-    <p>Data localization work saved $400K and won a 2025 Celent Model Bank award. Your answer to privacy, consent and residency, which an airline runs too.</p></div>
-  <div class="story"><h3>Handover as a discipline</h3><p class="from">Restaurant Brands</p>
-    <p>Small story, lands hard against their key-person risk bullet.</p></div>
+<section id="numbers">
+  <h2>Your numbers</h2>
+  <p class="sub">Say figures, not adjectives. Have these in front of you.</p>
+  <div class="nums">
+    <div class="num"><b>4,000+</b><span>Tim Hortons locations on your AJO and AEP implementation</span></div>
+    <div class="num"><b>3 yrs</b><span>Journey Optimizer in production, Apr 2023 to May 2026</span></div>
+    <div class="num"><b>$10M+</b><span>Digital marketing spend tracked, across 50+ stakeholders</span></div>
+    <div class="num"><b>$84K</b><span>Annual vendor spend cut through consolidation</span></div>
+    <div class="num"><b>+123%</b><span>Main site and app traffic growth</span></div>
+    <div class="num"><b>+964%</b><span>Tims Financial engagement</span></div>
+    <div class="num"><b>+441%</b><span>TimShop traffic through personalized campaigns</span></div>
+    <div class="num"><b>3 days to 4 hrs</b><span>Reporting cycle cut with Python and SQL at DXC</span></div>
+    <div class="num"><b>4M</b><span>User base on the Capital IQ roadmap you owned</span></div>
+    <div class="num"><b>+23% / &minus;15%</b><span>Adoption growth and churn reduction at S&amp;P Global</span></div>
+  </div>
+
+  <h3 style="margin:26px 0 4px;font-size:19px">Story bank</h3>
+  <div class="story"><h3>The implementation you owned</h3><p class="from">Restaurant Brands, AJO and AEP</p>
+    <p>Journey design, event and trigger configuration, audience targeting, traffic splits, real-time use cases and A/B testing, with accountability for reliability and compliance. Use for any depth question.</p></div>
+  <div class="story"><h3>The data layer story</h3><p class="from">Restaurant Brands, Experience Platform</p>
+    <p>RT-CDP segmentation, ingestion, XDM alignment and activation dataflows, with consent and suppression enforced before send. Use for the integration and audience-count questions, which is where you outclass the field.</p></div>
+  <div class="story"><h3>Vendor lifecycle and the Adobe relationship</h3><p class="from">Restaurant Brands</p>
+    <p>Sourcing through negotiation to offboarding across AEP, AEM, AJO and Google Business Profile API, with legal, IT and communications, cutting $84K. This is a named responsibility in their posting.</p></div>
+  <div class="story"><h3>Enablement as the deliverable</h3><p class="from">Restaurant Brands</p>
+    <p>Runbooks, operating procedures and training that moved Marketing Operations to self-serve. Their KPI list ends on exactly this.</p></div>
+  <div class="story"><h3>Orchestration outside Adobe</h3><p class="from">DXC Technology, P&amp;G programs</p>
+    <p>Lytics, Braze and Segment configured with full GDPR compliance, leading eight to ten consultants. Proves the orchestration skill is platform-independent, and Braze is an equivalent they name themselves.</p></div>
+  <div class="story"><h3>Roadmap ownership at scale</h3><p class="from">S&amp;P Global</p>
+    <p>Capital IQ and Credit Analytics for four million users, with prioritization from usage data, growing adoption 23% and cutting churn 15%. Your answer to the product half of the role.</p></div>
+</section>
+
+<section id="jd">
+  <h2>The posting</h2>
+  <p class="sub">Summarized section by section from the listing you sent, so you can scan it on the call. Keep the original open in another tab if you want their exact wording.</p>
+
+  <h3 style="margin:20px 0 4px;font-size:19px">How they frame the role</h3>
+  <p>Product Manager, Marketing Technology, sitting on the Marketing Technology team and covering Marketing Activation. The job is to define and deliver platform strategy for Adobe Campaign Classic and Adobe Journey Optimizer: roadmap, prioritization, platform standards, and hands-on configuration of the activation layer across workflows, journeys, integrations and templates.</p>
+  <p>They state the boundary twice. You build the platform capabilities that Marketing Operations uses to run email and triggered journeys. Marketing Technology owns the platforms; Marketing Operations executes campaigns on them. You are accountable for product direction and hands-on platform work, not for running day-to-day campaigns. Their summary of the mandate is to make activation reliable, compliant and adoptable.</p>
+
+  <h3 style="margin:22px 0 4px;font-size:19px">Responsibilities, product strategy and leadership</h3>
+  <ul class="plain">
+    <li>Define and maintain the product vision and roadmap for both platforms</li>
+    <li>Set standards for batch email in Campaign versus real-time and triggered communications in AJO</li>
+    <li>Own adoption KPIs: time to launch, workflow reuse, deliverability health, journey throughput, Marketing Operations self-serve maturity</li>
+    <li>Build business cases and present to marketing and technology leadership</li>
+    <li>Manage the Adobe relationship across Campaign and Journey Optimizer</li>
+    <li>Represent activation in steering forums with Marketing, Data, IT, Privacy and executives</li>
+  </ul>
+
+  <h3 style="margin:22px 0 4px;font-size:19px">Responsibilities, Campaign Classic</h3>
+  <ul class="plain">
+    <li>Own product direction and hands-on operation of their primary email platform</li>
+    <li>Lead migrations through assessment, plan, build, test, cutover, hypercare and steady state</li>
+    <li>Design and maintain workflow templates, targeting standards, typologies and Message Center patterns</li>
+    <li>Build, troubleshoot and optimize workflows, deliveries, SQL targeting and personalization rules</li>
+    <li>Partner on deliverability: warm-up, bounce and suppression handling, operational SLAs with Marketing Operations</li>
+  </ul>
+
+  <h3 style="margin:22px 0 4px;font-size:19px">Responsibilities, Journey Optimizer</h3>
+  <ul class="plain">
+    <li>Own AJO product direction and hands-on delivery of journeys, triggers and message designs</li>
+    <li>Configure journeys, events, offer decisioning and real-time use cases such as corporate direct and lifecycle triggers</li>
+    <li>Enable Marketing Operations through training, runbooks and operating procedures</li>
+    <li>Partner on AJO Offers and offer flows with Marketing Experience Platform teams</li>
+  </ul>
+
+  <h3 style="margin:22px 0 4px;font-size:19px">Responsibilities, cross-platform activation</h3>
+  <ul class="plain">
+    <li>Make sure audiences and consent or suppression from the customer data platform are enforced before sending in both tools</li>
+    <li>Architect and verify activation dataflows from the CDP into Campaign and AJO, defining data contracts and latency expectations with IT and vendors</li>
+    <li>Document platform configuration, dependencies and runbooks to reduce key-person risk</li>
+    <li>Champion change management so Marketing Operations adopts standards and reusable patterns</li>
+  </ul>
+
+  <h3 style="margin:22px 0 4px;font-size:19px">Required qualifications</h3>
+  <p>They open this section by saying they want strategy and hands-on platform skills in the same person.</p>
+  <ul class="plain">
+    <li>Five-plus years in marketing technology, product management or technical product ownership</li>
+    <li>Four-plus years hands-on Campaign Classic in production, covering workflows, deliveries, templates, targeting and troubleshooting</li>
+    <li>Two-plus years hands-on Journey Optimizer or comparable enterprise journey orchestration, with Braze, Salesforce Marketing Cloud Journeys and Responsys named as acceptable</li>
+    <li>Ability to own the roadmap and execute in both platforms rather than delegating all build work</li>
+    <li>Strong SQL, with comfort debugging audience counts and sync issues between the CDP and activation tools</li>
+    <li>Collaboration to align Experience Platform XDM schemas with Campaign Classic relational data models for profile merging</li>
+    <li>Scripting in Campaign workflows, JavaScript or equivalent, plus journey configuration experience</li>
+    <li>Email deliverability fundamentals and CASL-aware marketing operations</li>
+    <li>Experience leading a major platform migration or upgrade, with Campaign v7 to v8 strongly preferred</li>
+    <li>Punctuality and dependability in a fast-paced environment</li>
+    <li>Agile delivery and clear technical documentation</li>
+    <li>Influential communication in matrixed organizations</li>
+    <li>Bilingual English and French preferred at equal qualifications</li>
+    <li>Preference for travel, hospitality or loyalty program backgrounds</li>
+  </ul>
+
+  <h3 style="margin:22px 0 4px;font-size:19px">Nice to have</h3>
+  <ul class="plain">
+    <li>Experience Platform audience activation into Campaign and AJO</li>
+    <li>Message Center and high-volume enterprise email</li>
+    <li>AJO Offers and offer decisioning APIs</li>
+    <li>Adobe Campaign or Journey Optimizer certifications</li>
+    <li>Familiarity with tag management or web activation where it affects email and journey triggers</li>
+  </ul>
+
+  <h3 style="margin:22px 0 4px;font-size:19px">Conditions and other terms</h3>
+  <p>Candidates must be eligible to work in the country at the time an offer is made, are responsible for obtaining any required permits or visas, and must provide proof of eligibility before the start date. Preference goes to bilingual candidates at equal qualifications. The listing closes with their diversity and inclusion statement. The role is posted as on-site in Toronto.</p>
+
+  <div class="callout">Read the two lists side by side and the story is clear. Campaign Classic dominates the required section. Journey Optimizer, Experience Platform activation and offer decisioning dominate the responsibilities and the nice-to-haves. They are hiring for the platform they have while describing the platform they want.</div>
+</section>
+
+<section id="work">
+  <h2>The actual work</h2>
+  <p class="sub">What the posting tells you they will put in front of you, in the interviews and in the job.</p>
+
+  <h3 style="margin:20px 0 4px;font-size:19px">On this call</h3>
+  <p>A recruiter screen does not test platform depth properly. Expect verification rather than evaluation: confirm the Campaign Classic years, confirm the AJO years, confirm on-site, confirm French, confirm comp and notice. Your job on this call is to survive the Campaign Classic filter and get to the hiring manager, which means giving your bridge answer early and clearly enough that the recruiter can repeat it to someone else without garbling it. Write that sentence for them.</p>
+
+  <h3 style="margin:22px 0 4px;font-size:19px">Likely at the hiring manager round</h3>
+  <ul class="plain">
+    <li>Whiteboard the dataflow from the CDP into both Campaign and AJO, with the data contract and latency expectations named.
+      <em>Their cross-platform section is written as an architecture responsibility. This is your strongest possible exercise, so hope for it.</em></li>
+    <li>Debug a scenario where the audience count in the CDP does not match what was sent.
+      <em>The SQL requirement exists for this. Answer with the order you check layers in.</em></li>
+    <li>Describe how you would take a v7 to v8 migration through their phases, especially cutover and hypercare.
+      <em>Be honest about not having done this specific upgrade, then show the method.</em></li>
+    <li>Explain the standard you would set for batch email in Campaign versus triggered messaging in AJO.
+      <em>A direct responsibility bullet, and a genuine judgment question rather than a knowledge one.</em></li>
+    <li>How you would raise Marketing Operations self-serve maturity from where it is today.
+      <em>Your runbooks and training work at Tim Hortons answers this directly.</em></li>
+  </ul>
+
+  <h3 style="margin:22px 0 4px;font-size:19px">Possible take-home or panel exercise</h3>
+  <p>Roles written this way often ask for a short ninety-day plan or a platform assessment memo. If they do, structure it as assessment, then the three things you would stabilize first, then the roadmap. Do not present a roadmap without an assessment in front of it. If they ask for a business case, use the format you already know from presenting to Director and VP level at Restaurant Brands.</p>
+
+  <h3 style="margin:22px 0 4px;font-size:19px">The job itself, year one</h3>
+  <p>Reading the posting as a work plan rather than a wish list, year one is probably three things running in parallel. Carry the Campaign upgrade through cutover without breaking sends. Stand up or mature Journey Optimizer for real-time and lifecycle triggers, including offer decisioning. And make the CDP the single source of audiences and consent for both tools, which is the part that fails quietly and costs the most when it does.</p>
+  <p>Underneath all three sits the same recurring task: documentation, standards and enablement so Marketing Operations can run without you. They mention key-person risk explicitly, which usually means someone recently left and took the platform knowledge with them.</p>
+</section>
+
+<section id="success">
+  <h2>What success looks like</h2>
+  <p class="sub">They published their own KPI list, which is unusual and useful. Say it back to them with a view on which to fix first.</p>
+
+  <h3 style="margin:20px 0 4px;font-size:19px">Their five measures</h3>
+  <ul class="plain">
+    <li><strong>Time to launch.</strong> How long from campaign request to send. Falls when templates and workflow patterns are reusable, rises when every campaign is bespoke.</li>
+    <li><strong>Workflow reuse.</strong> The share of sends built from standard patterns rather than from scratch. The clearest single proxy for whether the platform work is landing.</li>
+    <li><strong>Deliverability health.</strong> Reputation, bounce and complaint rates, and whether warm-up and suppression are holding.</li>
+    <li><strong>Journey throughput.</strong> Volume and reliability of triggered and real-time journeys in AJO, which only grows once the event and audience plumbing is trustworthy.</li>
+    <li><strong>Marketing Operations self-serve maturity.</strong> How much they can do without you. The one that determines whether the role is strategic or a service desk.</li>
+  </ul>
+
+  <h3 style="margin:22px 0 4px;font-size:19px">What good looks like at each mark</h3>
+  <p><strong>Ninety days.</strong> You know the platform inside out, including what is undocumented. The migration plan is assessed and sequenced with the cutover risks named. You have met Marketing Operations and know which three things frustrate them most. You have not changed much yet, deliberately.</p>
+  <p><strong>Six months.</strong> The upgrade is through cutover and in hypercare with no material send incidents. Workflow templates and targeting standards exist and are being used. Audience and consent enforcement from the CDP is verified rather than assumed in both tools.</p>
+  <p><strong>Twelve months.</strong> Time to launch has measurably dropped, reuse is the default, journeys run at volume with offer decisioning live, and Marketing Operations builds most of what it needs without escalating. The platform is documented well enough that your absence would not stop it.</p>
+
+  <div class="callout">If they ask which KPI you would fix first, do not answer with a metric. Answer with the order: reliability and consent enforcement first because everything downstream depends on it, then reuse and time to launch, then throughput and self-serve. Sequence reads as judgment; a favourite metric reads as a guess.</div>
 </section>
 
 <section id="ask">
   <h2>What to ask</h2>
-  <p class="sub">Pick three, then close on the last one.</p>
+  <p class="sub">Pick three, close on the last.</p>
   <ul class="plain">
+    <li>Where is the Journey Optimizer build in its lifecycle relative to the Campaign v7 to v8 upgrade, and which one is the priority in year one?
+      <em>The single most useful question you can ask. If AJO is the priority, your profile is the strongest on the list and the Campaign gap shrinks. If the upgrade is the priority, you learn that early.</em></li>
     <li>The posting draws a firm line between Marketing Technology owning the platforms and Marketing Operations running campaigns. How settled is that split today?
-      <em>The unusual clarity suggests it was recently contested. Their answer tells you what you would walk into.</em></li>
-    <li>What is driving the timing on the Campaign v7 to v8 move, and where is it in the plan?
-      <em>Tests whether this is a migration hire with a deadline attached.</em></li>
-    <li>Who does this role report to, and how big is the Marketing Technology team?</li>
-    <li>What does the first six months look like if it goes well?</li>
+      <em>Unusual clarity in a posting often means it was recently contested.</em></li>
+    <li>How far along is the Experience Platform work, and are audiences already activating into Campaign and AJO or is that still to build?</li>
+    <li>Who does the role report to, and how large is the Marketing Technology team?</li>
     <li>What are the next steps and the timeline?
       <em>Always close on this.</em></li>
   </ul>
 </section>
 
 <section id="do">
-  <h2>What to do</h2>
-  <p class="sub">Before you dial. Ticks save.</p>
+  <h2>Checklist</h2>
+  <p class="sub">Ticks save between sessions.</p>
   <div id="checks">
-    <label class="check"><input type="checkbox" data-k="c1"><span>Opening line read aloud twice, timed under 45 seconds</span></label>
-    <label class="check"><input type="checkbox" data-k="c2"><span>One Campaign Classic number ready: send volume, audience size or workflow count</span></label>
-    <label class="check"><input type="checkbox" data-k="c3"><span>One Journey Optimizer journey ready, with its trigger named</span></label>
-    <label class="check"><input type="checkbox" data-k="c4"><span>Migration answer decided, including what to say if it was not v7 to v8</span></label>
-    <label class="check"><input type="checkbox" data-k="c5"><span>French answer settled in one sentence</span></label>
-    <label class="check"><input type="checkbox" data-k="c6"><span>Comp band and floor written down, with their range asked for first</span></label>
-    <label class="check"><input type="checkbox" data-k="c7"><span>Commute checked. Air Canada's Toronto base is at the airport, not downtown</span></label>
-    <label class="check"><input type="checkbox" data-k="c8"><span>Three questions picked, closing question ready</span></label>
-    <label class="check"><input type="checkbox" data-k="c9"><span>Every drill card marked solid at least once</span></label>
-    <label class="check"><input type="checkbox" data-k="c10"><span>Quiet room, charged phone, water, notepad</span></label>
+    <label class="check"><input type="checkbox" data-k="c1"><span>Opening read aloud twice, timed under 45 seconds</span></label>
+    <label class="check"><input type="checkbox" data-k="c2"><span>Campaign Classic answer memorized, not improvised</span></label>
+    <label class="check"><input type="checkbox" data-k="c3"><span>One AJO journey ready to describe end to end, trigger named</span></label>
+    <label class="check"><input type="checkbox" data-k="c4"><span>One audience reconciliation story ready</span></label>
+    <label class="check"><input type="checkbox" data-k="c5"><span>Migration answer decided, with the honest substitution</span></label>
+    <label class="check"><input type="checkbox" data-k="c6"><span>French answer settled in one sentence</span></label>
+    <label class="check"><input type="checkbox" data-k="c7"><span>Comp band and floor written down, their range asked for first</span></label>
+    <label class="check"><input type="checkbox" data-k="c8"><span>Commute checked. Air Canada's Toronto base is at the airport, not downtown</span></label>
+    <label class="check"><input type="checkbox" data-k="c9"><span>Numbers page open where you can see it</span></label>
+    <label class="check"><input type="checkbox" data-k="c10"><span>Every drill card marked solid at least once</span></label>
+    <label class="check"><input type="checkbox" data-k="c11"><span>Quiet room, charged phone, water, notepad</span></label>
   </div>
 </section>
 </main>
 </div>
 
 <script>
-const Q=[
+var Q=[
 {q:"Tell me about yourself.",
  test:"Whether you sound like a platform owner or a generalist.",
- say:"Three beats in 40 seconds: what you own at TD now, the martech depth from Restaurant Brands including hands-on Campaign and Journey Optimizer, and why this role. Then stop.",
- mat:"Layer 6 intake and partnership strategy. AEP and CJA audience work. Campaign Classic and AJO build work.",
- trap:"Do not open with the MBA or the awards. Credentials land as evidence later, not as identity first."},
+ say:"Three beats in 40 seconds: six years across the Adobe stack, three of them owning AJO and AEP for Tim Hortons at 4,000 locations, and why this role. Then stop and let them steer.",
+ mat:"Journey design and event configuration on AJO. RT-CDP, XDM and activation dataflows on AEP. Adobe relationship across Campaign and AJO.",
+ trap:"Do not open with the MBA or the awards. Credentials land as evidence later, never as identity first."},
 
 {q:"Why Air Canada, and why this role?",
  test:"Whether you read the posting or applied to fifty.",
- say:"Name the specific thing: the role asks for product direction and hands-on platform work in one person, which is unusual, and it sits on top of an Experience Platform to Campaign and AJO chain you have already worked in.",
- mat:"Hospitality and loyalty from Restaurant Brands. Regulated, high-volume consumer marketing from both TD and RBI.",
- trap:"Avoid airline romance. They hear it all day."},
+ say:"Two reasons, both specific. The role refuses to split roadmap from build, which is how you work. And the direction of travel, Campaign today with AJO and AEP audiences feeding it, is the transition you have just spent three years on.",
+ mat:"Hospitality and loyalty scale from Tim Hortons. Canadian consumer marketing under CASL.",
+ trap:"Airline romance. They hear it all day and it signals nothing."},
 
-{q:"Why are you leaving TD?",
- test:"Whether there is a problem you are running from.",
- say:"Answer forward. You want direct platform ownership back, and this role puts roadmap and build together.",
- mat:"Five rotations completed, so a move reads as a natural next step rather than an escape.",
- trap:"No mention of team friction, managers or reorgs. A recruiter who hears friction writes it down."},
+{q:"Walk me through your Journey Optimizer experience.",
+ test:"Whether AJO depth is real. This is the question you win on.",
+ say:"Scope first, then configuration, then a specific journey. Four thousand locations, three years, accountable for reliability and compliance. Then journey design, event configuration, trigger setup, audience targeting, traffic splits, real-time use cases and A/B testing. Land on one journey end to end.",
+ mat:"Tim Hortons digital channels. Tims Financial engagement up 964%, TimShop up 441% through personalized campaigns and journey programs.",
+ trap:"Describing marketing outcomes without the configuration. Name objects: event, trigger, audience, traffic split."},
 
-{q:"Walk me through your hands-on Campaign Classic experience.",
- test:"Depth. This is the question the role turns on.",
- say:"Structure it: what you owned, the workflow patterns you built, targeting and typology, then one troubleshooting story. Give a volume figure early so the scale is clear.",
- mat:"Workflows, deliveries, templates, targeting. Pick the build you remember well enough to draw on a whiteboard.",
- trap:"Vague verbs. 'I worked on campaigns' reads as adjacent experience. Name objects: workflow, delivery, typology rule, targeting dimension."},
+{q:"The role needs four-plus years hands-on Campaign Classic. Your CV says your depth is elsewhere. Talk to me about that.",
+ test:"Everything. This is the call.",
+ say:"Own it in one sentence with no hedging. Then three bridges: most Campaign failures live upstream in schema, audience reconciliation, dataflow latency and suppression placement, which is your three years; you already manage the Adobe relationship across both products; and orchestration concepts carry across AJO, Braze and Lytics. Close with a concrete ramp, a quarter to production competence plus certification on your own time, and offer to be tested on it.",
+ mat:"XDM alignment, RT-CDP, activation dataflows, consent enforcement before send. Braze and Lytics at DXC. Adobe vendor lifecycle including Campaign.",
+ trap:"Two failure modes. Overselling ecosystem exposure as hands-on experience, which destroys the credibility your honest CV bought you. And apologizing for four sentences, which turns a gap into a disqualification. Say it once, bridge, move."},
 
-{q:"How much of your time is actually in the platform versus strategy?",
- test:"Whether you will delegate the build. The posting says twice that they do not want that.",
- say:"Give a rough split, then a proof: the last thing you personally built or debugged, and when.",
- mat:"The hands-on line, that you open the workflow to find the fault rather than assigning it.",
- trap:"Overclaiming. If you are mostly strategy at TD right now, say so and point at the build work honestly."},
+{q:"So you would need ramp-up time. Why should we take that over someone already deep in Campaign?",
+ test:"Whether you can argue value rather than plead.",
+ say:"Reframe to their roadmap. A Campaign-only specialist is strong on the upgrade and thin on everything after it: AJO ownership, AEP audiences into both tools, offer decisioning. You are the reverse, and the Campaign half is the half that can be learned in a quarter. Then ask which half year one is actually about.",
+ mat:"Three years running the destination stack in production at 4,000-location scale.",
+ trap:"Arguing that Campaign Classic is outdated. Never insult the platform you would inherit."},
 
-{q:"Tell me about a journey you built in Journey Optimizer.",
- test:"Whether the AJO experience is real or a course you took.",
- say:"One journey, end to end: the business trigger, the event and schema behind it, the branching, and what it changed.",
- mat:"Name the trigger type. Real-time triggers and lifecycle journeys are what the posting calls out.",
- trap:"Describing the marketing goal without the configuration. They want the build."},
+{q:"Have you led a platform migration or upgrade?",
+ test:"Whether you can carry the v7 to v8 work.",
+ say:"Separate the two honestly. Not a v7 to v8 upgrade. You have led end-to-end greenfield implementation of AEP, AJO and AEM, and a vendor consolidation. Then walk their phases, spending most of the answer on cutover risk and hypercare, because that is where migrations actually fail.",
+ mat:"Full implementation at 4,000 locations. Vendor lifecycle from sourcing through offboarding, cutting $84K.",
+ trap:"Letting implementation sound like upgrade. Name the difference yourself before they do."},
 
-{q:"The audience count in the CDP does not match what landed in Campaign. What do you do?",
- test:"SQL and debugging instinct.",
- say:"Work backwards through the chain: segment definition at source, dataflow and latency, consent and suppression applied at send, then delivery exclusions. Say which layer you check first and why.",
- mat:"The DXC data integrity work and the RBI audience creation work both fit here.",
- trap:"Answering as a manager who escalates. Answer as the person who runs the count."},
+{q:"The audience count in the CDP does not match what landed in the send. What do you do?",
+ test:"SQL and debugging instinct. You should relish this one.",
+ say:"Work the chain backwards and say which layer you check first. Segment definition at source, then ingestion and dataflow latency, then identity and profile merge, then consent and suppression applied at send, then delivery-level exclusions. Give the order and the reason.",
+ mat:"RT-CDP segmentation and activation dataflows at RBI. Python and SQL pipelines at DXC, three days to four hours.",
+ trap:"Answering as someone who escalates. Answer as the person who runs the query."},
 
-{q:"Have you led a platform migration?",
- test:"Whether you can carry the v7 to v8 move, which looks like the real reason the role exists.",
- say:"If yes to v7 to v8, lead with it. If not, say so directly and substitute your closest migration using their phases: assessment, plan, build, test, cutover, hypercare. Spend most of the answer on cutover risk and hypercare, because that is where migrations fail.",
- mat:"Any platform or data migration you led, including the TD data localization work.",
- trap:"Implying v7 to v8 experience you do not have. It surfaces in round two."},
-
-{q:"How do you think about email deliverability?",
- test:"Whether you have run high-volume sending or only planned it.",
- say:"Treat it as one system: consent capture, suppression and bounce handling, IP and domain warm-up, engagement-based sending, and the operational SLAs with Marketing Operations. Say what you monitor weekly.",
- mat:"CASL applies at both TD and Restaurant Brands, so consent has been a live constraint in your work.",
- trap:"Reciting hard versus soft bounce definitions. Talk about what you did when reputation dropped."},
-
-{q:"What does CASL mean for how you operate day to day?",
+{q:"How do you handle consent and suppression?",
  test:"Canadian regulatory fluency, which matters at a federally regulated airline.",
- say:"Express consent and its record-keeping, unsubscribe handling inside the required window, and suppression enforced before send rather than after. Then tie it to platform design: consent lives in the data layer, not in the campaign.",
- mat:"Regulated data experience at TD, including the localization work that won the Celent award.",
- trap:"Treating it as legal's problem. The posting puts consent enforcement on this role."},
+ say:"Your CV line is the answer: enforced before sending, across all activation touchpoints. Then the principle, that consent belongs in the data layer rather than in the campaign, so it cannot be bypassed by whoever builds the send. Add CASL specifics: express consent and its record, unsubscribe inside the required window, suppression applied upstream.",
+ mat:"Consent and suppression enforcement at RBI. Full GDPR compliance on the P&G platform builds at DXC.",
+ trap:"Treating it as legal's problem. The posting puts enforcement on this role."},
+
+{q:"How do you think about deliverability?",
+ test:"Whether you have run high-volume sending or only planned it.",
+ say:"One system, not a checklist: consent capture, suppression and bounce handling, IP and domain warm-up, engagement-based sending, and the operational SLAs with Marketing Operations. Say what you monitored weekly.",
+ mat:"Platform reliability accountability at RBI across 4,000 locations.",
+ trap:"Reciting hard versus soft bounce definitions. Talk about what you did when reputation moved."},
 
 {q:"How would you work with Marketing Operations?",
- test:"Whether you respect the split the posting spells out.",
- say:"You own the platform, standards and reusable patterns. They run campaigns on it. Your success measure is their self-serve maturity, so training, runbooks and template quality are the job, not overhead.",
- mat:"The knowledge transfer document from Restaurant Brands. Enablement is already how you work.",
- trap:"Sounding like you would take campaign execution back when things get tense."},
+ test:"Whether you respect the split the posting spells out firmly.",
+ say:"You own platform, standards and reusable patterns. They run campaigns on it. Your success measure is their self-serve maturity, so runbooks, templates and training are the job rather than overhead.",
+ mat:"Runbooks, operating procedures and training materials that enabled Marketing Operations self-serve adoption at RBI.",
+ trap:"Sounding like you would take execution back when things get tense."},
 
-{q:"Tell me about influencing without authority.",
- test:"The matrixed-organization bullet.",
- say:"One situation where you moved a decision across functions that did not report to you, with the mechanism you used.",
- mat:"Layer 6 coordination across research, engineering, product and risk. The TD direct deposit business case that removed roughly 100,000 calls a year.",
- trap:"Abstract talk about relationships. Name the forum and the decision."},
+{q:"Tell me about managing a vendor relationship.",
+ test:"A named responsibility in their posting that most candidates cannot answer.",
+ say:"Full lifecycle, not just renewals. Sourcing, onboarding, contract negotiation, offboarding, coordinated with legal, IT and communications, with a consolidation number attached.",
+ mat:"AEP, AEM, AJO and Google Business Profile API. $84K annual spend cut. Adobe relationship across Campaign and AJO products.",
+ trap:"Underselling this. It maps one to one onto their bullet and few applicants will have it."},
+
+{q:"How comfortable are you scripting inside a platform?",
+ test:"Whether the build work is genuinely hands-on.",
+ say:"Name the languages, then a use. JavaScript, Python, SQL, R, plus REST API integration work. Tie it to something you configured rather than something you listed.",
+ mat:"Twelve-plus automated workflows scoped at DXC saving six to ten hours weekly each. Personally programmed the Empleo matching platform.",
+ trap:"Listing skills without a use. Recruiters cannot tell the difference but the hiring manager can, and the recruiter takes notes."},
 
 {q:"How do you prioritize when every team wants their campaign first?",
  test:"Roadmap discipline.",
- say:"A stated framework, not diplomacy: reach and revenue against build cost and reusability, with a standing lane for platform health so debt does not compound. Then how you deliver the no.",
- mat:"Enterprise AI intake at Layer 6 is this same problem at larger scale.",
+ say:"A stated framework rather than diplomacy: reach and revenue against build cost and reusability, with a protected lane for platform health so debt does not compound. Then how you deliver the no.",
+ mat:"Capital IQ roadmap for four million users, prioritized on customer research and usage data.",
  trap:"Saying you take it case by case."},
 
 {q:"What KPIs would you own here?",
- test:"Whether you read past the responsibilities.",
- say:"Their own list said back with intent: time to launch, workflow reuse, deliverability health, journey throughput, Marketing Operations self-serve maturity. Add which one you would fix first and why.",
- mat:"S&amp;P Global, where you moved a release cycle from 120 hours to 80 and lifted add-in usage 23%.",
- trap:"Inventing generic metrics like open rate. Those belong to Marketing Operations."},
+ test:"Whether you read past the responsibilities section.",
+ say:"Their own list said back with intent: time to launch, workflow reuse, deliverability health, journey throughput, Marketing Operations self-serve maturity. Then name which one you would fix first and why.",
+ mat:"Adoption up 23% and churn down 15% at S&P. Reporting cycles cut at DXC. Measurement infrastructure over $10M in spend at RBI.",
+ trap:"Inventing generic metrics like open rate. Those belong to Marketing Operations, not to you."},
+
+{q:"Why did you leave Restaurant Brands?",
+ test:"Whether there is a problem behind the move.",
+ say:"Answer forward and keep it short. Three years, the implementation matured, and you want the next platform ownership problem rather than steady state. This role has both a migration and a build ahead of it.",
+ mat:"You took AJO and AEP from implementation through to Marketing Operations self-serve, which is a completed arc.",
+ trap:"Any criticism of a former employer or manager. Recruiters write that down verbatim."},
+
+{q:"Do you have travel, hospitality or loyalty experience?",
+ test:"A stated preference in the posting.",
+ say:"Yes, and make the parallel explicit rather than leaving it implied. Four thousand hospitality locations, a consumer loyalty and payments footprint, and personalized activation driving engagement.",
+ mat:"Tims Financial up 964%, TimShop up 441%, main site and app up 123%.",
+ trap:"Assuming they will connect Tim Hortons to Aeroplan themselves. Draw the line out loud."},
 
 {q:"The role is on-site in Toronto. Does that work?",
- test:"A screening filter.",
- say:"A clear yes if it is one, plus a clarifying question about how many days on-site means in practice.",
- mat:"Check the commute first. Air Canada's Toronto base is at the airport, not downtown.",
+ test:"A screening filter, nothing more.",
+ say:"A clear yes if it is one, then a clarifying question about how many days on-site means in practice.",
+ mat:"Check the commute first. Air Canada's Toronto base is at the airport rather than downtown.",
  trap:"An unqualified yes you regret at offer stage."},
 
 {q:"Do you speak French?",
- test:"A stated preference at equal qualifications, and a real one at a federally regulated airline.",
- say:"A straight yes or no with your actual level, and nothing more.",
- mat:"You already speak more than one language, worth a sentence if French is a no.",
- trap:"Hedging. It reads worse than a no."},
+ test:"Preferred at equal qualifications, and real at a federally regulated airline.",
+ say:"Your actual level in one sentence, then stop.",
+ mat:"You speak more than one language, which is worth a single clause if French is a no.",
+ trap:"Hedging. It reads worse than a plain no."},
 
 {q:"What are your compensation expectations?",
  test:"Whether you anchor first.",
- say:"Turn it around once: ask what range the role is budgeted at. If pushed, give a band rather than a number, and anchor on total package including travel benefits.",
- mat:"This is a specialist platform role, which usually pays above a generalist product manager band.",
- trap:"Naming a number before they do, and naming one below your floor."},
-
-{q:"What is your notice period and availability?",
- test:"Logistics, and how serious you are.",
- say:"Your actual notice, said without apology, plus your availability for interviews.",
- mat:"Have your calendar constraints in front of you.",
- trap:"Overpromising a start date you cannot hold."},
+ say:"Turn it back once: ask what range the role is budgeted at. If pushed, give a band rather than a point, and anchor on total package including travel benefits.",
+ mat:"A specialist platform role, which typically pays above a generalist product manager band.",
+ trap:"Naming a number before they do, or naming one below your floor because the call is going well."},
 
 {q:"Do you hold any Adobe certifications?",
  test:"Listed under nice to have.",
- say:"Honest answer, then turn it into a question about whether they sponsor certification for the team.",
- mat:"Your track record of finishing programs, including the Ivey MBA on an entrepreneurship fellowship.",
- trap:"Apologizing for a nice-to-have you do not have."},
+ say:"Honest answer, then turn it forward: whether they sponsor certification, and that you would take Campaign certification on your own time regardless.",
+ mat:"A record of finishing what you start, including the Ivey MBA on a fellowship you were the sole recipient of.",
+ trap:"Apologizing for a nice-to-have. Convert it into intent instead."},
 
 {q:"What questions do you have for us?",
  test:"Whether you understood what the posting was telling you.",
- say:"Three, then the closing one. Lead with the Marketing Technology versus Marketing Operations split, because the posting defines it unusually firmly and that usually means it was recently contested.",
- mat:"Migration timing, reporting line, team size, first six months.",
- trap:"Having none, or asking something the posting already answered."}
+ say:"Lead with the one that matters most to your candidacy: where the AJO build sits relative to the v7 to v8 upgrade, and which is the year-one priority. Then two more, then close on next steps and timeline.",
+ mat:"The Marketing Technology versus Marketing Operations split. AEP maturity. Reporting line and team size.",
+ trap:"Having none, or asking something the posting already answers."}
 ];
 
-const KEY='ac-martech-drill:v2';
-let state={marks:{},checks:{}};
-let order=[...Q.keys()], pos=0, showing=false, timer=null;
-const $=id=>document.getElementById(id);
-const savedEl=$('saved');
+var KEY='ac-prep-rbi:v1';
+var state={marks:{},checks:{}};
+var order=[],pos=0,showing=false,timer=null;
+for(var k=0;k<Q.length;k++)order.push(k);
+function $(id){return document.getElementById(id);}
+var savedEl=$('saved');
 
-function flash(){savedEl.classList.add('show');setTimeout(()=>savedEl.classList.remove('show'),1100);}
-async function save(){try{const r=await window.storage.set(KEY,JSON.stringify(state));if(r)flash();}catch(e){console.error('Could not save',e);}}
+function flash(){savedEl.classList.add('show');setTimeout(function(){savedEl.classList.remove('show');},1100);}
+function save(){
+  try{
+    window.storage.set(KEY,JSON.stringify(state)).then(function(r){if(r)flash();}).catch(function(e){console.error(e);});
+  }catch(e){console.error('Could not save',e);}
+}
 function queueSave(){clearTimeout(timer);timer=setTimeout(save,500);}
-
-function esc(s){return s.replace(/</g,'&lt;');}
+function esc(s){return String(s).replace(/</g,'&lt;');}
 
 function render(){
-  const i=order[pos], q=Q[i], mark=state.marks[i];
-  $('card').innerHTML=
-    '<p class="qnum">Question '+(pos+1)+' of '+order.length+'</p>'+
-    '<h3>'+esc(q.q)+'</h3>'+
-    (showing?
-      '<div class="reveal">'+
+  var i=order[pos],q=Q[i],mark=state.marks[i];
+  var key=(i===3||i===4)?' &middot; <b>decides the call</b>':'';
+  var html='<p class="qnum">Question '+(pos+1)+' of '+order.length+key+'</p><h3>'+esc(q.q)+'</h3>';
+  if(showing){
+    html+='<div class="reveal">'+
       '<div class="blk"><p class="lab">What they are testing</p><p>'+q.test+'</p></div>'+
       '<div class="blk"><p class="lab">Say this</p><p>'+q.say+'</p></div>'+
       '<div class="blk mat"><p class="lab">Your material</p><p>'+q.mat+'</p></div>'+
@@ -412,17 +596,22 @@ function render(){
       '<div class="rate"><span class="lab">How did that go?</span>'+
       '<button class="pill '+(mark==='good'?'sel-good':'')+'" data-m="good">Solid</button>'+
       '<button class="pill '+(mark==='again'?'sel-again':'')+'" data-m="again">Needs work</button>'+
-      '</div></div>'
-    :'');
+      '</div></div>';
+  }
+  $('card').innerHTML=html;
   $('reveal').textContent=showing?'Hide answer':'Show answer';
-  const weak=Object.values(state.marks).filter(v=>v==='again').length;
+  var weak=0;
+  for(var m in state.marks){if(state.marks[m]==='again')weak++;}
   $('count').textContent=weak?weak+' marked needs work':'';
-  $('card').querySelectorAll('.pill').forEach(function(b){
-    b.addEventListener('click',function(){
-      state.marks[i]=state.marks[i]===b.dataset.m?null:b.dataset.m;
-      queueSave();render();
-    });
-  });
+  var pills=$('card').querySelectorAll('.pill');
+  for(var p=0;p<pills.length;p++){
+    (function(b){
+      b.addEventListener('click',function(){
+        state.marks[i]=(state.marks[i]===b.getAttribute('data-m'))?null:b.getAttribute('data-m');
+        queueSave();render();
+      });
+    })(pills[p]);
+  }
 }
 function go(d){pos=(pos+d+order.length)%order.length;showing=false;render();}
 
@@ -430,31 +619,45 @@ $('reveal').addEventListener('click',function(){showing=!showing;render();});
 $('next').addEventListener('click',function(){go(1);});
 $('prev').addEventListener('click',function(){go(-1);});
 $('replay').addEventListener('click',function(){
-  const weak=[...Q.keys()].filter(function(i){return state.marks[i]==='again';});
-  order=weak.length?weak:[...Q.keys()];
+  var weak=[];
+  for(var i=0;i<Q.length;i++){if(state.marks[i]==='again')weak.push(i);}
+  order=[];
+  if(weak.length){order=weak;}else{for(var j=0;j<Q.length;j++)order.push(j);}
   pos=0;showing=false;render();
 });
 $('reset').addEventListener('click',function(){
-  state.marks={};order=[...Q.keys()];pos=0;showing=false;queueSave();render();
+  state.marks={};order=[];for(var j=0;j<Q.length;j++)order.push(j);
+  pos=0;showing=false;queueSave();render();
 });
-document.querySelectorAll('#checks input').forEach(function(cb){
-  cb.addEventListener('change',function(){state.checks[cb.dataset.k]=cb.checked;queueSave();});
-});
+var boxes=document.querySelectorAll('#checks input');
+for(var b=0;b<boxes.length;b++){
+  (function(cb){
+    cb.addEventListener('change',function(){state.checks[cb.getAttribute('data-k')]=cb.checked;queueSave();});
+  })(boxes[b]);
+}
 
-const links=[...document.querySelectorAll('nav a')];
-const obs=new IntersectionObserver(function(es){
-  es.forEach(function(e){
-    if(e.isIntersecting){
-      links.forEach(function(l){l.classList.toggle('on',l.getAttribute('href')==='#'+e.target.id);});
+var links=document.querySelectorAll('nav a');
+var obs=new IntersectionObserver(function(es){
+  for(var i=0;i<es.length;i++){
+    if(es[i].isIntersecting){
+      for(var l=0;l<links.length;l++){
+        links[l].classList.toggle('on',links[l].getAttribute('href')==='#'+es[i].target.id);
+      }
     }
-  });
+  }
 },{rootMargin:'-15% 0px -70% 0px'});
-document.querySelectorAll('main section').forEach(function(s){obs.observe(s);});
+var secs=document.querySelectorAll('main section');
+for(var s=0;s<secs.length;s++)obs.observe(secs[s]);
 
-(async function(){
-  try{const r=await window.storage.get(KEY);if(r&&r.value)state=JSON.parse(r.value);}catch(e){}
-  document.querySelectorAll('#checks input').forEach(function(cb){cb.checked=!!state.checks[cb.dataset.k];});
-  render();
+(function(){
+  try{
+    window.storage.get(KEY).then(function(r){
+      if(r&&r.value){try{state=JSON.parse(r.value);}catch(e){}}
+      var bx=document.querySelectorAll('#checks input');
+      for(var i=0;i<bx.length;i++)bx[i].checked=!!state.checks[bx[i].getAttribute('data-k')];
+      render();
+    }).catch(function(){render();});
+  }catch(e){render();}
 })();
 </script>
 </body>
