@@ -121,6 +121,19 @@ ul.plain li em{font-style:normal;color:var(--ink-soft);display:block;font-size:1
 .num b{display:block;font-family:"Archivo Narrow",sans-serif;font-size:24px;line-height:1.1}
 .num span{font-size:13.5px;color:var(--ink-soft)}
 
+.gsearch{width:100%;max-width:var(--measure);font:inherit;font-size:16px;color:var(--ink);
+  background:var(--card);border:1px solid var(--rule);border-radius:2px;padding:9px 12px;margin:0 0 6px}
+.gcount{font-size:13.5px;color:var(--ink-soft);margin:0 0 14px}
+.gband{font-size:12.5px;color:var(--ink-soft);margin:26px 0 8px;padding-bottom:5px;border-bottom:1px solid var(--rule)}
+.term{background:var(--card);padding:16px 18px;margin:0 0 8px;border-left:3px solid var(--rule-2);max-width:var(--measure)}
+.term.key{border-left-color:var(--airspace)}
+.term h4{margin:0 0 3px;font-size:17.5px;color:var(--ink)}
+.term .short{margin:0 0 8px;font-size:15px;color:var(--water)}
+.term p{margin:0 0 8px;font-size:15.5px}
+.term p:last-child{margin-bottom:0}
+.term .eg{background:var(--paper-2);padding:9px 12px;font-size:15px}
+.term .yours{font-size:15px;color:var(--terrain)}
+.term .yours b,.term .eg b{font-weight:600}
 @media (max-width:880px){
   .wrap{grid-template-columns:minmax(0,1fr)}
   nav{position:static;height:auto;border-right:0;border-bottom:1px solid var(--rule);padding:14px 16px}
@@ -159,6 +172,7 @@ ul.plain li em{font-style:normal;color:var(--ink-soft);display:block;font-size:1
     <li><a href="#evidence">Your evidence</a></li>
     <li><a href="#map">Requirement map</a></li>
     <li><a href="#jd">The posting</a></li>
+    <li><a href="#glossary">Glossary</a></li>
     <li><a href="#success">Success in role</a></li>
     <li><a href="#checklist">Checklist</a></li>
   </ul>
@@ -595,6 +609,278 @@ ul.plain li em{font-style:normal;color:var(--ink-soft);display:block;font-size:1
   <div class="callout">If asked which KPI you would fix first, do not name a metric. Give the order: reliability and consent enforcement first because everything downstream depends on it, then reuse and time to launch, then throughput and self-serve. Sequence reads as judgment; a favourite metric reads as a guess.</div>
 </section>
 
+<section id="glossary">
+  <h2>Glossary</h2>
+  <p class="sub">Every platform and term in the posting, explained plainly, with an example and where you have touched it. Entries with a coloured edge are ones you should be able to explain without hesitating.</p>
+
+  <input class="gsearch" id="gsearch" type="text" placeholder="Filter, for example: consent, typology, XDM, warm-up">
+  <p class="gcount" id="gcount"></p>
+
+  <div id="glist">
+
+  <p class="gband">THE TWO PLATFORMS THIS ROLE OWNS</p>
+
+  <div class="term key" data-t="adobe campaign classic v7 v8 batch email platform">
+    <h4>Adobe Campaign Classic</h4>
+    <p class="short">Their main email platform. Old, powerful, built for big scheduled sends.</p>
+    <p>Campaign Classic is Adobe's long-standing email and direct marketing tool. You build a workflow, which is a flowchart of steps: pull an audience, filter it, split it, wait, then send. It sits on its own relational database, meaning customer data lives in tables with columns and keys, much like a traditional SQL database. That design is why it handles enormous scheduled sends well and why it feels dated compared with newer tools.</p>
+    <p>Version 7 is the older architecture. Version 8 moves the data layer onto a cloud database and changes how some things work under the hood. Their posting says a v7 to v8 upgrade is coming, which tells you they are on the old one now.</p>
+    <p class="eg"><b>Example.</b> A monthly statement email to eight million customers. A workflow queries the database for eligible customers, removes anyone who unsubscribed, splits them into English and French, personalizes each message, and sends overnight.</p>
+    <p class="yours"><b>You.</b> This is the declared gap. You have worked around it through the Adobe vendor relationship and the shared data layer, not inside it day to day.</p>
+  </div>
+
+  <div class="term key" data-t="adobe journey optimizer ajo real-time triggered">
+    <h4>Adobe Journey Optimizer (AJO)</h4>
+    <p class="short">The modern counterpart. Reacts to individual customers in real time.</p>
+    <p>Where Campaign asks "who should get this send tonight," Journey Optimizer asks "what should happen for this person right now." You build a journey, which listens for an event, then branches based on what the customer does next. It runs on top of Experience Platform, so it sees a live customer profile rather than a nightly extract.</p>
+    <p class="eg"><b>Example.</b> Someone abandons a booking. That fires an event. The journey waits two hours, checks whether they came back, and if not sends a reminder with the fare they were looking at. If they did come back, they exit the journey and get nothing.</p>
+    <p class="yours"><b>You.</b> Three years running this in production for Tim Hortons across 4,000 locations. Journey design, event configuration, trigger setup, audience targeting, traffic splits, real-time use cases and A/B testing. This is your strongest ground in the entire posting.</p>
+  </div>
+
+  <p class="gband">THE DATA LAYER UNDERNEATH BOTH</p>
+
+  <div class="term key" data-t="cdp customer data platform aep adobe experience platform real-time">
+    <h4>Customer Data Platform (CDP), and Adobe's Real-Time CDP</h4>
+    <p class="short">The single place where all customer data is unified into one profile per person.</p>
+    <p>A CDP takes data from everywhere the company touches a customer, the app, the website, purchases, the loyalty program, the call centre, and stitches it into one profile per human being. Then it hands audiences built from those profiles to the tools that actually send things. Adobe's version is Real-Time CDP, part of Adobe Experience Platform.</p>
+    <p>The reason it matters here is in their posting: audiences and consent should come from the CDP and be enforced before anything reaches Campaign or AJO. Without that, each send tool keeps its own version of the truth and they drift apart.</p>
+    <p class="eg"><b>Example.</b> One person has a mobile app login, a web cookie, a loyalty number and an email address. The CDP recognizes all four as the same human, so when you build the audience "flew in the last 90 days but has not opened the app," you get one entry for them, not four.</p>
+    <p class="yours"><b>You.</b> Configured Adobe Experience Platform end to end at RBI: Real-Time CDP audience segmentation, data ingestion, XDM schema alignment, and activation dataflows out to downstream channels. You also worked with Segment and Lytics at DXC, which are the same category of tool.</p>
+  </div>
+
+  <div class="term key" data-t="xdm experience data model schema field">
+    <h4>XDM schema</h4>
+    <p class="short">Adobe's standard vocabulary for customer data. A schema is the shape of the data.</p>
+    <p>XDM stands for Experience Data Model. A schema defines what fields exist and what type each one is: email is text, birth date is a date, loyalty tier is one of a fixed list. Every system feeding the platform has to map its own field names onto this shared vocabulary, otherwise nothing lines up.</p>
+    <p>This is where the interesting half of the requirement sits. Their posting asks you to align XDM schemas with Campaign Classic's relational data model so profiles merge correctly. XDM is a nested, document-like structure; Campaign's is flat tables. Getting those two to agree on who a person is, is genuinely fiddly work.</p>
+    <p class="eg"><b>Example.</b> The booking system calls it <em>cust_email</em>, the loyalty system calls it <em>member_email_address</em>, and the app calls it <em>contactEmail</em>. All three map to the same XDM field so the platform knows they refer to one thing.</p>
+    <p class="yours"><b>You.</b> XDM schema alignment is a configured responsibility on your CV, not exposure. The Campaign relational side is the half you would learn, and saying that plainly is stronger than bluffing it.</p>
+  </div>
+
+  <div class="term key" data-t="identity resolution profile merge policy stitching">
+    <h4>Identity resolution and profile merge</h4>
+    <p class="short">Deciding that these five records are all the same person, and which value wins when they disagree.</p>
+    <p>Identity resolution links records across systems using shared keys such as email, loyalty number or device ID. Profile merge, governed by merge policies, decides what happens when two linked records disagree, for instance two different mailing addresses. Usually the most recent wins, but you choose that rule deliberately.</p>
+    <p>Most audience count mysteries trace back here. If identity is too loose, you merge two different people. Too strict, and one person shows up as three, inflating your audience and sending them the same message three times.</p>
+    <p class="eg"><b>Example.</b> Someone books as a guest with a personal email, then later logs into their loyalty account with a work email. Identity resolution links them by phone number, and the merge policy decides which email is the one you actually send to.</p>
+    <p class="yours"><b>You.</b> Squarely inside the AEP work you configured. If the technical round goes here, you are on home ground.</p>
+  </div>
+
+  <div class="term key" data-t="ingestion dataflow activation streaming batch">
+    <h4>Data ingestion and activation dataflows</h4>
+    <p class="short">Ingestion is data coming in. Activation is audiences going back out to the send tools.</p>
+    <p>Ingestion is how data reaches the platform, either in batch, meaning a scheduled file, or streaming, meaning near-instant. Activation is the return trip: an audience built in the CDP is pushed out to Campaign, AJO, an ad platform, wherever it is needed. The dataflow is the configured pipe that carries it, with a schedule, a mapping and a failure behaviour.</p>
+    <p>Their posting asks you to architect and verify these flows and to define data contracts and latency expectations with IT and vendors. The word <em>verify</em> is doing real work there. Plenty of teams assume a dataflow is running correctly until an audience arrives empty.</p>
+    <p class="eg"><b>Example.</b> Yesterday's flights ingest overnight in batch. App activity streams in within seconds. An audience of "delayed over three hours yesterday" activates into AJO each morning so an apology journey can run.</p>
+    <p class="yours"><b>You.</b> Activation dataflows from CDP to downstream channels is a CV line. This is one of the strongest overlaps you have with their cross-platform section.</p>
+  </div>
+
+  <div class="term" data-t="data contract latency freshness sla">
+    <h4>Data contract and latency</h4>
+    <p class="short">A written agreement about what data arrives, how fresh it is, and what happens when it breaks.</p>
+    <p>A data contract specifies the fields and their types, how often data arrives, how much volume to expect, what happens on failure, and who gets paged. Latency is the delay between something happening in the real world and the platform knowing about it. The part teams usually forget is failure behaviour, so lead with it when asked.</p>
+    <p class="eg"><b>Example.</b> "Booking events arrive within five minutes, ninety-nine percent of the time. If the feed stops for more than fifteen minutes, journeys depending on it pause rather than firing on stale data, and IT is alerted."</p>
+    <p class="yours"><b>You.</b> You did this work at RBI, and at DXC on GCP with Apigee, Kafka and GKE, which are the plumbing components underneath this kind of contract.</p>
+  </div>
+
+  <p class="gband">THINGS YOU BUILD INSIDE THE TOOLS</p>
+
+  <div class="term" data-t="workflow delivery template campaign objects">
+    <h4>Workflow, delivery, template (Campaign vocabulary)</h4>
+    <p class="short">The three nouns Campaign people use constantly. Worth being fluent in even without hands-on hours.</p>
+    <p>A <em>workflow</em> is the flowchart: the sequence of query, filter, split, wait, send. A <em>delivery</em> is one specific send produced by that workflow, with its own audience, content and results. A <em>template</em> is a reusable starting point so nobody rebuilds the same structure from scratch. Their KPI called workflow reuse is measuring how much of the sending runs from templates rather than bespoke builds.</p>
+    <p class="eg"><b>Example.</b> A weekly promotional workflow runs every Tuesday. Each Tuesday's run produces one delivery. Both are built from the standard promotional template, so the team changes the offer rather than rebuilding the logic.</p>
+    <p class="yours"><b>You.</b> The concepts map cleanly onto AJO journeys and message designs. Use the parallel out loud rather than pretending to Campaign hours.</p>
+  </div>
+
+  <div class="term" data-t="typology rule fatigue pressure control campaign">
+    <h4>Typology and typology rules</h4>
+    <p class="short">Campaign's built-in guardrails. The rules that quietly stop bad sends before they go.</p>
+    <p>A typology is a set of rules applied to every delivery automatically: fatigue rules capping how many emails one person gets per week, consent and pressure rules, content checks, deliverability checks. It is the safety net that means an individual campaign builder cannot accidentally email someone eleven times in a day.</p>
+    <p class="eg"><b>Example.</b> A rule saying no customer receives more than three promotional emails per week. A marketer builds a campaign targeting everyone, and the typology silently removes anyone already at their limit.</p>
+    <p class="yours"><b>You.</b> Genuinely Campaign-specific vocabulary, so learn the word before the technical round. The equivalent instinct in your work is consent and suppression enforcement, which you did upstream in the data layer.</p>
+  </div>
+
+  <div class="term key" data-t="journey event trigger traffic split ajo objects">
+    <h4>Journey, event, trigger, traffic split (AJO vocabulary)</h4>
+    <p class="short">Your vocabulary. Use these nouns freely, because they prove you have actually built.</p>
+    <p>A <em>journey</em> is the flow a single customer moves through. An <em>event</em> is something that happened, such as a booking or a check-in, arriving as a message the platform listens for. A <em>trigger</em> is the condition that starts a journey. A <em>traffic split</em> divides people down different paths, either to test two versions or to hold back a control group.</p>
+    <p class="eg"><b>Example.</b> Check-in opens twenty-four hours before departure and fires an event. That triggers a journey. A traffic split sends half the travellers a seat-upgrade offer and half a plain reminder, so you can measure whether the offer changes behaviour.</p>
+    <p class="yours"><b>You.</b> All four are on your CV as things you configured. Say them without hedging.</p>
+  </div>
+
+  <div class="term" data-t="offer decisioning ajo offers next best">
+    <h4>Offer decisioning and AJO Offers</h4>
+    <p class="short">Letting the system choose which offer a person sees, rather than hard-coding it.</p>
+    <p>Instead of a campaign deciding in advance that everyone gets the same promotion, you load a catalogue of offers with eligibility rules and priorities, and the system picks the best one for each person at the moment of the send. Their posting lists this under both responsibilities and nice-to-haves, which usually means it is planned rather than live.</p>
+    <p class="eg"><b>Example.</b> Three offers exist: a lounge pass, a bag discount and bonus points. A frequent flyer with status is ineligible for the lounge pass because they already have access, so they see bonus points instead. One journey, different offers per person.</p>
+    <p class="yours"><b>You.</b> Adjacent rather than direct. Your real-time use cases and audience targeting work is the honest neighbouring experience, and it is a fair thing to say you would want to build.</p>
+  </div>
+
+  <div class="term" data-t="message center transactional campaign">
+    <h4>Message Center</h4>
+    <p class="short">The part of Campaign that sends transactional messages, one at a time, instantly.</p>
+    <p>Transactional means triggered by something the customer did and expected by them: a booking confirmation, a password reset, a receipt. These are separate from marketing sends because they must go immediately, they usually go regardless of marketing consent, and they cannot be delayed by a queue of promotional email.</p>
+    <p class="eg"><b>Example.</b> Someone books a flight and the confirmation arrives in seconds, even though the weekly newsletter is mid-send to millions.</p>
+    <p class="yours"><b>You.</b> Campaign-specific and listed as a nice-to-have. Know what it is; do not claim it.</p>
+  </div>
+
+  <div class="term" data-t="sql targeting personalization rules query">
+    <h4>SQL targeting and personalization rules</h4>
+    <p class="short">Writing the query that defines who gets the message, and the logic that varies what they see.</p>
+    <p>SQL targeting means selecting your audience by writing a query against the database rather than clicking through a visual builder. It is faster and far more precise for complex conditions. Personalization rules then vary the content per person, from a first name to entirely different blocks of a message.</p>
+    <p class="eg"><b>Example.</b> Target everyone who flew twice in six months but has no booking in the next ninety days, then show a different destination block depending on which airport they usually depart from.</p>
+    <p class="yours"><b>You.</b> Strong. Python and SQL pipelines at DXC that cut reporting from three days to four hours, and audience segmentation work at RBI. The requirement asks for strong SQL and you have it.</p>
+  </div>
+
+  <p class="gband">CONSENT AND COMPLIANCE</p>
+
+  <div class="term key" data-t="consent express implied opt-in permission">
+    <h4>Consent</h4>
+    <p class="short">Permission to contact someone, recorded, with proof of when and how you got it.</p>
+    <p>Express consent means the person actively agreed, ticking a box or signing up. Implied consent covers a narrower set of situations, such as an existing business relationship, and it expires. The key operational point is that consent is a record you must be able to produce, not a setting.</p>
+    <p class="eg"><b>Example.</b> Someone ticks a marketing box at booking. You store what they agreed to, the exact wording shown, the timestamp and the source. Two years later a regulator asks, and you can produce it.</p>
+    <p class="yours"><b>You.</b> Consent and suppression enforcement before sending, across all activation touchpoints, is a CV line. This is a strong area for you.</p>
+  </div>
+
+  <div class="term key" data-t="suppression list exclusion do not contact">
+    <h4>Suppression</h4>
+    <p class="short">The list of people who must not receive this, applied before the send, not after.</p>
+    <p>Suppression covers unsubscribes, hard bounces, complainers and legal exclusions. The judgment question their posting is really asking is where you apply it. Apply it in the data layer and it holds everywhere automatically. Apply it inside each campaign and every new channel has to re-implement it, and eventually one of them gets it wrong.</p>
+    <p class="eg"><b>Example.</b> Someone unsubscribes on Monday. Because suppression sits in the CDP rather than in each tool, they are already excluded from Tuesday's Campaign send and Wednesday's AJO journey without anyone doing anything.</p>
+    <p class="yours"><b>You.</b> This is your executive-round argument, and it is true, which is why it will hold up under questioning.</p>
+  </div>
+
+  <div class="term key" data-t="casl canadian anti-spam legislation gdpr privacy">
+    <h4>CASL, and GDPR</h4>
+    <p class="short">CASL is Canada's anti-spam law. GDPR is Europe's privacy regulation.</p>
+    <p>CASL requires consent before commercial electronic messages, clear sender identification, a working unsubscribe honoured within ten business days, and records proving consent. Penalties are substantial and it applies to messages sent to Canadians. Air Canada is federally regulated and Canadian, so CASL is a daily operating constraint rather than a legal footnote.</p>
+    <p>GDPR is broader, covering data rights generally: access, deletion, portability, and a lawful basis for processing. If you handled European customer data it applied to you.</p>
+    <p class="eg"><b>Example.</b> Under CASL, someone unsubscribing from promotional email must stop receiving it within ten business days, though you may still send their booking confirmation, because that is transactional rather than commercial.</p>
+    <p class="yours"><b>You.</b> Tim Hortons is Canadian, so CASL governed your work. At DXC you ran full GDPR compliance on the P&amp;G platform builds. You can speak to both.</p>
+  </div>
+
+  <p class="gband">DELIVERABILITY</p>
+
+  <div class="term" data-t="deliverability inbox placement sender reputation">
+    <h4>Deliverability</h4>
+    <p class="short">Whether your email actually reaches the inbox rather than spam or nowhere.</p>
+    <p>Mailbox providers such as Gmail and Outlook decide whether to accept your mail based on your sending reputation. Reputation is built from how people react: opens and clicks help, spam complaints and sending to dead addresses hurt. Deliverability is not one setting, it is the accumulated consequence of how you send.</p>
+    <p class="eg"><b>Example.</b> A team buys a list and sends to it. Complaints spike, Gmail starts filtering, and suddenly the regular newsletter that was fine last month lands in spam for everyone.</p>
+    <p class="yours"><b>You.</b> You were accountable for platform reliability at 4,000 locations. Talk about it as one system rather than reciting definitions.</p>
+  </div>
+
+  <div class="term" data-t="ip domain warm-up reputation ramp">
+    <h4>IP and domain warm-up</h4>
+    <p class="short">Building sending reputation gradually instead of blasting from a cold start.</p>
+    <p>A brand-new sending IP address or domain has no history, and mailbox providers treat unknown senders that suddenly send millions of messages as spam. Warm-up means starting small, sending to your most engaged people first, and increasing volume over days or weeks while reputation builds.</p>
+    <p>This matters directly for their migration. A v7 to v8 move can change sending infrastructure, and mishandling warm-up at cutover is one of the classic ways a migration visibly fails.</p>
+    <p class="eg"><b>Example.</b> Day one, fifty thousand to people who opened something in the last thirty days. Day three, two hundred thousand. Two weeks later, the full file.</p>
+    <p class="yours"><b>You.</b> Worth raising unprompted in the migration answer. Naming warm-up as a cutover risk signals you have thought about how migrations actually break.</p>
+  </div>
+
+  <div class="term" data-t="bounce hard soft complaint rate spf dkim dmarc authentication">
+    <h4>Bounces, complaints, and authentication</h4>
+    <p class="short">The signals that make or break reputation, and the records that prove you are you.</p>
+    <p>A <em>hard bounce</em> is a permanent failure, usually a dead address, and must be suppressed immediately. A <em>soft bounce</em> is temporary, such as a full mailbox, and can be retried. A <em>complaint</em> is someone hitting the spam button, and it is the most damaging signal of all. SPF, DKIM and DMARC are DNS records that prove your mail genuinely comes from your domain, and without them modern providers will not trust you.</p>
+    <p class="eg"><b>Example.</b> A list has not been cleaned in a year. Ten percent hard bounce on the first send, reputation drops sharply, and the next campaign underperforms for reasons that have nothing to do with its content.</p>
+    <p class="yours"><b>You.</b> Know these cold, but do not recite them. The better answer describes what you did when reputation moved.</p>
+  </div>
+
+  <p class="gband">THE MIGRATION</p>
+
+  <div class="term key" data-t="migration phases assessment cutover hypercare steady state">
+    <h4>Migration phases: assessment, plan, build, test, cutover, hypercare, steady state</h4>
+    <p class="short">Their exact wording. Use their phases back at them, because it shows you read the posting.</p>
+    <p><em>Assessment</em> is finding out what actually exists, including the undocumented parts. <em>Plan</em> sequences the work and names the risks. <em>Build</em> and <em>test</em> are the new environment and proving it works. <em>Cutover</em> is the moment you switch over, which is the highest-risk hour of the whole project. <em>Hypercare</em> is the weeks afterward with elevated monitoring and people on standby. <em>Steady state</em> is normal operations.</p>
+    <p>Migrations rarely fail during the build. They fail at cutover and in the two weeks after, which is why spending most of your answer there marks you as someone who has done one.</p>
+    <p class="eg"><b>Example.</b> Cutover risks worth naming: sending reputation on new infrastructure, in-flight journeys that must not double-send, suppression lists that must carry over completely, and a rollback plan if the first production send goes wrong.</p>
+    <p class="yours"><b>You.</b> Not a v7 to v8 upgrade, and say so first. You have led greenfield implementation of AEP, AJO and AEM, and platform onboarding across five to six systems at DXC. Then show the method.</p>
+  </div>
+
+  <div class="term" data-t="key-person risk runbook sop documentation">
+    <h4>Key-person risk, runbooks and SOPs</h4>
+    <p class="short">The danger that only one person knows how something works. Their posting raises it twice.</p>
+    <p>A <em>runbook</em> is step-by-step instructions for a specific operational task, written so someone else can do it under pressure. An <em>SOP</em> is a standard operating procedure, the agreed way a recurring process is done. Together they turn knowledge held in someone's head into something the team owns.</p>
+    <p>Mentioned twice in one posting usually means it recently hurt them. Someone probably left and took the platform knowledge with them.</p>
+    <p class="eg"><b>Example.</b> A runbook for "the nightly audience feed failed": how to confirm it, who to contact, how to backfill, and whether to pause dependent journeys.</p>
+    <p class="yours"><b>You.</b> Runbooks, operating procedures and training materials that moved Marketing Operations to self-serve. One of your closest matches in the whole posting.</p>
+  </div>
+
+  <p class="gband">THE METRICS THEY NAMED</p>
+
+  <div class="term key" data-t="time to launch workflow reuse journey throughput self-serve maturity kpi">
+    <h4>Their five KPIs, in plain terms</h4>
+    <p class="short">Time to launch, workflow reuse, deliverability health, journey throughput, self-serve maturity.</p>
+    <p><em>Time to launch</em> is how long from someone asking for a campaign to it going out. <em>Workflow reuse</em> is the share of sends built from standard templates rather than from scratch, and it is the clearest single sign the platform work is landing. <em>Deliverability health</em> is reputation, bounces and complaints holding steady. <em>Journey throughput</em> is how many triggered journeys run reliably at volume. <em>Self-serve maturity</em> is how much Marketing Operations can do without escalating to you.</p>
+    <p class="eg"><b>Example.</b> Reuse is the leading indicator. When it rises, time to launch falls a few weeks later, because people stop rebuilding the same logic.</p>
+    <p class="yours"><b>You.</b> If asked which to fix first, give the order rather than a metric: reliability and consent first, then reuse and time to launch, then throughput and self-serve.</p>
+  </div>
+
+  <p class="gband">OTHER TOOLS, YOURS AND THEIRS</p>
+
+  <div class="term key" data-t="braze salesforce marketing cloud responsys equivalent orchestration">
+    <h4>Braze, Salesforce Marketing Cloud Journeys, Responsys</h4>
+    <p class="short">The three platforms their posting names as acceptable substitutes for AJO experience.</p>
+    <p>All three do what Journey Optimizer does: real-time, event-driven, individually triggered messaging across email, push and in-app. Braze is the mobile-first one and is common in consumer apps. Marketing Cloud Journeys is Salesforce's version. Responsys is Oracle's.</p>
+    <p>This entry is here for one reason. Their posting explicitly accepts Braze, and you have configured it. That is not an argument you need to make, it is a box you tick.</p>
+    <p class="eg"><b>Example.</b> A push notification triggered by app behaviour with a fallback to email if the push goes unopened for two hours. Same pattern in any of the four tools, different interfaces.</p>
+    <p class="yours"><b>You.</b> Braze, Lytics and Segment configured for P&amp;G marketing programs at DXC. Combined with three years of AJO, your orchestration experience is roughly six years across four platforms.</p>
+  </div>
+
+  <div class="term" data-t="segment mparticle lytics cdp tools">
+    <h4>Segment, mParticle, Lytics</h4>
+    <p class="short">Customer data platforms, the same category as Adobe's Real-Time CDP.</p>
+    <p>These collect events from apps and websites, unify them into customer profiles, and forward audiences to whatever tools need them. Segment is the best known for event collection and routing. mParticle is similar with a mobile emphasis. Lytics leans further into behavioural scoring and audience building.</p>
+    <p class="eg"><b>Example.</b> One tracking snippet on the website sends events to Segment, which forwards them to analytics, the email tool and the ad platform, instead of five separate tracking integrations.</p>
+    <p class="yours"><b>You.</b> Lytics and Segment at DXC. This is why the CDP requirement is not new ground for you, it is the second time you have done it.</p>
+  </div>
+
+  <div class="term" data-t="aem adobe experience manager cms">
+    <h4>Adobe Experience Manager (AEM)</h4>
+    <p class="short">Adobe's content management system, for websites and reusable content.</p>
+    <p>AEM is where web pages and content fragments live, with templates, approval workflows and experience targeting, which means showing different content to different audiences on the same page. It matters to activation because the landing page an email points at usually lives here.</p>
+    <p class="eg"><b>Example.</b> A campaign email links to a landing page in AEM that shows different content depending on which audience the visitor belongs to.</p>
+    <p class="yours"><b>You.</b> Managed AEM at RBI for web content delivery, experience targeting and template governance. Not required here, but it rounds out the Adobe stack claim.</p>
+  </div>
+
+  <div class="term" data-t="adobe analytics cja customer journey analytics ga4 measurement">
+    <h4>Adobe Analytics, Customer Journey Analytics (CJA), GA4</h4>
+    <p class="short">Measurement tools. CJA is the one that analyses across channels using CDP data.</p>
+    <p>Adobe Analytics is the traditional web analytics product. CJA sits on Experience Platform data and lets you analyse the whole customer journey across channels rather than one website in isolation. GA4 is Google's current analytics product. Together they answer what happened after the send.</p>
+    <p class="eg"><b>Example.</b> CJA lets you ask whether people who entered a particular journey booked within thirty days, joining email behaviour to booking data in one analysis.</p>
+    <p class="yours"><b>You.</b> Built measurement infrastructure across CJA, Adobe Analytics and GA4 tracking over $10M in spend for 50-plus stakeholders, with a monthly report going to VP level.</p>
+  </div>
+
+  <div class="term" data-t="tag management gtm tealium launch web activation">
+    <h4>Tag management</h4>
+    <p class="short">How tracking code gets onto a website without a developer deploying every change.</p>
+    <p>A tag manager is a container on your site that lets marketing teams add and configure tracking and personalization code themselves. It appears in their nice-to-haves only where it affects email and journey triggers, meaning a website action needs to reliably fire an event that starts a journey.</p>
+    <p class="eg"><b>Example.</b> A tag fires when someone views the seat selection page without completing it, sending an event that triggers a journey.</p>
+    <p class="yours"><b>You.</b> Adjacent through your GA4, Adobe Analytics and Google Business Profile API work. A fair claim, not a headline one.</p>
+  </div>
+
+  <div class="term" data-t="aeroplan loyalty program tims rewards">
+    <h4>Loyalty programs, and why your Tim Hortons work maps</h4>
+    <p class="short">Aeroplan is their loyalty program, and loyalty is what makes airline activation complex.</p>
+    <p>Loyalty programs create tiers, points balances, partner earn and burn, and status. That means audiences are rarely simple: eligibility depends on tier, points, recent activity and partner behaviour all at once. It is the main reason an airline's activation stack is more tangled than a retailer's.</p>
+    <p class="eg"><b>Example.</b> An offer that should only reach members within five thousand points of the next tier, who have flown in the last six months, and who have not already received a similar offer this quarter.</p>
+    <p class="yours"><b>You.</b> Tim Hortons is hospitality at 4,000 locations with a loyalty and payments footprint, including the Tims Financial work where engagement rose 964%. Draw the parallel yourself rather than hoping they see it.</p>
+  </div>
+
+  <div class="term" data-t="matrixed organization steering forum stakeholder">
+    <h4>Matrixed organization and steering forums</h4>
+    <p class="short">Getting things done through people who do not report to you.</p>
+    <p>In a matrixed structure your work depends on Marketing, Data, IT and Privacy, none of whom you manage. A steering forum is the standing meeting where those functions make decisions together. Their posting names exactly this group, plus executives.</p>
+    <p class="eg"><b>Example.</b> A journey needs a new data feed. IT owns the pipeline, Privacy has to approve the field, Marketing wants it live next week, and you own the outcome without authority over any of them.</p>
+    <p class="yours"><b>You.</b> Fifty-plus stakeholders on measurement, VP-level reporting, vendor work across legal, IT and communications, and leading eight to ten consultants with client workshops at DXC.</p>
+  </div>
+
+  </div>
+
+  <div class="callout">If you only memorize six entries, make them these: Real-Time CDP, XDM schema, identity resolution and profile merge, suppression, typology, and the migration phases. The first four you can speak to from experience. Typology is the one piece of Campaign vocabulary you should know cold, and the phases are how you show method where you lack hours.</div>
+</section>
+
 <section id="checklist">
   <h2>Checklist</h2>
   <p class="sub">Ticks save between sessions.</p>
@@ -966,6 +1252,25 @@ var obs=new IntersectionObserver(function(es){
 },{rootMargin:'-12% 0px -75% 0px'});
 var secs=document.querySelectorAll('main section');
 for(var s=0;s<secs.length;s++)obs.observe(secs[s]);
+
+(function(){
+  var input=$('gsearch'),list=$('glist');
+  if(!input)return;
+  var terms=list.querySelectorAll('.term'),bands=list.querySelectorAll('.gband');
+  function count(){
+    var v=input.value.toLowerCase().trim(),shown=0;
+    for(var i=0;i<terms.length;i++){
+      var t=terms[i],hay=(t.getAttribute('data-t')+' '+t.textContent).toLowerCase();
+      var hit=!v||hay.indexOf(v)>-1;
+      t.style.display=hit?'':'none';
+      if(hit)shown++;
+    }
+    for(var b=0;b<bands.length;b++)bands[b].style.display=v?'none':'';
+    $('gcount').textContent=v?(shown+' of '+terms.length+' entries'):(terms.length+' entries');
+  }
+  input.addEventListener('input',count);
+  count();
+})();
 
 buildChips();
 (function(){
