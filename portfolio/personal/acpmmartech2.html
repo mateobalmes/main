@@ -21,7 +21,6 @@ body{margin:0;background:var(--paper);color:var(--ink);
   font-family:var(--serif);font-size:18px;line-height:1.6;-webkit-font-smoothing:antialiased}
 .wrap{max-width:740px;margin:0 auto;padding:0 20px 140px}
 
-/* bar */
 .prog{position:fixed;top:0;left:0;height:2px;background:var(--accent);width:0;z-index:70}
 .bar{position:sticky;top:0;z-index:50;background:rgba(246,247,248,.95);
   backdrop-filter:blur(8px);border-bottom:1px solid var(--rule)}
@@ -33,7 +32,6 @@ select{flex:1;min-width:140px;font-family:var(--sans);font-size:14px;font-weight
   color:var(--muted);padding:8px 13px;cursor:pointer}
 .modes button.on{background:var(--ink);color:#fff}
 
-/* masthead */
 header.top{padding:48px 0 26px;border-bottom:2px solid var(--ink)}
 header.top h1{font-family:var(--sans);font-weight:700;font-size:clamp(28px,6.5vw,40px);
   line-height:1.1;letter-spacing:-.02em;margin:0 0 12px}
@@ -47,6 +45,7 @@ section{padding:38px 0;border-bottom:1px solid var(--rule)}
 .step{font-family:var(--sans);font-size:12.5px;font-weight:700;color:var(--accent);margin-bottom:6px}
 h2{font-family:var(--sans);font-weight:700;font-size:clamp(22px,4.6vw,28px);line-height:1.15;
   letter-spacing:-.015em;margin:0 0 10px}
+h4{font-family:var(--sans);font-size:16.5px;font-weight:700;margin:26px 0 8px}
 p{margin:0 0 15px;max-width:66ch}
 .test{font-family:var(--sans);font-size:14.5px;line-height:1.5;color:var(--muted);
   border-left:2px solid var(--rule);padding-left:14px;margin:0 0 22px;max-width:60ch}
@@ -58,7 +57,6 @@ li{margin-bottom:6px}
   border-radius:8px;padding:13px 15px;margin:0 0 16px;color:var(--warn);max-width:62ch}
 .stop b{color:#5E3D00;font-weight:700}
 
-/* question card */
 .q{background:var(--card);border:1px solid var(--rule);border-radius:11px;padding:18px 20px;margin:0 0 16px}
 .q h3{font-family:var(--sans);font-size:17.5px;font-weight:700;margin:0 0 3px;letter-spacing:-.005em}
 .who{font-family:var(--sans);font-size:12.5px;color:var(--accent);font-weight:600;margin:0 0 12px}
@@ -70,8 +68,8 @@ details{margin-top:14px}
 details summary{font-family:var(--sans);font-size:13px;font-weight:600;color:var(--muted);
   cursor:pointer;list-style:none;padding:7px 0 0;border-top:1px dashed var(--rule)}
 details summary::-webkit-details-marker{display:none}
-details summary::before{content:"▸ ";color:var(--accent)}
-details[open] summary::before{content:"▾ "}
+details summary::before{content:"\25B8 ";color:var(--accent)}
+details[open] summary::before{content:"\25BE "}
 details summary:hover{color:var(--accent)}
 .say{padding-top:10px}
 .say p{margin:0 0 12px}
@@ -81,14 +79,12 @@ b.cue{font-weight:600;background:linear-gradient(transparent 62%,var(--accent-so
   font-family:var(--sans);font-size:14px;line-height:1.5;color:var(--warn)}
 .fill b{color:#5E3D00}
 
-/* stepper */
 .stepper{display:flex;justify-content:space-between;gap:12px;padding:28px 0 0}
 .stepper a{font-family:var(--sans);font-size:13.5px;font-weight:600;text-decoration:none;color:var(--muted);
   border:1px solid var(--rule);background:var(--card);border-radius:8px;padding:9px 13px;max-width:47%}
 .stepper a:hover{color:var(--accent);border-color:var(--accent)}
 .stepper a.n{margin-left:auto;text-align:right}
 
-/* notepad */
 .pad-open{position:fixed;right:16px;bottom:16px;z-index:80;font-family:var(--sans);font-size:14px;
   font-weight:600;color:#fff;background:var(--ink);border:none;border-radius:24px;padding:12px 18px;
   cursor:pointer;box-shadow:0 3px 14px rgba(26,32,41,.22)}
@@ -110,8 +106,7 @@ b.cue{font-weight:600;background:linear-gradient(transparent 62%,var(--accent-so
 .pad-btn.primary:hover{background:var(--accent);border-color:var(--accent);color:#fff}
 .pad-note{font-family:var(--sans);font-size:12.5px;color:var(--muted);margin-left:auto;text-align:right}
 
-/* cue mode strips the prose down */
-body.cue .test,body.cue .note,body.cue .stop,body.cue section > p,body.cue section > ul{display:none}
+body.cue .test,body.cue .note,body.cue .stop,body.cue section > p,body.cue section > ul,body.cue h4{display:none}
 body.cue section{padding:22px 0}
 body.cue .q{padding:14px 16px}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
@@ -123,12 +118,9 @@ body.cue .q{padding:14px 16px}
 <div class="prog" id="prog"></div>
 <div class="bar">
   <div class="bar-in">
-    <div class="modes">
-      <button id="mFull" class="on">Full</button>
-      <button id="mCue">Cue</button>
-    </div>
+    <div class="modes"><button id="mFull" class="on">Full</button><button id="mCue">Cue</button></div>
     <select id="nav" aria-label="Jump to section">
-      <option value="s0">0 — The room</option>
+      <option value="s0">0 — The room &amp; the org</option>
       <option value="s1">1 — Opening three</option>
       <option value="s2">2 — Campaign Classic</option>
       <option value="s3">3 — Migration</option>
@@ -137,7 +129,8 @@ body.cue .q{padding:14px 16px}
       <option value="s6">6 — Behavioural</option>
       <option value="s7">7 — Logistics</option>
       <option value="s8">8 — Your questions</option>
-      <option value="s9">9 — Cheat sheet</option>
+      <option value="s9">9 — Aviation</option>
+      <option value="s10">10 — Cheat sheet</option>
     </select>
   </div>
 </div>
@@ -148,32 +141,48 @@ body.cue .q{padding:14px 16px}
   <h1>Round 2 — Hiring manager<br>Air Canada, PM Marketing Technology</h1>
   <p class="meta">
     <b>Friday 18 September, 10:00. 45 minutes. Virtual.</b><br>
-    <b>Rafael Bica</b> — Manager, Digital Product. The one who decides.<br>
-    <b>Hakima</b> — Talent Recruiter. Opens, closes, handles logistics.
+    <b>Rafael Bica</b> — Manager, Digital Product. Brazilian. The decision.<br>
+    <b>Hakima</b> — Talent Recruiter. Opens, closes, logistics.
   </p>
   <div class="flags">
     <span class="flag">Red CV — RBI only</span>
-    <span class="flag">Two interviewers</span>
     <span class="flag">Switch to Cue before the call</span>
+    <span class="flag">Money-framed outcomes</span>
   </div>
 </header>
 
 <!-- 0 -->
 <section id="s0">
-  <div class="step">Before anything else</div>
-  <h2>The room</h2>
-  <p class="test"><b>Two people, two jobs.</b> Hakima runs the frame — intro, logistics, close. Rafael is the decision. When he asks something, answer <i>him</i>, and keep your eyes on the camera rather than his tile.</p>
+  <div class="step">Read first</div>
+  <h2>The room, and the org you'd be joining</h2>
+  <p class="test"><b>Two people, two jobs.</b> Hakima frames and closes. Rafael decides. Answer him when he asks, and keep your eyes on the camera rather than his tile.</p>
 
-  <h3 style="font-family:var(--sans);font-size:17px;margin:24px 0 8px">What I could find on Rafael</h3>
-  <p>Manager, Digital Product / Digital Optimization and Insights at Air Canada, based in Toronto. Before this, agency and media side — GALE, BIMM, SiriusXM Canada. Educated in statistics and actuarial science.</p>
-  <p class="note"><b>Treat that as a hint, not a fact.</b> It's aggregator data, not his own profile. Check his LinkedIn yourself before Friday.</p>
-  <p class="note"><b>What it implies if it's right.</b> Agency and optimization background, not platform engineering. He is more likely to press on <b>business impact, adoption and coordination</b> than on Campaign syntax. A statistics background means he will take measurement seriously, so section 5 matters more than usual. He will relate to "I got the business case approved" faster than "I rebuilt the workflow."</p>
-  <div class="stop"><b>Adjust your register.</b> Lead with the outcome, then the mechanism. Not the reverse. He does not need to hear the tool names to be impressed, and drowning him in Adobe vocabulary reads as hiding.</div>
+  <h4>Rafael</h4>
+  <p>Manager, Digital Product / Digital Optimization and Insights, Toronto. Agency and media background before Air Canada — GALE, BIMM, SiriusXM Canada. Studied statistics and actuarial science. Brazilian.</p>
+  <p class="note"><b>Treat that as a hint.</b> It came from a contact-scraping site, not his own profile. Check LinkedIn yourself before Friday.</p>
+  <p class="note"><b>What it means.</b> He'll press on <b>business impact, adoption and coordination</b> rather than Campaign syntax. A statistics background means measurement is his native language, so section 5 carries more weight than usual. Lead with the outcome, then the mechanism — never the reverse.</p>
 
-  <h3 style="font-family:var(--sans);font-size:17px;margin:24px 0 8px">Two things settled before you dial</h3>
+  <h4>His team: six martech product managers</h4>
+  <p>The org is split by <b>martech domain, not by function</b>. Each PM owns a domain end to end with their own squad. Three are visible from what you found:</p>
   <ul>
-    <li><b>Employment status.</b> Same answer as always, and it has to survive a check.</li>
-    <li><b>What you actually touched in Campaign Classic.</b> Specific. This round is where "adjacent" gets a follow-up question.</li>
+    <li><b>Consent &amp; personalization</b> — OneTrust, Adobe Target, AJO. Rebuilt consent for 35M+ customers, killed $1.5M of annual cost, led a $5M migration.</li>
+    <li><b>Analytics &amp; tagging</b> — clickstream, A/B, ad servers. Migrated Adobe DTM to Launch, closed 80% of the gap between the booking system and Adobe Analytics.</li>
+    <li><b>Activation</b> — Campaign Classic and AJO. <b>Your role.</b></li>
+  </ul>
+  <p class="note"><b>Why so many PMs:</b> 35M+ customers, Aeroplan, and three compliance regimes at once — GDPR, Quebec Law 25, CASL. Martech is a portfolio, not a team. That's also why the title is product manager rather than specialist: each domain needs someone accountable for outcomes, not someone executing inside one.</p>
+
+  <div class="stop"><b>AJO appears in two of these jobs.</b> The consent PM built an experience layer on Drupal, Adobe Target and AJO. You'd own AJO for activation. That boundary either works cleanly or is live friction — and asking about it is the sharpest question you have.</div>
+
+  <h4>Two things to match</h4>
+  <ul>
+    <li><b>Their outcomes are money-framed.</b> $1.5M eliminated, $5M migration, $250K vendor cost removed, $200K/month of resourcing. Your numbers are efficiency-framed. Attach a dollar or a cost avoided wherever you honestly can.</li>
+    <li><b>They run a specific operating model.</b> "Outcomes rather than roadmap items" and "continuous discovery" is deliberate vocabulary. Use it in your roadmap answer.</li>
+  </ul>
+
+  <h4>Settled before you dial</h4>
+  <ul>
+    <li><b>Employment status.</b> Has to survive a check.</li>
+    <li><b>What you actually touched in Campaign Classic.</b> One specific sentence. This is the round where "adjacent" gets a follow-up.</li>
   </ul>
 </section>
 
@@ -181,61 +190,55 @@ body.cue .q{padding:14px 16px}
 <section id="s1">
   <div class="step">Section 1</div>
   <h2>The opening three</h2>
-  <p class="test"><b>Same questions as a screen, different consequence.</b> Hakima may ask them, but Rafael will follow up on whatever you say. Every sentence is a door you are choosing to open.</p>
+  <p class="test"><b>Same questions as a screen, different consequence.</b> Rafael follows up on whatever you say. Every sentence is a door you choose to open.</p>
 
-  <article class="q" id="q1">
+  <article class="q">
     <h3>Tell me about yourself</h3>
-    <p class="who">Hakima opens it. Rafael probes after.</p>
+    <p class="who">Hakima opens. Rafael probes after.</p>
     <ul class="cues">
       <li class="hot">RBI, Adobe stack, Tim Hortons</li><li>4,000+ locations</li>
       <li>AEP, AJO, CJA, AEM</li><li>journeys, triggers, consent</li>
-      <li>owned Adobe relationship</li><li>DXC, P&amp;G, four brands</li>
+      <li>owned the Adobe relationship</li><li>DXC, P&amp;G, four brands</li>
       <li>Lytics, Segment, Braze</li><li>95% data integrity</li>
-      <li>3 days → 4 hours</li><li>S&amp;P, then Ivey MBA</li>
+      <li>3 days &rarr; 4 hours</li><li>S&amp;P, then Ivey MBA</li>
       <li class="hot">platform, not campaigns</li>
     </ul>
-    <details><summary>Full answer</summary>
-      <div class="say">
-        <p>"My last three years were at <b class="cue">Restaurant Brands</b>, owning the Adobe stack for <b class="cue">Tim Hortons across four thousand locations</b>. Experience Platform as the CDP, Journey Optimizer for orchestration, CJA on reporting, AEM for content.</p>
-        <p>Day to day I was <b class="cue">building journeys, configuring events and triggers</b>, working audience targeting, and making sure <b class="cue">consent and suppression</b> were enforced before anything went out. I also <b class="cue">managed the Adobe relationship</b> — vendor and licensing as well as the build.</p>
-        <p>Before that, <b class="cue">DXC as a technology consultant on P&amp;G</b>, deploying marketing tech for <b class="cue">four brands across the US and Canada</b>. Lytics, Segment, Braze. We got <b class="cue">data integrity to 95%</b>, and I built the pipelines that took <b class="cue">reporting from three days to four hours</b>.</p>
-        <p>Earlier was <b class="cue">S&amp;P Global on product strategy</b>, and my <b class="cue">MBA at Ivey</b> in between.</p>
-        <p>Short version: I've always sat on the <b class="cue">platform side rather than the campaign side</b>. I build the thing marketing operations runs on — which is the same line your posting draws."</p>
-      </div>
-    </details>
+    <details><summary>Full answer</summary><div class="say">
+      <p>"My last three years were at <b class="cue">Restaurant Brands</b>, owning the Adobe stack for <b class="cue">Tim Hortons across four thousand locations</b>. Experience Platform as the CDP, Journey Optimizer for orchestration, CJA on reporting, AEM for content.</p>
+      <p>Day to day, <b class="cue">building journeys, configuring events and triggers</b>, audience targeting, and making sure <b class="cue">consent and suppression</b> were enforced before anything went out. I also <b class="cue">managed the Adobe relationship</b> — vendor and licensing as well as the build.</p>
+      <p>Before that, <b class="cue">DXC as a technology consultant on P&amp;G</b>, marketing tech for <b class="cue">four brands across the US and Canada</b>. Lytics, Segment, Braze. Got <b class="cue">data integrity to 95%</b>, and built the pipelines that took <b class="cue">reporting from three days to four hours</b>.</p>
+      <p>Earlier was <b class="cue">S&amp;P Global on product strategy</b>, and my <b class="cue">MBA at Ivey</b> in between.</p>
+      <p>Short version: I've always sat on the <b class="cue">platform side rather than the campaign side</b>. I build the thing marketing operations runs on — the same line your posting draws."</p>
+    </div></details>
   </article>
 
-  <article class="q" id="q2">
+  <article class="q">
     <h3>Why did you leave RBI</h3>
     <p class="who">Hakima, usually early.</p>
     <ul class="cues">
       <li class="hot">scope shifted to CRM execution</li><li>wanted platform ownership</li>
       <li>legitimate need, wrong direction for me</li><li class="hot">then stop</li>
     </ul>
-    <details><summary>Full answer</summary>
-      <div class="say">
-        <p>"The scope was shifting toward <b class="cue">CRM execution</b> — running campaigns rather than owning the platform. That's a legitimate need, it just wasn't the direction I wanted. I've been building toward <b class="cue">platform and product ownership</b>, so I stepped away rather than drift into a different job than the one I signed up for."</p>
-        <p>If asked what you've done since: "Took the time deliberately. An AI side project, and a fair amount of travel. I wasn't in a rush to take the wrong thing." One breath, then forward.</p>
-      </div>
-    </details>
-    <div class="fill"><b>Out of this answer:</b> your manager leaving, the four months of sports and travel as an opener, and any judgment on RBI. All three cost you more than they earn.</div>
+    <details><summary>Full answer</summary><div class="say">
+      <p>"The scope was shifting toward <b class="cue">CRM execution</b> — running campaigns rather than owning the platform. A legitimate need, just not the direction I wanted. I've been building toward <b class="cue">platform and product ownership</b>, so I stepped away rather than drift into a different job than the one I signed up for."</p>
+      <p>If asked what you've done since: "Took the time deliberately. An AI side project, and a fair amount of travel. I wasn't in a rush to take the wrong thing." One breath, then forward.</p>
+    </div></details>
+    <div class="fill"><b>Out:</b> your manager leaving, the four months as an opener, any judgment on RBI. All three cost more than they earn.</div>
   </article>
 
-  <article class="q" id="q3">
+  <article class="q">
     <h3>Why Air Canada</h3>
-    <p class="who">Either. Rafael will care more.</p>
+    <p class="who">Either. Rafael cares more.</p>
     <ul class="cues">
       <li class="hot">reach new frontiers = growth</li><li>new planes, routes, passengers</li>
-      <li>martech is upstream of that</li><li class="hot">Aeroplan ≈ Tims, harder</li>
+      <li>martech is upstream of that</li><li class="hot">Aeroplan &asymp; Tims, harder</li>
       <li>more triggers, higher value</li><li>I fly constantly</li>
     </ul>
-    <details><summary>Full answer</summary>
-      <div class="say">
-        <p>"The mission is about <b class="cue">reaching new frontiers</b>, which in practice means growth — new aircraft, routes, passengers. <b class="cue">Marketing technology sits directly upstream of that</b>. You can't reach new customers well without understanding the ones you have.</p>
-        <p>The other reason is <b class="cue">Aeroplan</b>. At Tim Hortons I ran lifecycle and loyalty messaging for a Canadian program at national scale. Aeroplan is the same problem with <b class="cue">more trigger complexity and higher value per customer</b> — a step up in a direction I already know.</p>
-        <p>And personally I fly constantly. It isn't an abstract product to me."</p>
-      </div>
-    </details>
+    <details><summary>Full answer</summary><div class="say">
+      <p>"The mission is about <b class="cue">reaching new frontiers</b>, which in practice means growth — new aircraft, routes, passengers. <b class="cue">Marketing technology sits directly upstream of that</b>. You can't reach new customers well without understanding the ones you have.</p>
+      <p>The other reason is <b class="cue">Aeroplan</b>. At Tim Hortons I ran lifecycle and loyalty messaging for a Canadian program at national scale. Aeroplan is the same problem with <b class="cue">more trigger complexity and higher value per customer</b>.</p>
+      <p>And personally I fly constantly. It isn't an abstract product to me."</p>
+    </div></details>
     <div class="fill"><b>Before Friday:</b> check the exact mission wording on their careers page. Almost-right is worse than paraphrasing.</div>
   </article>
 </section>
@@ -244,9 +247,9 @@ body.cue .q{padding:14px 16px}
 <section id="s2">
   <div class="step">Section 2</div>
   <h2>Campaign Classic — the gap</h2>
-  <p class="test"><b>This is the round where it gets a follow-up.</b> A recruiter accepts "adjacent." A hiring manager asks "adjacent how?" Decide your specific answer before Friday, not during.</p>
+  <p class="test"><b>A recruiter accepts "adjacent." A hiring manager asks "adjacent how?"</b> Decide the specific answer before Friday, not during.</p>
 
-  <article class="q" id="q4">
+  <article class="q">
     <h3>How much hands-on Campaign Classic</h3>
     <p class="who">Rafael. Near certain.</p>
     <ul class="cues">
@@ -255,30 +258,26 @@ body.cue .q{padding:14px 16px}
       <li>transfers: SQL, deliverability, consent, suppression</li>
       <li>audience counts disagreeing = where real problems live</li>
       <li class="hot">learning the tool, not the domain</li>
-      <li class="hot">never say fast learner</li>
+      <li class="hot">never "fast learner"</li>
     </ul>
-    <details><summary>Full answer</summary>
-      <div class="say">
-        <p>"Let me be straight. <b class="cue">Journey Optimizer and Experience Platform are my hands-on tools</b> — that's where I've built. <b class="cue">Campaign Classic I've worked adjacent to</b> rather than in, mostly at the data and audience layer.</p>
-        <p>What carries over is most of the surrounding discipline. <b class="cue">SQL targeting, deliverability, consent and suppression</b>, and debugging audience counts when the CDP and the send tool disagree — which is where most of the real problems live anyway. So the ramp is <b class="cue">learning the tool, not learning the domain</b>."</p>
-      </div>
-    </details>
-    <div class="fill"><b>Fill this in before Friday.</b> Write one concrete sentence on what you actually did touch. The AEP-to-Campaign audience handoff? SQL against its schema? Reviewing deliveries? Sitting in planning? Whichever is true — say that specific thing, not the word "adjacent."</div>
+    <details><summary>Full answer</summary><div class="say">
+      <p>"Let me be straight. <b class="cue">Journey Optimizer and Experience Platform are my hands-on tools</b> — that's where I've built. <b class="cue">Campaign Classic I've worked adjacent to</b> rather than in, mostly at the data and audience layer.</p>
+      <p>What carries over is the surrounding discipline. <b class="cue">SQL targeting, deliverability, consent and suppression</b>, and debugging audience counts when the CDP and the send tool disagree — which is where most of the real problems live. So the ramp is <b class="cue">learning the tool, not learning the domain</b>."</p>
+    </div></details>
+    <div class="fill"><b>Fill this in before Friday.</b> One concrete sentence on what you actually touched. The AEP-to-Campaign handoff? SQL against its schema? Reviewing deliveries? Say the specific thing, not the word "adjacent."</div>
   </article>
 
-  <article class="q" id="q5">
-    <h3>If he presses on the gap</h3>
+  <article class="q">
+    <h3>If he presses</h3>
     <p class="who">Rafael, as a follow-up.</p>
     <ul class="cues">
-      <li>don't over-explain</li><li class="hot">turn it into a question</li>
-      <li>Classic staying, or folding into AJO?</li><li>what's the ramp expectation?</li>
+      <li class="hot">don't apologise twice</li><li class="hot">turn it into a question</li>
+      <li>Classic staying, or folding into AJO?</li><li>what ramp were you expecting?</li>
     </ul>
-    <details><summary>Full answer</summary>
-      <div class="say">
-        <p>Answer once, then flip it: "Is Classic staying long term, or consolidating into AJO? And what ramp were you expecting on it for this role?"</p>
-        <p>His answer tells you whether the gap is survivable. Asking it makes you sound like a platform PM rather than a candidate defending himself. <b class="cue">Don't apologise twice for the same gap</b> — repeating it makes it bigger than it is.</p>
-      </div>
-    </details>
+    <details><summary>Full answer</summary><div class="say">
+      <p>Answer once, then flip it: "Is Classic staying long term, or consolidating into AJO? And what ramp were you expecting on it for this role?"</p>
+      <p>His answer tells you whether the gap is survivable. Asking makes you sound like a platform PM rather than a candidate defending himself. <b class="cue">Repeating the apology makes the gap bigger than it is.</b></p>
+    </div></details>
   </article>
 </section>
 
@@ -287,40 +286,36 @@ body.cue .q{padding:14px 16px}
   <div class="step">Section 3</div>
   <h2>The v7 to v8 migration</h2>
 
-  <article class="q" id="q6">
+  <article class="q">
     <h3>Have you led a migration like this</h3>
     <p class="who">Rafael.</p>
     <ul class="cues">
-      <li class="hot">not a v7→v8 specifically</li><li>led a platform migration at RBI</li>
+      <li class="hot">not a v7&rarr;v8 specifically</li><li>led a platform migration at RBI</li>
       <li>name both vendors out loud</li><li>Adobe documents the technical path</li>
       <li class="hot">sequencing and coordination is the real work</li>
       <li>IT, data, privacy, ops</li>
     </ul>
-    <details><summary>Full answer</summary>
-      <div class="say">
-        <p>"Not a Campaign v7 to v8 upgrade specifically. I have <b class="cue">led a platform migration at RBI</b>, moving from one vendor to another.</p>
-        <p>My read is that the <b class="cue">technical path is well documented by Adobe</b> — the upgrade checklist exists. What decides whether it goes well is <b class="cue">sequencing and coordination</b>: which teams get pulled in, in what order, and where dependencies sit across IT, data and privacy. That part I've done."</p>
-      </div>
-    </details>
-    <div class="fill"><b>Name the two vendors.</b> "One vendor to another" without names sounds like you're covering something.</div>
+    <details><summary>Full answer</summary><div class="say">
+      <p>"Not a Campaign v7 to v8 upgrade specifically. I have <b class="cue">led a platform migration at RBI</b>, moving from one vendor to another.</p>
+      <p>My read is that the <b class="cue">technical path is well documented by Adobe</b> — the checklist exists. What decides whether it goes well is <b class="cue">sequencing and coordination</b>: which teams get pulled in, in what order, and where dependencies sit across IT, data and privacy. That part I've done."</p>
+    </div></details>
+    <div class="fill"><b>Name the two vendors.</b> "One vendor to another" without names sounds like covering.</div>
   </article>
 
-  <article class="q" id="q7">
-    <h3>What would week one of that migration look like here</h3>
+  <article class="q">
+    <h3>What would week one look like here</h3>
     <p class="who">Rafael, the likely follow-up.</p>
     <ul class="cues">
       <li class="hot">inventory first, build nothing</li>
       <li>every workflow, schema, integration, script</li>
       <li>flag standard vs custom</li><li>custom is where it breaks</li>
-      <li>then sequence: what everything else depends on</li>
+      <li>then sequence by dependency</li>
     </ul>
-    <details><summary>Full answer</summary>
-      <div class="say">
-        <p>"Week one I wouldn't build anything. I'd <b class="cue">inventory what's actually running</b> — every workflow, custom schema, integration and script — and flag which are standard and which are custom.</p>
-        <p>The database change itself is Adobe's problem and it's documented. <b class="cue">What breaks is everything built on top over the years</b>: custom scripts, one-off integrations, workflows someone built five years ago that nobody fully remembers. That inventory is what tells you how long this really takes.</p>
-        <p>Then phases: plan, build, test in parallel where possible, <b class="cue">cutover</b>, <b class="cue">hypercare</b>, steady state."</p>
-      </div>
-    </details>
+    <details><summary>Full answer</summary><div class="say">
+      <p>"Week one I wouldn't build anything. I'd <b class="cue">inventory what's actually running</b> — every workflow, custom schema, integration and script — and flag which are standard and which are custom.</p>
+      <p>The database change is Adobe's problem and it's documented. <b class="cue">What breaks is everything built on top over the years</b>: custom scripts, one-off integrations, workflows someone built five years ago that nobody fully remembers. That inventory tells you how long this really takes.</p>
+      <p>Then the phases: plan, build, test in parallel where possible, <b class="cue">cutover</b>, <b class="cue">hypercare</b>, steady state."</p>
+    </div></details>
   </article>
 </section>
 
@@ -328,47 +323,43 @@ body.cue .q{padding:14px 16px}
 <section id="s4">
   <div class="step">Section 4</div>
   <h2>Roadmap and first 90 days</h2>
-  <p class="test"><b>This is the PM part of the interview.</b> A thin answer here signals strategist-without-substance, which is exactly the scar in their posting.</p>
+  <p class="test"><b>The PM part of the interview.</b> A thin answer signals strategist-without-substance, which is exactly the scar in their posting.</p>
 
-  <article class="q" id="q8">
+  <article class="q">
     <h3>How would you build a roadmap</h3>
     <p class="who">Rafael. Very likely.</p>
     <ul class="cues">
       <li class="hot">what's slowing people down, not new features</li>
+      <li class="hot">outcomes, not roadmap items</li>
       <li>their own KPIs point at it</li>
       <li class="hot">sequence by dependency</li>
       <li>migration first, everything sits on it</li>
-      <li class="hot">build it with MOps, IT, Privacy in the room</li>
-      <li>a roadmap they didn't shape is one they won't use</li>
+      <li class="hot">built with MOps, IT, Privacy in the room</li>
     </ul>
-    <details><summary>Full answer</summary>
-      <div class="say">
-        <p>"I'd start with <b class="cue">what's actually slowing the team down</b>, not with new features. Where time-to-launch stalls, where workflow reuse breaks, where deliverability or self-serve maturity is weak. Those are basically the metrics in your own posting.</p>
-        <p>Then <b class="cue">sequence around dependencies</b>. Something like the v7 to v8 migration goes first, because everything else sits on top of it.</p>
-        <p>And I'd build it <b class="cue">with Marketing Operations, IT and Privacy in the room</b>, not alone — because a roadmap they didn't help shape is one they won't actually use."</p>
-      </div>
-    </details>
-    <div class="fill"><b>If he says the roadmap doesn't exist yet:</b> only the first beat changes. "Audit what's broken" becomes "find out what's actually running." Sequencing and who's-in-the-room stay identical.</div>
+    <details><summary>Full answer</summary><div class="say">
+      <p>"I'd start with <b class="cue">what's actually slowing the team down</b>, not with new features. Where time-to-launch stalls, where workflow reuse breaks, where deliverability or self-serve maturity is weak. Those are basically the metrics in your own posting.</p>
+      <p>Then <b class="cue">sequence around dependencies</b>. Something like the v7 to v8 migration goes first, because everything else sits on top of it.</p>
+      <p>And I'd frame it as <b class="cue">outcomes rather than a list of items</b>, built <b class="cue">with Marketing Operations, IT and Privacy in the room</b> — because a roadmap they didn't help shape is one they won't actually use."</p>
+    </div></details>
+    <div class="fill"><b>If he says there is no roadmap yet:</b> only the first beat changes. "Audit what's broken" becomes "find out what's actually running." Sequencing and who's-in-the-room stay identical.</div>
   </article>
 
-  <article class="q" id="q9">
+  <article class="q">
     <h3>First 90 days</h3>
     <p class="who">Rafael.</p>
     <ul class="cues">
       <li class="hot">M1: listen and audit, ship nothing big</li>
-      <li>sit with MOps, where do they get stuck</li>
-      <li>audit what's really running, not the docs</li>
+      <li>sit with MOps — where do they get stuck</li>
+      <li>audit what's running, not the docs</li>
       <li class="hot">M2: one or two visible wins</li>
-      <li>a template or runbook for the most common blocker</li>
+      <li>a template or runbook for the top blocker</li>
       <li class="hot">D90: roadmap built with the room</li>
     </ul>
-    <details><summary>Full answer</summary>
-      <div class="say">
-        <p>"First month I wouldn't ship anything big. I'd sit with Marketing Operations and find out <b class="cue">where they actually get stuck day to day</b>, not what the documentation says. Audit what's really running in Campaign and AJO — what's custom, what's fragile, what depends on one person. And get across the Adobe relationship and any migration conversation already in motion.</p>
-        <p>Second month, <b class="cue">one or two visible wins</b>. A workflow template or a runbook for whatever operations hits most often. Small, but it proves the platform team is useful rather than a gatekeeper.</p>
-        <p>By day 90, an <b class="cue">actual roadmap built with operations, IT and Privacy</b>, sequenced by dependency. And I'd be able to tell you what's broken, what's fragile, and what's next."</p>
-      </div>
-    </details>
+    <details><summary>Full answer</summary><div class="say">
+      <p>"First month I wouldn't ship anything big. I'd sit with Marketing Operations and find out <b class="cue">where they actually get stuck day to day</b>, not what the documentation says. Audit what's really running in Campaign and AJO — what's custom, what's fragile, what depends on one person. And get across the Adobe relationship and any migration already in motion.</p>
+      <p>Second month, <b class="cue">one or two visible wins</b>. A workflow template or a runbook for whatever operations hits most often. Small, but it proves the platform team is useful rather than a gatekeeper.</p>
+      <p>By day 90, an <b class="cue">actual roadmap built with operations, IT and Privacy</b>, sequenced by dependency. And I could tell you what's broken, what's fragile, and what's next."</p>
+    </div></details>
   </article>
 </section>
 
@@ -376,39 +367,36 @@ body.cue .q{padding:14px 16px}
 <section id="s5">
   <div class="step">Section 5</div>
   <h2>Proving it works</h2>
-  <p class="test"><b>Weight this one.</b> If his background really is optimization and statistics, measurement is his native language. This is where you sound like a peer instead of a candidate.</p>
+  <p class="test"><b>Weight this one.</b> Statistics background, optimization role. Measurement is his native language. This is where you sound like a peer.</p>
 
-  <article class="q" id="q10">
+  <article class="q">
     <h3>How would you know the platform is working</h3>
     <p class="who">Rafael. High probability.</p>
     <ul class="cues">
       <li class="hot">time to launch</li><li class="hot">workflow reuse</li>
       <li class="hot">deliverability health</li><li class="hot">journey throughput</li>
-      <li class="hot">MOps self-serve maturity</li>
+      <li class="hot">self-serve maturity</li>
       <li>platform metrics, not campaign metrics</li>
       <li>% of sends needing a Martech ticket</li>
     </ul>
-    <details><summary>Full answer</summary>
-      <div class="say">
-        <p>"Five things, and they're the ones in your posting. <b class="cue">Time to launch</b> — request to send. <b class="cue">Workflow reuse</b> — how much is templated versus rebuilt each time. <b class="cue">Deliverability health</b> — bounce, complaint, reputation. <b class="cue">Journey throughput</b>. And <b class="cue">self-serve maturity</b> — what share of sends operations completes without raising a ticket.</p>
-        <p>The distinction I'd hold onto is that <b class="cue">these are platform metrics, not campaign metrics</b>. Open rate is marketing operations' scoreboard. Mine is whether the platform let them move fast and safely."</p>
-      </div>
-    </details>
+    <details><summary>Full answer</summary><div class="say">
+      <p>"Five things, and they're the ones in your posting. <b class="cue">Time to launch</b> — request to send. <b class="cue">Workflow reuse</b> — templated versus rebuilt each time. <b class="cue">Deliverability health</b> — bounce, complaint, reputation. <b class="cue">Journey throughput</b>. And <b class="cue">self-serve maturity</b> — what share of sends operations completes without raising a ticket.</p>
+      <p>The distinction I'd hold is that <b class="cue">these are platform metrics, not campaign metrics</b>. Open rate is marketing operations' scoreboard. Mine is whether the platform let them move fast and safely."</p>
+    </div></details>
   </article>
 
-  <article class="q" id="q11">
+  <article class="q">
     <h3>How do you prioritise when everyone wants something</h3>
     <p class="who">Rafael, likely in some form.</p>
     <ul class="cues">
       <li>which KPI does it move</li><li>what depends on it</li>
-      <li>risk vs visibility</li><li class="hot">say no with a reason, not a queue position</li>
+      <li>invisible unblocker beats visible nothing</li>
+      <li class="hot">say no with a reason, not a queue position</li>
     </ul>
-    <details><summary>Full answer</summary>
-      <div class="say">
-        <p>"Two filters. <b class="cue">Which of those metrics does it move</b>, and <b class="cue">what else depends on it</b>. Something invisible that unblocks five other things beats something visible that unblocks nothing.</p>
-        <p>And when the answer is no, I'd rather say no with the reason than park it in a queue. People accept 'not this quarter because X' far better than silence."</p>
-      </div>
-    </details>
+    <details><summary>Full answer</summary><div class="say">
+      <p>"Two filters. <b class="cue">Which of those metrics does it move</b>, and <b class="cue">what else depends on it</b>. Something invisible that unblocks five other things beats something visible that unblocks nothing.</p>
+      <p>And when the answer is no, I'd rather say no with the reason than park it in a queue. People accept 'not this quarter because X' far better than silence."</p>
+    </div></details>
   </article>
 </section>
 
@@ -416,62 +404,47 @@ body.cue .q{padding:14px 16px}
 <section id="s6">
   <div class="step">Section 6</div>
   <h2>Behavioural</h2>
-  <p class="test"><b>These need real stories, and I don't have yours.</b> The frames below are the shape each answer should take. Fill the blanks yourself before Friday — an invented example collapses on the second follow-up question.</p>
+  <p class="test"><b>These need real stories and I don't have yours.</b> The frames below are the shape. Fill the blanks yourself — an invented example collapses on the second follow-up.</p>
 
-  <article class="q" id="q12">
+  <article class="q">
     <h3>Influencing without authority</h3>
-    <p class="who">Rafael. Their posting says "influential communicator in matrixed organizations."</p>
-    <ul class="cues">
-      <li>who disagreed</li><li>what was at stake</li>
-      <li>what you actually did</li><li class="hot">how it resolved</li>
-    </ul>
-    <div class="fill"><b>Pick one where Marketing, IT and Privacy wanted different things</b> and you got to a decision without owning any of those teams. Best candidate from your history: the consent and suppression enforcement work at RBI, or the Adobe vendor negotiation. Write the four beats out before Friday.</div>
+    <p class="who">Rafael. Their posting: "influential communicator in matrixed organizations."</p>
+    <ul class="cues"><li>who disagreed</li><li>what was at stake</li><li>what you did</li><li class="hot">how it resolved</li></ul>
+    <div class="fill"><b>Pick one where Marketing, IT and Privacy wanted different things</b> and you got a decision without owning any of those teams. Candidates from your history: consent and suppression enforcement at RBI, or the Adobe vendor negotiation.</div>
   </article>
 
-  <article class="q" id="q13">
+  <article class="q">
     <h3>A platform failure or a bad send</h3>
     <p class="who">Rafael.</p>
-    <ul class="cues">
-      <li>what broke</li><li>how you found it</li>
-      <li>what you did in the moment</li><li class="hot">what control you added after</li>
-    </ul>
-    <div class="fill"><b>The last beat is the one they're actually testing.</b> Anyone can describe a failure. The answer lands when you name the specific check, rule or runbook you added so it couldn't repeat.</div>
+    <ul class="cues"><li>what broke</li><li>how you found it</li><li>what you did then</li><li class="hot">what control you added after</li></ul>
+    <div class="fill"><b>The last beat is what they're testing.</b> Anyone can describe a failure. It lands when you name the specific check, rule or runbook that made it unrepeatable.</div>
   </article>
 
-  <article class="q" id="q14">
+  <article class="q">
     <h3>Convincing a non-technical stakeholder</h3>
     <p class="who">Rafael, given his background.</p>
     <ul class="cues">
-      <li class="hot">S&amp;P, CapitalIQ add-ins</li>
-      <li>usage +23%</li><li>release cycle 120h → 80h</li>
-      <li>framed in their terms, not the build</li>
+      <li class="hot">S&amp;P, CapitalIQ add-ins</li><li>usage +23%</li>
+      <li>release cycle 120h &rarr; 80h</li><li>outcome first, mechanism second</li>
     </ul>
-    <details><summary>Full answer</summary>
-      <div class="say">
-        <p>Your ready-made one is <b class="cue">S&amp;P Global, the CapitalIQ spreading add-ins</b> — a business case you built and got through, with <b class="cue">usage up 23%</b> and the <b class="cue">release cycle cut from 120 hours to 80</b>.</p>
-        <p>Frame it the way he'd frame it: the outcome first, the mechanism second. He came from agency and optimization work, so <b class="cue">"here's what changed and by how much"</b> is his register.</p>
-      </div>
-    </details>
+    <details><summary>Full answer</summary><div class="say">
+      <p>Your ready-made one is <b class="cue">S&amp;P Global, the CapitalIQ spreading add-ins</b> — a business case you built and got through, <b class="cue">usage up 23%</b>, <b class="cue">release cycle from 120 hours to 80</b>.</p>
+      <p>Frame it his way: what changed, and by how much. He came from agency and optimization work, so that's his register.</p>
+    </div></details>
   </article>
 
-  <article class="q" id="q15">
+  <article class="q">
     <h3>Disagreement with a stakeholder</h3>
     <p class="who">Either.</p>
-    <ul class="cues">
-      <li>about the decision, never the person</li>
-      <li>what you conceded</li><li class="hot">what you held</li>
-    </ul>
-    <div class="fill"><b>Include something you gave up.</b> A story where you were simply right and everyone came around reads as rehearsed. A real concession makes the whole thing credible.</div>
+    <ul class="cues"><li>about the decision, never the person</li><li>what you conceded</li><li class="hot">what you held</li></ul>
+    <div class="fill"><b>Include something you gave up.</b> A story where you were simply right and everyone came around reads as rehearsed.</div>
   </article>
 
-  <article class="q" id="q16">
+  <article class="q">
     <h3>Pace and dependability</h3>
     <p class="who">Possible. They wrote it into the posting, which is unusual.</p>
-    <ul class="cues">
-      <li>how you run a week</li><li>how you flag slippage early</li>
-      <li>no heroics, just rhythm</li>
-    </ul>
-    <div class="fill"><b>Why this is even in the posting:</b> most likely the last person in the seat was unreliable. Don't over-answer it. A calm, specific description of your operating rhythm does more than enthusiasm.</div>
+    <ul class="cues"><li>how you run a week</li><li>how you flag slippage early</li><li>no heroics, just rhythm</li></ul>
+    <div class="fill"><b>Why it's in the posting:</b> most likely the last person was unreliable. Don't over-answer. A calm description of your operating rhythm beats enthusiasm.</div>
   </article>
 </section>
 
@@ -481,7 +454,7 @@ body.cue .q{padding:14px 16px}
   <h2>Logistics</h2>
   <p class="test"><b>Hakima's territory, usually the last ten minutes.</b></p>
 
-  <article class="q" id="q17">
+  <article class="q">
     <h3>Compensation</h3>
     <ul class="cues">
       <li class="hot">ask their band first</li><li>base only, or total?</li>
@@ -489,17 +462,14 @@ body.cue .q{padding:14px 16px}
       <li class="hot">range, never a single number</li>
       <li>don't lead with your current salary</li>
     </ul>
-    <details><summary>Full answer</summary>
-      <div class="say">
-        <p>Let them go first: "What range did you have budgeted for the role?" Then probe it: <b class="cue">"Is that base only, or does it include bonus and benefits?"</b></p>
-        <p>If their band lands below where you are and you still want the role: "That's a bit below where I've been, but the scope here is different — ownership rather than execution — so I'm open to it. I'd want to understand the full package before saying more."</p>
-        <p>That keeps you in without pretending the gap isn't there.</p>
-      </div>
-    </details>
-    <div class="fill"><b>Check the live posting first.</b> Since January 2026 Ontario requires a salary range in public postings from employers with 25+ staff. The real number may already be published, which beats guessing from anything you saw internally.</div>
+    <details><summary>Full answer</summary><div class="say">
+      <p>Let them go first: "What range did you have budgeted for the role?" Then probe: <b class="cue">"Is that base only, or does it include bonus and benefits?"</b></p>
+      <p>If their band lands below where you are and you still want it: "That's a bit below where I've been, but the scope here is different — ownership rather than execution — so I'm open to it. I'd want to understand the full package before saying more."</p>
+    </div></details>
+    <div class="fill"><b>Check the live posting.</b> Since January 2026 Ontario requires a salary range in public postings from employers with 25+ staff. The real number may already be published.</div>
   </article>
 
-  <article class="q" id="q18">
+  <article class="q">
     <h3>The rest</h3>
     <ul class="cues">
       <li>employment status — settled in advance</li>
@@ -514,77 +484,201 @@ body.cue .q{padding:14px 16px}
 <section id="s8">
   <div class="step">Section 8</div>
   <h2>Your questions</h2>
-  <p class="test"><b>Pick three, not all of them.</b> Aim the technical ones at Rafael and the process ones at Hakima.</p>
+  <p class="test"><b>Pick three, not all.</b> Technical ones to Rafael, process ones to Hakima.</p>
 
-  <article class="q" id="q19">
+  <article class="q">
+    <h3>The org question — your strongest</h3>
+    <p class="who">Rafael. Shows you researched the org, not the posting.</p>
+    <ul class="cues">
+      <li class="hot">I could see a few of the martech product roles</li>
+      <li>consent &amp; preference, analytics &amp; tagging, activation</li>
+      <li class="hot">how is the portfolio split across the six?</li>
+      <li class="hot">where do the boundaries get tested?</li>
+    </ul>
+    <details><summary>Full answer</summary><div class="say">
+      <p>"I could see a few of the martech product roles on your team — consent and preference, analytics and tagging, and this activation one. <b class="cue">How is the portfolio split across the six, and where do the boundaries get tested?</b>"</p>
+      <p>Follow with the sharper one if it fits: <b class="cue">AJO shows up in both the experience layer and activation. Where does that line sit, and how do the two roadmaps stay aligned?</b></p>
+      <p>His answer tells you who you'd actually be negotiating with every week.</p>
+    </div></details>
+  </article>
+
+  <article class="q">
     <h3>For Rafael</h3>
     <ul class="cues">
       <li class="hot">Classic staying, or folding into AJO?</li>
-      <li>is the v7→v8 migration scoped? timeline?</li>
+      <li>is v7&rarr;v8 scoped? timeline?</li>
       <li class="hot">where does the Martech/MOps split break today?</li>
-      <li>consent resolved in the CDP already, or per tool?</li>
-      <li>what share of volume is Campaign vs AJO?</li>
+      <li>consent resolved in the CDP, or per tool?</li>
+      <li>volume share, Campaign vs AJO?</li>
       <li>what does success look like at 12 months?</li>
     </ul>
   </article>
 
-  <article class="q" id="q20">
+  <article class="q">
     <h3>For Hakima</h3>
-    <ul class="cues">
-      <li>why is the role open?</li><li>what are the next steps and timeline?</li>
-      <li>who else is in the process after this?</li>
-    </ul>
+    <ul class="cues"><li>why is the role open?</li><li>next steps and timeline?</li><li>who else is in the process?</li></ul>
   </article>
 </section>
 
 <!-- 9 -->
 <section id="s9">
   <div class="step">Section 9</div>
+  <h2>Aviation</h2>
+  <p class="test"><b>Discipline before content.</b> It's 45 minutes and you're assessed as a product manager, not a spotter. Pick <i>one</i> moment, let <i>one</i> detail land, then move on. If he takes the bait, follow him. If not, drop it.</p>
+
+  <article class="q">
+    <h3>Favourite airline</h3>
+    <p class="who">Likely only if you say you fly constantly.</p>
+    <ul class="cues">
+      <li class="hot">PAL — feels like going home</li>
+      <li class="hot">diaspora is a distinct segment</li>
+      <li>not tourists, not business travellers</li>
+      <li>ANA as the one you admire operationally</li>
+      <li class="hot">never say Air Canada</li>
+    </ul>
+    <details><summary>Full answer</summary><div class="say">
+      <p>"Philippine Airlines, honestly. Not on service rankings. It's that the flight feels like the <b class="cue">start of going home</b> rather than the trip to get there. Which is actually a real segment — people flying home to family behave completely differently from tourists or business travellers, and the airlines that understand that build a different product around it."</p>
+      <p>Bridge, if it fits: "Relevant here, actually. Toronto has one of the biggest diaspora populations anywhere, and that's a <b class="cue">lifecycle and loyalty question more than a route question</b>."</p>
+      <p>The alternative, or the pairing: <b class="cue">ANA</b>. "Every major carrier is safe, that's table stakes. It's the hospitality — on ANA the flight is part of the trip rather than the gap between two parts of it. Japan starts at the aircraft door."</p>
+    </div></details>
+    <div class="fill"><b>Why not Air Canada:</b> it reads as flattery and he'll discount everything after it. <b>PAL vs ANA:</b> PAL is memorable and true about you; ANA is safer and gives a cleaner product insight. Pairing both — the honest one plus the one you admire operationally — is usually strongest.</div>
+  </article>
+
+  <article class="q">
+    <h3>Favourite aircraft</h3>
+    <ul class="cues">
+      <li class="hot">A321XLR — narrowbody, transatlantic range</li>
+      <li class="hot">secondary cities get long-haul</li>
+      <li>787 — cabin altitude, humidity, quiet</li>
+      <li>A350-1000 — carbon fibre, replaced the 777-300ER</li>
+      <li>A220 — built in Mirabel, was the C Series</li>
+      <li>E195-E2 — Azul flies the most in the world</li>
+    </ul>
+    <details><summary>Full answer</summary><div class="say">
+      <p>Best single answer for this room: <b class="cue">"The A321XLR, honestly. A single-aisle doing transatlantic changes which cities can support long-haul at all — that's a network question more than an aircraft one."</b> Two sentences, then stop. It's their mission expressed as an aircraft.</p>
+      <p><b>787</b> for the customer-experience angle: lower cabin altitude, higher humidity, electrochromic windows, chevrons on the nacelles for noise. You land after fourteen hours less wrecked. Air Canada flies them.</p>
+      <p><b>A350-1000</b>: carbon-fibre fuselage, Trent XWB engines — that's where "XWB" comes from. Made ultra-long-haul work without four engines. Air Canada doesn't operate it, so don't imply they do.</p>
+      <p><b>A220</b>: built in Mirabel, Quebec, started as the Bombardier C Series, 3-2 seating so a third of the cabin has no middle seat.</p>
+      <p><b>Avoid</b> Concorde (cliché) and anything you haven't flown — the follow-up is always "when did you fly it."</p>
+    </div></details>
+  </article>
+
+  <article class="q">
+    <h3>The Brazil bridge</h3>
+    <p class="who">Only if aviation is already in play.</p>
+    <ul class="cues">
+      <li class="hot">Embraer E175 flies for Air Canada Express</li>
+      <li class="hot">scope clauses keep the E2 out of North America</li>
+      <li>Azul = largest E2 operator in the world</li>
+      <li>A220 was Bombardier — Canada vs Brazil at the WTO</li>
+      <li class="hot">GOL&ndash;Azul merger is DEAD</li>
+    </ul>
+    <details><summary>Full answer</summary><div class="say">
+      <p><b class="cue">The strongest bridge is Embraer.</b> Air Canada Express flies the E175. The reason it's the E175 and not the newer E175-E2 is US scope clauses — pilot contracts capping regional aircraft weight and seats, which the E2 exceeds. So Embraer's newest regional jet barely sells in North America while Azul is the world's largest E2 operator.</p>
+      <p>The better one if the conversation goes there: the <b class="cue">A220 Air Canada flies is built in Mirabel and started as the Bombardier C Series</b>. Bombardier and Embraer fought for years, including Canada and Brazil taking each other to the WTO over aircraft subsidies. Today the Canadian plane is Airbus and Embraer stayed independent. A Canada&ndash;Brazil story with both of you in it.</p>
+    </div></details>
+    <div class="stop"><b>Do not reference the GOL&ndash;Azul merger as live.</b> Abra called it off in September 2025 and killed the codeshare with it. Azul exited Chapter 11 on 20 February 2026 — roughly $850M new equity, $100M from United, American committing $100M pending approval. GOL exited its own Chapter 11 in June 2025. A Brazilian who follows this will clock the error instantly.</div>
+    <div class="fill"><b>The safer Brazil observation:</b> Brazil is the one major market where <b>no carrier belongs to a global alliance</b> — yet all three are wired into US airlines. LATAM through its Delta JV after leaving oneworld, GOL through Abra and American, Azul now through United and American equity. Alliance-free but not partner-free. Nice contrast with Air Canada, a founding Star Alliance member since 1997.</div>
+  </article>
+
+  <article class="q">
+    <h3>Boeing vs Airbus, if it comes up</h3>
+    <ul class="cues">
+      <li class="hot">control authority is the split</li>
+      <li>Airbus: hard envelope, sidesticks, static thrust levers</li>
+      <li>Boeing: pilot has final say, linked yokes, moving throttles</li>
+      <li class="hot">Airbus's real weapon is commonality</li>
+      <li>one type rating across the A320 family</li>
+    </ul>
+    <details><summary>Full answer</summary><div class="say">
+      <p>The philosophical split is <b class="cue">control authority</b>. Airbus fly-by-wire enforces a hard flight envelope — the aircraft won't let you exceed its limits. Boeing gives the pilot final authority with soft limits that can be overridden. Everything else follows: Airbus sidesticks aren't mechanically linked between pilots, Boeing yokes are; Airbus autothrust levers sit static in detents, Boeing autothrottles physically move.</p>
+      <p>Commercially, <b class="cue">Airbus's real weapon is commonality</b> — one type rating across the whole A320 family, cross-crew qualification up to the A330 and A350. A training-cost argument, which is how it wins fleet decisions.</p>
+      <p>Spotter details: the 737's flat-bottomed nacelles exist because it sits too low for a round one. The 787's raked wingtips and serrated chevrons are what make it quiet. The GE90 on a 777-300ER has a fan about as wide as a 737 fuselage. The A320's power transfer unit barks on the ground.</p>
+      <p><b>Air Canada spans both:</b> 737 MAX 8, 777, 787 on the Boeing side; A220, A320 family, A330 on Airbus; E175s at Express.</p>
+    </div></details>
+  </article>
+</section>
+
+<!-- 10 -->
+<section id="s10">
+  <div class="step">Section 10</div>
   <h2>Cheat sheet</h2>
+
+  <article class="q">
+    <h3>Your Tim Hortons stack</h3>
+    <ul class="cues">
+      <li class="hot">AEP — CDP, audiences, consent</li>
+      <li class="hot">AJO — journeys, events, triggers</li>
+      <li>CJA — reporting</li>
+      <li>AEM — content</li>
+      <li>Google Tag Manager</li><li>GA4</li>
+      <li>Chatmeter — listings</li>
+      <li>UTM governance</li><li>SEO</li>
+      <li class="hot">4,000+ locations</li>
+      <li>Adobe vendor lifecycle</li>
+    </ul>
+    <div class="fill"><b>Paste me anything missing</b> and I'll complete this — better your actual list than my partial one.</div>
+  </article>
+
+  <article class="q">
+    <h3>Your DXC / P&amp;G stack</h3>
+    <ul class="cues">
+      <li>Lytics — CDP</li><li>Segment — collection &amp; routing</li>
+      <li>Braze — messaging</li><li>Python / SQL pipelines</li>
+      <li>4 brands, US + Canada</li>
+    </ul>
+  </article>
 
   <article class="q">
     <h3>Their stack, four layers</h3>
     <ul class="cues">
       <li><b>Data</b> — AEP / Real-Time CDP</li>
-      <li class="hot"><b>Activation</b> — Campaign Classic (batch) + AJO (real-time) ← the job</li>
+      <li class="hot"><b>Activation</b> — Campaign Classic + AJO &larr; the job</li>
       <li><b>Decisioning</b> — AJO Offers</li>
       <li><b>Edges</b> — tag management, analytics elsewhere</li>
     </ul>
   </article>
 
   <article class="q">
-    <h3>The one-liner to land at least once</h3>
-    <ul class="cues"><li class="hot">"Marketing Technology owns the platforms. Marketing Operations runs the campaigns."</li></ul>
-  </article>
-
-  <article class="q">
-    <h3>Numbers you might need</h3>
+    <h3>Lines to land at least once</h3>
     <ul class="cues">
-      <li>4,000+ Tim Hortons locations</li><li>4 P&amp;G brands, US + Canada</li>
-      <li>95% data integrity</li><li>reporting 3 days → 4 hours</li>
-      <li>CapitalIQ usage +23%</li><li>release cycle 120h → 80h</li>
+      <li class="hot">"Marketing Technology owns the platforms. Marketing Operations runs the campaigns."</li>
+      <li class="hot">"Platform metrics, not campaign metrics."</li>
+      <li class="hot">"Outcomes, not roadmap items."</li>
     </ul>
   </article>
 
   <article class="q">
-    <h3>Terms, one line each</h3>
+    <h3>Numbers</h3>
+    <ul class="cues">
+      <li>4,000+ Tim Hortons locations</li><li>4 P&amp;G brands</li>
+      <li>95% data integrity (+17)</li><li>reporting 3 days &rarr; 4 hours</li>
+      <li>CapitalIQ usage +23%</li><li>release cycle 120h &rarr; 80h</li>
+    </ul>
+  </article>
+
+  <article class="q">
+    <h3>Terms</h3>
     <ul class="cues">
       <li><b>Suppression</b> — who you must not email, checked before every send</li>
       <li><b>Typologies</b> — Campaign's rules applied to every delivery</li>
       <li><b>Cutover</b> — the hour you switch live traffic over</li>
       <li><b>Hypercare</b> — close monitoring right after cutover</li>
       <li><b>Merge policy</b> — which source wins when systems disagree</li>
-      <li><b>Data contract</b> — agreed shape and cadence of data between teams</li>
+      <li><b>Data contract</b> — agreed shape and cadence between teams</li>
       <li><b>Express vs implied consent</b> — actively given vs from a business relationship, which expires</li>
     </ul>
   </article>
 
   <article class="q">
-    <h3>Three traps</h3>
+    <h3>Traps</h3>
     <ul class="cues">
       <li class="hot">never "fast learner"</li>
       <li class="hot">don't apologise twice for Campaign Classic</li>
       <li class="hot">don't volunteer the gap or the travel</li>
+      <li class="hot">GOL&ndash;Azul merger is dead</li>
+      <li class="hot">don't name Air Canada as favourite airline</li>
+      <li>don't criticise any carrier</li>
     </ul>
   </article>
 </section>
@@ -606,13 +700,12 @@ body.cue .q{padding:14px 16px}
 var secs = [].slice.call(document.querySelectorAll('section[id]'));
 var nav = document.getElementById('nav'), prog = document.getElementById('prog');
 var labels = {}; [].forEach.call(nav.options, function(o){ labels[o.value] = o.text; });
-var clean = function(id){ return (labels[id]||id).replace(/^\d+\s—\s/,''); };
+var clean = function(id){ return (labels[id]||id).replace(/^\d+\s\u2014\s/,''); };
 
 nav.addEventListener('change', function(e){
   var el = document.getElementById(e.target.value); if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
 });
 
-// full / cue mode
 var mFull = document.getElementById('mFull'), mCue = document.getElementById('mCue');
 function setMode(cue){
   document.body.classList.toggle('cue', cue);
@@ -623,7 +716,6 @@ mFull.addEventListener('click', function(){ setMode(false); });
 mCue.addEventListener('click', function(){ setMode(true); });
 setMode(false);
 
-// stepper
 secs.forEach(function(s,i){
   var st = document.createElement('div'); st.className='stepper';
   if(i>0){ var p=document.createElement('a'); p.href='#'+secs[i-1].id; p.textContent='\u2190  '+clean(secs[i-1].id); st.appendChild(p); }
@@ -631,7 +723,6 @@ secs.forEach(function(s,i){
   if(st.children.length) s.appendChild(st);
 });
 
-// notepad
 var padText=document.getElementById('padText'), padWhere=document.getElementById('padWhere'), pad=document.getElementById('pad'), stubbed=null;
 function stub(id){ return 'For '+clean(id)+':\n\n'; }
 function cur(){ var y=window.scrollY+140, c=secs[0]; secs.forEach(function(s){ if(s.offsetTop<=y) c=s; }); return c; }
