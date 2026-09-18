@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SQL for Martech — Refresher</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F6F7F8; --card:#FFFFFF; --ink:#1A2029; --muted:#5C6772;
+  --rule:#DCE1E5; --accent:#C8102E; --accent-soft:#FCEDEF;
+  --warn:#8A5A00; --warn-soft:#FBF3E2;
+  --code-bg:#1B2128; --code-fg:#DDE3EA;
+  --kw:#FF8FA3; --fn:#8ED0FF; --str:#A8E6A0; --num:#F5D580; --cmt:#7A8796;
+  --sans:"Archivo",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --serif:"Newsreader",Georgia,serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:96px}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--serif);font-size:18px;line-height:1.62;-webkit-font-smoothing:antialiased}
+.wrap{max-width:760px;margin:0 auto;padding:0 20px 140px}
+
+.prog{position:fixed;top:0;left:0;height:2px;background:var(--accent);width:0;z-index:70}
+.bar{position:sticky;top:0;z-index:50;background:rgba(246,247,248,.95);
+  backdrop-filter:blur(8px);border-bottom:1px solid var(--rule)}
+.bar-in{max-width:760px;margin:0 auto;padding:9px 20px;display:flex;gap:10px;align-items:center}
+.bar-id{font-family:var(--sans);font-size:12.5px;font-weight:600;color:var(--muted);white-space:nowrap}
+select{flex:1;min-width:0;font-family:var(--sans);font-size:14px;font-weight:500;color:var(--ink);
+  background:var(--card);border:1px solid var(--rule);border-radius:7px;padding:8px 10px;cursor:pointer}
+
+header.top{padding:48px 0 26px;border-bottom:2px solid var(--ink)}
+header.top h1{font-family:var(--sans);font-weight:700;font-size:clamp(28px,6.5vw,42px);
+  line-height:1.08;letter-spacing:-.02em;margin:0 0 14px}
+header.top .sub{font-size:17px;color:var(--muted);margin:0 0 18px;max-width:58ch}
+.howto{background:var(--accent-soft);border-radius:9px;padding:14px 16px;
+  font-family:var(--sans);font-size:14.5px;line-height:1.55;color:#8E1226}
+.howto b{color:#6E0E1D}
+
+section{padding:40px 0;border-bottom:1px solid var(--rule)}
+.step{font-family:var(--sans);font-size:12.5px;font-weight:700;color:var(--accent);margin-bottom:6px}
+h2{font-family:var(--sans);font-weight:700;font-size:clamp(22px,4.8vw,29px);line-height:1.15;
+  letter-spacing:-.015em;margin:0 0 10px}
+h3{font-family:var(--sans);font-weight:700;font-size:18px;margin:0 0 4px}
+p{margin:0 0 15px;max-width:66ch}
+.lead{font-family:var(--sans);font-size:14.5px;line-height:1.5;color:var(--muted);
+  border-left:2px solid var(--rule);padding-left:14px;margin:0 0 22px;max-width:60ch}
+.lead b{color:var(--ink);font-weight:600}
+ul,ol{margin:0 0 16px;padding-left:22px;max-width:64ch}
+li{margin-bottom:7px}
+
+/* query card */
+.card{background:var(--card);border:1px solid var(--rule);border-radius:12px;
+  padding:20px 22px;margin:0 0 20px}
+.tag{font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.03em;
+  text-transform:uppercase;color:var(--accent);margin:0 0 8px}
+.plain{font-family:var(--sans);font-size:15px;line-height:1.55;color:var(--muted);margin:0 0 14px}
+.plain b{color:var(--ink);font-weight:600}
+
+pre{background:var(--code-bg);border-radius:9px;padding:16px 18px;margin:0 0 14px;
+  overflow-x:auto;font-family:var(--mono);font-size:14px;line-height:1.85;color:var(--code-fg)}
+@media(max-width:520px){pre{font-size:12.5px;padding:13px 14px}}
+pre .kw{color:var(--kw)} pre .fn{color:var(--fn)} pre .str{color:var(--str)}
+pre .num{color:var(--num)} pre .cmt{color:var(--cmt);font-style:italic}
+
+/* hoverable / tappable token */
+.t{position:relative;border-bottom:1px dashed rgba(255,255,255,.38);cursor:help}
+.t:hover{background:rgba(255,255,255,.09);border-bottom-color:#fff}
+.t .tip{
+  position:absolute;left:0;bottom:calc(100% + 10px);
+  width:max-content;max-width:min(330px,72vw);
+  font-family:var(--sans);font-size:13px;line-height:1.5;font-weight:400;
+  background:#fff;color:var(--ink);border:1px solid var(--rule);
+  box-shadow:0 6px 22px rgba(14,18,24,.28);
+  padding:11px 13px;border-radius:9px;white-space:normal;
+  opacity:0;visibility:hidden;transition:opacity .13s ease;z-index:60;text-align:left;
+}
+.t .tip b{display:block;font-family:var(--mono);font-size:12.5px;font-weight:700;
+  color:var(--accent);margin-bottom:4px}
+.t:hover .tip,.t.show .tip{opacity:1;visibility:visible}
+
+.out{font-family:var(--sans);font-size:14.5px;line-height:1.55;background:var(--paper);
+  border-radius:8px;padding:12px 14px;margin:0 0 12px}
+.out b{font-weight:700}
+.why{font-family:var(--sans);font-size:14.5px;line-height:1.55;margin:0 0 12px}
+.why b{font-weight:700}
+.gotcha{font-family:var(--sans);font-size:14.5px;line-height:1.55;background:var(--warn-soft);
+  border-radius:8px;padding:12px 14px;margin:0;color:var(--warn)}
+.gotcha b{color:#5E3D00;font-weight:700}
+
+table{width:100%;border-collapse:collapse;margin:0 0 18px;font-family:var(--sans);font-size:14.5px}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--rule);vertical-align:top}
+th{font-weight:700;font-size:12.5px;text-transform:uppercase;letter-spacing:.03em;color:var(--muted)}
+td code{font-family:var(--mono);font-size:13px;background:var(--paper);padding:2px 5px;border-radius:4px}
+
+.stepper{display:flex;justify-content:space-between;gap:12px;padding:28px 0 0}
+.stepper a{font-family:var(--sans);font-size:13.5px;font-weight:600;text-decoration:none;color:var(--muted);
+  border:1px solid var(--rule);background:var(--card);border-radius:8px;padding:9px 13px;max-width:47%}
+.stepper a:hover{color:var(--accent);border-color:var(--accent)}
+.stepper a.n{margin-left:auto;text-align:right}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.t .tip{transition:none}}
+</style>
+</head>
+<body>
+
+<div class="prog" id="prog"></div>
+<div class="bar">
+  <div class="bar-in">
+    <span class="bar-id">Jump to</span>
+    <select id="nav" aria-label="Jump to a section">
+      <option value="s0">0 — How SQL actually reads</option>
+      <option value="s1">1 — Count an audience</option>
+      <option value="s2">2 — Filter with a date window</option>
+      <option value="s3">3 — Join profiles to behaviour</option>
+      <option value="s4">4 — Exclude a suppression list</option>
+      <option value="s5">5 — Count per customer</option>
+      <option value="s6">6 — Deduplicate</option>
+      <option value="s7">7 — Bucket into tiers</option>
+      <option value="s8">8 — Reconcile two counts</option>
+      <option value="s9">9 — Tidy it with a CTE</option>
+      <option value="s10">10 — Handle nulls</option>
+      <option value="s11">11 — Cheat sheet</option>
+    </select>
+  </div>
+</div>
+
+<div class="wrap">
+
+<header class="top">
+  <h1>SQL for martech<br>a working refresher</h1>
+  <p class="sub">Ten queries that cover almost everything this job needs. Not a SQL course — the specific patterns that come up when you're debugging audiences and building targeting.</p>
+  <div class="howto"><b>Hover any underlined word</b> in a query to see what it does. On a phone, tap it. Every query has a plain-English version above it, so read that first and the code second.</div>
+</header>
+
+<!-- 0 -->
+<section id="s0">
+  <div class="step">Start here</div>
+  <h2>How SQL actually reads</h2>
+  <p class="lead"><b>The one idea that makes SQL click:</b> it isn't read top to bottom. The database does <code>FROM</code> first, then filters, then groups, and only picks your columns near the end. That's why a column you invent in <code>SELECT</code> can't be used in <code>WHERE</code> — it doesn't exist yet when <code>WHERE</code> runs.</p>
+
+  <table>
+    <tr><th>Order</th><th>Clause</th><th>In plain English</th></tr>
+    <tr><td>1</td><td><code>FROM</code> / <code>JOIN</code></td><td>Which table(s) am I looking at, and how do they connect</td></tr>
+    <tr><td>2</td><td><code>WHERE</code></td><td>Throw away rows I don't want</td></tr>
+    <tr><td>3</td><td><code>GROUP BY</code></td><td>Collapse the survivors into groups, usually one per customer</td></tr>
+    <tr><td>4</td><td><code>HAVING</code></td><td>Throw away whole groups I don't want</td></tr>
+    <tr><td>5</td><td><code>SELECT</code></td><td>Decide which columns come back</td></tr>
+    <tr><td>6</td><td><code>ORDER BY</code></td><td>Sort the result</td></tr>
+    <tr><td>7</td><td><code>LIMIT</code></td><td>Only give me the first N rows</td></tr>
+  </table>
+
+  <p><b>The single most useful habit:</b> when a count looks wrong, comment out everything below <code>FROM</code> and add conditions back one at a time. The line where the number jumps is your bug. That's 90% of audience debugging.</p>
+</section>
+
+<!-- 1 -->
+<section id="s1">
+  <div class="step">Query 1</div>
+  <h2>Count an audience</h2>
+
+  <div class="card">
+    <p class="tag">The foundation</p>
+    <h3>How many people are in this audience?</h3>
+    <p class="plain"><b>Plain English:</b> look at the customers table, count the distinct customer IDs where marketing consent is true. Distinct matters — if a customer appears on several rows you'd otherwise count them twice.</p>
+<pre><span class="kw">SELECT</span>
+  <span class="fn t">COUNT<span class="tip"><b>COUNT(...)</b>Counts rows. Wrapping it around DISTINCT counts unique values instead of raw rows.</span></span>(<span class="kw t">DISTINCT<span class="tip"><b>DISTINCT</b>Ignores repeats. Without it, a customer on five rows counts as five people — the classic reason an audience number looks inflated.</span></span> customer_id) <span class="kw t">AS<span class="tip"><b>AS</b>Renames the output column so the result reads as "audience_size" instead of something unreadable.</span></span> audience_size
+<span class="kw t">FROM<span class="tip"><b>FROM</b>The table you're reading. Runs first, before anything else.</span></span> customers
+<span class="kw t">WHERE<span class="tip"><b>WHERE</b>Filters individual rows. Only rows that pass survive to be counted.</span></span> marketing_consent = <span class="kw t">TRUE<span class="tip"><b>= TRUE</b>Tests a yes/no column. Safer written as "IS TRUE" in some databases, because = TRUE doesn't match NULL.</span></span>;</pre>
+    <div class="out"><b>Returns:</b> one row, one number. Something like <code>audience_size: 2,431,908</code>.</div>
+    <div class="why"><b>Why this job needs it:</b> this is the query you run when marketing says the audience looks too small. Half of "the CDP and the send tool disagree" problems are a missing DISTINCT on one side.</div>
+    <div class="gotcha"><b>Gotcha:</b> <code>COUNT(column)</code> silently skips NULLs, while <code>COUNT(*)</code> counts every row. Two people can run "the same" count and get different answers for exactly this reason.</div>
+  </div>
+</section>
+
+<!-- 2 -->
+<section id="s2">
+  <div class="step">Query 2</div>
+  <h2>Filter with a date window</h2>
+
+  <div class="card">
+    <p class="tag">Lookbacks</p>
+    <h3>Who has bought in the last 30 days?</h3>
+    <p class="plain"><b>Plain English:</b> from the orders table, get the unique customers whose order date falls within the last 30 days. Almost every lifecycle audience is a date window like this.</p>
+<pre><span class="kw">SELECT</span> <span class="kw">DISTINCT</span> customer_id
+<span class="kw">FROM</span> orders
+<span class="kw">WHERE</span> order_date <span class="kw t">&gt;=<span class="tip"><b>&gt;=</b>"On or after." Use &gt;= for the start of a window and &lt; for the end, so you never double-count a boundary day.</span></span> <span class="fn t">CURRENT_DATE<span class="tip"><b>CURRENT_DATE</b>Today's date, from the database. Beware: usually UTC, which can shift your window by a day versus Toronto time.</span></span> <span class="t">- <span class="kw">INTERVAL</span> <span class="str">'30 days'</span><span class="tip"><b>- INTERVAL '30 days'</b>Subtracts 30 days from today. Syntax varies by database — Snowflake often uses DATEADD instead.</span></span>
+  <span class="kw t">AND<span class="tip"><b>AND</b>Both conditions must be true. Contrast with OR, where either will do.</span></span> order_status = <span class="str t">'completed'<span class="tip"><b>'completed'</b>Text values go in single quotes. Filtering on status matters — cancelled and refunded orders shouldn't earn someone a "recent buyer" message.</span></span>;</pre>
+    <div class="out"><b>Returns:</b> one column of customer IDs, no repeats.</div>
+    <div class="why"><b>Why this job needs it:</b> "recent purchasers," "lapsed 90 days," "booked in the last week" are all this shape. It's also the query where time zones quietly break things.</div>
+    <div class="gotcha"><b>Gotcha:</b> if the column is a timestamp rather than a date, <code>&gt;= CURRENT_DATE - 30</code> can include or exclude part of a day depending on the hour. Ask which time zone the data is stored in before trusting any date window.</div>
+  </div>
+</section>
+
+<!-- 3 -->
+<section id="s3">
+  <div class="step">Query 3</div>
+  <h2>Join profiles to behaviour</h2>
+
+  <div class="card">
+    <p class="tag">The workhorse</p>
+    <h3>Consented customers who have actually ordered</h3>
+    <p class="plain"><b>Plain English:</b> take the customers table, attach their orders by matching customer ID, then keep only consented customers with at least one completed order. A join is just "line these two tables up using a shared key."</p>
+<pre><span class="kw">SELECT</span> <span class="kw">DISTINCT</span> <span class="t">c<span class="tip"><b>c</b>An alias — a nickname for the customers table so you can write c.email instead of customers.email.</span></span>.customer_id, c.email
+<span class="kw">FROM</span> customers <span class="kw">AS</span> c
+<span class="kw t">INNER JOIN<span class="tip"><b>INNER JOIN</b>Keeps only rows that exist in BOTH tables. A customer with no orders disappears from the result entirely.</span></span> orders <span class="kw">AS</span> o
+  <span class="kw t">ON<span class="tip"><b>ON</b>The matching rule — which column in one table lines up with which in the other. Get this wrong and you get either no rows or wildly too many.</span></span> c.customer_id = o.customer_id
+<span class="kw">WHERE</span> c.marketing_consent = <span class="kw">TRUE</span>
+  <span class="kw">AND</span> o.order_status = <span class="str">'completed'</span>;</pre>
+    <div class="out"><b>Returns:</b> customer IDs and emails for consented customers with at least one completed order.</div>
+    <div class="why"><b>Why this job needs it:</b> targeting almost always spans tables — profile attributes in one place, behaviour in another. This is the pattern Campaign Classic's query builder generates under the hood.</div>
+    <div class="gotcha"><b>Gotcha — the big one:</b> a join multiplies rows. A customer with 12 orders appears 12 times. That's why <code>DISTINCT</code> is here. If an audience count suddenly balloons, a join without DISTINCT is the first suspect.</div>
+  </div>
+
+  <div class="card">
+    <p class="tag">Join types, quickly</p>
+    <table>
+      <tr><th>Type</th><th>Keeps</th><th>Use for</th></tr>
+      <tr><td><code>INNER JOIN</code></td><td>Only matches in both tables</td><td>"Customers who have ordered"</td></tr>
+      <tr><td><code>LEFT JOIN</code></td><td>All of the left table, matches where they exist, NULL where they don't</td><td>"All customers, with order count if any"</td></tr>
+      <tr><td><code>FULL OUTER JOIN</code></td><td>Everything from both sides</td><td>Reconciling two systems</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- 4 -->
+<section id="s4">
+  <div class="step">Query 4</div>
+  <h2>Exclude a suppression list</h2>
+
+  <div class="card">
+    <p class="tag">The one that matters most</p>
+    <h3>Everyone except people on the suppression list</h3>
+    <p class="plain"><b>Plain English:</b> take all consented customers, look for them on the suppression list, and keep only the ones who <i>weren't found</i>. The trick is joining and then keeping the non-matches.</p>
+<pre><span class="kw">SELECT</span> c.customer_id, c.email
+<span class="kw">FROM</span> customers <span class="kw">AS</span> c
+<span class="kw t">LEFT JOIN<span class="tip"><b>LEFT JOIN</b>Keeps every row from the left table whether or not a match exists. Where there's no match, the right table's columns come back empty (NULL).</span></span> suppression_list <span class="kw">AS</span> s
+  <span class="kw">ON</span> <span class="fn t">LOWER<span class="tip"><b>LOWER(...)</b>Forces text to lowercase before comparing. Emails are case-insensitive in practice but databases compare them exactly, so Jay@x.com wouldn't match jay@x.com without this.</span></span>(c.email) = <span class="fn">LOWER</span>(s.email)
+<span class="kw">WHERE</span> s.email <span class="kw t">IS NULL<span class="tip"><b>IS NULL</b>The whole trick. After a LEFT JOIN, a NULL on the right side means "no match was found" — so this keeps exactly the people NOT on the suppression list.</span></span>
+  <span class="kw">AND</span> c.marketing_consent = <span class="kw">TRUE</span>;</pre>
+    <div class="out"><b>Returns:</b> the sendable audience — consented, not suppressed.</div>
+    <div class="why"><b>Why this job needs it:</b> this is suppression logic in its simplest form, and it's the query behind the single most important rule in email: never send to someone who opted out. In production this belongs upstream in the CDP, not in each send tool — but the logic is this.</div>
+    <div class="gotcha"><b>Gotcha:</b> <code>NOT IN</code> looks like an easier way to do this and is a trap. If the suppression list contains a single NULL, <code>NOT IN</code> returns zero rows and you'll think your audience is empty. <code>LEFT JOIN ... IS NULL</code> or <code>NOT EXISTS</code> are the safe patterns.</div>
+  </div>
+</section>
+
+<!-- 5 -->
+<section id="s5">
+  <div class="step">Query 5</div>
+  <h2>Count per customer</h2>
+
+  <div class="card">
+    <p class="tag">Grouping</p>
+    <h3>Customers with three or more orders in 90 days</h3>
+    <p class="plain"><b>Plain English:</b> collapse the orders table down to one row per customer, count their orders, and keep only customers whose count is three or more. <code>GROUP BY</code> collapses, <code>HAVING</code> filters the collapsed groups.</p>
+<pre><span class="kw">SELECT</span>
+  customer_id,
+  <span class="fn">COUNT</span>(*) <span class="kw">AS</span> order_count,
+  <span class="fn t">MAX<span class="tip"><b>MAX(...)</b>The largest value in the group. On a date column that means the most recent one — handy for "last seen" or recency.</span></span>(order_date) <span class="kw">AS</span> last_order
+<span class="kw">FROM</span> orders
+<span class="kw">WHERE</span> order_date &gt;= <span class="fn">CURRENT_DATE</span> - <span class="kw">INTERVAL</span> <span class="str">'90 days'</span>
+  <span class="kw">AND</span> order_status = <span class="str">'completed'</span>
+<span class="kw t">GROUP BY<span class="tip"><b>GROUP BY</b>Collapses many rows into one per unique value. Here: one row per customer instead of one per order. Every non-aggregated column in SELECT must appear here.</span></span> customer_id
+<span class="kw t">HAVING<span class="tip"><b>HAVING</b>Like WHERE, but it filters GROUPS after counting, not individual rows before. You cannot put COUNT() in a WHERE clause — this is why HAVING exists.</span></span> <span class="fn">COUNT</span>(*) &gt;= <span class="num">3</span>;</pre>
+    <div class="out"><b>Returns:</b> one row per qualifying customer, with their order count and most recent order date.</div>
+    <div class="why"><b>Why this job needs it:</b> frequency-based audiences — loyal, frequent, at-risk — are all this. It's also how you sanity-check whether a segment definition is doing what the brief asked.</div>
+    <div class="gotcha"><b>Gotcha:</b> <code>WHERE</code> runs before grouping, <code>HAVING</code> after. Putting the date filter in HAVING would count all orders ever and then filter, giving you the wrong customers.</div>
+  </div>
+</section>
+
+<!-- 6 -->
+<section id="s6">
+  <div class="step">Query 6</div>
+  <h2>Deduplicate</h2>
+
+  <div class="card">
+    <p class="tag">One row per person</p>
+    <h3>Keep only the newest record for each email</h3>
+    <p class="plain"><b>Plain English:</b> when the same person appears several times, number their rows newest-first, then keep only number one. This is what you do before uploading a list, and it's the manual version of what a merge policy does in a CDP.</p>
+<pre><span class="kw">SELECT</span> customer_id, email, updated_at
+<span class="kw">FROM</span> (
+  <span class="kw">SELECT</span>
+    customer_id, email, updated_at,
+    <span class="fn t">ROW_NUMBER()<span class="tip"><b>ROW_NUMBER()</b>Numbers rows 1, 2, 3… A "window function" — it looks at a set of rows without collapsing them the way GROUP BY does.</span></span> <span class="kw t">OVER<span class="tip"><b>OVER (...)</b>Defines the window: which rows count as a set, and in what order to number them.</span></span> (
+      <span class="kw t">PARTITION BY<span class="tip"><b>PARTITION BY</b>Restarts the numbering for each group. Here, every distinct email starts again at 1.</span></span> <span class="fn">LOWER</span>(email)
+      <span class="kw t">ORDER BY<span class="tip"><b>ORDER BY ... DESC</b>Sorts within each group. DESC means newest first, so row number 1 is the most recent record.</span></span> updated_at <span class="kw">DESC</span>
+    ) <span class="kw">AS</span> rn
+  <span class="kw">FROM</span> customers
+) <span class="kw t">ranked<span class="tip"><b>ranked</b>A name for the inner query's result. You need one, because the outer query has to refer to it — and rn only exists once the inner query has run.</span></span>
+<span class="kw">WHERE</span> rn = <span class="num t">1<span class="tip"><b>rn = 1</b>Keeps only the first row in each group — the newest record per email. Change to rn &gt; 1 to see the duplicates you're throwing away.</span></span>;</pre>
+    <div class="out"><b>Returns:</b> exactly one row per email address, the most recently updated one.</div>
+    <div class="why"><b>Why this job needs it:</b> duplicate profiles are the most common data problem in martech — one of Rafael's own team eliminated $1.5M of cost tied to 6.5M duplicate records. Being able to find and quantify duplicates is directly relevant.</div>
+    <div class="gotcha"><b>Gotcha:</b> if two rows have the identical <code>updated_at</code>, which one wins is arbitrary. Add a tiebreaker to <code>ORDER BY</code>, like <code>updated_at DESC, customer_id DESC</code>, so the result is repeatable.</div>
+  </div>
+</section>
+
+<!-- 7 -->
+<section id="s7">
+  <div class="step">Query 7</div>
+  <h2>Bucket into tiers</h2>
+
+  <div class="card">
+    <p class="tag">Segmentation</p>
+    <h3>Label each customer by recency</h3>
+    <p class="plain"><b>Plain English:</b> walk down a list of conditions and use the first one that's true, like an if/else. Turns a raw date into a label a marketer can actually use.</p>
+<pre><span class="kw">SELECT</span>
+  customer_id,
+  <span class="kw t">CASE<span class="tip"><b>CASE</b>SQL's if/else. Checks each WHEN in order and stops at the first true one, so the order of conditions matters.</span></span>
+    <span class="kw t">WHEN<span class="tip"><b>WHEN ... THEN</b>"If this condition is true, use this value." Conditions are tested top to bottom.</span></span> last_order &gt;= <span class="fn">CURRENT_DATE</span> - <span class="kw">INTERVAL</span> <span class="str">'30 days'</span>  <span class="kw">THEN</span> <span class="str">'active'</span>
+    <span class="kw">WHEN</span> last_order &gt;= <span class="fn">CURRENT_DATE</span> - <span class="kw">INTERVAL</span> <span class="str">'90 days'</span>  <span class="kw">THEN</span> <span class="str">'cooling'</span>
+    <span class="kw">WHEN</span> last_order &gt;= <span class="fn">CURRENT_DATE</span> - <span class="kw">INTERVAL</span> <span class="str">'365 days'</span> <span class="kw">THEN</span> <span class="str">'lapsed'</span>
+    <span class="kw t">ELSE<span class="tip"><b>ELSE</b>The catch-all when nothing above matched. Without it, unmatched rows come back NULL — which is usually a bug, not a decision.</span></span> <span class="str">'dormant'</span>
+  <span class="kw t">END<span class="tip"><b>END</b>Closes the CASE block. Followed by AS to name the new column.</span></span> <span class="kw">AS</span> lifecycle_stage
+<span class="kw">FROM</span> customer_summary;</pre>
+    <div class="out"><b>Returns:</b> every customer with a lifecycle label — active, cooling, lapsed or dormant.</div>
+    <div class="why"><b>Why this job needs it:</b> this is a lifecycle segmentation in one clause, and it's the kind of derived field that belongs defined once centrally rather than reinvented in every campaign. That's a standards argument, which is your job.</div>
+    <div class="gotcha"><b>Gotcha:</b> because CASE stops at the first match, ordering the conditions loosest-first would put everyone in one bucket. Always go tightest to loosest.</div>
+  </div>
+</section>
+
+<!-- 8 -->
+<section id="s8">
+  <div class="step">Query 8</div>
+  <h2>Reconcile two counts</h2>
+
+  <div class="card">
+    <p class="tag">Debugging</p>
+    <h3>Who's in the CDP audience but not in the send tool?</h3>
+    <p class="plain"><b>Plain English:</b> take the list from system A, subtract the list from system B, and look at what's left. This is the query that answers "why did 40,000 people not get the email."</p>
+<pre><span class="kw">SELECT</span> customer_id <span class="kw">FROM</span> cdp_audience
+<span class="kw t">EXCEPT<span class="tip"><b>EXCEPT</b>Set subtraction — rows in the first query that don't appear in the second. Called MINUS in some databases, including Oracle.</span></span>
+<span class="kw">SELECT</span> customer_id <span class="kw">FROM</span> send_tool_audience;
+
+<span class="cmt t">-- and the totals side by side<span class="tip"><b>--</b>A comment. Everything after it on the line is ignored. Use comments to leave notes for whoever reads the query next, including you.</span></span>
+<span class="kw">SELECT</span> <span class="str">'cdp'</span> <span class="kw">AS</span> source, <span class="fn">COUNT</span>(<span class="kw">DISTINCT</span> customer_id) <span class="kw">FROM</span> cdp_audience
+<span class="kw t">UNION ALL<span class="tip"><b>UNION ALL</b>Stacks two result sets into one. ALL keeps duplicates; plain UNION removes them and is slower.</span></span>
+<span class="kw">SELECT</span> <span class="str">'send_tool'</span>, <span class="fn">COUNT</span>(<span class="kw">DISTINCT</span> customer_id) <span class="kw">FROM</span> send_tool_audience;</pre>
+    <div class="out"><b>Returns:</b> first, the missing IDs. Second, two rows showing each system's count side by side.</div>
+    <div class="why"><b>Why this job needs it:</b> their posting asks you to "verify activation dataflows" and "debug audience counts and sync issues between CDP and activation tools." This is literally that query. It's worth saying out loud that <b>count drift between systems is something you'd monitor, not just investigate when someone complains</b>.</div>
+    <div class="gotcha"><b>Gotcha:</b> a gap isn't always a bug. Suppression, consent changes and identity resolution all legitimately shrink an audience between the CDP and the send tool. The useful question is whether the gap is <i>explainable</i>, not whether it's zero.</div>
+  </div>
+</section>
+
+<!-- 9 -->
+<section id="s9">
+  <div class="step">Query 9</div>
+  <h2>Tidy it with a CTE</h2>
+
+  <div class="card">
+    <p class="tag">Readability</p>
+    <h3>Name your steps instead of nesting them</h3>
+    <p class="plain"><b>Plain English:</b> <code>WITH</code> lets you define a named intermediate result, then use it below like a table. Same logic as a nested subquery, far easier to read and debug. Use this whenever a query grows past about ten lines.</p>
+<pre><span class="kw t">WITH<span class="tip"><b>WITH</b>Starts a CTE — a Common Table Expression. A named temporary result you can reference below, which keeps queries readable.</span></span> recent_buyers <span class="kw t">AS<span class="tip"><b>name AS (...)</b>Names the block. You can chain several, separated by commas, and each one can reference the ones above it.</span></span> (
+  <span class="kw">SELECT</span> <span class="kw">DISTINCT</span> customer_id
+  <span class="kw">FROM</span> orders
+  <span class="kw">WHERE</span> order_date &gt;= <span class="fn">CURRENT_DATE</span> - <span class="kw">INTERVAL</span> <span class="str">'30 days'</span>
+    <span class="kw">AND</span> order_status = <span class="str">'completed'</span>
+),
+sendable <span class="kw">AS</span> (
+  <span class="kw">SELECT</span> customer_id, email
+  <span class="kw">FROM</span> customers
+  <span class="kw">WHERE</span> marketing_consent = <span class="kw">TRUE</span>
+)
+<span class="kw">SELECT</span> s.customer_id, s.email
+<span class="kw">FROM</span> sendable <span class="kw">AS</span> s
+<span class="kw">INNER JOIN</span> recent_buyers <span class="kw">AS</span> r <span class="kw">ON</span> s.customer_id = r.customer_id;</pre>
+    <div class="out"><b>Returns:</b> consented customers who bought in the last 30 days — same as nesting it, but you can run each block on its own to see where a number goes wrong.</div>
+    <div class="why"><b>Why this job needs it:</b> targeting logic gets handed between people. A query someone else can read is a documentation decision, not a style preference — and their posting cares a lot about documentation and key-person risk.</div>
+    <div class="gotcha"><b>Gotcha:</b> CTEs don't make a query faster. They make it readable. If something is slow, the fix is filtering earlier and joining on indexed keys, not restructuring with WITH.</div>
+  </div>
+</section>
+
+<!-- 10 -->
+<section id="s10">
+  <div class="step">Query 10</div>
+  <h2>Handle nulls</h2>
+
+  <div class="card">
+    <p class="tag">The silent bug</p>
+    <h3>Treat missing consent as "no"</h3>
+    <p class="plain"><b>Plain English:</b> NULL means "unknown," not "false" or "zero." Comparing anything to NULL gives NULL, not true — so rows with NULL quietly vanish from your filters. This is the most common reason two people get different audience counts.</p>
+<pre><span class="kw">SELECT</span>
+  customer_id,
+  <span class="fn t">COALESCE<span class="tip"><b>COALESCE(a, b)</b>Returns the first value that isn't NULL. A safe default — "use a, but if it's missing use b."</span></span>(marketing_consent, <span class="kw">FALSE</span>) <span class="kw">AS</span> consent_safe,
+  <span class="fn">COALESCE</span>(lifetime_orders, <span class="num">0</span>) <span class="kw">AS</span> orders_safe
+<span class="kw">FROM</span> customers
+<span class="kw">WHERE</span> email <span class="kw t">IS NOT NULL<span class="tip"><b>IS NOT NULL</b>The only correct way to test for presence. Writing "email != NULL" never matches anything, because any comparison with NULL returns NULL rather than true.</span></span>
+  <span class="kw">AND</span> <span class="fn">COALESCE</span>(marketing_consent, <span class="kw">FALSE</span>) = <span class="kw">TRUE</span>;</pre>
+    <div class="out"><b>Returns:</b> customers with an email and explicit consent, with missing values defaulted rather than silently dropped.</div>
+    <div class="why"><b>Why this job needs it:</b> on consent specifically, defaulting NULL to FALSE is the compliant choice — absence of consent is not consent. That's a CASL point as much as a SQL one, and worth saying that way.</div>
+    <div class="gotcha"><b>Gotcha:</b> never write <code>= NULL</code> or <code>!= NULL</code>. They always fail silently. It's <code>IS NULL</code> and <code>IS NOT NULL</code>, always.</div>
+  </div>
+</section>
+
+<!-- 11 -->
+<section id="s11">
+  <div class="step">Reference</div>
+  <h2>Cheat sheet</h2>
+
+  <div class="card">
+    <p class="tag">Clause by clause</p>
+    <table>
+      <tr><th>Clause</th><th>Does what</th></tr>
+      <tr><td><code>SELECT DISTINCT</code></td><td>Pick columns, drop duplicate rows</td></tr>
+      <tr><td><code>FROM</code> / <code>JOIN ... ON</code></td><td>Which tables, and how they connect</td></tr>
+      <tr><td><code>WHERE</code></td><td>Filter individual rows, before grouping</td></tr>
+      <tr><td><code>GROUP BY</code></td><td>Collapse to one row per value</td></tr>
+      <tr><td><code>HAVING</code></td><td>Filter groups, after counting</td></tr>
+      <tr><td><code>ORDER BY ... DESC</code></td><td>Sort, largest or newest first</td></tr>
+      <tr><td><code>LIMIT 100</code></td><td>First 100 rows — always use this while testing</td></tr>
+      <tr><td><code>WITH x AS (...)</code></td><td>Name a step so the query reads cleanly</td></tr>
+      <tr><td><code>CASE WHEN ... END</code></td><td>If/else, for bucketing into labels</td></tr>
+      <tr><td><code>COALESCE(a, b)</code></td><td>Use a, or b if a is missing</td></tr>
+      <tr><td><code>EXCEPT</code> / <code>UNION ALL</code></td><td>Subtract one list from another / stack two together</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <p class="tag">The five that cause most wrong numbers</p>
+    <ol>
+      <li><b>Missing DISTINCT after a join.</b> A customer with 12 orders counts as 12 people.</li>
+      <li><b>NULL comparisons.</b> <code>= NULL</code> never matches. Rows vanish silently.</li>
+      <li><b>NOT IN with a NULL in the list.</b> Returns zero rows, looks like an empty audience.</li>
+      <li><b>Date windows across time zones.</b> UTC versus local shifts your boundary by a day.</li>
+      <li><b>Filter in HAVING that belonged in WHERE.</b> Counts everything, then filters — wrong customers.</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <p class="tag">If he asks how you'd debug an audience</p>
+    <p class="plain">Say the method, not the syntax. Most candidates recite clauses; the method is what a platform PM is hired for.</p>
+    <ol>
+      <li>Count both sides independently — CDP and send tool — with DISTINCT on each.</li>
+      <li>Subtract one from the other and look at actual IDs, not just the delta.</li>
+      <li>Check the explainable causes first: suppression, consent, identity resolution, and the sync window.</li>
+      <li>Strip the query to <code>FROM</code> and add conditions back one at a time. The line where the number jumps is the bug.</li>
+      <li>Then decide whether the gap needs fixing or documenting — and whether it should be <b>monitored as drift</b> rather than investigated on complaint.</li>
+    </ol>
+  </div>
+</section>
+
+</div>
+
+<script>
+var secs=[].slice.call(document.querySelectorAll('section[id]'));
+var nav=document.getElementById('nav'),prog=document.getElementById('prog');
+var labels={};[].forEach.call(nav.options,function(o){labels[o.value]=o.text;});
+var clean=function(id){return (labels[id]||id).replace(/^\d+\s\u2014\s/,'');};
+
+nav.addEventListener('change',function(e){
+  var el=document.getElementById(e.target.value); if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+});
+
+// prev/next
+secs.forEach(function(s,i){
+  var st=document.createElement('div'); st.className='stepper';
+  if(i>0){var p=document.createElement('a');p.href='#'+secs[i-1].id;p.textContent='\u2190  '+clean(secs[i-1].id);st.appendChild(p);}
+  if(i<secs.length-1){var n=document.createElement('a');n.className='n';n.href='#'+secs[i+1].id;n.textContent=clean(secs[i+1].id)+'  \u2192';st.appendChild(n);}
+  if(st.children.length) s.appendChild(st);
+});
+
+window.addEventListener('scroll',function(){
+  var h=document.documentElement.scrollHeight-window.innerHeight;
+  prog.style.width=(h>0?(window.scrollY/h)*100:0)+'%';
+  var y=window.scrollY+130,c=secs[0];
+  secs.forEach(function(s){if(s.offsetTop<=y)c=s;});
+  if(nav.value!==c.id) nav.value=c.id;
+},{passive:true});
+
+// tap-to-toggle tooltips so this works on a phone too
+document.addEventListener('click',function(e){
+  var t=e.target.closest('.t');
+  [].forEach.call(document.querySelectorAll('.t.show'),function(el){ if(el!==t) el.classList.remove('show'); });
+  if(t) t.classList.toggle('show');
+});
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape') [].forEach.call(document.querySelectorAll('.t.show'),function(el){el.classList.remove('show');});
+});
+</script>
+</body>
+</html>
