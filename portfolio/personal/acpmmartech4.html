@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Campaign Classic + AEP + AJO — martech activation demo</title>
+<style>
+  :root {
+    --surface-2: #ffffff;
+    --surface-1: #f4f3ef;
+    --surface-0: #ebe9e2;
+    --border: #ddd9cf;
+    --border-strong: #c7c2b4;
+    --border-accent: #378ADD;
+    --bg-accent: #E6F1FB;
+    --text-accent: #0C447C;
+    --bg-success: #EAF3DE;
+    --text-success: #27500A;
+    --text-primary: #2C2C2A;
+    --text-secondary: #5F5E5A;
+    --radius: 8px;
+    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --surface-2: #262624;
+      --surface-1: #2f2f2c;
+      --surface-0: #1e1e1c;
+      --border: #44443f;
+      --border-strong: #55554f;
+      --border-accent: #85B7EB;
+      --bg-accent: #0C447C;
+      --text-accent: #B5D4F4;
+      --bg-success: #27500A;
+      --text-success: #C0DD97;
+      --text-primary: #ECEBE4;
+      --text-secondary: #B4B2A9;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: var(--font-sans);
+    background: var(--surface-0);
+    color: var(--text-primary);
+    margin: 0;
+    padding: 24px 16px 60px;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; }
+  h1 { font-size: 20px; font-weight: 500; margin: 0 0 4px; }
+  .sub { font-size: 14px; color: var(--text-secondary); margin: 0 0 24px; }
+  .tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+  button {
+    font-family: inherit;
+    font-size: 13px;
+    padding: 8px 14px;
+    border-radius: var(--radius);
+    border: 0.5px solid var(--border-strong);
+    background: transparent;
+    color: var(--text-primary);
+    cursor: pointer;
+  }
+  button:hover { background: var(--surface-1); }
+  button.active { background: var(--bg-accent); color: var(--text-accent); font-weight: 500; border-color: var(--border-accent); }
+  .panel { display: none; grid-template-columns: minmax(0,280px) minmax(0,1fr); gap: 20px; }
+  .panel.show { display: grid; }
+  .card {
+    background: var(--surface-2);
+    border: 0.5px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 20px;
+    height: fit-content;
+  }
+  .avatar {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--bg-accent); color: var(--text-accent);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 500; font-size: 13px;
+  }
+  .badge {
+    font-size: 11px; padding: 3px 10px; border-radius: var(--radius);
+    background: var(--bg-accent); color: var(--text-accent); display: inline-block;
+  }
+  .badge-muted { background: var(--surface-1); color: var(--text-secondary); }
+  .badge-success { background: var(--bg-success); color: var(--text-success); }
+  .row { border: 0.5px solid var(--border); border-radius: var(--radius); padding: 8px 12px; background: var(--surface-1); font-size: 12px; }
+  .row-accent { border-color: var(--border-accent); background: var(--bg-accent); color: var(--text-accent); }
+  .row b { font-weight: 500; }
+  .connector { width: 0.5px; height: 16px; background: var(--border-strong); margin: 0 auto; }
+  .callouts { display: flex; flex-direction: column; gap: 14px; font-size: 13px; color: var(--text-secondary); }
+  .callout { border-left: 2px solid var(--border-accent); padding-left: 12px; }
+  .footer-note { font-size: 12px; color: var(--text-secondary); margin-top: 32px; border-top: 0.5px solid var(--border); padding-top: 16px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Campaign Classic + AEP + AJO</h1>
+  <p class="sub">How a martech activation stack routes the same customer through a real-time and a batch engine.</p>
+
+  <div class="tabs">
+    <button data-panel="aep" class="active" onclick="showPanel('aep')">1. AEP — customer profile</button>
+    <button data-panel="ajo" onclick="showPanel('ajo')">2. AJO — real-time journey</button>
+    <button data-panel="acc" onclick="showPanel('acc')">3. Campaign Classic — batch send</button>
+  </div>
+
+  <div class="panel show" data-panel="aep">
+    <div class="card">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px">
+        <div class="avatar">JB</div>
+        <div><p style="font-weight:500;font-size:14px;margin:0">Jordan Blake</p><p style="font-size:12px;color:var(--text-secondary);margin:0">Aeroplan #12345678</p></div>
+      </div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px">
+        <span class="badge">Elite 50</span>
+        <span class="badge badge-muted">App user</span>
+      </div>
+      <div style="border-top:0.5px solid var(--border);padding-top:10px;font-size:12px;color:var(--text-secondary);line-height:1.9">
+        <div>Last flight: YYZ → LHR, Sep 2</div>
+        <div>Site visit: 2h ago — searched YYZ → NRT</div>
+        <div>Loyalty points: 84,200</div>
+      </div>
+    </div>
+    <div class="callouts">
+      <div class="callout">Identity graph stitches the app ID, Aeroplan number, and web cookie into this one profile.</div>
+      <div class="callout">The site visit from 2 hours ago is already on the profile — that instant update is what "real-time" means in AEP.</div>
+      <div class="callout">Segments like "Elite + searched Japan" get computed from this profile, and both AJO and Campaign Classic query against them.</div>
+    </div>
+  </div>
+
+  <div class="panel" data-panel="ajo">
+    <div class="card" style="display:flex;flex-direction:column;align-items:center">
+      <div class="row" style="width:100%"><b>Trigger</b><br/>Flight status: delayed &gt;60 min</div>
+      <div class="connector"></div>
+      <div class="row" style="width:100%"><b>Decision</b><br/>Is member Elite 50?</div>
+      <div class="connector"></div>
+      <div class="row row-accent" style="width:100%"><b>Action</b><br/>Push: lounge access offer</div>
+      <div class="connector"></div>
+      <div class="row" style="width:100%"><b>Wait</b><br/>2 hours</div>
+      <div class="connector"></div>
+      <div class="row" style="width:100%"><b>Action</b><br/>Email: rebooking options</div>
+    </div>
+    <div class="callouts">
+      <div class="callout">Fires the instant AEP records the delay event — no batch job runs this, it's event-driven.</div>
+      <div class="callout">The decision branch reads straight off the profile's Elite 50 segment computed in step 1.</div>
+      <div class="callout">Waits and multi-step sequencing are native to AJO's journey canvas — this is what "orchestration" refers to.</div>
+    </div>
+  </div>
+
+  <div class="panel" data-panel="acc">
+    <div class="card">
+      <div class="badge badge-success" style="margin-bottom:12px">Recurring: weekly</div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div class="row"><b>Audience</b><br/>Elite 50 + newsletter opt-in (128,402)</div>
+        <div class="row"><b>Email</b><br/>"October fare sale"</div>
+        <div class="row"><b>Delivery</b><br/>Tue 6:00am ET</div>
+        <div class="row"><b>Tracking</b><br/>Opens, clicks, unsubscribes</div>
+      </div>
+    </div>
+    <div class="callouts">
+      <div class="callout">The audience is pulled from that same AEP segment — but as a static snapshot, not a live feed.</div>
+      <div class="callout">Runs on a schedule, not a trigger — this is the batch/legacy engine, not the real-time one.</div>
+      <div class="callout">Best fit: mass, non-urgent sends and older complex templates not yet rebuilt in AJO.</div>
+    </div>
+  </div>
+
+  <p class="footer-note">Illustrative mock-up for learning purposes — not real Air Canada or Adobe UI or data.</p>
+</div>
+
+<script>
+function showPanel(name) {
+  document.querySelectorAll('.panel').forEach(function(p) {
+    p.classList.toggle('show', p.dataset.panel === name);
+  });
+  document.querySelectorAll('button[data-panel]').forEach(function(b) {
+    b.classList.toggle('active', b.dataset.panel === name);
+  });
+}
+</script>
+</body>
+</html>
