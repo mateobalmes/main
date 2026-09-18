@@ -126,8 +126,25 @@ td code{font-family:var(--mono);font-size:12.5px;background:var(--paper);padding
 .pad-btn.primary:hover{background:var(--accent);border-color:var(--accent);color:#fff}
 .pad-note{font-family:var(--sans);font-size:12.5px;color:var(--muted);margin-left:auto;text-align:right}
 
+/* your own notes, per section */
+.mynote{margin:22px 0 0;background:var(--card);border:1px solid var(--rule);
+  border-left:3px solid var(--accent);border-radius:10px;padding:14px 16px}
+.mynote label{display:block;font-family:var(--sans);font-size:12px;font-weight:700;
+  letter-spacing:.04em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+.mynote textarea{width:100%;min-height:76px;resize:vertical;overflow:hidden;
+  font-family:var(--sans);font-size:14.5px;line-height:1.6;color:var(--ink);
+  background:var(--paper);border:1px solid var(--rule);border-radius:7px;padding:10px 11px}
+.mynote textarea:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.mynote-ft{display:flex;gap:8px;align-items:center;margin-top:8px}
+.mynote-btn{font-family:var(--sans);font-size:12.5px;font-weight:600;cursor:pointer;
+  border:1px solid var(--rule);background:var(--paper);color:var(--muted);
+  border-radius:6px;padding:6px 10px}
+.mynote-btn:hover{border-color:var(--accent);color:var(--accent)}
+.mynote-hint{font-family:var(--sans);font-size:12px;color:var(--muted);margin-left:auto}
+
 body.cue .test,body.cue .note,body.cue .stop,body.cue section>p,body.cue section>ul,
 body.cue h4,body.cue .tbl-wrap,body.cue section>table{display:none}
+body.cue .mynote{margin-top:14px}
 body.cue section{padding:22px 0}
 body.cue .q{padding:14px 16px}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.h .tip{transition:none}}
@@ -148,6 +165,7 @@ body.cue .q{padding:14px 16px}
       <option value="s4">They ask &middot; Roadmap &amp; first 90 days</option>
       <option value="s5">They ask &middot; How you'd measure it</option>
       <option value="s6">They ask &middot; Behavioural stories</option>
+      <option value="s6h">They ask &middot; HR questions (Hakima)</option>
       <option value="s7">They ask &middot; Comp &amp; logistics</option>
       <option value="s8">You ask &middot; Questions for them</option>
       <option value="s9">Reference &middot; Classic &harr; AJO vocabulary</option>
@@ -228,19 +246,30 @@ body.cue .q{padding:14px 16px}
       <li>Chatmeter listings, BrightEdge search</li>
       <li>Adobe vendor relationship</li>
       <li>the intake process teams requested through</li>
+      <li class="hot">set up measurement for multi-million $ social campaigns</li>
+      <li class="hot">so paid teams could tell what actually worked</li>
       <li>DXC, P&amp;G, four brands</li>
       <li>Segment, Lytics, Braze</li>
       <li>S&amp;P product strategy, Ivey MBA</li>
       <li class="hot">platform, not campaigns</li>
     </ul>
-    <details><summary>Full answer</summary><div class="say">
+    <details><summary>SHORT version &mdash; say this one</summary><div class="say">
+      <p>Four beats, about 60 seconds. Stop at the end of the fourth.</p>
+      <p><b>1.</b> "Last three years at <b class="cue">Restaurant Brands</b>, owning the martech stack for <b class="cue">Tim Hortons across about four thousand locations</b> &mdash; Experience Platform as the CDP, Journey Optimizer for orchestration, plus mParticle as a second CDP."</p>
+      <p><b>2.</b> "A lot of it was measurement &mdash; I <b class="cue">set up the measurement for multi-million dollar digital campaigns across social</b>, so the paid teams could tell what was actually working."</p>
+      <p><b>3.</b> "Before that, <b class="cue">DXC on the P&amp;G account</b> &mdash; four brands across the US and Canada, on Segment, Lytics and Braze. Product strategy at S&amp;P before that, with my <b class="cue">Ivey MBA</b> in between."</p>
+      <p><b>4.</b> "The through-line is that I've sat on the <b class="cue">platform side rather than the campaign side</b>. I build the thing marketing operations runs on."</p>
+    </div></details>
+    <details><summary>Long version &mdash; only if he asks for more</summary><div class="say">
       <p>"My last three years were at Restaurant Brands, where I <b class="cue">owned the martech stack for Tim Hortons</b> across about four thousand locations. Adobe on one side &mdash; <b class="cue">Experience Platform as the CDP</b>, Journey Optimizer, CJA, Audience Manager. But also <b class="cue">mParticle as a second CDP</b>, <span class="h">Branch and Singular<span class="tip"><b>MMP</b>Mobile measurement partners. They attribute app installs and in-app events to the campaign that drove them, and handle deep linking &mdash; sending someone straight to the right screen in the app.</span></span> for mobile attribution and deep linking, <span class="h">Chatmeter<span class="tip"><b>Listings management</b>Keeps location data &mdash; hours, address, menu &mdash; correct across Google, Apple Maps and review sites. At 4,000 stores that's a real operation.</span></span> for location listings, and BrightEdge for search.</p>
       <p>Alongside the platforms I <b class="cue">managed the Adobe relationship</b> &mdash; vendor and licensing, not just support tickets &mdash; and I <b class="cue">built the request intake process</b> the marketing teams came through, plus the training library behind it.</p>
+      <p>A big piece of it was measurement. I <b class="cue">set up the measurement and experimentation for multi-million dollar digital campaigns across social channels</b> &mdash; the tracking, the audience side, the reporting &mdash; so the paid teams could actually tell what was working rather than guessing.</p>
       <p>Before that, DXC as a technology consultant on the <b class="cue">P&amp;G account, four brands across the US and Canada</b>. Different stack: <span class="h">Segment<span class="tip"><b>Segment</b>A CDP built around collect-once, route-everywhere. You instrument an event once and it fans out to every downstream tool.</span></span> for collection and routing, <span class="h">Lytics<span class="tip"><b>Lytics</b>A CDP with behavioural modelling &mdash; builds propensity scores and predicted affinities from behaviour, not just rule-based segments.</span></span> as the CDP with behavioural scoring, and <span class="h">Braze<span class="tip"><b>Braze</b>A customer engagement and messaging platform. Its journey builder is called Canvas. Closest direct competitor to AJO &mdash; which is why Air Canada's posting lists it as an acceptable substitute.</span></span> for messaging. We got <b class="cue">data integrity to 95%</b>, and I wrote the pipelines that took <b class="cue">reporting from three days to about four hours</b>.</p>
       <p>Earlier was S&amp;P Global on product strategy, and my <b class="cue">MBA at Ivey</b> in between.</p>
       <p>The through-line is that I've sat on the <b class="cue">platform side rather than the campaign side</b>. I build the thing marketing operations runs on."</p>
     </div></details>
     <div class="fill"><b>Two CDPs is the detail to land.</b> Most candidates have one. It's also your honest answer to aligning AEP schemas with Campaign's relational model &mdash; you've had to reconcile two different data models before.</div>
+    <div class="fill"><b>The measurement line is aimed straight at him.</b> His whole career is analytics &mdash; Web Analytics Manager at GALE, Data &amp; Analytics Manager at BIMM, BI Consultant at SiriusXM, Data Intelligence Director at Ag&ecirc;ncia3, plus GA and Campaign Manager 360 certs. "Measurement for multi-million dollar social campaigns" is his native language, and it's the sentence most likely to make him lean in. Say it early, not as an afterthought.</div>
   </article>
 
   <article class="q">
@@ -395,6 +424,7 @@ body.cue .q{padding:14px 16px}
       <p>And I'd frame it as <b class="cue">outcomes rather than a list of items</b>, built <b class="cue">with Marketing Operations, IT and Privacy in the room</b>. A roadmap they didn't help shape is one they won't use."</p>
     </div></details>
     <div class="fill"><b>If he says there is no roadmap yet:</b> only the first beat changes. "Audit what's broken" becomes "find out what's actually running." Sequencing and who's-in-the-room stay the same.</div>
+    <div class="fill"><b>You've earned the last beat &mdash; use it.</b> If he pushes on why the room matters, that's your RBI story: you built a roadmap in your own team, engineering wouldn't commit capacity to it, and you fixed it by re-running the whole thing as co-creation. Full version on the <b>influencing without authority</b> card in section 6. Don't tell it in both places.</div>
   </article>
 
   <article class="q">
@@ -444,15 +474,17 @@ body.cue .q{padding:14px 16px}
     <h3>How do you prioritise when everyone wants something</h3>
     <p class="who">Rafael, in some form.</p>
     <ul class="cues">
-      <li>which metric does it move</li>
-      <li>what else depends on it</li>
-      <li>invisible unblocker beats visible nothing</li>
-      <li class="hot">say no with a reason, not a queue position</li>
+      <li class="hot">three kinds of work compete, not one backlog</li>
+      <li class="hot">lights on / the migration / new capability</li>
+      <li class="hot">agree the split first, then rank inside each</li>
+      <li>otherwise BAU eats everything</li>
+      <li class="hot">say no with the reason, not a queue position</li>
     </ul>
     <details><summary>Full answer</summary><div class="say">
-      <p>"Two filters. <b class="cue">Which of those metrics does it move</b>, and <b class="cue">what else depends on it</b>. Something invisible that unblocks five other things beats something visible that unblocks nothing.</p>
-      <p>And when the answer is no, I'd rather say no with the reason than park it in a queue. People take 'not this quarter, because X' far better than silence."</p>
+      <p>"Honestly the hard part isn't ranking a backlog. It's that <b class="cue">three different kinds of work compete for the same capacity</b> &mdash; keeping the lights on, the migration, and new capability. If you don't split that explicitly, <b class="cue">BAU eats everything and the migration slips for a year</b>.</p>
+      <p>So I'd want an agreed split first &mdash; roughly what share goes where &mdash; then rank inside each one. And when the answer is no, I'd rather <b class="cue">say no with the reason</b> than park something in a queue. People take 'not this quarter, because X' fine. They don't take silence."</p>
     </div></details>
+    <div class="fill"><b>Why this beats a framework.</b> "Two filters" sounds recited. Naming the real tension &mdash; BAU versus migration versus new build &mdash; sounds like someone who has actually had to defend a roadmap.</div>
   </article>
 
   <article class="q">
@@ -479,147 +511,314 @@ body.cue .q{padding:14px 16px}
 <section id="s6">
   <div class="step">They ask</div>
   <h2>Behavioural stories</h2>
-  <p class="test"><b>I don't have your stories, so these are prompts, not scripts.</b> Each card names what's being tested, gives a shape, and suggests which of your experiences might fit. Pick one real example per card and write four bullets.</p>
+  <p class="test"><b>Five stories cover about twenty questions.</b> Don't hunt for a new one &mdash; find which of these five fits and lead with the beat that matches what he asked.</p>
 
-  <div class="stop"><b>Red CV constraint.</b> Every story has to come from RBI, S&amp;P, DXC or Empleo. Nothing from TD &mdash; not the ICML delegation, not the MIT hackathon, not the CPB Challenge win. Those are your best recent stories and none of them can be used Friday. Worth ten minutes tonight finding the RBI-era equivalents.</div>
+  <div class="stop"><b>Red CV.</b> Every story is RBI, S&amp;P or DXC. Nothing from TD &mdash; not ICML, not the MIT hackathon, not the CPB Challenge win.</div>
 
-  <h4>The four most likely</h4>
+  <h4>Story A &mdash; the roadmap nobody would resource</h4>
 
   <article class="q">
-    <h3>Influencing without authority</h3>
-    <p class="who">Rafael. Their posting: "influential communicator in matrixed organizations."</p>
+    <h3>A &middot; Influencing without authority</h3>
+    <p class="who">Also: coordination gone badly &middot; what you'd do differently &middot; disagreeing with a team</p>
     <ul class="cues">
-      <li>who disagreed, and what each side wanted</li>
-      <li>what was at stake if it stayed unresolved</li>
-      <li>what you actually did</li>
-      <li class="hot">how it resolved, and what it cost</li>
+      <li class="hot">built the roadmap inside our own team</li>
+      <li class="hot">engineering wouldn't commit capacity</li>
+      <li>no authority over their priorities</li>
+      <li class="hot">didn't escalate &mdash; restarted the process</li>
+      <li class="hot">I ran the co-creation sessions</li>
+      <li>they made the trade-offs with me, not after me</li>
+      <li class="hot">they committed the capacity</li>
+      <li class="hot">co-development became the standing process</li>
     </ul>
-    <div class="fill"><b>Candidates from your history:</b> getting consent and suppression enforced upstream rather than per tool. The Adobe vendor negotiation. The intake process &mdash; you made other teams change how they requested work, which is influence without authority by definition.</div>
+    <details><summary>Full STAR</summary><div class="say">
+      <p><b>S.</b> "At RBI we built the martech roadmap inside our own team. When we took it to engineering, <b class="cue">it was the first time they'd seen it &mdash; and they wouldn't commit capacity to any of it</b>."</p>
+      <p><b>T.</b> "Which meant nothing on that roadmap was going to ship. And <b class="cue">I had no authority over engineering's priorities</b>."</p>
+      <p><b>A.</b> "I didn't escalate it. <b class="cue">I restarted the process and ran co-creation sessions</b> with engineering and marketing operations &mdash; brought them in before anything was sequenced, so they were <b class="cue">making the trade-off calls with me rather than receiving a finished plan</b>. Engineering could say what was actually buildable and in what order; marketing ops could say what they'd actually use."</p>
+      <p><b>R.</b> "<b class="cue">They committed the capacity</b> and our work got into their priorities. The part that stuck was the process &mdash; <b class="cue">roadmaps were co-developed from the start after that, not presented</b>."</p>
+      <p><b>Close on.</b> "<b class="cue">A roadmap people didn't help build is one they won't resource.</b>"</p>
+    </div></details>
+    <div class="fill"><b>Own the miss in one clause and move.</b> "It was the first time they'd seen it" is enough. Don't explain how the silo happened, and don't say "my team" like it wasn't yours &mdash; the credit is that <b>you</b> ran the fix.</div>
+    <div class="fill"><b>If he asks about a difficult peer or an individual</b>, this is thin &mdash; it's a team disagreement about priorities. Use <b>Story E</b> instead, where peers actively resisted something you were asking them to do.</div>
+  </article>
+
+  <h4>Story B &mdash; Android attribution went dark</h4>
+
+  <article class="q">
+    <h3>B &middot; A platform failure</h3>
+    <p class="who">Also: working under pressure &middot; attention to detail &middot; managing a vendor &middot; your strongest story for Rafael specifically</p>
+    <ul class="cues">
+      <li class="hot">Android attribution all coming through as "unknown"</li>
+      <li>couldn't tell channel, campaign or creative</li>
+      <li class="hot">significant media spend optimising on bad numbers</li>
+      <li class="hot">investigated across vendor + our devs + ad platforms</li>
+      <li>triangulated their data to isolate it</li>
+      <li class="hot">root cause: the Branch SDK version</li>
+      <li>fix scoped, committed date, deployed</li>
+      <li class="hot">told paid media their numbers weren't trustworthy</li>
+      <li class="hot">rebuilt the lost window manually with GAID</li>
+      <li class="hot">SDK compatibility became a standing build check</li>
+    </ul>
+    <details><summary>Full STAR</summary><div class="say">
+      <p><b>S.</b> "At RBI, Android attribution stopped reporting &mdash; <b class="cue">everything came through as 'unknown'</b>, so we couldn't tell which channel, campaign or creative was driving Android app installs."</p>
+      <p><b>T.</b> "I owned the martech stack, so attribution was mine. And we had <b class="cue">significant media spend running through it</b>, so the paid team was optimising against numbers that weren't real."</p>
+      <p><b>A.</b> "I ran the investigation across three parties at once &mdash; <b class="cue">the vendor, our own developers, and the ad platforms</b> &mdash; and triangulated their data to isolate where the break was. It came down to <b class="cue">the Branch SDK version we were running</b>. I got the fix scoped and deployed on a committed date, and <b class="cue">told the paid media team their Android numbers weren't trustworthy</b> in the meantime. For the window we'd lost, we <b class="cue">used GAID to reconstruct the attribution manually</b> rather than writing the period off."</p>
+      <p><b>R.</b> "Attribution was restored and the lost data was recovered. And we made <b class="cue">SDK version compatibility a standing check against the app build</b>, so an SDK change can't silently break attribution again."</p>
+    </div></details>
+    <div class="fill"><b>The recovery beat is what makes this story.</b> Most people stop at "we fixed it." Reconstructing the lost window so the team could still make decisions is the part that says you own an outcome, not a ticket. Land it.</div>
+    <div class="fill"><b>Don't over-explain the technical cause.</b> "The SDK version we were running had a bug affecting Android attribution" is plenty. Never say "I don't know how to describe it."</div>
+  </article>
+
+  <h4>Story C &mdash; the intake process</h4>
+
+  <article class="q">
+    <h3>C &middot; Something with no clear owner</h3>
+    <p class="who">Also: driving adoption &middot; documentation and key-person risk &middot; saying no &middot; dependability &middot; your best story for this job description</p>
+    <ul class="cues">
+      <li class="hot">every request arrived by email, nothing tracked</li>
+      <li>people couldn't see where their request sat</li>
+      <li class="hot">my own initiative &mdash; I was the bottleneck</li>
+      <li>moved it to tickets: status, timelines, one place to update</li>
+      <li class="hot">didn't force it &mdash; kept taking email so nobody was blocked</li>
+      <li class="hot">it won because they could see their status</li>
+      <li>~50 training modules so they could self-serve</li>
+      <li class="hot">100% same-day SLA</li>
+      <li class="hot">wrote the full handover doc when I left</li>
+    </ul>
+    <details><summary>Full STAR</summary><div class="say">
+      <p><b>S.</b> "At RBI every martech request came in by email. Nothing was tracked, people couldn't see where their request sat, things got lost, and nobody had a clear timeline &mdash; <b class="cue">including me</b>."</p>
+      <p><b>T.</b> "<b class="cue">This was my own initiative.</b> I was the one actioning every request, so I was the bottleneck and I felt it."</p>
+      <p><b>A.</b> "I moved it to a proper intake with tickets &mdash; <b class="cue">status visible</b>, issues resolved inside the ticket rather than a thread nobody could find, clear timelines, and <b class="cue">one place to update a request</b> when something changed later. <b class="cue">I didn't force the switch.</b> I kept taking email requests so nobody was blocked, and used every meeting and comms channel to point people at the form. It won because it gave them something email couldn't &mdash; they could see where their request was. Behind it I built a <b class="cue">training library, around fifty modules</b>, so the things people kept asking me for they could do themselves."</p>
+      <p><b>R.</b> "We held a <b class="cue">100% same-day SLA</b> on audience creation, reporting and listings. And when I left I wrote the full knowledge transfer document, so <b class="cue">none of it depended on me being there</b>."</p>
+    </div></details>
+    <div class="fill"><b>Why this is your best story for this role.</b> Their posting names <i>MOps self-serve maturity</i> as a KPI, asks for <i>runbooks and operating procedures</i>, and lists <i>reduce key-person risk</i> as a responsibility. This one story answers all three.</div>
+  </article>
+
+  <h4>Story D &mdash; $84K quoted, delivered for nothing</h4>
+
+  <article class="q">
+    <h3>D &middot; Build versus buy</h3>
+    <p class="who">Also: initiative and resourcefulness &middot; proudest work &middot; hands-on rather than delegating</p>
+    <ul class="cues">
+      <li>objective was driving more customer reviews</li>
+      <li>needed Google place IDs for every location</li>
+      <li class="hot">listings vendor quoted $84K/year for the capability</li>
+      <li class="hot">used Google Sheets API + an existing Maps plugin instead</li>
+      <li>same approach generated the QR codes</li>
+      <li class="hot">no new tooling, no new contract</li>
+      <li class="hot">wrote the instructions so the field team could run it</li>
+      <li class="hot">~5,000 locations, US + Canada, under a month</li>
+    </ul>
+    <details><summary>Full STAR</summary><div class="say">
+      <p><b>S.</b> "One of our objectives at RBI was driving more customer reviews. To do that we needed direct review links and QR codes for every location, which meant getting the <b class="cue">Google place ID</b> for all of them."</p>
+      <p><b>T.</b> "The obvious path was an add-on from our listings vendor &mdash; <b class="cue">they quoted us $84K a year</b>. I owned the stack and the vendor relationships, so it was my call whether we bought it."</p>
+      <p><b>A.</b> "Instead of buying it I looked at what we already had. I used the <b class="cue">Google Sheets API with an existing Google Maps plugin</b> to pull the place IDs, then the same approach to generate the QR codes. <b class="cue">No new tooling, no new contract.</b> Then &mdash; the part that actually mattered &mdash; I <b class="cue">wrote clear instructions for the team who had to print and place the stickers</b>, so they could run it without me."</p>
+      <p><b>R.</b> "Stickers went out across about <b class="cue">5,000 locations in the US and Canada in under a month</b>, and the capability cost nothing instead of $84K a year."</p>
+    </div></details>
+    <div class="fill"><b>One number, and it's a quote.</b> "They quoted us $84K a year" is a fact you were handed, not an estimate you built &mdash; much easier to defend. If he asks for the breakdown, the $24K and $60K on your CV are the two components.</div>
+    <div class="fill"><b>This is not your persuasion story.</b> Nobody needed convincing; you had the authority and made the call. If he asks about convincing a non-technical stakeholder, use <b>Story E</b>.</div>
+  </article>
+
+  <h4>Story E &mdash; the UTM standard</h4>
+
+  <article class="q">
+    <h3>E &middot; Convincing a non-technical stakeholder</h3>
+    <p class="who">Also: a peer who pushed back &middot; change management &middot; driving adoption</p>
+    <ul class="cues">
+      <li class="hot">rolling a UTM standard out to digital marketing teams</li>
+      <li class="hot">to them it just meant longer URLs</li>
+      <li>no authority to make them do it</li>
+      <li class="hot">stopped explaining it as data hygiene</li>
+      <li class="hot">put it in their terms: see which platforms return, shift spend</li>
+      <li class="hot">built a UTM generator &mdash; made it the easy path</li>
+      <li>ran sessions, stayed available for questions</li>
+      <li>reliable channel reporting out the other side</li>
+    </ul>
+    <details><summary>Full STAR</summary><div class="say">
+      <p><b>S.</b> "I was rolling out a UTM standard across the digital marketing teams at RBI. To them it was a mechanical change that <b class="cue">made their URLs longer</b>, and they couldn't see why it mattered."</p>
+      <p><b>T.</b> "I needed them to actually adopt it and I had no authority to make them. <b class="cue">If they didn't tag consistently we had no reliable channel reporting at all.</b>"</p>
+      <p><b>A.</b> "I <b class="cue">stopped explaining it as data hygiene and put it in their terms</b>. With those fields populated we could see where traffic was really coming from, which meant we could tell which platforms were returning and <b class="cue">shift spend toward them</b> &mdash; that's a decision they cared about. Then I made it easy rather than mandatory: I <b class="cue">built a UTM generator</b> so the correct format was the path of least resistance, ran sessions to walk people through it, and stayed available for questions so it didn't feel like a big change being done to them."</p>
+      <p><b>R.</b> "They adopted it, and we got <b class="cue">reliable channel reporting</b> out of it &mdash; which is what let the paid team actually compare platform efficiency."</p>
+    </div></details>
+    <div class="fill"><b>Keep "it just meant longer URLs."</b> Naming the real objection shows you listened rather than deciding they were being difficult. That detail is why the story works.</div>
+  </article>
+
+  <h4>The through-line &mdash; say this if he asks anything broad</h4>
+
+  <article class="q">
+    <h3>Your one-sentence identity</h3>
+    <ul class="cues">
+      <li class="hot">"I don't enforce standards. I make following them easier than not following them."</li>
+      <li>the intake form &mdash; status you couldn't get from email</li>
+      <li>the UTM generator &mdash; correct format is the easy path</li>
+      <li>the QR instructions &mdash; a field team ran it without me</li>
+    </ul>
+    <div class="fill"><b>Three of your five stories are the same move.</b> That's an identity, not a coincidence, and interviewers remember a through-line far better than four good anecdotes. Use it for "how do you drive adoption," "what's your approach," or "why should we hire you."</div>
+  </article>
+
+  <h4>Which story for which question</h4>
+
+  <div class="tbl-wrap">
+  <table>
+    <tr><th>If he asks&hellip;</th><th>Use</th><th>Lead with</th></tr>
+    <tr><td>Influencing without authority</td><td><b>A</b></td><td>no authority over engineering</td></tr>
+    <tr><td>Coordination that went badly</td><td><b>A</b></td><td>the silo, owned in one clause</td></tr>
+    <tr><td>What you'd do differently</td><td><b>A</b></td><td>I'd have brought them in first</td></tr>
+    <tr><td>Disagreeing with a team</td><td><b>A</b></td><td>engineering said no</td></tr>
+    <tr><td>A difficult peer / someone pushed back</td><td><b>E</b></td><td>they didn't want longer URLs</td></tr>
+    <tr><td>A failure or something that broke</td><td><b>B</b></td><td>attribution went dark</td></tr>
+    <tr><td>Working under pressure</td><td><b>B</b></td><td>spend running on bad numbers</td></tr>
+    <tr><td>Attention to detail</td><td><b>B</b></td><td>the standing build check</td></tr>
+    <tr><td>Managing a vendor</td><td><b>B</b></td><td>the Branch investigation</td></tr>
+    <tr><td>Something with no clear owner</td><td><b>C</b></td><td>nobody asked me to</td></tr>
+    <tr><td>Driving adoption / enablement</td><td><b>C</b> or <b>E</b></td><td>made it the easy path</td></tr>
+    <tr><td>Documentation / key-person risk</td><td><b>C</b></td><td>the handover doc</td></tr>
+    <tr><td>Saying no to a request</td><td><b>C</b></td><td>turned one-offs into templates</td></tr>
+    <tr><td>Dependability, fast pace</td><td><b>C</b></td><td>100% same-day SLA</td></tr>
+    <tr><td>A business case / build vs buy</td><td><b>D</b></td><td>$84K quoted, built for nothing</td></tr>
+    <tr><td>Proudest work</td><td><b>D</b></td><td>5,000 locations in under a month</td></tr>
+    <tr><td>Hands-on, not delegating</td><td><b>D</b></td><td>I built it myself</td></tr>
+    <tr><td>Convincing a non-technical person</td><td><b>E</b></td><td>their terms, not mine</td></tr>
+    <tr><td>Change management</td><td><b>E</b></td><td>easier than not doing it</td></tr>
+    <tr><td>How do you drive adoption</td><td>the through-line</td><td>one sentence, then an example</td></tr>
+  </table>
+  </div>
+
+  <h4>For anything not on that list</h4>
+
+  <article class="q">
+    <h3>The live fallback</h3>
+    <ul class="cues">
+      <li class="hot">"Let me think of a good example" &mdash; buy four seconds</li>
+      <li class="hot">where and when</li>
+      <li class="hot">what made it hard</li>
+      <li class="hot">what I did</li>
+      <li class="hot">how it ended</li>
+      <li>one sentence each</li>
+    </ul>
+    <details><summary>How to use it</summary><div class="say">
+      <p>Saying "<b class="cue">let me think of a good example</b>" out loud reads as considered, not stalled. Then four beats, one sentence each: <b class="cue">where and when &rarr; what made it hard &rarr; what I did &rarr; how it ended</b>. If there's no number, say what changed instead.</p>
+      <p>And if you genuinely have nothing: "<b class="cue">I don't have a clean example of that one. Here's how I'd handle it, though &mdash;</b>" then answer it as approach. That's a respectable answer. An invented story is not, and it dies on the follow-up, which is always "what happened next."</p>
+    </div></details>
+  </article>
+</section>
+
+<!-- 6h -->
+<section id="s6h">
+  <div class="step">They ask</div>
+  <h2>HR questions &mdash; Hakima</h2>
+  <p class="test"><b>She asks from a different list than Rafael.</b> These are the ones that aren't covered anywhere else, and the first two are near-certain.</p>
+
+  <article class="q">
+    <h3>What's your greatest weakness</h3>
+    <p class="who">Near-certain. You have an unusually good answer.</p>
+    <ul class="cues">
+      <li class="hot">I go and build rather than pulling people in early</li>
+      <li>efficient until it isn't</li>
+      <li class="hot">the roadmap engineering wouldn't resource</li>
+      <li class="hot">now I spend the time upfront getting them in the room</li>
+      <li>even when it feels slower</li>
+    </ul>
+    <details><summary>Full answer</summary><div class="say">
+      <p>"My instinct is to <b class="cue">go and build the thing rather than pull people in early</b>. It's efficient right up until it isn't &mdash; I built a martech roadmap inside my own team once and <b class="cue">engineering wouldn't resource it, because they'd had no say in it</b>.</p>
+      <p>So I've learned to spend the time upfront getting the people who have to deliver it into the room, <b class="cue">even when that feels slower</b>."</p>
+    </div></details>
+    <div class="fill"><b>Why this works:</b> real, specific, you have evidence you fixed it, and it isn't secretly a brag. Never use "perfectionist," "I care too much," or "I work too hard."</div>
   </article>
 
   <article class="q">
-    <h3>A platform failure or a bad send</h3>
-    <p class="who">Rafael. Almost always asked of platform people.</p>
+    <h3>A time you got difficult feedback</h3>
+    <p class="who">Common from HR. Tests coachability.</p>
     <ul class="cues">
-      <li>what broke</li><li>how you found out</li>
-      <li>what you did in the moment</li>
-      <li class="hot">what control you added so it couldn't repeat</li>
+      <li class="hot">I over-contextualize</li>
+      <li>the explanation became daunting, not helpful</li>
+      <li class="hot">start where they are, not where the problem is</li>
+      <li>their terms, their examples, only what they need to act</li>
+      <li class="hot">extra detail goes into a supplementary doc</li>
+      <li>the UTM rollout is where it clicked</li>
     </ul>
-    <div class="fill"><b>The last beat is what's being tested.</b> Anyone can describe a failure. It only lands when you name the specific check, rule, alert or runbook that made it unrepeatable. If you genuinely never had a bad send, say that and describe a near-miss the controls caught &mdash; that's also a good answer.</div>
+    <details><summary>Full answer</summary><div class="say">
+      <p>"I got feedback that <b class="cue">I over-contextualize</b>. Someone would need a decision and I'd give them the whole picture &mdash; and the explanation ended up being daunting instead of helpful. People came away more confused than when they started.</p>
+      <p>What I changed was <b class="cue">starting from where they are rather than where the problem is</b>. Their terms, examples from their world, and only what they actually need to act on. Anything extra goes into a <b class="cue">supplementary resource</b> &mdash; a follow-up doc or a reference &mdash; so if they want to go deeper it's there, but it isn't in the way of the answer.</p>
+      <p>"The UTM rollout is where that clicked. Explaining tracking taxonomy to digital marketers got me nowhere. Explaining that they'd be able to see which platforms were returning, and move spend accordingly, got me adoption."</p>
+    </div></details>
+    <div class="stop"><b>This feedback is your live risk today.</b> Your instinct under pressure is more context, not less. The instruction for 10am is the answer you just gave: <b>answer it, stop, let him ask the follow-up.</b> Silence after a short answer reads as confidence. Filling it reads as uncertainty.</div>
   </article>
 
   <article class="q">
-    <h3>Convincing a non-technical stakeholder</h3>
-    <p class="who">Rafael, given his agency background.</p>
+    <h3>Why a Product Manager role when your title was Senior Analyst</h3>
+    <p class="who">Likely from HR. Don't be defensive about it.</p>
     <ul class="cues">
-      <li class="hot">S&amp;P, CapitalIQ spreading add-ins</li>
-      <li>usage +23%</li>
-      <li>release cycle 120h &rarr; 80h</li>
-      <li class="hot">outcome first, mechanism second</li>
+      <li class="hot">Manager was the next step on that track</li>
+      <li>three years at Senior Analyst level</li>
+      <li class="hot">scope was already platform ownership</li>
+      <li>roadmap, vendor relationship, standards, the build</li>
+      <li>DXC martech before that, S&amp;P product strategy before that</li>
+      <li class="hot">the title changes, not the work</li>
     </ul>
-    <details><summary>The ready-made one</summary><div class="say">
-      <p>S&amp;P Global, the <b class="cue">CapitalIQ spreading add-ins</b> &mdash; a business case you built and got through, with <b class="cue">usage up 23%</b> and the <b class="cue">release cycle cut from 120 hours to 80</b>.</p>
-      <p>Frame it his way: what changed, and by how much. He came from agency and optimization work, so "here's the number that moved" is his register &mdash; not "here's how I built it."</p>
+    <details><summary>Full answer</summary><div class="say">
+      <p>"<b class="cue">Manager was the next step from Senior Analyst on that track</b>, and I'd done three years at that level. The scope was already platform ownership &mdash; the roadmap, the vendor relationship, the standards, the build.</p>
+      <p>Before RBI I did martech platform work at DXC on the P&amp;G account, and product strategy at S&amp;P Global before that, with my MBA in between. So <b class="cue">the title is the thing that changes here, not the work</b>."</p>
+    </div></details>
+    <div class="fill"><b>Same answer covers the years question.</b> Their posting wants "5+ years in marketing technology, product management or technical product ownership" &mdash; that's three years RBI martech, a year of DXC martech delivery, plus S&amp;P product strategy. Say it that way if the number gets questioned.</div>
+  </article>
+
+  <article class="q">
+    <h3>Why should we hire you / what makes you different</h3>
+    <p class="who">Often the closer.</p>
+    <ul class="cues">
+      <li class="hot">two CDPs &mdash; AEP and mParticle</li>
+      <li class="hot">audience layer as architecture, not one vendor's product</li>
+      <li class="hot">I make standards easier to follow than not to follow</li>
+      <li>intake process, UTM generator, QR instructions</li>
+      <li class="hot">adoption is where platform work usually fails</li>
+    </ul>
+    <details><summary>Full answer</summary><div class="say">
+      <p>"Two things. I've run <b class="cue">two different CDPs</b> &mdash; AEP and mParticle &mdash; so I think about the audience and consent layer as <b class="cue">architecture rather than one vendor's product</b>.</p>
+      <p>And my approach to standards is to <b class="cue">make following them easier than not following them</b>. The intake process, the UTM generator, the instructions that let a field team deploy across 5,000 locations without me &mdash; that's the same move three times. <b class="cue">Adoption is the part most platform work fails on</b>, and it's the part I'm actually good at."</p>
     </div></details>
   </article>
 
   <article class="q">
-    <h3>Pace and dependability</h3>
-    <p class="who">Possible. They wrote it into the posting, which is unusual for a PM role.</p>
+    <h3>The blunt filter version of the Classic question</h3>
+    <p class="who">HR asks this more directly than a hiring manager would.</p>
     <ul class="cues">
-      <li class="hot">100% same-day SLA on audience and reporting requests</li>
-      <li>100% on-time SLA on paid media integrations</li>
-      <li>how you ran a week</li>
-      <li>how you flagged slippage early</li>
-      <li>rhythm, not heroics</li>
+      <li>"the role wants 4+ years Classic and you don't have it"</li>
+      <li class="hot">same answer as section 2, delivered without flinching</li>
+      <li>don't add new apology</li>
     </ul>
-    <div class="fill"><b>You have the best possible answer here and we nearly missed it.</b> Sustained 100% same-day SLA on audience creation, reporting and listings requests across CRM, paid media and cross-functional teams. That's not a personality claim, it's a measured one &mdash; and "punctuality and dependability" appearing in a product manager posting usually means the last person in the seat wasn't.</div>
-  </article>
-
-  <h4>Likely enough to prepare</h4>
-
-  <article class="q">
-    <h3>Saying no, or pushing back on a request</h3>
-    <ul class="cues">
-      <li>what was asked</li><li>why it was the wrong build</li>
-      <li>what you offered instead</li><li class="hot">how the relationship survived</li>
-    </ul>
-    <div class="fill"><b>Theme:</b> platform teams are asked for one-off builds constantly. A good story is one where you turned a bespoke request into a reusable pattern &mdash; which is literally "workflow reuse" from their KPI list.</div>
+    <div class="fill">Give the section 2 answer exactly as it is. The temptation with HR is to soften or over-explain because the question sounds harsher. Don't &mdash; it's the same answer.</div>
   </article>
 
   <article class="q">
-    <h3>Something with no clear owner</h3>
+    <h3>Where do you see yourself</h3>
     <ul class="cues">
-      <li>the gap nobody was covering</li>
-      <li>why you picked it up</li>
-      <li>who you had to pull in</li>
-      <li class="hot">what you left behind so it stayed owned</li>
+      <li class="hot">owning a bigger platform portfolio</li>
+      <li>this role is the shape of work I want</li>
+      <li>platform ownership with hands on the tools</li>
+      <li>Aeroplan scale is the step up</li>
     </ul>
-    <div class="fill"><b>Candidates:</b> the intake process. The training library. The offboarding knowledge transfer document. All three are things nobody asked you to build.</div>
+    <div class="fill"><b>Don't overreach.</b> Not "your job," not "running the team." Rafael's own path was analytics into product; ambition that skips steps reads badly.</div>
   </article>
 
   <article class="q">
-    <h3>A time you were wrong, or changed your mind</h3>
+    <h3>How would colleagues describe you / what environment do you thrive in / what motivates you</h3>
+    <p class="who">Don't script these. Decide the three words now.</p>
     <ul class="cues">
-      <li>what you believed</li><li>what changed it</li>
-      <li class="hot">what you did differently after</li>
-      <li>no fake humility, no disguised brag</li>
+      <li class="hot">the person who makes things usable for other people</li>
+      <li class="hot">steady when the data breaks</li>
+      <li class="hot">self-directed &mdash; most of what I built, nobody asked for</li>
     </ul>
-    <div class="fill"><b>Theme that works:</b> a platform or vendor decision you'd make differently now. Specific and technical beats personal. The failure mode is picking something that's secretly a strength ("I cared too much about quality") &mdash; interviewers hear that immediately.</div>
+    <div class="fill">All three are true of your five stories, which is why they'll hold up if she asks for an example.</div>
   </article>
 
   <article class="q">
-    <h3>Learning something fast under pressure</h3>
+    <h3>The one that isn't behavioural but is your biggest risk</h3>
     <ul class="cues">
-      <li>what you didn't know</li>
-      <li class="hot">how you got competent &mdash; the method</li>
-      <li>what you shipped</li>
-      <li>how long it took</li>
+      <li class="hot">"are you working at the moment?"</li>
+      <li class="hot">settled before you dial</li>
+      <li>has to match a background check and your LinkedIn</li>
     </ul>
-    <div class="fill"><b>This is the Campaign Classic answer in disguise.</b> If he asks it after the Classic conversation, that's not a coincidence &mdash; he's testing whether your ramp claim is credible. Have a real example where you learned a platform from zero and shipped on it. The method matters more than the speed.</div>
-  </article>
-
-  <h4>Possible, lower priority</h4>
-
-  <article class="q">
-    <h3>Managing a vendor through a problem</h3>
-    <ul class="cues">
-      <li>the Adobe relationship at RBI</li>
-      <li>vendor evaluations, hundreds of thousands in contract value</li>
-      <li>what you escalated and how</li>
-      <li class="hot">what you got that you wouldn't have by asking nicely</li>
-    </ul>
-  </article>
-
-  <article class="q">
-    <h3>Coordination that went badly</h3>
-    <ul class="cues">
-      <li>what fell between teams</li>
-      <li>your share of it &mdash; own something</li>
-      <li class="hot">what you changed structurally, not personally</li>
-    </ul>
-    <div class="fill"><b>Theme:</b> this is the safest place to use your real insight about martech and engineering planning separately and work getting built twice. As a story about a structural lesson it's strong. As a complaint it's fatal. See section 8 for the framing.</div>
-  </article>
-
-  <article class="q">
-    <h3>Documentation or handover</h3>
-    <ul class="cues">
-      <li>the offboarding knowledge transfer document</li>
-      <li>53 training modules and the intake process</li>
-      <li class="hot">key-person risk is in their posting</li>
-    </ul>
-    <div class="fill"><b>Strongest structural evidence you have.</b> They named "reduce key-person risk" as a responsibility, which usually means they're living with it. You built a self-serve training library and documented your own exit. Don't oversell it &mdash; just say it plainly and let him do the math.</div>
-  </article>
-
-  <article class="q">
-    <h3>Proudest work</h3>
-    <ul class="cues">
-      <li>pick platform work, not a marketing outcome</li>
-      <li class="hot">$84K avoided &mdash; build vs buy</li>
-      <li>two CDPs running in parallel</li>
-      <li>avoid the SEO numbers here</li>
-    </ul>
-    <div class="fill"><b>Deliberately avoid the SEO wins</b> &mdash; the 123%, 964%, 441% growth. They're real and impressive and they'd undercut the whole "platform not campaigns" position. Web and search also belongs to a different PM on his team.</div>
+    <div class="stop">HR asks this as routine admin, which makes it easy to answer badly. Have the sentence ready and say it the same way every time it comes up.</div>
   </article>
 </section>
 
@@ -1013,6 +1212,39 @@ body.cue .q{padding:14px 16px}
   </article>
 
   <article class="q">
+    <h3>If a question isn't prepped</h3>
+    <ul class="cues">
+      <li class="hot">"Let me think of a good example" &mdash; out loud, buys four seconds</li>
+      <li class="hot">where and when &rarr; what made it hard &rarr; what I did &rarr; how it ended</li>
+      <li>one sentence each</li>
+      <li>no number? say what changed</li>
+      <li class="hot">nothing at all? "I don't have a clean example &mdash; here's how I'd handle it"</li>
+    </ul>
+  </article>
+
+  <article class="q">
+    <h3>Five stories, twenty questions</h3>
+    <ul class="cues">
+      <li class="hot">A &mdash; roadmap engineering wouldn't resource</li>
+      <li class="hot">B &mdash; Android attribution went dark</li>
+      <li class="hot">C &mdash; the intake process + 100% same-day SLA</li>
+      <li class="hot">D &mdash; $84K quoted, built for nothing</li>
+      <li class="hot">E &mdash; the UTM standard</li>
+      <li>full map in section 6</li>
+    </ul>
+  </article>
+
+  <article class="q">
+    <h3>The one rule for today</h3>
+    <ul class="cues">
+      <li class="hot">Answer it. Stop. Let him ask.</li>
+      <li>your own feedback was that you over-contextualize</li>
+      <li>silence after a short answer = confidence</li>
+      <li>filling it = uncertainty</li>
+    </ul>
+  </article>
+
+  <article class="q">
     <h3>Traps</h3>
     <ul class="cues">
       <li class="hot">never "fast learner"</li>
@@ -1047,9 +1279,35 @@ var secs=[].slice.call(document.querySelectorAll('section[id]'));
 var nav=document.getElementById('nav'),prog=document.getElementById('prog');
 var labels={};[].forEach.call(nav.options,function(o){labels[o.value]=o.text;});
 function clean(id){var t=labels[id]||id;var i=t.indexOf('·');return i>-1?t.slice(i+1).trim():t;}
+/* --- scroll-jump fix: lock position tracking during programmatic scrolls --- */
+var navLock = 0;
+function barH(){ var b=document.querySelector('.bar'); return b ? b.getBoundingClientRect().height : 0; }
+function scrollToId(id){
+  var el = document.getElementById(id);
+  if(!el) return;
+  navLock = Date.now() + 1000;
+  var y = el.getBoundingClientRect().top + window.pageYOffset - barH() - 12;
+  if(y < 0) y = 0;
+  if('scrollBehavior' in document.documentElement.style){
+    window.scrollTo({top:y, behavior:'smooth'});
+  } else {
+    window.scrollTo(0, y);
+  }
+}
+document.addEventListener('click', function(e){
+  var a = e.target.closest ? e.target.closest('a[href^="#"]') : null;
+  if(!a) return;
+  var id = a.getAttribute('href').slice(1);
+  if(!id || !document.getElementById(id)) return;
+  e.preventDefault();
+  scrollToId(id);
+}, true);
+
 
 nav.addEventListener('change',function(e){
-  var el=document.getElementById(e.target.value); if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+  var id=e.target.value;
+  try{e.target.blur();}catch(err){}
+  scrollToId(id);
 });
 
 var mFull=document.getElementById('mFull'),mCue=document.getElementById('mCue');
@@ -1062,7 +1320,46 @@ mFull.addEventListener('click',function(){setMode(false);});
 mCue.addEventListener('click',function(){setMode(true);});
 setMode(false);
 
+function grow(ta){ta.style.height='auto';ta.style.height=Math.max(76,ta.scrollHeight)+'px';}
+
 secs.forEach(function(s,i){
+  // ---- your own notes box ----
+  var box=document.createElement('div'); box.className='mynote';
+  var lab=document.createElement('label');
+  lab.setAttribute('for','note-'+s.id);
+  lab.textContent='Your notes — '+clean(s.id);
+  var ta=document.createElement('textarea');
+  ta.id='note-'+s.id;
+  ta.placeholder='Your own wording, your stories, anything you want to say instead…';
+  var ft=document.createElement('div'); ft.className='mynote-ft';
+  var cp=document.createElement('button'); cp.className='mynote-btn'; cp.type='button'; cp.textContent='Copy';
+  var cl=document.createElement('button'); cl.className='mynote-btn'; cl.type='button'; cl.textContent='Clear';
+  var hint=document.createElement('span'); hint.className='mynote-hint'; hint.textContent='saves as you type';
+  ft.appendChild(cp); ft.appendChild(cl); ft.appendChild(hint);
+  box.appendChild(lab); box.appendChild(ta); box.appendChild(ft);
+  s.appendChild(box);
+
+  var key='ac2-note-'+s.id;
+  try{var saved=localStorage.getItem(key); if(saved){ta.value=saved;}}
+  catch(e){hint.textContent='not saved in this browser';}
+  grow(ta);
+  ta.addEventListener('input',function(){
+    grow(ta);
+    try{localStorage.setItem(key,ta.value);}catch(e){}
+  });
+  cp.addEventListener('click',function(){
+    ta.select();
+    var done=function(){cp.textContent='Copied';setTimeout(function(){cp.textContent='Copy';},1300);};
+    if(navigator.clipboard){navigator.clipboard.writeText(ta.value).then(done,function(){document.execCommand('copy');done();});}
+    else{document.execCommand('copy');done();}
+  });
+  cl.addEventListener('click',function(){
+    if(!ta.value||confirm('Clear your notes for this section?')){
+      ta.value=''; grow(ta);
+      try{localStorage.removeItem(key);}catch(e){}
+    }
+  });
+
   var st=document.createElement('div'); st.className='stepper';
   if(i>0){var p=document.createElement('a');p.href='#'+secs[i-1].id;p.textContent='←  '+clean(secs[i-1].id);st.appendChild(p);}
   if(i<secs.length-1){var n=document.createElement('a');n.className='n';n.href='#'+secs[i+1].id;n.textContent=clean(secs[i+1].id)+'  →';st.appendChild(n);}
@@ -1081,6 +1378,7 @@ function refresh(id){
 window.addEventListener('scroll',function(){
   var h=document.documentElement.scrollHeight-window.innerHeight;
   prog.style.width=(h>0?(window.scrollY/h)*100:0)+'%';
+  if(Date.now()<navLock) return;
   var c=cur(); if(nav.value!==c.id){nav.value=c.id;refresh(c.id);}
 },{passive:true});
 document.getElementById('padOpen').addEventListener('click',function(){
