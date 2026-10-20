@@ -1097,7 +1097,7 @@ body.mode-remote #viewport,body.mode-remote #tools{display:none}
   </div>
   <div class="r-side"><iframe id="rPreview" title="Current slide" tabindex="-1"></iframe><div class="list" id="rSideList"></div></div>
   <div class="r-ctrl"><button id="rPrev">‹ Back</button><button id="rNextBtn">Next ›</button></div>
-  <div class="r-sheet" id="rSheet"><div><h4>Jump to</h4><div id="rSheetList"></div><p class="note">Tip: the big screen follows whatever you pick here.</p></div></div>
+  <div class="r-sheet" id="rSheet"><div><h4>Jump to</h4><div id="rSheetList"></div><p class="note">Tip: the big screen follows whatever you pick here.</p><p class="note"><b>Not linking?</b> Open the same published link on the laptop and this phone, both signed in to Claude with an account that has edit access. Then tap Next once.</p></div></div>
 </div>
 
 <script>
@@ -1589,7 +1589,7 @@ function prev(){ cur.step > 0 ? go(cur.scene, cur.step - 1) : cur.scene > 0 && g
    SYNC: BroadcastChannel (same device) + room (across devices)
    ========================================================= */
 let bc = null; try { bc = new BroadcastChannel("rm101-sync"); } catch(e) {}
-let room = null, linkState = "none";
+let room = null, linkState = "none", roomState = "pending";
 function msg(){ return { t: "nav", scene: cur.scene, step: cur.step, ts: Date.now(), from: ME, role: MODE }; }
 function broadcast(){ const m = msg(); lastTs = m.ts; try { bc && bc.postMessage(m); } catch(e) {} if (room) room.emit("nav", m).catch(() => {}); }
 function receive(m, via){
@@ -1597,21 +1597,23 @@ function receive(m, via){
   if (m.t === "hello") { if (MODE === "stage") { const r = msg(); try { via === "bc" ? bc.postMessage(r) : room && room.emit("nav", r).catch(()=>{}); } catch(e) {} toast(via === "room" ? "Phone remote connected" : "Presenter view connected"); } return; }
   if (m.t !== "nav") return;
   if (m.role === "stage" && MODE === "remote") setLink(via === "room" ? "ok" : "local");
-  if (m.ts < lastTs) return; lastTs = m.ts;
   if (typeof m.scene === "number") go(m.scene, m.step, { silent: true });
 }
 if (bc) bc.onmessage = e => receive(e.data, "bc");
 function hello(){ const h = { t: "hello", from: ME, role: MODE, ts: Date.now() }; try { bc && bc.postMessage(h); } catch(e) {} if (room) room.emit("hello", h).catch(() => {}); }
 (async function initRoom(){
   try {
-    if (!window.claude || !window.claude.use) return;
-    room = await window.claude.use("room"); if (!room) return;
+    if (!window.claude || !window.claude.use) { roomState = "none"; setLink(linkState); return; }
+    room = await window.claude.use("room"); if (!room) { roomState = "none"; setLink(linkState); return; }
+    roomState = "on"; setLink(linkState);
+    if (room.onConnection) room.onConnection(() => { if (MODE !== "stage") hello(); else room.emit("nav", msg()).catch(() => {}); });
     room.on("nav", m => { if (!m.sameTab) receive(m.data, "room"); });
     room.on("hello", m => { if (!m.sameTab) receive(m.data, "room"); });
     if (room.onPeers) room.onPeers(() => { if (MODE === "stage") room.emit("nav", msg()).catch(() => {}); });
     if (MODE !== "stage") hello();
-  } catch(e) { room = null; }
+  } catch(e) { room = null; roomState = "none"; setLink(linkState); }
 })();
+setTimeout(() => { if (roomState === "pending") { roomState = "none"; setLink(linkState); } }, 11000);
 function toast(t){ const el = $("#toast"); $("#toastT").textContent = t; el.classList.add("show"); clearTimeout(el._t); el._t = setTimeout(() => el.classList.remove("show"), 2600); }
 
 /* =========================================================
@@ -1661,7 +1663,8 @@ let tRun = false, tStart = 0, tAcc = 0;
 function elapsed(){ return tAcc + (tRun ? (Date.now() - tStart)/1000 : 0); }
 function onNavForTimer(){ if (MODE === "remote" && !tRun && tAcc === 0 && cur.scene >= 1) { tRun = true; tStart = Date.now(); } }
 function plannedAt(sceneIdx){ return SCENES.slice(0, sceneIdx).reduce((a, s) => a + s.time, 0); }
-function setLink(st){ if (MODE !== "remote") return; linkState = st; const el = $("#rLink"); el.className = "r-link" + (st === "ok" ? " ok" : st === "local" ? " local" : ""); $("span", el).textContent = st === "ok" ? "Linked to screen" : st === "local" ? "Linked (same computer)" : "Looking for screen…"; }
+function setLink(st){ if (MODE !== "remote") return; linkState = st; const el = $("#rLink"); el.className = "r-link" + (st === "ok" ? " ok" : st === "local" ? " local" : ""); $("span", el).textContent = st === "ok" ? "Linked to screen" : st === "local" ? "Linked (same computer)" : roomState === "none" ? "Sync unavailable here" : "Looking for screen…";
+  if (st === "none" && roomState === "none") el.title = "Open the published link while signed in to Claude, on both the laptop and this phone."; }
 function renderRemote(){
   if (MODE !== "remote") return;
   const s = SCENES[cur.scene], st = s.steps[cur.step];
